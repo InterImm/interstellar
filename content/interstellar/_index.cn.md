@@ -1,9 +1,7 @@
 ---
-title: "Fashion Brands"
-date: 2018-12-29T11:02:05+06:00
-# meta description
-description: "A collection of fashion brands"
-# type dont remove or customize
-type : "docs"
+title: 飞向恒星
+date: 2022-01-25T21:01:50.818Z
+description: 我们必须走出太阳系
+type: docs
 ---
-
+这就是开端。
