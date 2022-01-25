@@ -3,7 +3,7 @@ backend:
   branch: main # Branch to update (optional; defaults to master)
 media_folder: static/uploads
 public_folder: /uploads
-i18n: { structure: multiple_folder, locales: ['cn', 'en'] }
+i18n: { structure: multiple_files, locales: ['cn', 'en'] }
 collections:
   - name: 'interstellar'
     label: 'Interstellar'
