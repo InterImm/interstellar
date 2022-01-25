@@ -1,0 +1,289 @@
+######################## default configuration ####################
+baseURL = "/"
+title = "星际移民之书 - 恒星篇"
+theme = "godocs-1"
+# google analytics
+googleAnalytics = "" # example : UA-123-45
+# disable language
+disableLanguages = ["fr"] # desable language from here
+defaultContentLanguage = 'cn'
+
+# hugo outputs
+[outputs]
+home = [ "HTML", "JSON"]
+
+# render unsafe html
+[markup.goldmark.renderer]
+unsafe = true
+
+############################# Plugins ##############################
+
+# CSS Plugin
+[[params.plugins.css]]
+link = "plugins/bootstrap/bootstrap.min.css"
+[[params.plugins.css]]
+link = "plugins/search/auto-complete.css"
+[[params.plugins.css]]
+link = "plugins/featherlight/featherlight.min.css"
+
+
+# JS Plugin
+[[params.plugins.js]]
+link = "plugins/jQuery/jquery.min.js"
+[[params.plugins.js]]
+link = "plugins/bootstrap/bootstrap.min.js"
+[[params.plugins.js]]
+link = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/js/all.min.js"
+attributes = "crossorigin='anonymous' defer='defer' data-search-pseudo-elements"
+[[params.plugins.js]]
+link = "plugins/masonry/masonry.min.js"
+[[params.plugins.js]]
+link = "plugins/featherlight/featherlight.min.js"
+[[params.plugins.js]]
+link = "plugins/clipboard/clipboard.min.js"
+[[params.plugins.js]]
+link = "plugins/search/auto-complete.js"
+[[params.plugins.js]]
+link = "plugins/search/search.js"
+[[params.plugins.js]]
+link = "plugins/search/lunr.min.js"
+[[params.plugins.js]]
+link = "plugins/search/fuse.min.js"
+[[params.plugins.js]]
+link = "plugins/search/mark.js"
+[[params.plugins.js]]
+link = "plugins/search/search-page.js"
+
+# site variables
+[params.variables]
+# Color Variables
+primary_color = "#FF0043"
+text_color = "#333"
+text_color_dark = "#222"
+text_color_light = "#999"
+body_color = "#fff"
+border_color = "#E2E2E2"
+black = "#000"
+white = "#fff"
+light = "#FBFBFB"
+
+# Font Variables
+primary_font = "Montserrat:wght@300;400;500;600;700;800"
+primary_font_type = "sans-serif" # [serif/sans-serif]
+secondary_font = ""
+secondary_font_type = "" # [serif/sans-serif]
+icon_font = "Font Awesome 5 Free"
+
+
+#################### default parameters ################################
+[params]
+# meta description
+author = "InterImm"
+description = "星际移民之书 - 飞向恒星"
+# contact form action
+contact_form_action = "#" # contact form works with https://formspree.io
+# feedback form action
+feedback_form_action = "#" # contact form works with https://formspree.io
+
+
+# logo
+# [params.logo]
+# main = "ico/favicon-192x192.png"
+# favicon = "ico/favicon.ico"
+# main_site_link = "/"
+# logo_icon = "images/favicon-192x192.png"
+# # site_logo = "images/site-logo.png"
+# docs_logo = "images/interimm_banner_black.png"
+
+# Preloader
+[params.preloader]
+enable = false
+preloader = "" # use jpg, png, svg or gif format.
+
+# Navigation button
+[[params.nav_button]]
+style = "outline" # available style: solid, outline
+label = "InterImm"
+link = "https://interimm.org"
+
+[[params.nav_button]]
+style = "solid" # available style: solid, outline
+label = "GitHub"
+link = "https://github.com/interimm"
+
+
+############################# social site ########################
+[[params.social]]
+title = "facebook"
+icon = "fab fa-facebook" # fontawesome icon : https://fontawesome.com/icons
+link = "https://www.facebook.com/InterImm"
+
+# [[params.social]]
+# title = "twitter"
+# icon = "fab fa-twitter" # fontawesome icon : https://fontawesome.com/icons
+# link = "#"
+
+[[params.social]]
+title = "github"
+icon = "fab fa-github" # fontawesome icon : https://fontawesome.com/icons
+link = "https://github.com/InterImm"
+
+# [[params.social]]
+# title = "linkedin"
+# icon = "fab fa-linkedin" # fontawesome icon : https://fontawesome.com/icons
+# link = "#"
+
+################################### English language #####################################
+[Languages.cn]
+languageName = "CN"
+languageCode = "zh-cn"
+weight = 1
+# copyright
+copyright = "[InterImm](https://interimm.org)"
+
+# banner
+[Languages.cn.banner]
+title = "星际移民之书 - 恒星篇"
+subtitle = "在火星地球化即将完成的时候，太阳系内爆发了大规模冲突。一边是不断向火星倾销商品企图垄断火星各个行业的 UPI，另一边则是借着地球化春风不断发展但是屡受打压，渴望打破垄断同样开辟市场的火星本土势力。这场冲突很快席卷整个太阳系，这样的背景下，星际移民局的秘密远景计划，也举步维艰。"
+image = "images/InterImm_banner_1050X400.png"
+
+# feedback
+[Languages.cn.feedback]
+title = "Did you find this doc useful?"
+content = "Your feedback helps us improve our docs."
+positive_placeholder = "What did you like about this doc?"
+negative_placeholder = "What can we improve in this doc?"
+
+# call to action
+[Languages.cn.call_to_action]
+enable = true
+title = "这是一个开源项目"
+image = "images/InterImm_1024X1024.png"
+content = "可以在 GitHub 提交和更新内容"
+
+  # call to action button
+  [Languages.cn.call_to_action.button]
+  enable = "true"
+  label = "GitHub"
+  link = "https://github.com/interimm/galaxy"
+
+
+############## English navigation ###############
+[[Languages.cn.menu.footer]]
+name = "Changelog"
+url = "/changelog"
+weight = 1
+
+[[Languages.cn.menu.footer]]
+name = "星际移民中心"
+url = "https://interimm.org"
+weight = 2
+
+[[Languages.cn.menu.footer]]
+name = "Github"
+url = "https://github.com/interimm/galaxy"
+weight = 3
+
+
+################################### English language #####################################
+[Languages.en]
+languageName = "En"
+languageCode = "en-us"
+weight = 2
+# copyright
+copyright = "[InterImm](https://interimm.org/en)"
+
+# banner
+[Languages.en.banner]
+title = "The Book of InterImm - Interstellar"
+subtitle = "We, as a space faring civilization, are going interstellar."
+image = "images/InterImm_banner_1050X400.png"
+
+# feedback
+# [Languages.en.feedback]
+# title = "Did you find this doc useful?"
+# content = "Your feedback helps us improve our docs."
+# positive_placeholder = "What did you like about this doc?"
+# negative_placeholder = "What can we improve in this doc?"
+
+# call to action
+[Languages.en.call_to_action]
+enable = true
+title = "Would like to contribute?"
+image = "images/InterImm_1024X1024.png"
+content = "We are open on GitHub."
+
+  # call to action button
+  [Languages.en.call_to_action.button]
+  enable = "true"
+  label = "Contribute on GitHub"
+  link = "https://github.com/interimm/galaxy"
+
+
+############## English navigation ###############
+# [[Languages.en.menu.footer]]
+# name = "Changelog"
+# url = "changelog"
+# weight = 1
+
+[[Languages.en.menu.footer]]
+name = "InterImm"
+url = "https://interimm.org/en"
+weight = 2
+
+[[Languages.en.menu.footer]]
+name = "Github"
+url = "https://github.com/interimm/galaxy"
+weight = 3
+
+
+################################### French language #####################################
+[Languages.fr]
+languageName = "Fr"
+languageCode = "fr-fr"
+weight = 2
+# copyright
+copyright = "Conçu par [Themefisher](https://themefisher.com) & développé par [Gethugothemes](https://gethugothemes.com)"
+
+# banner
+[Languages.fr.banner]
+title = "Thème de documentation par l'équipe Themefisher"
+subtitle = "Lorem ipsum dolor amet, consetetur sadiffspscing elitr, diam nonumy invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua At."
+image = "images/banner.jpg"
+
+# feedback
+[Languages.fr.feedback]
+title = "Avez-vous trouvé ce document utile?"
+content = "Vos commentaires nous aident à améliorer nos documents."
+positive_placeholder = "Qu'avez-vous aimé dans ce document?"
+negative_placeholder = "Que pouvons-nous améliorer dans ce document?"
+
+# call to action
+[Languages.fr.call_to_action]
+enable = true
+title = "Vous n'avez toujours pas trouvé votre réponse?"
+image = "images/cta-illustration.jpg"
+content = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam <br> nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam"
+
+  # call to action button
+  [Languages.fr.call_to_action.button]
+  enable = "true"
+  label = "Soumettre un ticket"
+  link = "contact"
+
+
+############## French navigation ###############
+[[Languages.fr.menu.footer]]
+name = "Changelog"
+url = "changelog"
+weight = 1
+
+[[Languages.fr.menu.footer]]
+name = "Contact"
+url = "contact"
+weight = 2
+
+[[Languages.fr.menu.footer]]
+name = "Github"
+url = "https://github.com/themefisher/"
+weight = 3

@@ -1,0 +1,35 @@
+- id: search
+  translation: 搜索
+
+- id: search_placeholder
+  translation: 在这里搜索...
+
+- id: topics
+  translation: 浏览章节
+
+- id: details
+  translation: 更多
+
+- id: first_name
+  translation: 名
+
+- id: last_name
+  translation: 姓
+
+- id: email
+  translation: Email
+
+- id: contact_reason
+  translation: 联系缘由
+
+- id: write_message
+  translation: 开始写消息
+
+- id: send
+  translation: 发送
+
+- id: send_feedback
+  translation: 发送反馈
+
+- id: search_result
+  translation: "搜索结果："
