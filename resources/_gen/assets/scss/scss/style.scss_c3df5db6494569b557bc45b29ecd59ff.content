@@ -67,20 +67,20 @@ h6, .h6 {
     padding: 10px 25px; }
 
 .btn-primary {
-  background: #FF0043;
+  background: #d9534f;
   color: #fff;
-  border-color: #FF0043; }
+  border-color: #d9534f; }
   .btn-primary:active, .btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary.active {
-    background: #cc0036 !important;
-    border-color: #cc0036 !important; }
+    background: #c9302c !important;
+    border-color: #c9302c !important; }
 
 .btn-outline-primary {
   background: transparent;
-  color: #FF0043;
-  border-color: #FF0043; }
+  color: #d9534f;
+  border-color: #d9534f; }
   .btn-outline-primary:active, .btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary.focus, .btn-outline-primary.active {
-    background: #cc0036 !important;
-    border-color: #cc0036 !important;
+    background: #c9302c !important;
+    border-color: #c9302c !important;
     color: #fff; }
 
 body {
@@ -88,7 +88,7 @@ body {
   overflow-x: hidden; }
 
 ::selection {
-  background: #ff3369;
+  background: #e27c79;
   color: #fff; }
 
 /* preloader */
@@ -132,7 +132,7 @@ select {
     outline: 0; }
 
 a:hover {
-  color: #FF0043; }
+  color: #d9534f; }
 
 .slick-slide {
   outline: 0; }
@@ -180,10 +180,10 @@ a:hover {
   display: unset !important; }
 
 .bg-primary {
-  background: #FF0043 !important; }
+  background: #d9534f !important; }
 
 .text-primary {
-  color: #FF0043 !important; }
+  color: #d9534f !important; }
 
 .text-light {
   color: #999 !important; }
@@ -251,7 +251,7 @@ a:hover {
 .navbar-light .navbar-nav .nav-link {
   color: #222; }
   .navbar-light .navbar-nav .nav-link:hover {
-    color: #FF0043; }
+    color: #d9534f; }
 
 .navbar-expand-lg .navbar-nav .nav-link {
   padding: 20px;
@@ -284,7 +284,7 @@ a:hover {
     top: 50%;
     transform: translateY(-50%); }
     .search-wrapper button i {
-      color: #FF0043; }
+      color: #d9534f; }
 
 .card {
   transition: .2s ease;
@@ -292,7 +292,7 @@ a:hover {
   .card-lg .card-body {
     padding: 35px; }
   .card-icon {
-    background: #FF0043;
+    background: #d9534f;
     color: #fff;
     padding: 10px 0;
     width: 53px;
@@ -317,7 +317,7 @@ a:hover {
     line-height: 42px;
     text-align: center;
     color: #fff;
-    background: #FF0043;
+    background: #d9534f;
     border-radius: 6px; }
 
 .footer-menu {
@@ -329,7 +329,7 @@ a:hover {
     color: #333;
     transition: .2s ease; }
     .footer-menu a:hover {
-      color: #FF0043; }
+      color: #d9534f; }
 
 /* sidenav */
 .sidenav {
@@ -348,7 +348,7 @@ a:hover {
   .sidenav .sidelist ul {
     display: none; }
   .sidenav .parent > a {
-    color: #FF0043 !important;
+    color: #d9534f !important;
     position: relative;
     margin-left: 10px; }
     .sidenav .parent > a::before {
@@ -358,7 +358,7 @@ a:hover {
       top: 25%;
       height: 50%;
       width: 1px;
-      background: #FF0043; }
+      background: #d9534f; }
   .sidenav .parent ul {
     display: block;
     margin-bottom: 10px; }
@@ -393,7 +393,7 @@ a:hover {
   margin-top: 50px;
   justify-content: space-between; }
   .pagination a {
-    color: #FF0043;
+    color: #d9534f;
     font-size: 18px;
     font-weight: 500; }
   .pagination svg {
@@ -416,7 +416,7 @@ a:hover {
       .code-tabs .nav-tabs .nav-item::before {
         display: none; }
       .code-tabs .nav-tabs .nav-item.active {
-        background: #FF0043; }
+        background: #d9534f; }
         .code-tabs .nav-tabs .nav-item.active .nav-link {
           color: #fff; }
   .code-tabs .tab-content {
@@ -425,7 +425,7 @@ a:hover {
 pre {
   position: relative; }
   pre .copy-to-clipboard {
-    background: #FF0043;
+    background: #d9534f;
     color: #fff;
     cursor: pointer;
     padding: 4px 5px;
@@ -456,13 +456,13 @@ pre {
     padding: 10px;
     font-weight: 500; }
     .autocomplete-suggestions .autocomplete-suggestion.selected {
-      background: #FF0043; }
+      background: #d9534f; }
 
 .search-item a {
   color: #222;
   display: block; }
   .search-item a:hover {
-    color: #FF0043; }
+    color: #d9534f; }
 
 .search-item:not(:last-child) {
   border-bottom: 1px solid #E2E2E2; }
@@ -483,7 +483,7 @@ pre {
     color: #999; }
   .form-group .form-control:focus {
     outline: 0;
-    border-color: #FF0043;
+    border-color: #d9534f;
     box-shadow: none; }
 
 .form-group .custom-select {
@@ -549,7 +549,7 @@ pre {
 
 .content a {
   text-decoration: underline;
-  color: #FF0043; }
+  color: #d9534f; }
 
 .content ol,
 .content ul {
@@ -570,7 +570,7 @@ pre {
       height: 8px;
       width: 8px;
       border-radius: 50%;
-      background: #FF0043;
+      background: #d9534f;
       left: 3px;
       top: 8px; }
 
@@ -659,7 +659,7 @@ pre {
   font-size: 20px !important;
   color: #222;
   padding: 20px 40px;
-  border-left: 2px solid #FF0043;
+  border-left: 2px solid #d9534f;
   margin: 40px 0;
   font-weight: bold;
   background: #FBFBFB; }

@@ -57,7 +57,16 @@ link = "plugins/search/search-page.js"
 # site variables
 [params.variables]
 # Color Variables
-primary_color = "#FF0043"
+# primary_color = "#FF0043"
+# text_color = "#333"
+# text_color_dark = "#222"
+# text_color_light = "#999"
+# body_color = "#fff"
+# border_color = "#E2E2E2"
+# black = "#000"
+# white = "#fff"
+# light = "#FBFBFB"
+primary_color = "#d9534f"
 text_color = "#333"
 text_color_dark = "#222"
 text_color_light = "#999"
