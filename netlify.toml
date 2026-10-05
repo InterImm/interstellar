@@ -1,0 +1,4 @@
+# Plain static files: nothing to build.
+[build]
+  publish = "."
+  command = ""

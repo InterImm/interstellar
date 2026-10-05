@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en" class="js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>The 2219 signal | The Contact Era</title>
+<meta name="description" content="On 2219-09-18 every pulsar ledger in the solar system heard the same faint pattern from Epsilon Eridani, 10.47 light years away. How it started, the beacon to decode, and a letter to write back.">
+<link rel="alternate" hreflang="zh-CN" href="https://interstellar.interimm.org/archive/2219-signal/">
+<link rel="alternate" hreflang="en" href="https://interstellar.interimm.org/archive/2219-signal/en/">
+<link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../kit/interimm.css">
+<link rel="stylesheet" href="../../../app/signal.css">
+<script src="../../../kit/interimm.js" defer></script>
+<script type="module" src="../../../app/signal.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" data-interimm-header data-lang="en" data-current="signal" data-lang-cn="../">
+  <div class="wrap header-inner">
+    <a class="brand" href="../../../en/"><span class="brand-dot" aria-hidden="true"></span><span class="brand-name">The Contact Era</span></a>
+  </div>
+</header>
+
+<main id="main">
+  <header class="signal-hero space">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <p class="kicker"><span class="pulse"></span>Archive · made public 2219-10-05 · 1420.405 MHz</p>
+          <h1>Someone is calling from <span class="num">10.47</span> light years away.</h1>
+          <p class="lede">On 2219-09-18 every pulsar ledger in the solar system logged the same faint pattern. It comes from Epsilon Eridani, it was sent on purpose, and it is still arriving.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" href="#signal">How it started</a>
+            <a class="btn btn-ghost btn-lg" href="#write">Write back <span>→</span></a>
+          </div>
+        </div>
+        <figure class="scope">
+          <canvas data-waterfall data-line="0.62" width="280" height="140" role="img" aria-label="A live waterfall spectrogram: noise, with one narrow line that switches on and off"></canvas>
+          <figcaption><span>waterfall · 1420.405 MHz ± 40 kHz</span><time class="readout" data-story-clock>--:--:-- UTC</time></figcaption>
+        </figure>
+      </div>
+      <dl class="readouts">
+        <div><dt>Source</dt><dd>ε Eridani · K2V</dd></div>
+        <div><dt>Distance</dt><dd>10.47 ly</dd></div>
+        <div><dt>Position</dt><dd>03h32m56s −09°27′</dd></div>
+        <div><dt>Light left them</dt><dd id="ro-left">2209</dd></div>
+        <div><dt>Days since</dt><dd data-days-since="2219-09-18T03:12:07Z">–</dd></div>
+      </dl>
+    </div>
+  </header>
+
+  <section class="section" id="signal" aria-labelledby="signal-title">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="kicker">Signal</p>
+        <h2 class="section-title" id="signal-title">How it started</h2>
+        <p class="section-lede">The MC ledger keeps its clock by timing pulsars, on every world, all the time. That is why it heard first.</p>
+      </header>
+      <div class="story-grid">
+        <ol class="log">
+          <li>
+            <time datetime="2219-09-18T03:12:07Z">2219-09-18 03:12:07 UTC · Farside</time>
+            <h3>A residual nobody expected</h3>
+            <p>The ledger node on the far side of the Moon times twelve pulsars to keep the MC clock. At 03:12 it logged a narrow tone at 1420.405 MHz, the frequency of cold hydrogen, switching on and off. It was filed as local interference.</p>
+          </li>
+          <li>
+            <time datetime="2219-09-18">2219-09-18 · within 25 minutes</time>
+            <h3>Every other ledger heard it too</h3>
+            <p>Earth, Isidis on Mars and the Ceres node logged the identical pattern, each at a different moment. Ledgers compare notes at light speed, so the comparison alone took most of the day.</p>
+          </li>
+          <li class="is-key">
+            <time datetime="2219-09-18">2219-09-18</time>
+            <h3>The delays point at one star</h3>
+            <p>The arrival times fit a single wave from one direction outside the solar system: RA 03h 32m 55.8s, Dec −09° 27′ 30″. That is Epsilon Eridani, an orange star a little smaller and younger than the Sun, 10.47 light years away.</p>
+          </li>
+          <li>
+            <time datetime="2219-09-21">2219-09-21</time>
+            <h3>It is not natural</h3>
+            <p>The pulses are separated by 2, 3, 5, 7, 11 … 47 units: the prime numbers, in order. No pulsar, maser or reflection does that. Then 667 bits follow, and the whole sequence repeats.</p>
+          </li>
+          <li>
+            <time datetime="2219-09-24">2219-09-24</time>
+            <h3>The transmitter is on a turning world</h3>
+            <p>The tone drifts up and down by a few hertz every 31.6 hours. The transmitter stands on a planet that turns once in 31.6 hours, and whoever built it did not correct for that.</p>
+          </li>
+          <li>
+            <time datetime="2219-09-27">2219-09-27</time>
+            <h3>The 667 bits are a picture</h3>
+            <p>667 is 23 × 29. Folded into rows of 23, the bits make a drawing. <a href="#decode">Fold it yourself.</a></p>
+          </li>
+          <li class="is-key">
+            <time datetime="2219-10-05">2219-10-05</time>
+            <h3>Made public</h3>
+            <p>Every ledger published its raw recordings on the same day. This page is part of that announcement.</p>
+          </li>
+        </ol>
+        <aside class="card triangulation" aria-labelledby="tri-title">
+          <p class="eyebrow">Arrival times</p>
+          <h3 class="card-title" id="tri-title">Who heard it when</h3>
+          <p>A wave from one star reaches each ledger at a slightly different time. The pattern of delays is the star's address.</p>
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead><tr><th>Ledger node</th><th class="num">Arrival (UTC)</th><th class="num">Delay (s)</th></tr></thead>
+              <tbody>
+                <tr><td>Farside, Moon</td><td class="num">03:12:07.218</td><td class="num">0.000</td></tr>
+                <tr><td>Earth</td><td class="num">03:12:08.009</td><td class="num">+0.791</td></tr>
+                <tr><td>Isidis, Mars</td><td class="num">03:13:07.411</td><td class="num">+60.193</td></tr>
+                <tr><td>Ceres</td><td class="num">03:37:09.801</td><td class="num">+1502.583</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note">Story calendar, 2219-09-18.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="decode" aria-labelledby="decode-title">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="kicker">Decode</p>
+        <h2 class="section-title" id="decode-title">Fold the beacon</h2>
+        <p class="section-lede">You have the same data the ledgers had. Three steps from noise to a picture.</p>
+      </header>
+      <div class="decode-grid">
+        <div>
+          <div class="step">
+            <h3>1 · Count the gaps</h3>
+            <p>The preamble is a row of pulses with prime-numbered gaps. Its only job is to say "this is deliberate".</p>
+            <svg id="preamble" role="img" aria-label="Pulses separated by gaps of 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43 and 47 units"></svg>
+          </div>
+          <div class="step">
+            <h3>2 · Read the payload</h3>
+            <p>Then 667 bits, ones and zeros, and nothing to say how they fit together.</p>
+            <p class="bitstrip" id="bitstrip" aria-hidden="true"></p>
+          </div>
+          <div class="step">
+            <h3>3 · Fold it</h3>
+            <p>Lay the bits out in rows. Try different widths; only one makes sense.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="fold-controls">
+            <label class="sr-only" for="fold-width">Bits per row</label>
+            <input type="range" id="fold-width" min="5" max="60" value="17">
+            <output id="fold-value" for="fold-width">17 bits per row</output>
+            <button class="btn btn-ghost" type="button" id="fold-hint">Try 23</button>
+          </div>
+          <div class="scope fold-stage"><canvas id="fold" width="230" height="290" role="img"></canvas></div>
+          <p id="fold-verdict" role="status"></p>
+          <ol id="fold-legend" hidden></ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="distance" aria-labelledby="distance-title">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="kicker">Distance</p>
+        <h2 class="section-title" id="distance-title">Nobody is coming.</h2>
+      </header>
+      <p class="distance-big">10.47 <small>light years</small></p>
+      <div class="gap-line" aria-hidden="true"><span class="us">Sun · us</span><span class="packet"></span><span class="them">ε Eri · them</span></div>
+      <div class="prose">
+        <p>Not us, and not them. Neither side can build a ship that crosses 10.47 light years, and nothing in the signal suggests they are trying. What crosses is light.</p>
+        <p>So this is contact by correspondence. A question sent today reaches them on <span class="readout" id="dist-arrives">2230</span>. If they answer at once, the reply lands on <span class="readout" id="dist-answer">2240</span>. Every exchange takes a generation, and the people who start a conversation may not be the ones who finish it.</p>
+      </div>
+      <dl class="readouts">
+        <div><dt>One way</dt><dd>10.47 yr</dd></div>
+        <div><dt>Round trip</dt><dd>20.94 yr</dd></div>
+        <div><dt>Distance</dt><dd><span id="dist-km">99.1</span> trillion km</dd></div>
+      </dl>
+      <p class="after-word">For now, theirs is the only voice we can hear.</p>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="write" aria-labelledby="write-title">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="kicker">Write back</p>
+        <h2 class="section-title" id="write-title">Write to the star</h2>
+        <p class="section-lede">Your letter travels at light speed, almost 300,000 km every second. Send the link to anyone and they can watch it go.</p>
+      </header>
+      <div id="shared" hidden></div>
+      <div class="write-grid">
+        <form class="card stack" id="write-form">
+          <label class="field">Your letter <textarea id="letter" maxlength="1000" placeholder="Hello, Epsilon Eridani. We heard you."></textarea></label>
+          <button class="btn btn-primary" type="submit">Send <span>→</span></button>
+          <p class="note" id="write-note" role="status"></p>
+          <p class="note">Letters stay in this browser and are never uploaded. Dates use the story calendar (real time + 70,491 days).</p>
+        </form>
+        <div>
+          <h3 class="card-title">Sent</h3>
+          <div class="outbox" id="outbox"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" data-interimm-footer>
+  <div class="wrap">
+    <p class="footer-legal"><span>© InterImm</span><a href="https://interimm.org/en/">InterImm 2219</a></p>
+  </div>
+</footer>
+</body>
+</html>
