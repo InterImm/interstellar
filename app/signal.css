@@ -40,7 +40,7 @@
 .gap-line .them::before { background: var(--accent); box-shadow: 0 0 0 5px var(--accent-soft); }
 .gap-line .us { left: 0.5rem; transform: translate(0, -50%); justify-items: start; }
 .gap-line .them { left: auto; right: 0.5rem; transform: translate(0, -50%); justify-items: end; }
-.gap-line .packet { left: 0; width: 2.5rem; height: 2px; background: linear-gradient(90deg, transparent, var(--accent)); transform: translate(0, -50%); animation: travel 9s linear infinite; }
+.gap-line .packet { left: 0; width: 2.5rem; height: 2px; background: linear-gradient(90deg, transparent, var(--us)); transform: translate(0, -50%); animation: travel 9s linear infinite; }
 .gap-line .packet::before { display: none; }
 @keyframes travel { from { left: 0.5rem; } to { left: calc(100% - 3rem); } }
 .after-word { margin-top: 2.5rem; color: var(--muted); font-style: italic; }
@@ -52,12 +52,12 @@
 .outbox { display: grid; gap: 1rem; }
 #shared { margin-bottom: 2rem; }
 .letter { padding: 1.25rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
-.letter-shared { border-color: color-mix(in srgb, var(--accent) 50%, transparent); }
+.letter-shared { border-color: color-mix(in srgb, var(--us) 50%, transparent); }
 .letter-body { white-space: pre-wrap; margin-bottom: 1rem; }
 .letter-track { position: relative; height: 0.9rem; margin: 0 0 0.4rem; }
 .letter-track::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px dashed var(--border-strong); }
-.letter-bar { position: absolute; left: 0; top: calc(50% - 1px); height: 2px; width: calc(var(--progress, 0) * 100%); min-width: 2px; background: var(--accent); }
-.letter-dot { position: absolute; top: 50%; left: calc(var(--progress, 0) * 100%); width: 0.6rem; height: 0.6rem; margin: -0.3rem 0 0 -0.3rem; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+.letter-bar { position: absolute; left: 0; top: calc(50% - 1px); height: 2px; width: calc(var(--progress, 0) * 100%); min-width: 2px; background: var(--us); }
+.letter-dot { position: absolute; top: 50%; left: calc(var(--progress, 0) * 100%); width: 0.6rem; height: 0.6rem; margin: -0.3rem 0 0 -0.3rem; border-radius: 50%; background: var(--us); box-shadow: 0 0 0 4px var(--us-soft); }
 .letter-progress { margin: 0 0 0.75rem; font-size: 0.78rem; color: var(--muted); }
 .letter-meta { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin: 0; font-size: 0.8rem; }
 .letter-meta dt { color: var(--muted); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; }

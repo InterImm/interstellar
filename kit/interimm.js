@@ -1,4 +1,4 @@
-// InterImm phase 2 kit · Deep Field: shared header, footer and small instruments.
+// InterImm phase 2 kit · Water Hole: shared header, footer and small instruments.
 //
 // Source of truth: InterImm/interstellar, kit/. Published at
 // https://interstellar.interimm.org/kit/interimm.js. See kit/README.md.
@@ -59,7 +59,7 @@
       <nav id="site-nav" class="site-nav" aria-label="${esc(nav.labels.menu)}">
         <ul class="nav-list">${items}</ul>
         <ul class="nav-list nav-tools">
-          <li class="nav-item"><a class="nav-link" href="${esc(nav.github)}" rel="noopener">${GITHUB_ICON}<span>GitHub</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="${esc(nav.github)}" rel="noopener">${GITHUB_ICON}<span class="nav-github-label">GitHub</span></a></li>
           ${langs ? `<li class="nav-item">${langs}</li>` : ''}
         </ul>
       </nav>

@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="dark light">
-<title>Deep Field | The phase 2 design language</title>
-<meta name="description" content="Deep Field, the design language of every InterImm phase 2 site: principles, page anatomy, colour, type, components, data and instruments.">
+<meta name="color-scheme" content="dark">
+<title>Water Hole | The phase 2 design language</title>
+<meta name="description" content="Water Hole, the design language of every InterImm phase 2 site: two voices, one conversation across light years.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <!-- Other sites use the absolute URLs https://interstellar.interimm.org/kit/interimm.css and .js -->
 <link rel="stylesheet" href="interimm.css">
@@ -64,8 +64,8 @@
     <div class="wrap hero-grid">
       <div>
         <p class="kicker">InterImm phase 2 · design language</p>
-        <h1>Deep <em>Field</em></h1>
-        <p class="lede">How every site of the Contact Era looks, reads and behaves. One kit, linked by every site: a radio observatory at night, where humanity is learning to listen and to answer.</p>
+        <h1>Water <em>Hole</em></h1>
+        <p class="lede">The quiet band between hydrogen at 1420 MHz and hydroxyl at 1662 MHz, where astronomers guessed two civilisations would meet. Every site of the Contact Era is part of that conversation: their voice in cyan, ours in violet, on a night that never turns to day.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#use">Use it on a site <span>→</span></a>
           <a class="btn btn-ghost" href="https://github.com/InterImm/interstellar/tree/main/kit">Source</a>
@@ -73,12 +73,12 @@
       </div>
       <figure class="scope">
         <canvas data-waterfall data-line="0.62" role="img" aria-label="A waterfall spectrogram with a faint pulsed line"></canvas>
-        <figcaption><span>waterfall · 1420.405 MHz</span><time class="readout" data-story-clock>--:--:--</time></figcaption>
+        <figcaption><span>waterfall · 1420–1662 MHz</span><time class="readout" data-story-clock>--:--:--</time></figcaption>
       </figure>
     </div>
     <div class="wrap">
       <ul class="toc">
-        <li><a href="#principles">Principles</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#colour">Colour</a></li>
+        <li><a href="#principles">Principles</a></li><li><a href="#phase1">Not phase 1</a></li><li><a href="#conversation">Conversation</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#colour">Colour</a></li>
         <li><a href="#type">Type</a></li><li><a href="#space">Space</a></li><li><a href="#components">Components</a></li>
         <li><a href="#data">Data</a></li><li><a href="#instruments">Instruments</a></li><li><a href="#words">Words</a></li>
         <li><a href="#use">Use</a></li><li><a href="#checklist">Checklist</a></li>
@@ -95,13 +95,61 @@
         <p class="section-lede">When a choice is not covered below, decide it with these.</p>
       </header>
       <div class="panel principles">
-        <article class="card"><p class="eyebrow">01</p><h3 class="card-title">Listening, not voyaging</h3><p>Nobody is coming and nobody is going. The pictures are dishes, spectrograms, clocks and logs, never ships or planets seen up close.</p></article>
-        <article class="card"><p class="eyebrow">02</p><h3 class="card-title">Night is the ground, red is the signal</h3><p>Indigo carries everything. Hydrogen-line red marks the one thing that matters on a screen: the detection, the candidate, the current item. If everything is red, nothing is.</p></article>
+        <article class="card"><p class="eyebrow">01</p><h3 class="card-title">A conversation, not a voyage</h3><p>Nobody is coming and nobody is going; only messages cross. The pictures are dishes, spectrograms, clocks, logs and letters in transit, never ships or planets seen up close.</p></article>
+        <article class="card"><p class="eyebrow">02</p><h3 class="card-title">Two voices on one night</h3><p>Cyan is what reaches us: their signal, the detection, the current item. Violet is what we send: replies, letters, the send button. Everything else is night. No paper, no red.</p></article>
         <article class="card"><p class="eyebrow">03</p><h3 class="card-title">Every number is a readout</h3><p>Times, distances, coordinates and counts are set in mono with tabular figures, with units, so they line up and read as measured.</p></article>
-        <article class="card"><p class="eyebrow">04</p><h3 class="card-title">Hairlines, not shadows</h3><p>Panels are divided like an instrument rack: 1 px lines, flat surfaces. Shadows only for things that float (menus, tooltips).</p></article>
-        <article class="card"><p class="eyebrow">05</p><h3 class="card-title">Only the signal moves</h3><p>Motion is for live data: a waterfall, a ticking clock, a passing packet. Nothing decorative animates, and everything stops for reduced motion.</p></article>
+        <article class="card"><p class="eyebrow">04</p><h3 class="card-title">Lines are links</h3><p>Dividers are dashed, like a path a message travels; panels are split by hairlines like an instrument rack. Shadows only for things that float.</p></article>
+        <article class="card"><p class="eyebrow">05</p><h3 class="card-title">Only messages move</h3><p>Motion is for live data: a waterfall, a ticking clock, a packet in transit. Nothing decorative animates, and everything stops for reduced motion.</p></article>
         <article class="card"><p class="eyebrow">06</p><h3 class="card-title">Static, linked, free</h3><p>No build step, no server, zero running cost. Sites link this kit instead of copying it, so a change here reaches every site.</p></article>
       </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ not phase 1 -->
+  <section class="section section-alt" id="phase1">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="kicker">Not phase 1</p>
+        <h2 class="section-title">Two eras, two looks, one set of hooks</h2>
+        <p class="section-lede">Phase 1 is the public paperwork of settling Mars. Phase 2 is a conversation across light years. They share markup and class names so a site can move between them, and nothing else.</p>
+      </header>
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead><tr><th></th><th>Phase 1 · interimm.org/kit/</th><th>Phase 2 · Water Hole</th></tr></thead>
+          <tbody>
+            <tr><td class="readout">Ground</td><td>Paper and ink, follows the visitor's light or dark setting</td><td>Night only, deep blue-black, the open sky in heroes</td></tr>
+            <tr><td class="readout">Colour</td><td>One Mars rust, used sparingly</td><td>Two voices: cyan for them, violet for us. No red anywhere</td></tr>
+            <tr><td class="readout">Type</td><td>Source Serif headings, IBM Plex text and data</td><td>Unbounded headings, Instrument Sans text, JetBrains Mono data</td></tr>
+            <tr><td class="readout">Lines</td><td>Thin solid printed rules</td><td>Dashed transmission lines</td></tr>
+            <tr><td class="readout">Controls</td><td>Square ink buttons</td><td>Lit pills: cyan to receive and explore, violet to send</td></tr>
+            <tr><td class="readout">Signature</td><td>The signal line under the header: distance and delay to Mars</td><td>The exchange, the transit line and the waterfall</td></tr>
+            <tr><td class="readout">Brand mark</td><td>The InterImm wordmark</td><td>Two points and the dashed line between them</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ conversation -->
+  <section class="section" id="conversation">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="kicker">Conversation</p>
+        <h2 class="section-title">An exchange across 11.01 light years</h2>
+        <p class="section-lede">Their messages arrive on the left in cyan, ours leave on the right in violet, and the dashed spine between is the distance. Use it wherever the era shows messages, letters or replies.</p>
+      </header>
+      <ol class="exchange">
+        <li class="msg msg-in"><p class="msg-meta"><span>Ross 128 b → Sol</span><time>sent 2208-09-13 · heard 2219-09-18</time></p><p>A prime-numbered preamble, then 667 bits that fold into a picture: counting, their star with its one planet circled, a dish, hydrogen.</p></li>
+        <li class="msg msg-out"><p class="msg-meta"><span>Sol → Ross 128 b</span><time>sent 2219-10-05 · arrives 2230-10-09</time></p><p>We heard you. Here is how we count, where we are, and the same line of hydrogen you used.</p></li>
+        <li class="msg msg-in msg-waiting"><p class="msg-meta"><span>Ross 128 b → Sol</span><time>earliest answer 2241-10-12</time></p><p class="muted">Waiting. Nothing we send can be answered sooner than twice the distance.</p></li>
+      </ol>
+      <p class="demo-label kicker kicker-out">.transit · a message on its way</p>
+      <div class="stack">
+        <div class="transit transit-out" style="--progress: 0.06"><span>Sol · 2219-10-05</span><span class="transit-packet" aria-hidden="true"></span><span>Ross 128 b · 2230-10-09</span></div>
+        <div class="transit" style="--progress: 1"><span>Ross 128 b · 2208-09-13</span><span>Sol · 2219-09-18</span></div>
+      </div>
+      <p class="note" style="margin-top:1.5rem">Kickers take a voice too: <code>.kicker</code> listens (cyan), <code>.kicker-out</code> sends (violet). Logs mark what reached us with <code>.is-key</code> and what we sent with <code>.is-out</code>.</p>
     </div>
   </section>
 
@@ -146,7 +194,7 @@
       <header class="section-head">
         <p class="kicker">Colour</p>
         <h2 class="section-title">Roles, not paint</h2>
-        <p class="section-lede">Use the token for the role, never a hex value. Every token has a light and a night value and follows the visitor's setting; anything inside <code>.space</code> is always night. Switch your system theme to see both.</p>
+        <p class="section-lede">Use the token for the role, never a hex value. Phase 2 is night only; <code>.space</code> is a deeper night with stars, for heroes.</p>
       </header>
       <h3>Ground and ink</h3>
       <ul class="swatches">
@@ -159,16 +207,17 @@
         <li class="swatch"><span style="background:var(--border)"></span><code>--border</code><small>hairlines</small></li>
         <li class="swatch"><span style="background:var(--border-strong)"></span><code>--border-strong</code><small>controls</small></li>
       </ul>
-      <h3>The two accents</h3>
+      <h3>The two voices</h3>
       <ul class="swatches">
-        <li class="swatch"><span style="background:var(--accent)"></span><code>--accent · --signal</code><small>hydrogen-line red: the detection, the current item, kickers</small></li>
-        <li class="swatch"><span style="background:var(--accent-soft)"></span><code>--accent-soft</code><small>selected rows, halos</small></li>
-        <li class="swatch"><span style="background:var(--beam)"></span><code>--beam · --noise</code><small>beam blue: the instrument, the noise floor, context</small></li>
-        <li class="swatch"><span style="background:var(--beam-soft)"></span><code>--beam-soft</code><small>secondary highlights</small></li>
+        <li class="swatch"><span style="background:var(--them)"></span><code>--them · --accent · --signal</code><small>incoming: their signal, the detection, the current item, primary buttons</small></li>
+        <li class="swatch"><span style="background:var(--them-soft)"></span><code>--them-soft</code><small>selected rows, halos</small></li>
+        <li class="swatch"><span style="background:var(--us)"></span><code>--us · --beam</code><small>outgoing: our replies, letters, the send button</small></li>
+        <li class="swatch"><span style="background:var(--us-soft)"></span><code>--us-soft</code><small>our highlights</small></li>
+        <li class="swatch"><span style="background:var(--noise)"></span><code>--noise</code><small>the noise floor in a waterfall</small></li>
       </ul>
       <div class="do-dont">
-        <div class="card"><p class="eyebrow">Do</p><h3>Red for one thing per view</h3><p>The detection in a chart, the conservative habitable zone, the open menu item, a key log entry.</p></div>
-        <div class="card"><p class="eyebrow">Don't</p><h3>Red for decoration or errors</h3><p>Primary buttons are ink and turn red only on hover. Categorical chart series never use red.</p></div>
+        <div class="card"><p class="eyebrow">Do</p><h3>Pick the voice by direction</h3><p>Anything that came from them, or that we are looking at, is cyan. Anything we write or send is violet. One cyan subject per chart.</p></div>
+        <div class="card"><p class="eyebrow">Don't</p><h3>Bring back paper or rust</h3><p>No light theme, no red or orange accents, no serif headings: those belong to phase 1. Chart series never use the two voices.</p></div>
       </div>
     </div>
   </section>
@@ -234,13 +283,14 @@
         <a class="btn btn-primary" href="#components">Primary</a>
         <a class="btn" href="#components">Default</a>
         <a class="btn btn-ghost" href="#components">Ghost <span>→</span></a>
+        <a class="btn btn-send" href="#components">Send <span>→</span></a>
         <a class="btn btn-primary btn-lg" href="#components">Large</a>
         <button class="btn btn-sm" type="button">Small</button>
         <a class="text-link" href="#components">Text link <span>→</span></a>
       </div>
       <div class="cluster" style="margin-bottom:1.25rem">
         <ul class="chips" style="margin:0"><li>chip</li><li>1420.405 MHz</li><li>M4V</li></ul>
-        <span class="badge">soon</span><span class="badge badge-signal">live</span><span class="badge badge-beam">estimate</span>
+        <span class="badge">soon</span><span class="badge badge-signal">received</span><span class="badge badge-us">sent</span>
       </div>
       <div class="tabs" role="tablist" aria-label="Demo tabs"><button role="tab" aria-selected="true" type="button">Plot</button><button role="tab" aria-selected="false" type="button">Table</button><button role="tab" aria-selected="false" type="button">Rank</button></div>
 
@@ -351,7 +401,8 @@
       <p class="demo-label kicker">.log</p>
       <ol class="log">
         <li><time>2219-09-18 03:12:07 UTC</time><h3>An entry</h3><p>Timestamped entries down a hairline.</p></li>
-        <li class="is-key"><time>2219-10-05</time><h3>A key entry</h3><p>Marked in red with <code>.is-key</code>.</p></li>
+        <li class="is-key"><time>2219-09-18</time><h3>A key entry</h3><p>Something reached us: <code>.is-key</code>.</p></li>
+        <li class="is-out"><time>2219-10-05</time><h3>Our entry</h3><p>Something we sent: <code>.is-out</code>.</p></li>
       </ol>
       <p class="demo-label kicker">.data-table</p>
       <div class="table-scroll">
@@ -375,6 +426,7 @@
           <li><strong>Plain and exact.</strong> Short sentences, real numbers with units. "11.01 light years", not "very far away".</li>
           <li><strong>Story time is the present.</strong> Dates are in the story calendar (real time + 70,491 days); say so once on any page that shows them.</li>
           <li><strong>Calm, not cinematic.</strong> Nobody is coming. Wonder comes from the facts, not from adjectives.</li>
+          <li><strong>Every message has two dates.</strong> When it was sent and when it arrives; the gap is the story.</li>
           <li><strong>Real science, labelled fiction.</strong> Real catalogues are cited; invented details are called proposals or story.</li>
         </ol>
         <ol class="rules">
@@ -440,7 +492,8 @@
         <li>Links the kit's stylesheet and script from interstellar.interimm.org; no copied kit files.</li>
         <li>Header and footer use the hooks; the site has an entry in <code>nav.cn.json</code> and <code>nav.en.json</code> and sets <code>data-current</code>.</li>
         <li>Its own stylesheet holds only what is its own, using kit tokens; no new hex values except data colours the kit lacks.</li>
-        <li>Works in light, night and at phone width; nothing moves under reduced motion.</li>
+        <li>Night only, at desktop and phone width; nothing moves under reduced motion.</li>
+        <li>Uses the two voices by direction: cyan for what we receive, violet for what we send. No red, no paper.</li>
         <li>Numbers are readouts; dates say they are story time; sources are cited.</li>
         <li>Chinese and English, or the language switch is turned off.</li>
         <li>Static, zero running cost.</li>

@@ -1,16 +1,19 @@
-/* InterImm phase 2 kit · Deep Field: the shared look of every phase 2 site.
+/* InterImm phase 2 kit · Water Hole: the shared look of every phase 2 site.
 
    Source of truth: InterImm/interstellar, kit/. Published at
    https://interstellar.interimm.org/kit/interimm.css with its fonts and interimm.js.
-   See kit/README.md.
+   See kit/README.md and the spec page at https://interstellar.interimm.org/kit/.
 
-   A radio observatory at night: dark indigo, a hydrogen-line red, a beam blue,
-   spectrograms as the signature. Hand-written, no framework.
+   The water hole is the quiet stretch of radio sky between the hydrogen line
+   (1420 MHz) and the hydroxyl lines (1662 MHz), where astronomers guessed two
+   civilisations would meet. Phase 2 is that conversation, so the look has two
+   voices: a cyan for what reaches us (them, incoming) and a violet for what we
+   send (us, outgoing), on a night that never turns to day. Phase 1 is paper,
+   ink and Mars rust; phase 2 has no paper and no red.
 
-   Same class names and tokens as the phase 1 kit (https://interimm.org/kit/),
-   so a page switches era by swapping its stylesheet and script links. Colours
-   are tokens on :root and follow the visitor's light/dark preference; anything
-   with the `space` class is always the night sky. Keep changes additive. */
+   Same class names and token names as the phase 1 kit (https://interimm.org/kit/),
+   so a page switches era by swapping its stylesheet and script links. Phase 2 is
+   night only: there is no light scheme. Keep changes additive. */
 
 /* ---------- fonts (self-hosted, SIL OFL; see kit/fonts) ---------- */
 @font-face {
@@ -37,39 +40,47 @@
 
 /* ---------- tokens ---------- */
 :root {
-  color-scheme: light dark;
+  color-scheme: dark;
 
-  --bg: #f3f4f8;
-  --bg-alt: #e9ebf3;
-  --surface: #ffffff;
-  --surface-2: #f7f8fb;
-  --text: #10142a;
-  --muted: #565d78;
-  --border: #d9dce8;
-  --border-strong: #c3c8d9;
-  --link: #b52a19;
-  --focus: #c2311f;
-  --accent: #c2311f;          /* hydrogen-line red */
-  --accent-hover: #a82819;
-  --accent-text: #ffffff;
-  --accent-soft: rgb(194 49 31 / 0.1);
-  --beam: #2d4bd6;            /* beam blue, the second accent */
-  --beam-soft: rgb(45 75 214 / 0.1);
-  --signal: var(--accent);    /* the colour of a detection in charts */
-  --noise: var(--beam);       /* the colour of the noise floor in charts */
-  --scope: var(--bg-alt);     /* chart ground */
-  --shadow: 0 1px 2px rgb(16 20 42 / 0.06), 0 12px 32px rgb(16 20 42 / 0.08);
+  --bg: #070912;
+  --bg-alt: #0b0e1b;
+  --surface: #10142a;
+  --surface-2: #161b36;
+  --text: #e8ecf6;
+  --muted: #8f97b8;
+  --border: #1d2340;
+  --border-strong: #2e3660;
 
-  /* data colours: categorical series never use red, which belongs to the signal */
-  --c1: #2a78d6; --c2: #12917a; --c3: #b0731a; --c4: #8a4fd6;
-  --seq-1: #b7d3f6; --seq-2: #86b6ef; --seq-3: #5598e7; --seq-4: #2a78d6; --seq-5: #256abf; --seq-6: #184f95; --seq-7: #0d366b;
-  --div-cool-1: #f2b3ab; --div-cool-2: #e3695c; --div-cool-3: #b52a19;
-  --div-hot-1: #b7d3f6; --div-hot-2: #5598e7; --div-hot-3: #184f95;
-  --div-mid: #a9a8a2;
-  --plot-grid: #e3e5ee;       /* gridlines */
-  --plot-axis: #c3c8d9;       /* axes and ticks */
-  --plot-context: rgb(86 93 120 / 0.16);  /* everything that is not the subject */
-  --plot-dim: #a3a8bb;        /* unmatched or unknown */
+  /* the two voices */
+  --them: #5fe3d1;            /* incoming: the signal, what reaches us */
+  --them-soft: rgb(95 227 209 / 0.13);
+  --us: #a99cff;              /* outgoing: our replies, what we send */
+  --us-soft: rgb(169 156 255 / 0.14);
+
+  /* phase 1 names, mapped onto the voices */
+  --accent: var(--them);
+  --accent-hover: #8ff0e2;
+  --accent-text: #03110f;
+  --accent-soft: var(--them-soft);
+  --beam: var(--us);          /* earlier phase 2 name for the second accent */
+  --beam-soft: var(--us-soft);
+  --link: #8ff0e2;
+  --focus: #8ff0e2;
+  --signal: var(--them);      /* a detection in charts */
+  --noise: #3a3f8f;           /* the noise floor in charts */
+  --scope: #090c19;           /* chart ground */
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.5), 0 16px 40px rgb(0 0 0 / 0.45);
+
+  /* data colours: categorical series never use the two voices */
+  --c1: #6f9dff; --c2: #f2b84b; --c3: #ef7fa8; --c4: #93d36c;
+  --seq-1: #18305e; --seq-2: #1f417f; --seq-3: #2956a3; --seq-4: #3d73c9; --seq-5: #6d9ae4; --seq-6: #a3c0f2; --seq-7: #d6e3fb;
+  --div-cool-1: #6e2c3c; --div-cool-2: #b84c63; --div-cool-3: #ef7fa8;
+  --div-hot-1: #1f417f; --div-hot-2: #3d73c9; --div-hot-3: #a3c0f2;
+  --div-mid: #6b6f82;
+  --plot-grid: #171c36;       /* gridlines */
+  --plot-axis: #2a3158;       /* axes and ticks */
+  --plot-context: rgb(143 151 184 / 0.14);  /* everything that is not the subject */
+  --plot-dim: #535a7e;        /* unmatched or unknown */
 
   /* scales */
   --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
@@ -86,6 +97,7 @@
   --radius: 0.9rem;
   --radius-pill: 999px;
   --dur: 0.15s;
+  --rule: 1px dashed var(--border-strong);   /* a transmission line, not a printed rule */
   --wrap: 76rem;
   --cjk: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Noto Sans SC", "Source Han Sans SC";
   --emoji: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
@@ -94,71 +106,22 @@
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, var(--cjk), monospace;
 }
 
-/* night values, shared by the dark scheme and every `.space` block */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0b0f22;
-    --bg-alt: #0f1429;
-    --surface: #121834;
-    --surface-2: #161d3d;
-    --text: #e9ebf5;
-    --muted: #9aa1c0;
-    --border: #232a48;
-    --border-strong: #323b62;
-    --link: #ff8a73;
-    --focus: #ff8a73;
-    --accent: #ff6a4f;
-    --accent-hover: #ff8670;
-    --accent-text: #1a0602;
-    --accent-soft: rgb(255 106 79 / 0.14);
-    --beam: #8ea2ff;
-    --beam-soft: rgb(142 162 255 / 0.14);
-    --shadow: 0 1px 2px rgb(0 0 0 / 0.5), 0 16px 40px rgb(0 0 0 / 0.4);
-    --c1: #5b9cf0; --c2: #2fc4a0; --c3: #e0a83e; --c4: #b38cf5;
-    --seq-1: #184f95; --seq-2: #1c5cab; --seq-3: #256abf; --seq-4: #3987e5; --seq-5: #6da7ec; --seq-6: #9ec5f4; --seq-7: #cde2fb;
-    --div-cool-1: #7d2c24; --div-cool-2: #c4463c; --div-cool-3: #ff8a73;
-    --div-hot-1: #1c4a8a; --div-hot-2: #3987e5; --div-hot-3: #9ec5f4;
-    --div-mid: #6c6b66;
-    --plot-grid: #1d2442;
-    --plot-axis: #2c355c;
-    --plot-context: rgb(160 167 198 / 0.14);
-    --plot-dim: #5b6283;
-  }
-}
-
+/* the open sky: a deeper ground, the two voices as faint glows, stars and a dish's beam rings */
 .space {
-  --bg: #070a1a;
-  --bg-alt: #0d1228;
+  --bg: #04060d;
   --surface: rgb(255 255 255 / 0.04);
   --surface-2: rgb(255 255 255 / 0.07);
-  --text: #eef0f8;
-  --muted: #a0a7c6;
-  --border: rgb(255 255 255 / 0.1);
-  --border-strong: rgb(255 255 255 / 0.2);
-  --link: #ff8a73;
-  --focus: #ff8a73;
-  --accent: #ff6a4f;
-  --accent-hover: #ff8670;
-  --accent-text: #1a0602;
-  --accent-soft: rgb(255 106 79 / 0.16);
-  --beam: #8ea2ff;
-  --beam-soft: rgb(142 162 255 / 0.14);
-  --scope: #0d1228;
-  --c1: #5b9cf0; --c2: #2fc4a0; --c3: #e0a83e; --c4: #b38cf5;
-  --plot-grid: #1d2442;
-  --plot-axis: #2c355c;
-  --plot-context: rgb(160 167 198 / 0.14);
-  --plot-dim: #5b6283;
+  --border: rgb(255 255 255 / 0.09);
+  --border-strong: rgb(255 255 255 / 0.18);
   color: var(--text);
   position: relative;
   isolation: isolate;
   overflow: hidden;
   background:
-    radial-gradient(56rem 30rem at 85% -15%, rgb(45 75 214 / 0.28), transparent 62%),
-    radial-gradient(40rem 26rem at -5% 115%, rgb(255 106 79 / 0.14), transparent 60%),
+    radial-gradient(56rem 30rem at 88% -15%, rgb(95 227 209 / 0.12), transparent 62%),
+    radial-gradient(44rem 28rem at -5% 115%, rgb(169 156 255 / 0.14), transparent 60%),
     var(--bg);
 }
-/* faint stars and the concentric rings of a dish's beam pattern, both static */
 .space::before, .space::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; }
 .space::before {
   opacity: 0.6;
@@ -173,10 +136,13 @@
     radial-gradient(0.7px 0.7px at 44% 44%, #fff, transparent);
   background-size: 460px 360px;
 }
+/* two sets of wavefronts: one arriving from the upper right, one leaving from the lower left */
 .space::after {
-  background-image: repeating-radial-gradient(circle at 88% 8%, transparent 0 46px, rgb(142 162 255 / 0.07) 46px 47px);
-  -webkit-mask-image: radial-gradient(ellipse at 88% 8%, #000, transparent 65%);
-  mask-image: radial-gradient(ellipse at 88% 8%, #000, transparent 65%);
+  background-image:
+    repeating-radial-gradient(circle at 92% 6%, transparent 0 46px, rgb(95 227 209 / 0.07) 46px 47px),
+    repeating-radial-gradient(circle at 4% 104%, transparent 0 46px, rgb(169 156 255 / 0.06) 46px 47px);
+  -webkit-mask-image: radial-gradient(ellipse at 92% 6%, #000, transparent 55%), radial-gradient(ellipse at 4% 104%, #000, transparent 45%);
+  mask-image: radial-gradient(ellipse at 92% 6%, #000, transparent 55%), radial-gradient(ellipse at 4% 104%, #000, transparent 45%);
 }
 
 /* ---------- base ---------- */
@@ -229,20 +195,28 @@ ul, ol { margin: 0 0 1em; }
 
 .text-center { text-align: center; }
 
-/* mono label above a heading; in red, like a receiver's readout */
+/* mono label above a heading, led by a signal-strength glyph like a receiver's readout.
+   .kicker-out (or .eyebrow-out) switches it to our voice, for what we send. */
 .kicker, .eyebrow {
   display: inline-flex; align-items: center; gap: 0.6rem; margin: 0 0 1rem;
   font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500;
   letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent);
 }
-.kicker::before { content: ""; width: 0.45rem; height: 0.45rem; border-radius: 50%; background: currentColor; }
+.kicker::before {
+  content: ""; flex: none; width: 0.7rem; height: 0.62rem;
+  background:
+    linear-gradient(currentColor 0 0) 0 100% / 2px 35% no-repeat,
+    linear-gradient(currentColor 0 0) 50% 100% / 2px 68% no-repeat,
+    linear-gradient(currentColor 0 0) 100% 100% / 2px 100% no-repeat;
+}
+.kicker-out, .eyebrow-out { color: var(--us); }
 .kicker:has(.pulse)::before { display: none; }
 .eyebrow { margin: 0; }
 .pulse {
   width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--accent);
-  box-shadow: 0 0 0 0 rgb(255 106 79 / 0.6); animation: pulse 2.4s infinite;
+  box-shadow: 0 0 0 0 rgb(95 227 209 / 0.6); animation: pulse 2.4s infinite;
 }
-@keyframes pulse { 70% { box-shadow: 0 0 0 0.6rem rgb(255 106 79 / 0); } 100% { box-shadow: 0 0 0 0 rgb(255 106 79 / 0); } }
+@keyframes pulse { 70% { box-shadow: 0 0 0 0.6rem rgb(95 227 209 / 0); } 100% { box-shadow: 0 0 0 0 rgb(95 227 209 / 0); } }
 
 /* numbers that should line up: clocks, coordinates, measurements */
 .readout { font-family: var(--font-mono); font-variant-numeric: tabular-nums; letter-spacing: 0; }
@@ -265,16 +239,21 @@ ul, ol { margin: 0 0 1em; }
   font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; letter-spacing: 0.01em;
   color: var(--text); text-decoration: none;
 }
-/* phase 2 brand mark: a red source with a halo, drawn in CSS. An <img class="brand-mark"> still works. */
+/* phase 2 brand mark: two parties and the line between them, drawn in CSS
+   (them in cyan, us in violet). An <img class="brand-mark"> still works. */
 .brand-mark { border-radius: 50%; }
 .brand-dot {
-  flex: none; width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--accent);
-  box-shadow: 0 0 0 4px var(--accent-soft), 0 0 0 9px color-mix(in srgb, var(--accent) 7%, transparent);
+  flex: none; width: 1.7rem; height: 0.6rem;
+  background:
+    radial-gradient(circle at 0.3rem 50%, var(--us) 0.24rem, transparent 0.26rem),
+    radial-gradient(circle at calc(100% - 0.3rem) 50%, var(--them) 0.24rem, transparent 0.26rem),
+    linear-gradient(90deg, var(--muted) 50%, transparent 0) 0 50% / 4px 1px repeat-x;
 }
 .brand-site { color: var(--text); font-weight: 600; font-size: 0.98rem; text-decoration: none; white-space: nowrap; }
 .brand-site::before { content: "/"; margin-right: 0.75rem; color: var(--border-strong); font-weight: 400; }
 .brand-site:hover { color: var(--link); }
-@media (max-width: 40rem) { .header-inner:has(.brand-site) .brand-sub { display: none; } }
+/* a family site shows its own name instead of the era's year */
+.header-inner:has(.brand-site) .brand-sub { display: none; }
 .brand-sub { font-family: var(--font-mono); font-weight: 500; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 
 .site-nav { display: flex; flex: 1; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.25rem 1rem; }
@@ -282,7 +261,7 @@ ul, ol { margin: 0 0 1em; }
 
 .nav-link, .dropdown > summary {
   display: inline-flex; align-items: center; gap: 0.4rem;
-  padding: 0.4rem 0.8rem; border-radius: 999px;
+  padding: 0.4rem 0.7rem; border-radius: 999px;
   color: var(--muted); font-size: 0.95rem; font-weight: 500; text-decoration: none; cursor: pointer;
   transition: color 0.15s, background 0.15s;
 }
@@ -314,7 +293,9 @@ ul, ol { margin: 0 0 1em; }
   background: transparent; color: var(--text); cursor: pointer;
 }
 
-@media (max-width: 58rem) {
+/* on wide screens GitHub is an icon; the word comes back in the folded menu */
+@media (min-width: 75.01rem) { .nav-github-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } }
+@media (max-width: 75rem) {
   .js .nav-toggle { display: inline-flex; }
   .js .site-nav { display: none; flex-basis: 100%; padding-bottom: 0.75rem; }
   .js .site-nav.is-open { display: flex; flex-direction: column; align-items: stretch; }
@@ -335,8 +316,11 @@ ul, ol { margin: 0 0 1em; }
 .btn span { display: inline-block; transition: transform 0.15s; }
 .btn:hover span { transform: translateX(3px); }
 /* primary is ink on the ground: a calm, solid control; red is kept for the signal itself */
-.btn-primary { background: var(--text); border-color: transparent; color: var(--bg); }
-.btn-primary:hover { background: var(--accent); border-color: transparent; color: var(--accent-text); box-shadow: 0 8px 28px rgb(255 106 79 / 0.3); }
+/* primary is lit in the incoming voice; .btn-send is for anything that transmits (send, write back) */
+.btn-primary { background: var(--them); border-color: transparent; color: var(--accent-text); }
+.btn-primary:hover { background: var(--accent-hover); border-color: transparent; color: var(--accent-text); box-shadow: 0 0 0 4px var(--them-soft), 0 8px 28px rgb(95 227 209 / 0.25); }
+.btn-send { background: var(--us); border-color: transparent; color: #0d0828; }
+.btn-send:hover { background: #c4bbff; border-color: transparent; box-shadow: 0 0 0 4px var(--us-soft), 0 8px 28px rgb(169 156 255 / 0.25); }
 .btn-ghost { background: transparent; }
 .btn-ghost:hover { background: var(--surface-2); border-color: var(--border-strong); }
 .btn-lg { min-height: 3rem; padding: 0.7rem 1.5rem; font-size: 1.02rem; }
@@ -354,7 +338,7 @@ ul, ol { margin: 0 0 1em; }
 
 /* ---------- sections ---------- */
 .section { padding-block: clamp(3.5rem, 8vw, 6rem); }
-.section-alt { background: var(--bg-alt); border-block: 1px solid var(--border); }
+.section-alt { background: var(--bg-alt); border-block: var(--rule); }
 .section-head { margin-bottom: clamp(1.75rem, 4vw, 2.75rem); }
 .section-head-split { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1.25rem 2rem; }
 .section-title { font-size: var(--step-2); margin-bottom: 0.5rem; }
@@ -431,7 +415,9 @@ ul, ol { margin: 0 0 1em; }
 .log > li { position: relative; padding: 0 0 2rem 1.75rem; }
 .log > li:last-child { padding-bottom: 0; }
 .log > li::before { content: ""; position: absolute; left: -0.3rem; top: 0.45rem; width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--bg); border: 1.5px solid var(--muted); }
-.log > li.is-key::before { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+.log > li.is-key::before { background: var(--them); border-color: var(--them); box-shadow: 0 0 0 4px var(--them-soft); }
+.log > li.is-out::before { background: var(--us); border-color: var(--us); box-shadow: 0 0 0 4px var(--us-soft); }
+.log > li.is-out time { color: var(--us); }
 .log time { display: block; margin-bottom: 0.25rem; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.04em; color: var(--accent); font-variant-numeric: tabular-nums; }
 .log h3 { font-size: 1.1rem; margin-bottom: 0.35rem; }
 .log p { color: var(--muted); max-width: 40rem; }
@@ -455,7 +441,7 @@ ul, ol { margin: 0 0 1em; }
 
 /* ---------- page anatomy: heroes and splits ---------- */
 /* Every phase 2 page opens with a .hero (a .space one for story pages), then .section blocks. */
-.hero { padding-block: clamp(3rem, 8vw, 5.5rem) clamp(2.5rem, 6vw, 4rem); border-bottom: 1px solid var(--border); }
+.hero { padding-block: clamp(3rem, 8vw, 5.5rem) clamp(2.5rem, 6vw, 4rem); border-bottom: var(--rule); }
 .hero h1 { font-size: var(--step-4); font-weight: 800; line-height: 1.02; letter-spacing: -0.025em; margin-bottom: 0.45em; }
 .hero h1:lang(zh) { line-height: 1.18; letter-spacing: 0.02em; }
 .hero h1 em, .hero h1 .num { font-style: normal; color: var(--accent); }
@@ -484,7 +470,7 @@ ul, ol { margin: 0 0 1em; }
   color: var(--muted); vertical-align: middle; white-space: nowrap;
 }
 .badge-signal { border-color: transparent; background: var(--accent-soft); color: var(--accent); }
-.badge-beam { border-color: transparent; background: var(--beam-soft); color: var(--beam); }
+.badge-beam, .badge-us { border-color: transparent; background: var(--us-soft); color: var(--us); }
 
 /* tabs: a segmented control. Use role="tab" and aria-selected; the page shows and hides the panels. */
 .tabs { display: inline-flex; flex-wrap: wrap; gap: 0.15rem; padding: 0.2rem; background: var(--bg-alt); border: 1px solid var(--border); border-radius: 0.8rem; }
@@ -549,8 +535,49 @@ input[type="checkbox"], input[type="radio"], input[type="range"] { accent-color:
   .app-side { position: static; max-height: none; }
 }
 
+/* ---------- conversation: the signature of phase 2 ---------- */
+/* An exchange across light years. Incoming messages (theirs) sit left in cyan,
+   outgoing (ours) sit right in violet; the dashed spine is the distance between.
+   <ol class="exchange">
+     <li class="msg msg-in"><p class="msg-meta"><span>Ross 128 b → Sol</span><time>sent 2208 · heard 2219</time></p><p>…</p></li>
+     <li class="msg msg-out"><p class="msg-meta"><span>Sol → Ross 128 b</span><time>sent 2219 · arrives 2230</time></p><p>…</p></li>
+   </ol> */
+.exchange { position: relative; display: grid; gap: 1.25rem; margin: 0; padding: 0; list-style: none; }
+.exchange::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; border-left: var(--rule); }
+.msg { position: relative; width: min(100%, calc(50% - 1.5rem)); padding: 1rem 1.2rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+.msg > :last-child { margin-bottom: 0; }
+.msg-in { justify-self: start; border-left: 2px solid var(--them); }
+.msg-out { justify-self: end; border-right: 2px solid var(--us); }
+.msg::after { content: ""; position: absolute; top: 1.25rem; width: 0.6rem; height: 0.6rem; border-radius: 50%; }
+.msg-in::after { right: calc(-1.5rem - 0.3rem); background: var(--them); box-shadow: 0 0 0 4px var(--them-soft); }
+.msg-out::after { left: calc(-1.5rem - 0.3rem); background: var(--us); box-shadow: 0 0 0 4px var(--us-soft); }
+.msg-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.2rem 1rem; margin: 0 0 0.5rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.04em; color: var(--muted); }
+.msg-in .msg-meta span { color: var(--them); }
+.msg-out .msg-meta span { color: var(--us); }
+.msg-waiting { border-style: dashed; background: transparent; }
+@media (max-width: 40rem) {
+  .exchange::before { left: 0.3rem; }
+  .msg { width: auto; margin-left: 1.5rem; }
+  .msg-in::after, .msg-out::after { left: -1.5rem; right: auto; }
+}
+
+/* a message in transit: a dashed path from sender to receiver, the packet at --progress (0–1).
+   <div class="transit transit-out" style="--progress: 0.3"><span>Sol</span><span>Ross 128 b</span></div> */
+.transit { --voice: var(--them); --voice-soft: var(--them-soft); position: relative; display: flex; justify-content: space-between; gap: 1rem; padding-top: 1.1rem; font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
+.transit-out { --voice: var(--us); --voice-soft: var(--us-soft); }
+.transit::before { content: ""; position: absolute; left: 0; right: 0; top: 0.35rem; border-top: var(--rule); }
+.transit::after {
+  content: ""; position: absolute; top: calc(0.35rem - 1px); left: 0; height: 2px; width: calc(var(--progress, 0) * 100%); min-width: 2px;
+  background: linear-gradient(90deg, transparent, var(--voice));
+}
+.transit > :first-child::before, .transit > :last-child::before { content: ""; position: absolute; top: 0.05rem; width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--surface-2); border: 1px solid var(--border-strong); }
+.transit > :first-child::before { left: 0; }
+.transit > :last-child::before { right: 0; }
+.transit > :first-child::before { background: var(--voice); border-color: var(--voice); box-shadow: 0 0 0 4px var(--voice-soft); }
+.transit-packet { position: absolute; top: calc(0.35rem - 0.25rem); left: calc(var(--progress, 0) * 100%); width: 0.5rem; height: 0.5rem; margin-left: -0.25rem; border-radius: 50%; background: var(--voice); box-shadow: 0 0 0 4px var(--voice-soft); }
+
 /* ---------- inner pages ---------- */
-.page-hero { padding-block: clamp(3.5rem, 9vw, 6.5rem) clamp(2.5rem, 6vw, 4rem); border-bottom: 1px solid var(--border); }
+.page-hero { padding-block: clamp(3.5rem, 9vw, 6.5rem) clamp(2.5rem, 6vw, 4rem); border-bottom: var(--rule); }
 .page-hero h1 { font-size: var(--step-3); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 0.4em; }
 .page-hero h1:lang(zh) { letter-spacing: 0.02em; line-height: 1.2; }
 .page-hero .lede { max-width: 44rem; margin: 0 0 1rem; color: var(--muted); font-size: clamp(1.05rem, 1rem + 0.4vw, 1.22rem); }
@@ -569,7 +596,7 @@ blockquote { margin: 1.5rem 0; padding: 0.25rem 0 0.25rem 1.25rem; border-left: 
 :lang(zh) .tile p, :lang(zh) .card p, :lang(zh) .log p { line-height: 1.75; }
 
 /* ---------- footer ---------- */
-.site-footer { padding-block: 3.5rem 1.5rem; background: var(--bg-alt); border-top: 1px solid var(--border); color: var(--muted); font-size: 0.93rem; }
+.site-footer { padding-block: 3.5rem 1.5rem; background: var(--bg-alt); border-top: var(--rule); color: var(--muted); font-size: 0.93rem; }
 .footer-brand { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; padding-bottom: 2rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border); }
 .footer-brand .kicker { margin: 0; }
 .footer-grid { display: grid; gap: 2rem 3rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }

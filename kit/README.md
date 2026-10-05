@@ -1,4 +1,9 @@
-# InterImm kit, phase 2 · Deep Field
+# InterImm kit, phase 2 · Water Hole
+
+Phase 2 is a conversation across light years, and it looks nothing like phase 1. Phase 1 is paper, ink, serif
+headings and Mars rust. Phase 2 is night only, with two voices: cyan (`--them`) for what reaches us and violet
+(`--us`) for what we send. It has no light theme, no paper and no red. The name comes from the "water hole", the
+radio band between hydrogen (1420 MHz) and hydroxyl (1662 MHz) where two civilisations were expected to meet.
 
 The design language of every phase 2 InterImm site, and the code that carries it: principles, colours, type,
 scales, header, footer, page layouts, components, chart colours and a few instruments (a live waterfall
@@ -70,19 +75,23 @@ variants, `.chips`, `.card`, `.card-grid`, `.tile`, `.bento`, `.card-link-wrap`,
 
 Phase 2 adds:
 
-- Tokens: `--beam` / `--beam-soft` (second accent), `--signal`, `--noise`, `--scope`; chart colours `--c1`…`--c4`
-  (categorical, never red), `--seq-1`…`--seq-7`, `--div-cool-*` / `--div-mid` / `--div-hot-*`, `--plot-grid`,
+- Tokens: the voices `--them` / `--them-soft` (also `--accent`, `--signal`) and `--us` / `--us-soft` (also
+  `--beam`), `--noise`, `--scope`, `--rule` (the dashed divider); chart colours `--c1`…`--c4` (categorical, never
+  either voice), `--seq-1`…`--seq-7`, `--div-cool-*` / `--div-mid` / `--div-hot-*`, `--plot-grid`,
   `--plot-axis`, `--plot-context`, `--plot-dim`; scales `--space-1`…`--space-8`, `--step--2`…`--step-5`,
   `--radius-sm`, `--radius-pill`, `--dur`.
 - Layout: `.hero`, `.hero-xl`, `.hero-grid`, `.hero-actions`, `.split` (ratio via `--split`), `.cluster`,
   `.wrap-full`, `.app-shell`, `.app-side`, `.app-main`, `.app-detail`.
 - Parts: `.eyebrow`, `.readout`, `.readouts`, `.brand-dot`, `.brand-sub`, `.brand-site`, `.panel`, `.scope`, `.log`,
   `.data-table`, `.field`, `.field-pair`, `.field-checks`, `.inline-field`, `.note`, `.muted`, `.btn-sm`, `.badge`
-  (`-signal`, `-beam`), `.tabs`, `.legend` with `.sw` swatches (`.sw-c1`…, `.sw-band`, `.sw-ring`, `.sw-signal`,
+  (`-signal`, `-us`), `.btn-send`, `.kicker-out`, `.log .is-out`, `.tabs`, `.legend` with `.sw` swatches (`.sw-c1`…, `.sw-band`, `.sw-ring`, `.sw-signal`,
   `.sw-dim`), `.tooltip`.
 
-One difference to know: `.btn-primary` is ink on the ground (white on night, indigo on light) and turns red
-on hover. Red is kept for the signal itself: one thing per view, and never a categorical chart series.
+- Conversation (the signature): `.exchange` with `.msg.msg-in` / `.msg.msg-out` (and `.msg-waiting`), `.msg-meta`;
+  `.transit` / `.transit-out` with `--progress` and an optional `.transit-packet`.
+
+Pick the voice by direction: `.btn-primary` and `.kicker` are cyan (receiving, exploring); `.btn-send`,
+`.kicker-out` and `.is-out` are violet (sending, replying).
 
 ### Instruments
 
@@ -95,7 +104,7 @@ on hover. Red is kept for the signal itself: one thing per view, and never a cat
 <span data-days-since="2219-09-18T03:12:07Z"></span>
 ```
 
-The waterfall reads its colours from CSS, follows light/dark, pauses when off screen and stays still for
+The waterfall reads its colours from CSS, pauses when off screen and stays still for
 visitors who prefer reduced motion. The same functions are on `window.InterImm`.
 
 ## Changing it
