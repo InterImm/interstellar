@@ -1,11 +1,11 @@
 // The entrance page: hero readouts, the beacon decoder and the letter outbox.
 // Everything runs in the browser; letters are kept in this browser only.
-import { EPSILON_ERIDANI as STAR, YEAR_MS, LY_KM, message, messageProgress, emitted, storyNow, storyFromReal, realFromStory } from '../lib/light.js';
+import { ROSS_128 as STAR, YEAR_MS, LY_KM, message, messageProgress, emitted, storyNow, storyFromReal, realFromStory } from '../lib/light.js';
 import { BITS, PRIMES, WIDTH, HEIGHT, PARTS } from './beacon.js';
 
 const zh = document.documentElement.lang.toLowerCase().startsWith('zh');
 const T = zh ? {
-  arrived: '已抵达天苑四',
+  arrived: '已抵达罗斯128',
   onTheWay: (p) => `已走了 ${p}`,
   arrives: '抵达',
   reply: '最早回音',
@@ -14,18 +14,18 @@ const T = zh ? {
   remove: '删除',
   share: '复制链接',
   copied: '链接已复制',
-  sharedTitle: '有人给天苑四写了一封信',
+  sharedTitle: '有人给罗斯128 b写了一封信',
   tooShort: '先写点什么。',
-  saved: '已发出。它会以光速走 10.47 年。',
+  saved: '已发出。它会以光速走 11.01 年。',
   unsaved: '已发出，但这个浏览器不能保存它；刷新后就看不到了。',
   fold: (w) => `每行 ${w} 位`,
   found: `23 × 29 = 667。两个都是质数，只有这一种折法能成图。`,
   notYet: (w) => (667 % w === 0 ? `${w} 能整除 667，但图是斜的。试试另一个因数。` : `${w} 除不尽 667，最后一行是残的。`),
-  parts: { count: '数数：1 到 7，用三位二进制', system: '一颗恒星，五颗行星，第四颗被圈起', dish: '一面天线，向外发出电波', hydrogen: '氢原子的自旋翻转：1420.405 MHz，就是这个频率' },
+  parts: { count: '数数：1 到 7，用三位二进制', system: '一颗小恒星，只有一颗行星，被圈了起来', dish: '一面天线，向外发出电波', hydrogen: '氢原子的自旋翻转：1420.405 MHz，就是这个频率' },
   km: (n) => `${n} 公里`,
   years: (n) => `${n} 年`,
 } : {
-  arrived: 'Has reached Epsilon Eridani',
+  arrived: 'Has reached Ross 128',
   onTheWay: (p) => `${p} of the way`,
   arrives: 'Arrives',
   reply: 'Earliest answer',
@@ -34,14 +34,14 @@ const T = zh ? {
   remove: 'Delete',
   share: 'Copy link',
   copied: 'Link copied',
-  sharedTitle: 'Someone wrote a letter to Epsilon Eridani',
+  sharedTitle: 'Someone wrote a letter to Ross 128 b',
   tooShort: 'Write something first.',
-  saved: 'Sent. It will travel at light speed for 10.47 years.',
+  saved: 'Sent. It will travel at light speed for 11.01 years.',
   unsaved: 'Sent, but this browser could not keep it; it will be gone after a reload.',
   fold: (w) => `${w} bits per row`,
   found: '23 × 29 = 667. Both are prime, so this is the only fold that makes a picture.',
   notYet: (w) => (667 % w === 0 ? `${w} divides 667, but the picture is skewed. Try the other factor.` : `${w} does not divide 667; the last row is ragged.`),
-  parts: { count: 'Counting: 1 to 7, in three-bit binary', system: 'A star with five planets; the fourth is circled', dish: 'A dish, sending waves outward', hydrogen: 'The hydrogen spin flip: 1420.405 MHz, the frequency they chose' },
+  parts: { count: 'Counting: 1 to 7, in three-bit binary', system: 'A small star with one planet, circled', dish: 'A dish, sending waves outward', hydrogen: 'The hydrogen spin flip: 1420.405 MHz, the frequency they chose' },
   km: (n) => `${n} km`,
   years: (n) => `${n} yr`,
 };
