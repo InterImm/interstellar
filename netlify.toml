@@ -1,4 +1,5 @@
-# Plain static files: nothing to build.
+# Plain static files: nothing to build. The command is an explicit no-op so it
+# replaces any build command (such as hugo) still set in the Netlify UI.
 [build]
   publish = "."
-  command = ""
+  command = "echo 'Static site: nothing to build'"
