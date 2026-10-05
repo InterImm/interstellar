@@ -8,7 +8,11 @@
 // 1. On a page that marks its header with `data-interimm-header` (and its footer
 //    with `data-interimm-footer`), it replaces them with the phase 2 menu and
 //    footer, read from nav.<lang>.json next to this script. The page's own
-//    markup stays as the fallback if that fails.
+//    markup stays as the fallback if that fails. On the header: data-current names the
+//    menu item of this page; data-site="Name" data-site-url="./" adds the site's own name
+//    after the era's brand; data-width="full" spans the window (tools); data-lang-cn="" or
+//    data-lang-en="" drops that language from the switch when the site has no such version.
+//    data-width="full" works on the footer too.
 // 2. On every page it wires up the header menu: the mobile toggle and one
 //    dropdown open at a time. Without JavaScript the menu is always visible.
 // 3. Instruments, phase 2 only:
@@ -32,7 +36,12 @@
   // ------------------------------------------------------------ header and footer
 
   const langUrl = (header, l) => header.getAttribute(`data-lang-${l.lang}`) || l.url;
+  // data-lang-cn="" on the header means the site has no Chinese version: the switch is left out
+  const hasLang = (header, l) => !(header && header.getAttribute(`data-lang-${l.lang}`) === '');
   const brand = (nav) => `<a class="brand" href="${esc(nav.home)}">${nav.logo ? `<img class="brand-mark" src="${esc(nav.logo)}" alt="" width="32" height="32">` : '<span class="brand-dot" aria-hidden="true"></span>'}<span class="brand-name">${esc(nav.title)}</span>${nav.subtitle ? `<span class="brand-sub">${esc(nav.subtitle)}</span>` : ''}</a>`;
+  // a site of the family names itself after the era's brand: data-site="Exoplanet Explorer" data-site-url="./"
+  const site = (host) => (host && host.dataset.site ? `<a class="brand-site" href="${esc(host.dataset.siteUrl || './')}">${esc(host.dataset.site)}</a>` : '');
+  const wrapClass = (host) => (host && host.dataset.width === 'full' ? 'wrap-full' : 'wrap');
 
   const renderHeader = (header, nav, current) => {
     const link = (item) => `<a href="${esc(item.url)}"${item.id === current ? ' aria-current="page"' : ''}>${esc(item.name)}</a>`;
@@ -43,9 +52,9 @@
       }
       return `<li class="nav-item">${link(item).replace('<a ', '<a class="nav-link" ')}</li>`;
     }).join('');
-    const langs = nav.languages.map((l) => `<a class="nav-link lang-link" href="${esc(langUrl(header, l))}" hreflang="${esc(l.code)}" lang="${esc(l.code)}"><span class="sr-only">${esc(nav.labels.language)}: </span>${esc(l.name)}</a>`).join('');
-    return `<div class="wrap header-inner">
-      ${brand(nav)}
+    const langs = nav.languages.filter((l) => hasLang(header, l)).map((l) => `<a class="nav-link lang-link" href="${esc(langUrl(header, l))}" hreflang="${esc(l.code)}" lang="${esc(l.code)}"><span class="sr-only">${esc(nav.labels.language)}: </span>${esc(l.name)}</a>`).join('');
+    return `<div class="${wrapClass(header)} header-inner">
+      ${brand(nav)}${site(header)}
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="sr-only">${esc(nav.labels.menu)}</span>${MENU_ICON}</button>
       <nav id="site-nav" class="site-nav" aria-label="${esc(nav.labels.menu)}">
         <ul class="nav-list">${items}</ul>
@@ -57,7 +66,7 @@
     </div>`;
   };
 
-  const renderFooter = (nav) => `<div class="wrap">
+  const renderFooter = (nav, footer) => `<div class="${wrapClass(footer)}">
       <div class="footer-brand">
         ${brand(nav)}
         <p class="kicker">${esc(nav.labels.kicker)}</p>
@@ -206,7 +215,7 @@
       .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then((nav) => {
         if (header) header.innerHTML = renderHeader(header, nav, header.dataset.current);
-        if (footer) footer.innerHTML = renderFooter(nav);
+        if (footer) footer.innerHTML = renderFooter(nav, footer);
       })
       .catch(() => { /* keep the page's own fallback markup */ })
       .finally(initMenu);

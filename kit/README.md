@@ -1,7 +1,9 @@
 # InterImm kit, phase 2 · Deep Field
 
-The shared look of every phase 2 InterImm site: colours, fonts, header, footer, components and a few
-instruments (a live waterfall spectrogram, the story clock). InterImm/interstellar owns it and
+The design language of every phase 2 InterImm site, and the code that carries it: principles, colours, type,
+scales, header, footer, page layouts, components, chart colours and a few instruments (a live waterfall
+spectrogram, the story clock). The spec is the live page at https://interstellar.interimm.org/kit/
+(`kit/index.html`); this file is how to use it. InterImm/interstellar owns it and
 publishes it at interstellar.interimm.org; other phase 2 sites link it instead of copying it.
 
 Phase 1 keeps its own kit at `https://interimm.org/kit/` (source: InterImm/interimm.github.io, branch `hugo`).
@@ -33,7 +35,24 @@ The two kits share markup hooks, class names and token names, so a site switches
 </html>
 ```
 
-`data-lang`, `data-current`, `data-lang-cn` / `data-lang-en` work exactly as in the phase 1 kit.
+`data-lang`, `data-current`, `data-lang-cn` / `data-lang-en` work exactly as in the phase 1 kit. Phase 2 adds, on
+the header:
+
+| Attribute | Effect |
+| --- | --- |
+| `data-site="Exoplanet Explorer"` `data-site-url="./"` | Shows the site's own name after the era's brand: ● The Contact Era / Exoplanet Explorer |
+| `data-width="full"` | Header (or footer) spans the window, for tools |
+| `data-lang-cn=""` (empty) | Leaves that language out of the switch, for a site with no such version |
+
+Every phase 2 site needs an entry in `nav.cn.json` and `nav.en.json` with the `id` it passes as `data-current`.
+
+### Page anatomy
+
+- **Story page** (entrance, archive): `.hero.space` (kicker, `h1`, `.lede`, `.hero-actions`, optional
+  `.hero-grid` with a `.scope`), then `.section` / `.section-alt` blocks with `.section-head`. `.hero-xl` is for
+  the entrance only.
+- **Tool** (explorer, ledger): header with `data-width="full"`, then `main.app-shell` with `.app-side`,
+  `.app-main` and an optional `.app-detail` column that appears when it is not `hidden`.
 
 ### Switching era
 
@@ -49,12 +68,21 @@ variants, `.chips`, `.card`, `.card-grid`, `.tile`, `.bento`, `.card-link-wrap`,
 `--border-strong`, `--accent`, `--accent-hover`, `--accent-text`, `--accent-soft`, `--link`, `--focus`, `--radius`,
 `--font`, `--font-display`, `--font-mono`).
 
-Phase 2 adds: `--beam` / `--beam-soft` (second accent), `--signal`, `--noise`, `--scope` (chart colours),
-`.eyebrow`, `.readout`, `.readouts`, `.brand-dot`, `.brand-sub`, `.panel`, `.scope`, `.log`, `.data-table`,
-`.field`, `.inline-field`, `.note`.
+Phase 2 adds:
+
+- Tokens: `--beam` / `--beam-soft` (second accent), `--signal`, `--noise`, `--scope`; chart colours `--c1`…`--c4`
+  (categorical, never red), `--seq-1`…`--seq-7`, `--div-cool-*` / `--div-mid` / `--div-hot-*`, `--plot-grid`,
+  `--plot-axis`, `--plot-context`, `--plot-dim`; scales `--space-1`…`--space-8`, `--step--2`…`--step-5`,
+  `--radius-sm`, `--radius-pill`, `--dur`.
+- Layout: `.hero`, `.hero-xl`, `.hero-grid`, `.hero-actions`, `.split` (ratio via `--split`), `.cluster`,
+  `.wrap-full`, `.app-shell`, `.app-side`, `.app-main`, `.app-detail`.
+- Parts: `.eyebrow`, `.readout`, `.readouts`, `.brand-dot`, `.brand-sub`, `.brand-site`, `.panel`, `.scope`, `.log`,
+  `.data-table`, `.field`, `.field-pair`, `.field-checks`, `.inline-field`, `.note`, `.muted`, `.btn-sm`, `.badge`
+  (`-signal`, `-beam`), `.tabs`, `.legend` with `.sw` swatches (`.sw-c1`…, `.sw-band`, `.sw-ring`, `.sw-signal`,
+  `.sw-dim`), `.tooltip`.
 
 One difference to know: `.btn-primary` is ink on the ground (white on night, indigo on light) and turns red
-on hover. Red is kept for the signal itself.
+on hover. Red is kept for the signal itself: one thing per view, and never a categorical chart series.
 
 ### Instruments
 

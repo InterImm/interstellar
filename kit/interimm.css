@@ -60,7 +60,32 @@
   --scope: var(--bg-alt);     /* chart ground */
   --shadow: 0 1px 2px rgb(16 20 42 / 0.06), 0 12px 32px rgb(16 20 42 / 0.08);
 
+  /* data colours: categorical series never use red, which belongs to the signal */
+  --c1: #2a78d6; --c2: #12917a; --c3: #b0731a; --c4: #8a4fd6;
+  --seq-1: #b7d3f6; --seq-2: #86b6ef; --seq-3: #5598e7; --seq-4: #2a78d6; --seq-5: #256abf; --seq-6: #184f95; --seq-7: #0d366b;
+  --div-cool-1: #f2b3ab; --div-cool-2: #e3695c; --div-cool-3: #b52a19;
+  --div-hot-1: #b7d3f6; --div-hot-2: #5598e7; --div-hot-3: #184f95;
+  --div-mid: #a9a8a2;
+  --plot-grid: #e3e5ee;       /* gridlines */
+  --plot-axis: #c3c8d9;       /* axes and ticks */
+  --plot-context: rgb(86 93 120 / 0.16);  /* everything that is not the subject */
+  --plot-dim: #a3a8bb;        /* unmatched or unknown */
+
+  /* scales */
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
+  --space-5: 1.5rem; --space-6: 2rem; --space-7: 3rem; --space-8: 4.5rem;
+  --step--2: 0.72rem;         /* mono labels: kickers, table heads, captions */
+  --step--1: 0.875rem;        /* notes, small controls */
+  --step-0: 1.0625rem;        /* body */
+  --step-1: 1.22rem;          /* ledes */
+  --step-2: clamp(1.6rem, 1.1rem + 2vw, 2.6rem);    /* section titles */
+  --step-3: clamp(2rem, 1.2rem + 3.4vw, 3.6rem);    /* page titles */
+  --step-4: clamp(2.1rem, 1.1rem + 4vw, 4rem);      /* hero titles */
+  --step-5: clamp(2.2rem, 1.1rem + 4.4vw, 4.4rem);  /* the entrance only */
+  --radius-sm: 0.55rem;
   --radius: 0.9rem;
+  --radius-pill: 999px;
+  --dur: 0.15s;
   --wrap: 76rem;
   --cjk: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Noto Sans SC", "Source Han Sans SC";
   --emoji: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
@@ -89,6 +114,15 @@
     --beam: #8ea2ff;
     --beam-soft: rgb(142 162 255 / 0.14);
     --shadow: 0 1px 2px rgb(0 0 0 / 0.5), 0 16px 40px rgb(0 0 0 / 0.4);
+    --c1: #5b9cf0; --c2: #2fc4a0; --c3: #e0a83e; --c4: #b38cf5;
+    --seq-1: #184f95; --seq-2: #1c5cab; --seq-3: #256abf; --seq-4: #3987e5; --seq-5: #6da7ec; --seq-6: #9ec5f4; --seq-7: #cde2fb;
+    --div-cool-1: #7d2c24; --div-cool-2: #c4463c; --div-cool-3: #ff8a73;
+    --div-hot-1: #1c4a8a; --div-hot-2: #3987e5; --div-hot-3: #9ec5f4;
+    --div-mid: #6c6b66;
+    --plot-grid: #1d2442;
+    --plot-axis: #2c355c;
+    --plot-context: rgb(160 167 198 / 0.14);
+    --plot-dim: #5b6283;
   }
 }
 
@@ -110,6 +144,11 @@
   --beam: #8ea2ff;
   --beam-soft: rgb(142 162 255 / 0.14);
   --scope: #0d1228;
+  --c1: #5b9cf0; --c2: #2fc4a0; --c3: #e0a83e; --c4: #b38cf5;
+  --plot-grid: #1d2442;
+  --plot-axis: #2c355c;
+  --plot-context: rgb(160 167 198 / 0.14);
+  --plot-dim: #5b6283;
   color: var(--text);
   position: relative;
   isolation: isolate;
@@ -232,6 +271,10 @@ ul, ol { margin: 0 0 1em; }
   flex: none; width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--accent);
   box-shadow: 0 0 0 4px var(--accent-soft), 0 0 0 9px color-mix(in srgb, var(--accent) 7%, transparent);
 }
+.brand-site { color: var(--text); font-weight: 600; font-size: 0.98rem; text-decoration: none; white-space: nowrap; }
+.brand-site::before { content: "/"; margin-right: 0.75rem; color: var(--border-strong); font-weight: 400; }
+.brand-site:hover { color: var(--link); }
+@media (max-width: 40rem) { .header-inner:has(.brand-site) .brand-sub { display: none; } }
 .brand-sub { font-family: var(--font-mono); font-weight: 500; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 
 .site-nav { display: flex; flex: 1; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.25rem 1rem; }
@@ -314,7 +357,7 @@ ul, ol { margin: 0 0 1em; }
 .section-alt { background: var(--bg-alt); border-block: 1px solid var(--border); }
 .section-head { margin-bottom: clamp(1.75rem, 4vw, 2.75rem); }
 .section-head-split { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1.25rem 2rem; }
-.section-title { font-size: clamp(1.6rem, 1.1rem + 2vw, 2.6rem); margin-bottom: 0.5rem; }
+.section-title { font-size: var(--step-2); margin-bottom: 0.5rem; }
 .section-lede { max-width: 38rem; margin: 0; color: var(--muted); font-size: 1.08rem; }
 
 /* tiles */
@@ -410,9 +453,105 @@ ul, ol { margin: 0 0 1em; }
 .inline-field { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: var(--muted); }
 .note { font-size: 0.85rem; color: var(--muted); }
 
+/* ---------- page anatomy: heroes and splits ---------- */
+/* Every phase 2 page opens with a .hero (a .space one for story pages), then .section blocks. */
+.hero { padding-block: clamp(3rem, 8vw, 5.5rem) clamp(2.5rem, 6vw, 4rem); border-bottom: 1px solid var(--border); }
+.hero h1 { font-size: var(--step-4); font-weight: 800; line-height: 1.02; letter-spacing: -0.025em; margin-bottom: 0.45em; }
+.hero h1:lang(zh) { line-height: 1.18; letter-spacing: 0.02em; }
+.hero h1 em, .hero h1 .num { font-style: normal; color: var(--accent); }
+.hero-xl h1 { font-size: var(--step-5); }
+.hero .lede { max-width: 38rem; margin: 0 0 1rem; color: var(--muted); font-size: clamp(1.05rem, 1rem + 0.4vw, var(--step-1)); }
+.hero .scope canvas { height: clamp(13rem, 30vw, 19rem); }
+.hero .readouts { margin-top: clamp(2rem, 5vw, 3.5rem); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1.75rem 0 0; }
+
+/* two columns that stack on narrow screens; set --split to change the ratio */
+.split, .hero-grid { display: grid; gap: clamp(1.5rem, 4vw, 3rem); grid-template-columns: var(--split, minmax(0, 1fr) minmax(0, 1fr)); align-items: start; }
+.hero-grid { --split: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 3.5rem); align-items: center; }
+.split-center { align-items: center; }
+@media (max-width: 56rem) { .split, .hero-grid { grid-template-columns: minmax(0, 1fr); } }
+
+.cluster { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+.muted { color: var(--muted); }
+
+/* ---------- small parts ---------- */
+.btn-sm { min-height: 2.1rem; padding: 0.3rem 0.85rem; font-size: var(--step--1); }
+
+/* a short status word next to a title: soon, live, estimate */
+.badge {
+  display: inline-block; padding: 0 0.5rem; border: 1px solid var(--border-strong); border-radius: var(--radius-pill);
+  font-family: var(--font-mono); font-size: 0.65rem; font-weight: 500; line-height: 1.7; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); vertical-align: middle; white-space: nowrap;
+}
+.badge-signal { border-color: transparent; background: var(--accent-soft); color: var(--accent); }
+.badge-beam { border-color: transparent; background: var(--beam-soft); color: var(--beam); }
+
+/* tabs: a segmented control. Use role="tab" and aria-selected; the page shows and hides the panels. */
+.tabs { display: inline-flex; flex-wrap: wrap; gap: 0.15rem; padding: 0.2rem; background: var(--bg-alt); border: 1px solid var(--border); border-radius: 0.8rem; }
+.tabs > button, .tabs > a {
+  font: inherit; font-size: 0.92rem; font-weight: 600; color: var(--muted); background: none; border: 0; text-decoration: none;
+  padding: 0.4rem 0.9rem; border-radius: 0.6rem; cursor: pointer; transition: color var(--dur), background var(--dur);
+}
+.tabs > :hover { color: var(--text); }
+.tabs > [aria-selected="true"], .tabs > [aria-current="page"] { color: var(--text); background: var(--surface); box-shadow: 0 1px 2px rgb(0 0 0 / 0.12); }
+
+/* form groups: a min–max pair and a list of checkboxes */
+.field-pair, .field-checks { margin: 0; padding: 0; border: 0; min-width: 0; }
+.field-pair legend, .field-checks legend { padding: 0; margin-bottom: 0.35rem; font-size: 0.9rem; color: var(--muted); }
+.field-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; }
+.field-pair input {
+  width: 100%; min-width: 0; font: inherit; font-size: 0.92rem; color: var(--text); background: var(--surface);
+  border: 1px solid var(--border-strong); border-radius: var(--radius-sm); padding: 0.4rem 0.6rem;
+}
+.field-checks label { display: flex; gap: 0.45rem; align-items: center; font-size: 0.92rem; line-height: 1.6; }
+input[type="checkbox"], input[type="radio"], input[type="range"] { accent-color: var(--accent); }
+
+/* ---------- data: legends and tooltips for any chart ---------- */
+.legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; list-style: none; margin: 0.75rem 0 0.25rem; padding: 0; font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+.legend li { display: inline-flex; align-items: center; gap: 0.4rem; }
+.legend .ramp { gap: 0.15rem; }
+.legend .ramp > span:not(.sw) { margin-inline: 0.3rem; }
+.sw { display: inline-block; flex: none; width: 0.75rem; height: 0.75rem; border-radius: 50%; }
+.sw-bar, .legend .ramp .sw { width: 1.1rem; height: 0.6rem; border-radius: 2px; }
+.sw-band { width: 1.1rem; height: 0.6rem; border-radius: 2px; background: var(--accent-soft); outline: 1px solid var(--accent); }
+.sw-ring { border: 2px solid var(--text); background: var(--bg); }
+.sw-c1 { background: var(--c1); } .sw-c2 { background: var(--c2); } .sw-c3 { background: var(--c3); } .sw-c4 { background: var(--c4); }
+.sw-signal { background: var(--signal); } .sw-dim { background: var(--plot-dim); }
+
+.tooltip {
+  position: absolute; left: 0; top: 0; pointer-events: none; z-index: 2;
+  display: grid; gap: 0.1rem; max-width: 18rem; padding: 0.5rem 0.7rem;
+  background: var(--bg); color: var(--text); border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
+  box-shadow: var(--shadow); font-family: var(--font-mono); font-size: 0.75rem; line-height: 1.45;
+}
+.tooltip[hidden] { display: none; }
+.tooltip strong { font-family: var(--font); font-size: 0.88rem; }
+.tooltip span { color: var(--muted); }
+
+/* ---------- tools: a full-width app with a side panel ---------- */
+/* <main class="app-shell"><aside class="app-side">filters</aside><section class="app-main">…</section>
+   <aside class="app-detail" hidden>details</aside></main>. The detail column appears when it is shown. */
+.wrap-full { width: auto; max-width: none; margin-inline: 0; padding-inline: 1rem; }
+.app-shell { display: grid; gap: 1.25rem; align-items: start; grid-template-columns: 16.5rem minmax(0, 1fr); padding: 1.25rem 1rem 3rem; }
+.app-shell:has(> .app-detail:not([hidden])) { grid-template-columns: 16.5rem minmax(0, 1fr) 22rem; }
+.app-side { position: sticky; top: 5rem; max-height: calc(100vh - 6rem); overflow: auto; padding-right: 0.25rem; }
+.app-detail {
+  position: sticky; top: 5rem; max-height: calc(100vh - 6rem); overflow: auto;
+  padding: 1.25rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+}
+@media (max-width: 75rem) {
+  .app-shell:has(> .app-detail:not([hidden])) { grid-template-columns: 16.5rem minmax(0, 1fr); }
+  .app-detail { grid-column: 2; position: static; max-height: none; }
+}
+@media (max-width: 52rem) {
+  .app-shell, .app-shell:has(> .app-detail:not([hidden])) { grid-template-columns: minmax(0, 1fr); }
+  .app-detail { grid-column: 1; }
+  .app-side { position: static; max-height: none; }
+}
+
 /* ---------- inner pages ---------- */
 .page-hero { padding-block: clamp(3.5rem, 9vw, 6.5rem) clamp(2.5rem, 6vw, 4rem); border-bottom: 1px solid var(--border); }
-.page-hero h1 { font-size: clamp(2rem, 1.2rem + 3.4vw, 3.6rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 0.4em; }
+.page-hero h1 { font-size: var(--step-3); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 0.4em; }
 .page-hero h1:lang(zh) { letter-spacing: 0.02em; line-height: 1.2; }
 .page-hero .lede { max-width: 44rem; margin: 0 0 1rem; color: var(--muted); font-size: clamp(1.05rem, 1rem + 0.4vw, 1.22rem); }
 .page-hero .chips { margin: 1rem 0 0; }

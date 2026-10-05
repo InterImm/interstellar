@@ -1,20 +1,10 @@
-/* Entrance page only. Everything shared is in kit/interimm.css. */
+/* Signal archive only. Everything shared is in kit/interimm.css. */
 
-/* hero */
-.signal-hero { padding-block: clamp(3rem, 8vw, 5.5rem) clamp(2.5rem, 6vw, 4rem); border-bottom: 1px solid var(--border); }
-.hero-grid { display: grid; gap: clamp(2rem, 5vw, 3.5rem); grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: center; }
-@media (max-width: 56rem) { .hero-grid { grid-template-columns: minmax(0, 1fr); } }
-.signal-hero h1 { font-size: clamp(2.1rem, 1.1rem + 4vw, 4rem); font-weight: 800; line-height: 1.02; letter-spacing: -0.025em; margin-bottom: 0.45em; }
-.signal-hero h1:lang(zh) { line-height: 1.18; letter-spacing: 0.02em; }
-.signal-hero h1 .num { color: var(--accent); }
-.signal-hero .lede { max-width: 36rem; color: var(--muted); font-size: clamp(1.05rem, 1rem + 0.4vw, 1.22rem); }
-.hero-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1.75rem 0 0; }
-.signal-hero .scope canvas { height: clamp(13rem, 30vw, 19rem); }
-.signal-hero .readouts { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
+/* hero: .hero and .hero-grid come from the kit */
+.signal-hero .lede { max-width: 36rem; }
 
 /* the log of the first days */
-.story-grid { display: grid; gap: clamp(2rem, 5vw, 4rem); grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
-@media (max-width: 56rem) { .story-grid { grid-template-columns: minmax(0, 1fr); } }
+.story-grid { gap: clamp(2rem, 5vw, 4rem); }
 .triangulation { position: sticky; top: 5.5rem; }
 .triangulation .card-title { margin-top: 0; }
 .triangulation p { color: var(--muted); font-size: 0.95rem; }
@@ -22,8 +12,6 @@
 .triangulation .note { margin: 0; }
 
 /* the beacon */
-.decode-grid { display: grid; gap: clamp(1.5rem, 4vw, 3rem); grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
-@media (max-width: 56rem) { .decode-grid { grid-template-columns: minmax(0, 1fr); } }
 .step { margin-bottom: 2rem; }
 .step h3 { font-size: 1.05rem; margin-bottom: 0.4rem; }
 .step p { color: var(--muted); }
@@ -32,7 +20,7 @@
 #preamble .gaps { fill: var(--muted); font: 7px var(--font-mono); text-anchor: middle; }
 .bitstrip { margin: 0.75rem 0 0; padding: 0.75rem; border: 1px solid var(--border); border-radius: 0.6rem; background: var(--scope); font-family: var(--font-mono); font-size: 0.68rem; line-height: 1.5; color: var(--muted); word-break: break-all; max-height: 7.5rem; overflow: hidden; -webkit-mask-image: linear-gradient(#000 60%, transparent); mask-image: linear-gradient(#000 60%, transparent); }
 .fold-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; margin-bottom: 1rem; }
-.fold-controls input[type="range"] { flex: 1 1 12rem; accent-color: var(--accent); }
+.fold-controls input[type="range"] { flex: 1 1 12rem; }
 .fold-controls output { min-width: 7.5rem; font-family: var(--font-mono); font-size: 0.85rem; color: var(--text); }
 .fold-stage { display: grid; place-items: center; padding: 1rem; min-height: 20rem; }
 .fold-stage canvas { display: block; max-width: 100%; height: auto; max-height: 34rem; image-rendering: pixelated; }
@@ -58,8 +46,7 @@
 .after-word { margin-top: 2.5rem; color: var(--muted); font-style: italic; }
 
 /* letters */
-.write-grid { display: grid; gap: clamp(1.5rem, 4vw, 3rem); grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); align-items: start; }
-@media (max-width: 56rem) { .write-grid { grid-template-columns: minmax(0, 1fr); } }
+.write-grid { --split: minmax(0, 1fr) minmax(0, 1.1fr); }
 #write-form { gap: 1rem; }
 #write-form .btn { justify-self: start; }
 .outbox { display: grid; gap: 1rem; }

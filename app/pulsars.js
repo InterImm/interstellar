@@ -98,7 +98,7 @@ function tickNodes() {
   $('#beacon-next').textContent = b.passing ? hms(BEACON_LENGTH - b.into) : hms(b.next);
   $('#beacon-passes').textContent = nf(b.passes);
   document.body.classList.toggle('is-passing', b.passing);
-  $('#nodes').innerHTML = NODES.map((n) => `<li><span class="node-dot hue-${n.hue}" aria-hidden="true"></span><b>${n.name[zh ? 'zh' : 'en']}</b><span class="readout">${n.light ? T.delay(n.light) : '0 s'}</span><span class="node-ok">${T.synced}</span></li>`).join('');
+  $('#nodes').innerHTML = NODES.map((n) => `<li><span class="node-dot sw-c${n.hue + 1}" aria-hidden="true"></span><b>${n.name[zh ? 'zh' : 'en']}</b><span class="readout">${n.light ? T.delay(n.light) : '0 s'}</span><span class="node-ok">${T.synced}</span></li>`).join('');
 }
 
 // ------------------------------------------------------------------ residuals
@@ -112,7 +112,7 @@ function drawResiduals() {
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   const s = getComputedStyle(canvas);
   const col = (v) => s.getPropertyValue(v).trim();
-  const hues = [col('--beam'), col('--text'), col('--muted'), col('--border-strong')];
+  const hues = [col('--c1'), col('--c2'), col('--c3'), col('--c4')]; // the kit's categorical series
   ctx.clearRect(0, 0, W, H);
 
   const now = storyNow().getTime();
