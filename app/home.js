@@ -1,5 +1,5 @@
 // Entrance page: the dates that depend on today.
-import { EPSILON_ERIDANI as STAR, message, emitted, storyNow } from '../lib/light.js';
+import { ROSS_128 as STAR, message, emitted, storyNow } from '../lib/light.js';
 
 const pad = (n) => String(n).padStart(2, '0');
 const ymd = (d) => `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}`;

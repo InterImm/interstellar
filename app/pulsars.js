@@ -1,5 +1,5 @@
 // The pulsar ledger, live: the pulsars that keep the MC clock, the ledger nodes, and the timing residuals
-// where the Epsilon Eridani beacon keeps showing up. Everything is computed in the browser from the clock,
+// where the Ross 128 beacon keeps showing up. Everything is computed in the browser from the clock,
 // so every visitor sees the same numbers at the same moment.
 //
 // Periods are real (ATNF Pulsar Catalogue, rounded). Pulse phases are illustrative: the count starts at
@@ -38,10 +38,10 @@ const NODES = [
 
 const T = zh ? {
   pulses: '次', perSecond: (n) => `每秒 ${n} 次`, tooFast: '太快，眼睛看不出', nextPass: '下一次经过', passing: '正在经过', since: '首次接收以来',
-  passes: '次经过', synced: '已同步', delay: (s) => s < 60 ? `光延迟 ${s.toFixed(1)} 秒` : `光延迟 ${(s / 60).toFixed(1)} 分`, hours: '小时前', now: '现在', beacon: '天苑四信标',
+  passes: '次经过', synced: '已同步', delay: (s) => s < 60 ? `光延迟 ${s.toFixed(1)} 秒` : `光延迟 ${(s / 60).toFixed(1)} 分`, hours: '小时前', now: '现在', beacon: '罗斯128信标',
 } : {
   pulses: 'pulses', perSecond: (n) => `${n} per second`, tooFast: 'too fast to see', nextPass: 'Next pass', passing: 'Passing now', since: 'since first received',
-  passes: 'passes', synced: 'in sync', delay: (s) => s < 60 ? `light delay ${s.toFixed(1)} s` : `light delay ${(s / 60).toFixed(1)} min`, hours: 'h ago', now: 'now', beacon: 'ε Eri beacon',
+  passes: 'passes', synced: 'in sync', delay: (s) => s < 60 ? `light delay ${s.toFixed(1)} s` : `light delay ${(s / 60).toFixed(1)} min`, hours: 'h ago', now: 'now', beacon: 'Ross 128 beacon',
 };
 
 const $ = (s) => document.querySelector(s);

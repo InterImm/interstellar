@@ -1,6 +1,6 @@
 // The beacon as received: a prime-numbered preamble, then 667 bits. 667 = 23 × 29, both prime, so there are
 // only two ways to fold it into a rectangle, and one of them is a picture.
-// Proposed canon: what the picture shows is a first draft (their star and planets, a dish, the hydrogen line).
+// Proposed canon: what the picture shows is a first draft (their star and its one planet, a dish, the hydrogen line).
 
 export const PRIMES = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47];
 export const WIDTH = 23;
@@ -17,7 +17,7 @@ const ROWS = [
   '...###.................',
   '..#####.........###....',
   '.#######.......#...#...',
-  '.#######..#..#.#.#.#.#.',
+  '.#######.......#.#.#...',
   '.#######.......#...#...',
   '..#####.........###....',
   '...###.................',
