@@ -31,6 +31,12 @@
       "children": []
     },
     {
+      "id": "explorer",
+      "name": "Exoplanet explorer",
+      "url": "https://interimm.org/exoplanet-explorer/",
+      "children": []
+    },
+    {
       "id": "write",
       "name": "Write back",
       "url": "https://interstellar.interimm.org/archive/2219-signal/en/#write",
@@ -69,6 +75,10 @@
           "url": "https://interstellar.interimm.org/pulsars/en/"
         },
         {
+          "title": "Exoplanet explorer",
+          "url": "https://interimm.org/exoplanet-explorer/"
+        },
+        {
           "title": "Write back",
           "url": "https://interstellar.interimm.org/archive/2219-signal/en/#write"
         }
@@ -99,6 +109,10 @@
         {
           "title": "GitHub",
           "url": "https://github.com/InterImm/interstellar"
+        },
+        {
+          "title": "GitHub · exoplanet-explorer",
+          "url": "https://github.com/InterImm/exoplanet-explorer"
         }
       ]
     }

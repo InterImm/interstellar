@@ -1,7 +1,15 @@
-# InterImm kit, phase 2 · Deep Field
+# InterImm kit, phase 2 · 667
 
-The shared look of every phase 2 InterImm site: colours, fonts, header, footer, components and a few
-instruments (a live waterfall spectrogram, the story clock). InterImm/interstellar owns it and
+Phase 2 is a conversation across light years, and it looks nothing like phase 1. Phase 1 is paper, ink, serif
+headings and Mars rust. Phase 2 is built from the first thing they sent: a picture of 667 bits, 23 by 29. Everything
+is pixels on signal blue. Headings are set in a pixel face, corners are square or stepped, shadows are hard, motion
+steps instead of easing, and their picture is drawn behind every hero. Two voices: white-cyan (`--them`) for what
+reaches us and Sol yellow (`--us`) for what we send. No light theme, no paper, no red, no curves.
+
+The design language of every phase 2 InterImm site, and the code that carries it: principles, colours, type,
+scales, header, footer, page layouts, components, chart colours and a few instruments (a live waterfall
+spectrogram, the story clock). The spec is the live page at https://interstellar.interimm.org/kit/
+(`kit/index.html`); this file is how to use it. InterImm/interstellar owns it and
 publishes it at interstellar.interimm.org; other phase 2 sites link it instead of copying it.
 
 Phase 1 keeps its own kit at `https://interimm.org/kit/` (source: InterImm/interimm.github.io, branch `hugo`).
@@ -12,7 +20,7 @@ The two kits share markup hooks, class names and token names, so a site switches
 | `https://interstellar.interimm.org/kit/interimm.css` | Stylesheet, including the fonts | `kit/interimm.css` |
 | `https://interstellar.interimm.org/kit/interimm.js` | Header and footer, menu behaviour, instruments | `kit/interimm.js` |
 | `https://interstellar.interimm.org/kit/nav.cn.json`, `nav.en.json` | Phase 2 menu and footer | `kit/nav.*.json` (hand-edited) |
-| `https://interstellar.interimm.org/kit/fonts/` | Unbounded, Instrument Sans, JetBrains Mono (SIL OFL, Latin) | `kit/fonts/` |
+| `https://interstellar.interimm.org/kit/fonts/` | Pixelify Sans, Instrument Sans, JetBrains Mono (SIL OFL, Latin) | `kit/fonts/` |
 | `https://interstellar.interimm.org/kit/` | Live style guide | `kit/index.html` |
 
 ## Using it on another site
@@ -33,7 +41,24 @@ The two kits share markup hooks, class names and token names, so a site switches
 </html>
 ```
 
-`data-lang`, `data-current`, `data-lang-cn` / `data-lang-en` work exactly as in the phase 1 kit.
+`data-lang`, `data-current`, `data-lang-cn` / `data-lang-en` work exactly as in the phase 1 kit. Phase 2 adds, on
+the header:
+
+| Attribute | Effect |
+| --- | --- |
+| `data-site="Exoplanet Explorer"` `data-site-url="./"` | Shows the site's own name after the era's brand: ● The Contact Era / Exoplanet Explorer |
+| `data-width="full"` | Header (or footer) spans the window, for tools |
+| `data-lang-cn=""` (empty) | Leaves that language out of the switch, for a site with no such version |
+
+Every phase 2 site needs an entry in `nav.cn.json` and `nav.en.json` with the `id` it passes as `data-current`.
+
+### Page anatomy
+
+- **Story page** (entrance, archive): `.hero.space` (kicker, `h1`, `.lede`, `.hero-actions`, optional
+  `.hero-grid` with a `.scope`), then `.section` / `.section-alt` blocks with `.section-head`. `.hero-xl` is for
+  the entrance only.
+- **Tool** (explorer, ledger): header with `data-width="full"`, then `main.app-shell` with `.app-side`,
+  `.app-main` and an optional `.app-detail` column that appears when it is not `hidden`.
 
 ### Switching era
 
@@ -49,12 +74,25 @@ variants, `.chips`, `.card`, `.card-grid`, `.tile`, `.bento`, `.card-link-wrap`,
 `--border-strong`, `--accent`, `--accent-hover`, `--accent-text`, `--accent-soft`, `--link`, `--focus`, `--radius`,
 `--font`, `--font-display`, `--font-mono`).
 
-Phase 2 adds: `--beam` / `--beam-soft` (second accent), `--signal`, `--noise`, `--scope` (chart colours),
-`.eyebrow`, `.readout`, `.readouts`, `.brand-dot`, `.brand-sub`, `.panel`, `.scope`, `.log`, `.data-table`,
-`.field`, `.inline-field`, `.note`.
+Phase 2 adds:
 
-One difference to know: `.btn-primary` is ink on the ground (white on night, indigo on light) and turns red
-on hover. Red is kept for the signal itself.
+- Tokens: the voices `--them` / `--them-soft` (also `--accent`, `--signal`) and `--us` / `--us-soft` (also
+  `--beam`), `--noise`, `--scope`, `--rule` (the dashed divider); chart colours `--c1`…`--c4` (categorical, never
+  either voice), `--seq-1`…`--seq-7`, `--div-cool-*` / `--div-mid` / `--div-hot-*`, `--plot-grid`,
+  `--plot-axis`, `--plot-context`, `--plot-dim`; scales `--space-1`…`--space-8`, `--step--2`…`--step-5`,
+  `--radius-sm`, `--radius-pill`, `--dur`.
+- Layout: `.hero`, `.hero-xl`, `.hero-grid`, `.hero-actions`, `.split` (ratio via `--split`), `.cluster`,
+  `.wrap-full`, `.app-shell`, `.app-side`, `.app-main`, `.app-detail`.
+- Parts: `.eyebrow`, `.readout`, `.readouts`, `.brand-dot`, `.brand-sub`, `.brand-site`, `.panel`, `.scope`, `.log`,
+  `.data-table`, `.field`, `.field-pair`, `.field-checks`, `.inline-field`, `.note`, `.muted`, `.btn-sm`, `.badge`
+  (`-signal`, `-us`), `.btn-send`, `.kicker-out`, `.log .is-out`, `.tabs`, `.legend` with `.sw` swatches (`.sw-c1`…, `.sw-band`, `.sw-ring`, `.sw-signal`,
+  `.sw-dim`), `.tooltip`.
+
+- Conversation (the signature): `.exchange` with `.msg.msg-in` / `.msg.msg-out` (and `.msg-waiting`), `.msg-meta`;
+  `.transit` / `.transit-out` with `--progress` and an optional `.transit-packet`.
+
+Pick the voice by direction: `.btn-primary` and `.kicker` are white-cyan (receiving, exploring); `.btn-send`,
+`.kicker-out` and `.is-out` are yellow (sending, replying).
 
 ### Instruments
 
@@ -65,10 +103,12 @@ on hover. Red is kept for the signal itself.
 </figure>
 <time data-story-clock data-format="datetime"></time>     <!-- time (default), date, datetime -->
 <span data-days-since="2219-09-18T03:12:07Z"></span>
+<section class="space">…</section>                        <!-- their picture is drawn behind it; data-message="off" to skip -->
+<span class="tile-icon" data-glyph="dish"></span>          <!-- count, system, dish, hydrogen -->
 ```
 
-The waterfall reads its colours from CSS, follows light/dark, pauses when off screen and stays still for
-visitors who prefer reduced motion. The same functions are on `window.InterImm`.
+The waterfall reads its colours from CSS, pauses when off screen and stays still for
+visitors who prefer reduced motion. The picture arrives row by row, or all at once for those visitors. The same functions are on `window.InterImm`.
 
 ## Changing it
 

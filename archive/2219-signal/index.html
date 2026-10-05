@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="dark light">
+<meta name="color-scheme" content="dark">
 <title>罗斯128信号 · 2219 | 通联纪</title>
 <meta name="description" content="2219 年 9 月 18 日，太阳系里每一台脉冲星账本都听到了同一个微弱的图案，它来自 11.01 光年外的罗斯128 b。这里是它的来龙去脉、可以亲手解开的信标，和一封可以写回去的信。">
 <link rel="alternate" hreflang="zh-CN" href="https://interstellar.interimm.org/archive/2219-signal/">
@@ -24,7 +24,7 @@
 </header>
 
 <main id="main">
-  <header class="signal-hero space">
+  <header class="hero signal-hero space">
     <div class="wrap">
       <div class="hero-grid">
         <div>
@@ -58,7 +58,7 @@
         <h2 class="section-title" id="signal-title">事情是怎样开始的</h2>
         <p class="section-lede">脉币账本靠给脉冲星计时来走钟，每个世界、每时每刻都在听。所以最先听到的是它。</p>
       </header>
-      <div class="story-grid">
+      <div class="split story-grid">
         <ol class="log">
           <li>
             <time datetime="2219-09-18T03:12:07Z">2219-09-18 03:12:07 UTC · 月背</time>
@@ -124,7 +124,7 @@
         <h2 class="section-title" id="decode-title">把信标折起来</h2>
         <p class="section-lede">你手里的数据和账本拿到的一模一样。从噪声到图画，只要三步。</p>
       </header>
-      <div class="decode-grid">
+      <div class="split decode-grid">
         <div>
           <div class="step">
             <h3>1 · 数间隔</h3>
@@ -180,15 +180,15 @@
   <section class="section section-alt" id="write" aria-labelledby="write-title">
     <div class="wrap">
       <header class="section-head">
-        <p class="kicker">回信</p>
+        <p class="kicker kicker-out">回信</p>
         <h2 class="section-title" id="write-title">给那颗星写信</h2>
         <p class="section-lede">信以光速飞行，每秒将近 30 万公里。把链接发给任何人，他们都能看着它一路往前走。</p>
       </header>
       <div id="shared" hidden></div>
-      <div class="write-grid">
+      <div class="split write-grid">
         <form class="card stack" id="write-form">
           <label class="field">你的信 <textarea id="letter" maxlength="1000" placeholder="你好，罗斯128 b。我们听到了。"></textarea></label>
-          <button class="btn btn-primary" type="submit">发出 <span>→</span></button>
+          <button class="btn btn-send" type="submit">发出 <span>→</span></button>
           <p class="note" id="write-note" role="status"></p>
           <p class="note">信只保存在这个浏览器里，不会上传。日期用故事纪年（现实时间 + 70,491 天）。</p>
         </form>
