@@ -1,0 +1,106 @@
+{
+  "title": "通联纪",
+  "subtitle": "2219",
+  "author": "InterImm",
+  "home": "https://interstellar.interimm.org/",
+  "logo": "",
+  "github": "https://github.com/InterImm/interstellar",
+  "labels": {
+    "menu": "菜单",
+    "language": "语言",
+    "backToTop": "回到顶部",
+    "kicker": "星际移民之书 · 恒星篇"
+  },
+  "menu": [
+    {
+      "id": "home",
+      "name": "首页",
+      "url": "https://interstellar.interimm.org/",
+      "children": []
+    },
+    {
+      "id": "signal",
+      "name": "信号档案",
+      "url": "https://interstellar.interimm.org/archive/2219-signal/",
+      "children": []
+    },
+    {
+      "id": "pulsars",
+      "name": "脉冲星账本",
+      "url": "https://interstellar.interimm.org/pulsars/",
+      "children": []
+    },
+    {
+      "id": "write",
+      "name": "回信",
+      "url": "https://interstellar.interimm.org/archive/2219-signal/#write",
+      "children": []
+    },
+    {
+      "id": "phase1",
+      "name": "星际移民中心",
+      "url": "https://interimm.org/",
+      "children": []
+    }
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "code": "en",
+      "name": "English",
+      "url": "https://interstellar.interimm.org/en/"
+    }
+  ],
+  "footer": [
+    {
+      "title": "通联纪",
+      "description": "星际移民之书 · 恒星篇：人类加入群星之间的对话。",
+      "links": [
+        {
+          "title": "首页",
+          "url": "https://interstellar.interimm.org/"
+        },
+        {
+          "title": "档案 · 2219 天苑四信号",
+          "url": "https://interstellar.interimm.org/archive/2219-signal/"
+        },
+        {
+          "title": "脉冲星账本（实时）",
+          "url": "https://interstellar.interimm.org/pulsars/"
+        },
+        {
+          "title": "回信",
+          "url": "https://interstellar.interimm.org/archive/2219-signal/#write"
+        }
+      ]
+    },
+    {
+      "title": "第一阶段 · 2219",
+      "description": "火星改造的第一年。",
+      "links": [
+        {
+          "title": "星际移民中心",
+          "url": "https://interimm.org/"
+        },
+        {
+          "title": "火星时钟",
+          "url": "https://interimm.org/mars-clock/"
+        }
+      ]
+    },
+    {
+      "title": "开源",
+      "description": "这是一个开源项目，可以在 GitHub 提交和更新内容。",
+      "links": [
+        {
+          "title": "第二阶段设计套件",
+          "url": "https://interstellar.interimm.org/kit/"
+        },
+        {
+          "title": "GitHub",
+          "url": "https://github.com/InterImm/interstellar"
+        }
+      ]
+    }
+  ]
+}

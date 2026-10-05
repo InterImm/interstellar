@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN" class="js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>脉冲星账本 | 通联纪</title>
+<meta name="description" content="实时：维持脉币时钟的脉冲星、各个账本节点，以及天苑四信标反复出现的计时残差。">
+<link rel="alternate" hreflang="zh-CN" href="https://interstellar.interimm.org/pulsars/">
+<link rel="alternate" hreflang="en" href="https://interstellar.interimm.org/pulsars/en/">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../kit/interimm.css">
+<link rel="stylesheet" href="../app/pulsars.css">
+<script src="../kit/interimm.js" defer></script>
+<script type="module" src="../app/pulsars.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到正文</a>
+
+<header class="site-header" data-interimm-header data-lang="cn" data-current="pulsars" data-lang-en="en/">
+  <div class="wrap header-inner">
+    <a class="brand" href="../"><span class="brand-dot" aria-hidden="true"></span><span class="brand-name">通联纪</span></a>
+  </div>
+</header>
+
+<main id="main">
+  <header class="ledger-hero space">
+    <div class="wrap">
+      <p class="kicker"><span class="pulse"></span>实时 · 脉冲星账本</p>
+      <h1>最先听到它的那些钟</h1>
+      <p class="lede">脉币账本靠数十几颗脉冲星的脉冲来计时，每个世界同时在数。这里是实时的计数，以及天苑四信标反复出现的计时残差。</p>
+      <dl class="readouts">
+        <div><dt>账本时间</dt><dd><time data-story-clock data-format="datetime">–</time></dd></div>
+        <div><dt id="beacon-state">下一次经过</dt><dd id="beacon-next">–</dd></div>
+        <div><dt>信标经过次数</dt><dd id="beacon-passes">–</dd></div>
+        <div><dt>首次接收至今（天）</dt><dd id="since-detected">–</dd></div>
+      </dl>
+    </div>
+  </header>
+
+  <section class="section" aria-labelledby="res-title">
+    <div class="wrap ledger-grid">
+      <div>
+        <header class="section-head">
+          <p class="kicker">残差 · 最近 48 小时</p>
+          <h2 class="section-title" id="res-title">钟对不上的地方</h2>
+          <p class="section-lede">残差是脉冲实际到达的时刻与时钟预计时刻之差，平时只是噪声。每隔 9 小时 41 分，信标经过一次，每个节点都看到同样的抖动，一个比一个晚一点。</p>
+        </header>
+        <figure class="scope">
+          <canvas id="residuals" role="img" aria-label="四个账本节点最近 48 小时的计时残差，红色标出信标经过的时段"></canvas>
+          <figcaption><span>残差（纳秒）· 5 分钟一格</span><span>故事纪年</span></figcaption>
+        </figure>
+        <ul class="chart-key"><li><i class="band"></i>天苑四信标经过</li><li><i class="hue-0"></i>月背</li><li><i class="hue-1"></i>地球</li><li><i class="hue-2"></i>火星伊希地</li><li><i class="hue-3"></i>谷神星</li></ul>
+      </div>
+      <aside>
+        <p class="eyebrow">账本节点</p>
+        <h2 class="card-title">四只耳朵，一个钟</h2>
+        <ul id="nodes"></ul>
+        <p class="note method">每个光锥一本账：节点之间以光速交换计数，所以谷神星要将近半小时后才知道月背听到了什么。</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="pulsars" aria-labelledby="psr-title">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="kicker">计时阵列</p>
+        <h2 class="section-title" id="psr-title">自 2219-01-01 以来数过的脉冲</h2>
+        <p class="section-lede">十二颗真实的脉冲星，真实的周期。慢的那几颗按真实频率闪烁。</p>
+      </header>
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead><tr><th>脉冲星</th><th class="num">周期</th><th class="num rate">频率</th><th class="num">脉冲数</th></tr></thead>
+          <tbody id="pulsar-rows"></tbody>
+        </table>
+      </div>
+      <p class="note method">周期取自 ATNF 脉冲星星表并做了取整。计数从 2219-01-01 相位零开始，忽略自转减慢和观测者的运动，所以这是故事里的钟，不是星历表。信标 9 小时 41 分的重复周期属于故事设定。<a href="../archive/2219-signal/">信号的完整记录</a>。</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" data-interimm-footer>
+  <div class="wrap"><p class="footer-legal"><span>© InterImm</span><a href="../">通联纪</a></p></div>
+</footer>
+</body>
+</html>

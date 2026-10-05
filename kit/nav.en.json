@@ -1,0 +1,106 @@
+{
+  "title": "The Contact Era",
+  "subtitle": "2219",
+  "author": "InterImm",
+  "home": "https://interstellar.interimm.org/en/",
+  "logo": "",
+  "github": "https://github.com/InterImm/interstellar",
+  "labels": {
+    "menu": "Menu",
+    "language": "Language",
+    "backToTop": "Back to top",
+    "kicker": "The Book of InterImm · Interstellar"
+  },
+  "menu": [
+    {
+      "id": "home",
+      "name": "Home",
+      "url": "https://interstellar.interimm.org/en/",
+      "children": []
+    },
+    {
+      "id": "signal",
+      "name": "The signal",
+      "url": "https://interstellar.interimm.org/archive/2219-signal/en/",
+      "children": []
+    },
+    {
+      "id": "pulsars",
+      "name": "Pulsar ledger",
+      "url": "https://interstellar.interimm.org/pulsars/en/",
+      "children": []
+    },
+    {
+      "id": "write",
+      "name": "Write back",
+      "url": "https://interstellar.interimm.org/archive/2219-signal/en/#write",
+      "children": []
+    },
+    {
+      "id": "phase1",
+      "name": "InterImm 2219",
+      "url": "https://interimm.org/en/",
+      "children": []
+    }
+  ],
+  "languages": [
+    {
+      "lang": "cn",
+      "code": "zh-CN",
+      "name": "中文",
+      "url": "https://interstellar.interimm.org/"
+    }
+  ],
+  "footer": [
+    {
+      "title": "The Contact Era",
+      "description": "The Book of InterImm, interstellar part: humanity joins the conversation between the stars.",
+      "links": [
+        {
+          "title": "Home",
+          "url": "https://interstellar.interimm.org/en/"
+        },
+        {
+          "title": "Archive · The 2219 signal",
+          "url": "https://interstellar.interimm.org/archive/2219-signal/en/"
+        },
+        {
+          "title": "Pulsar ledger (live)",
+          "url": "https://interstellar.interimm.org/pulsars/en/"
+        },
+        {
+          "title": "Write back",
+          "url": "https://interstellar.interimm.org/archive/2219-signal/en/#write"
+        }
+      ]
+    },
+    {
+      "title": "Phase 1 · 2219",
+      "description": "The first year of terraforming Mars.",
+      "links": [
+        {
+          "title": "InterImm",
+          "url": "https://interimm.org/en/"
+        },
+        {
+          "title": "Mars Clock",
+          "url": "https://interimm.org/mars-clock/en/"
+        }
+      ]
+    },
+    {
+      "title": "Open source",
+      "description": "We are open on GitHub. Contributions welcome.",
+      "links": [
+        {
+          "title": "Phase 2 design kit",
+          "url": "https://interstellar.interimm.org/kit/"
+        },
+        {
+          "title": "GitHub",
+          "url": "https://github.com/InterImm/interstellar"
+        }
+      ]
+    }
+  ]
+}
