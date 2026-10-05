@@ -1,0 +1,22 @@
+/* Five transmissions only. Everything shared is in kit/interimm.css. */
+.signals-hero h1 { font-size: var(--step-4); }
+.signals-hero .lede { max-width: 44rem; }
+.signals-hero .note { margin-top: 1.25rem; max-width: 44rem; }
+
+.signals-index { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; margin: 1.75rem 0 0; padding: 0; }
+.signals-index a { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.8rem 0.4rem 0.4rem; border: 2px solid var(--border-strong); color: var(--text); text-decoration: none; font-weight: 600; }
+.signals-index a:hover { border-color: var(--them); color: var(--them); }
+.signals-index span { display: inline-grid; place-items: center; width: 1.6rem; height: 1.6rem; background: var(--them); color: var(--them-ink); font-family: var(--font-mono); font-size: 0.8rem; }
+
+.signals-split { --split: minmax(0, 1fr) minmax(0, 1.15fr); align-items: center; }
+.signals-split > div { display: grid; gap: 0.9rem; justify-items: start; min-width: 0; }
+.signals-split p { margin: 0; max-width: 38rem; }
+.signals-split .section-title { margin: 0; }
+.signals-split .scope canvas { height: clamp(16rem, 34vw, 24rem); }
+#cv-picture { image-rendering: pixelated; }
+
+.tick-us, .tick-them { font-style: normal; }
+.tick-us { color: var(--us); }
+.tick-them { color: var(--them); }
+
+@media (max-width: 52rem) { .signals-split { --split: minmax(0, 1fr); } }

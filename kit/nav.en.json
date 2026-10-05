@@ -25,6 +25,12 @@
       "children": []
     },
     {
+      "id": "signals",
+      "name": "Transmissions",
+      "url": "https://interstellar.interimm.org/signals/en/",
+      "children": []
+    },
+    {
       "id": "pulsars",
       "name": "Pulsar ledger",
       "url": "https://interstellar.interimm.org/pulsars/en/",
@@ -75,6 +81,10 @@
         {
           "title": "Archive · The 2219 signal",
           "url": "https://interstellar.interimm.org/archive/2219-signal/en/"
+        },
+        {
+          "title": "Five transmissions (listen)",
+          "url": "https://interstellar.interimm.org/signals/en/"
         },
         {
           "title": "Pulsar ledger (live)",
