@@ -284,7 +284,7 @@ ul, ol { margin: 0 0 1em; }
 
 /* on wide screens GitHub is an icon; the word comes back in the folded menu */
 @media (min-width: 75.01rem) { .nav-github-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } }
-@media (max-width: 75rem) {
+@media (max-width: 96rem) {
   .js .nav-toggle { display: inline-flex; }
   .js .site-nav { display: none; flex-basis: 100%; padding-bottom: 0.75rem; }
   .js .site-nav.is-open { display: flex; flex-direction: column; align-items: stretch; }

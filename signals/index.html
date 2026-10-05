@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN" class="js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>五段发射 | 通联纪</title>
+<meta name="description" content="罗斯128 b 的信标里有五段发射：一幅图、地球的影子、脉冲星、分子和弦，以及数字 137。看看每一段怎么编码，再听一听。">
+<link rel="alternate" hreflang="zh-CN" href="https://interstellar.interimm.org/signals/">
+<link rel="alternate" hreflang="en" href="https://interstellar.interimm.org/signals/en/">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../kit/interimm.css">
+<link rel="stylesheet" href="../app/signals.css">
+<script src="../kit/interimm.js" defer></script>
+<script type="module" src="../app/signals.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到正文</a>
+
+<header class="site-header" data-interimm-header data-lang="cn" data-current="signals" data-lang-en="en/">
+  <div class="wrap header-inner">
+    <a class="brand" href="../"><span class="brand-dot" aria-hidden="true"></span><span class="brand-name">通联纪</span></a>
+  </div>
+</header>
+
+<main id="main">
+  <header class="hero signals-hero space">
+    <div class="wrap">
+      <p class="kicker">档案 · 五段发射</p>
+      <h1>一个信标，五段发射。</h1>
+      <p class="lede">信标每 9 小时 41 分经过一次，每次轮流带一段发射。第一段是一幅图。另外四段根本不用画：每一段都指向两个世界本来就能测量的东西，我们自己的影子、脉冲星、分子的化学、一个自然常数。几秒钟的信号，代表了大量不必发送的内容。</p>
+      <ul class="signals-index">
+        <li><a href="#picture"><span>1</span>图</a></li>
+        <li><a href="#shadow"><span>2</span>影子</a></li>
+        <li><a href="#pulsars"><span>3</span>脉冲星</a></li>
+        <li><a href="#chords"><span>4</span>和弦</a></li>
+        <li><a href="#number"><span>5</span>数字</a></li>
+      </ul>
+      <p class="note">每一段都可以播放。射电频率和小时被换算成人耳听得到的音高和秒，你听到的是信号的翻译，不是录音。</p>
+    </div>
+  </header>
+
+  <section class="section signal-block" id="picture" aria-labelledby="picture-title">
+    <div class="wrap split signals-split">
+      <div>
+        <p class="kicker">第 1 段 · 图</p>
+        <h2 class="section-title" id="picture-title">667 位，折一次</h2>
+        <p>间隔 2、3、5、7……47 的咔嗒声在说“这是故意的”。接着是 667 位，1 是高音，0 是低音。667 = 23 × 29，所以只有一种排法能成图：计数、他们的星和唯一的行星、一面天线、氢的自旋翻转。</p>
+        <p class="muted">这是最朴素的一段：它假设我们和他们看东西的方式一样。<a href="../archive/2219-signal/#decode">自己折一次</a>。</p>
+        <button type="button" class="btn btn-primary" data-play="picture">收听 · 40 秒</button>
+      </div>
+      <figure class="scope"><canvas id="cv-picture" role="img" aria-label="23 × 29 的图，随播放逐位画出"></canvas><figcaption><span>23 × 29 · 1 = 高音，0 = 低音</span><span class="readout" data-cap="picture">–</span></figcaption></figure>
+    </div>
+  </section>
+
+  <section class="section section-alt signal-block" id="shadow" aria-labelledby="shadow-title">
+    <div class="wrap split signals-split">
+      <div>
+        <p class="kicker">第 2 段 · 影子</p>
+        <h2 class="section-title" id="shadow-title">他们的第一个词是“你们”</h2>
+        <p>音调一次次变暗又恢复。每一次变暗，都是地球从太阳前经过，正是从罗斯128看到的样子：深百万分之八十四，被太阳较暗的边缘磨圆。他们观察我们的那些年里，每个世纪发一次，从公元前约 1100 年到公元 1100 年。起初很短、擦边而过，后来长到 13 小时，再慢慢变短，因为罗斯128正在漂过那条能看到地球凌日的带子。然后是两个世纪的静默。最后是三次又短又深的变暗：他们自己的行星每 9.87 天从他们的恒星前经过一次。</p>
+        <p class="muted">每一次变暗都来自两颗星的真实运动（<a href="../drift/">两星漂移</a>）。整段意思是：“我们看了你们两千二百年，然后看不见了。”</p>
+        <button type="button" class="btn btn-primary" data-play="shadow">收听 · 30 秒</button>
+      </div>
+      <figure class="scope"><canvas id="cv-shadow" role="img" aria-label="整段发射的亮度：一排地球凌日，每世纪一次，然后是罗斯128 b 更深的三次"></canvas><figcaption><span>亮度 · 变暗放大 7,000 倍</span><span class="readout" data-cap="shadow">–</span></figcaption></figure>
+    </div>
+  </section>
+
+  <section class="section signal-block" id="pulsars" aria-labelledby="pulsars-title">
+    <div class="wrap split signals-split">
+      <div>
+        <p class="kicker">第 3 段 · 脉冲星</p>
+        <h2 class="section-title" id="pulsars-title">用时钟写成的地址</h2>
+        <p>十二串脉冲，一串接一串，每一串都按一颗真实脉冲星的周期。毫秒脉冲星转得够快，听起来是一个音：B1937+21 以 642 Hz 嗡鸣。慢的只是滴答声。周期就是名字，所以不必画出它们在哪里，天文学家都知道。</p>
+        <p>关键是每一串从哪里开始。他们按脉冲星传到罗斯128时的相位起头。同一个脉冲到达他们那里比到达我们早一些或晚一些，取决于他们在这颗脉冲星的方向上离我们多远。十二个相位差，只有三个未知数，足以定出他们在哪里；再对照脉冲星时钟，还能定出发送的时刻。脉币账本正是这样计时的，所以账本可以直接读它。</p>
+        <button type="button" class="btn btn-primary" data-play="pulsars">收听 · 20 秒</button>
+      </div>
+      <figure class="scope"><canvas id="cv-pulsars" role="img" aria-label="十二颗脉冲星，每颗画出一个周期：我们的相位在起点，他们的在后面"></canvas><figcaption><span>每行一个周期 · <i class="tick-us">▮</i> 我们 · <i class="tick-them">▮</i> 他们</span><span class="readout" data-cap="pulsars">–</span></figcaption></figure>
+    </div>
+  </section>
+
+  <section class="section section-alt signal-block" id="chords" aria-labelledby="chords-title">
+    <div class="wrap split signals-split">
+      <div>
+        <p class="kicker">第 4 段 · 和弦</p>
+        <h2 class="section-title" id="chords-title">用分子组成的词</h2>
+        <p>几个频率同时响起的短促爆发。每个频率都是一条真实的射电谱线，是某种分子特有的音：氢在 1420 MHz，水在 22 GHz，氧在 119 GHz。一个和弦说出一种物质，响度说明有多少。每条谱线都同样偏高 0.01%，和氢音调的多普勒频移一样，说明它们来自同一个地方。</p>
+        <p>目前有五个和弦：氢，作为单位；水；很多水；他们的空气，有氧和臭氧；还有甲醇，旁边是三条任何目录里都没有的谱线。</p>
+        <button type="button" class="btn btn-primary" data-play="chords">收听 · 11 秒</button>
+      </div>
+      <figure class="scope"><canvas id="cv-chords" role="img" aria-label="五个和弦，画在 1 到 130 GHz 的频率轴上"></canvas><figcaption><span>频率 1–130 GHz（对数）· 柱高 = 响度</span><span class="readout" data-cap="chords">–</span></figcaption></figure>
+    </div>
+  </section>
+
+  <section class="section signal-block" id="number" aria-labelledby="number-title">
+    <div class="wrap split signals-split">
+      <div>
+        <p class="kicker">第 5 段 · 数字</p>
+        <h2 class="section-title" id="number-title">137，不用数字</h2>
+        <p>一串急促的咔嗒声，和一个缓慢、明亮的提示音。数一数两次提示音之间的咔嗒声：137。但提示音并不正好落在咔嗒声上。每一轮它都往后滑一点，是一个间隔的 0.036，大约 28 轮之后又对齐。两种节奏之比是 137.036。</p>
+        <p>这是精细结构常数的倒数，代表光与电子相互作用的强弱。它没有单位，所以在任何世界、任何度量制里都是同一个数。用比例发送它，同时说了三件事：我们懂物理；我们的物理就是你们的物理；这是我们测量它的精度。</p>
+        <button type="button" class="btn btn-primary" data-play="number">收听 · 5 秒</button>
+      </div>
+      <figure class="scope"><canvas id="cv-number" role="img" aria-label="29 轮，每轮 137 下咔嗒声；提示音每轮向右滑一点"></canvas><figcaption><span>每行一轮 · 放大到两下咔嗒声之间</span><span class="readout" data-cap="number">–</span></figcaption></figure>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="method" aria-labelledby="method-title">
+    <div class="wrap prose">
+      <h2 class="section-title" id="method-title">声音是怎么做的</h2>
+      <p>一切都在你的浏览器里由 <a href="https://github.com/InterImm/interstellar/blob/main/lib/signals.js">lib/signals.js</a> 计算。</p>
+      <ul>
+        <li>影子：每次地球凌日的碰撞参数，来自那一年罗斯128偏离地球轨道平面的角度（<a href="../drift/">两星漂移</a>），并计入太阳的临边昏暗。13 小时换成 0.9 秒。罗斯128 b 的真实大小没有测到，变暗深度按 1.1 个地球半径计算。</li>
+        <li>脉冲星：周期和位置来自 ATNF 目录。相位差是沿这颗脉冲星的方向，罗斯128与太阳之间的光程差，再对周期取余。</li>
+        <li>和弦：谱线频率是真实的（CDMS/JPL）。射电频率每乘 4 升一个八度，1420 MHz 落在中央 C 下面的 G 上。三条未知谱线是虚构的。</li>
+        <li>数字：1/α = 137.035999084（CODATA 2018）。</li>
+      </ul>
+      <p>五段发射的轮换方式、内容和顺序都是故事提案。</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" data-interimm-footer>
+  <div class="wrap"><p class="footer-legal"><span>© InterImm星际移民中心</span><a href="../">通联纪</a></p></div>
+</footer>
+</body>
+</html>

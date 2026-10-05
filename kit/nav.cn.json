@@ -25,6 +25,12 @@
       "children": []
     },
     {
+      "id": "signals",
+      "name": "五段发射",
+      "url": "https://interstellar.interimm.org/signals/",
+      "children": []
+    },
+    {
       "id": "pulsars",
       "name": "脉冲星账本",
       "url": "https://interstellar.interimm.org/pulsars/",
@@ -75,6 +81,10 @@
         {
           "title": "档案 · 2219 罗斯128信号",
           "url": "https://interstellar.interimm.org/archive/2219-signal/"
+        },
+        {
+          "title": "五段发射（可收听）",
+          "url": "https://interstellar.interimm.org/signals/"
         },
         {
           "title": "脉冲星账本（实时）",
