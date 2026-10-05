@@ -3,8 +3,8 @@
 The entrance to InterImm phase 2, at https://interstellar.interimm.org/. In 2219 the solar system hears another
 civilisation for the first time; no ship can cross the distance, so this is the era of learning to write to the stars.
 
-Static files, no build step, no server, zero running cost. Serve the repo root as is (GitHub Pages or Netlify;
-`netlify.toml` tells Netlify there is nothing to build).
+Static files, no build step, no server, zero running cost. Published with GitHub Pages from the root of `main`
+(`CNAME` sets the domain, `.nojekyll` serves files as they are).
 
 | Path | What |
 | --- | --- |
