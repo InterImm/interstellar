@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en" class="js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>Pulsar ledger | The Contact Era</title>
+<meta name="description" content="Live: the pulsars that keep the MC clock, the ledger nodes, and the timing residuals where the Epsilon Eridani beacon keeps showing up.">
+<link rel="alternate" hreflang="zh-CN" href="https://interstellar.interimm.org/pulsars/">
+<link rel="alternate" hreflang="en" href="https://interstellar.interimm.org/pulsars/en/">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../kit/interimm.css">
+<link rel="stylesheet" href="../../app/pulsars.css">
+<script src="../../kit/interimm.js" defer></script>
+<script type="module" src="../../app/pulsars.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" data-interimm-header data-lang="en" data-current="pulsars" data-lang-cn="../">
+  <div class="wrap header-inner">
+    <a class="brand" href="../../en/"><span class="brand-dot" aria-hidden="true"></span><span class="brand-name">The Contact Era</span></a>
+  </div>
+</header>
+
+<main id="main">
+  <header class="ledger-hero space">
+    <div class="wrap">
+      <p class="kicker"><span class="pulse"></span>Live · pulsar ledger</p>
+      <h1>The clocks that heard it first</h1>
+      <p class="lede">The MC ledger keeps time by counting pulses from a dozen pulsars, on every world at once. This is that count, live, and the timing residuals where the beacon from Epsilon Eridani keeps showing up.</p>
+      <dl class="readouts">
+        <div><dt>Ledger time</dt><dd><time data-story-clock data-format="datetime">–</time></dd></div>
+        <div><dt id="beacon-state">Next pass</dt><dd id="beacon-next">–</dd></div>
+        <div><dt>Beacon passes</dt><dd id="beacon-passes">–</dd></div>
+        <div><dt>Days since first</dt><dd id="since-detected">–</dd></div>
+      </dl>
+    </div>
+  </header>
+
+  <section class="section" aria-labelledby="res-title">
+    <div class="wrap ledger-grid">
+      <div>
+        <header class="section-head">
+          <p class="kicker">Residuals · last 48 h</p>
+          <h2 class="section-title" id="res-title">What doesn't fit the clock</h2>
+          <p class="section-lede">A residual is the difference between when a pulse arrives and when the clock says it should. Normally it is noise. Every 9 h 41 m the beacon passes and every node sees the same wobble, each a little later than the last.</p>
+        </header>
+        <figure class="scope">
+          <canvas id="residuals" role="img" aria-label="Timing residuals of four ledger nodes over the last 48 hours, with the beacon's passes marked in red"></canvas>
+          <figcaption><span>residual (ns) · 5-minute bins</span><span>story time</span></figcaption>
+        </figure>
+        <ul class="chart-key"><li><i class="band"></i>ε Eri beacon pass</li><li><i class="hue-0"></i>Farside</li><li><i class="hue-1"></i>Earth</li><li><i class="hue-2"></i>Isidis</li><li><i class="hue-3"></i>Ceres</li></ul>
+      </div>
+      <aside>
+        <p class="eyebrow">Ledger nodes</p>
+        <h2 class="card-title">Four ears, one clock</h2>
+        <ul id="nodes"></ul>
+        <p class="note method">One ledger per light-cone: nodes agree by exchanging their counts at light speed, so a node on Ceres learns what Farside heard almost half an hour later.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="pulsars" aria-labelledby="psr-title">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="kicker">The array</p>
+        <h2 class="section-title" id="psr-title">Pulses counted since 2219-01-01</h2>
+        <p class="section-lede">Twelve real pulsars and their real periods. The slow ones blink at their true rate.</p>
+      </header>
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead><tr><th>Pulsar</th><th class="num">Period</th><th class="num rate">Rate</th><th class="num">Pulses</th></tr></thead>
+          <tbody id="pulsar-rows"></tbody>
+        </table>
+      </div>
+      <p class="note method">Periods from the ATNF Pulsar Catalogue, rounded. The count starts at phase zero on 2219-01-01 and ignores spin-down and the observer's motion, so it is a story clock, not an ephemeris. The beacon's 9 h 41 m repeat is part of the story. <a href="../../archive/2219-signal/en/">The full record of the signal</a>.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" data-interimm-footer>
+  <div class="wrap"><p class="footer-legal"><span>© InterImm</span><a href="../../en/">The Contact Era</a></p></div>
+</footer>
+</body>
+</html>

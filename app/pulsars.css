@@ -1,0 +1,32 @@
+/* Pulsar ledger only. Everything shared is in kit/interimm.css. */
+.ledger-hero { padding-block: clamp(3rem, 8vw, 5rem) clamp(2rem, 5vw, 3rem); border-bottom: 1px solid var(--border); }
+.ledger-hero h1 { font-size: clamp(2rem, 1.1rem + 3.6vw, 3.6rem); font-weight: 800; line-height: 1.05; margin-bottom: 0.4em; }
+.ledger-hero h1:lang(zh) { line-height: 1.2; letter-spacing: 0.02em; }
+.ledger-hero .lede { max-width: 40rem; color: var(--muted); font-size: 1.12rem; }
+.ledger-hero .readouts { margin-top: 2rem; }
+.is-passing #beacon-state, .is-passing #beacon-next { color: var(--accent); }
+
+.ledger-grid { display: grid; gap: clamp(1.5rem, 4vw, 2.5rem); grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); align-items: start; }
+@media (max-width: 60rem) { .ledger-grid { grid-template-columns: minmax(0, 1fr); } }
+
+#pulsar-rows td { vertical-align: middle; }
+#pulsar-rows .psr { font-family: var(--font-mono); font-weight: 600; }
+#pulsar-rows small { display: block; color: var(--muted); font-size: 0.78rem; }
+#pulsar-rows .rate { color: var(--muted); font-size: 0.8rem; }
+#pulsar-rows .count { min-width: 9rem; }
+.beat { display: inline-block; width: 0.55rem; height: 0.55rem; margin-right: 0.6rem; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); vertical-align: 0.05em; }
+@media (max-width: 40rem) { #pulsars .rate { display: none; } }
+
+#nodes { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
+#nodes li { display: grid; grid-template-columns: auto 1fr auto; gap: 0.1rem 0.6rem; align-items: center; padding: 0.7rem 0.9rem; border: 1px solid var(--border); border-radius: 0.6rem; background: var(--surface); }
+#nodes .readout { grid-column: 2; font-size: 0.78rem; color: var(--muted); }
+#nodes .node-ok { grid-row: 1 / span 2; grid-column: 3; font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); }
+.node-dot { grid-row: 1 / span 2; width: 0.6rem; height: 0.6rem; border-radius: 50%; }
+.hue-0 { background: var(--beam); } .hue-1 { background: var(--text); } .hue-2 { background: var(--muted); } .hue-3 { background: var(--border-strong); }
+
+#residuals { display: block; width: 100%; height: 16rem; }
+.chart-key { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; margin: 0.75rem 0 0; padding: 0; list-style: none; font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
+.chart-key li { display: inline-flex; align-items: center; gap: 0.4rem; }
+.chart-key i { width: 0.9rem; height: 0.6rem; border-radius: 2px; }
+.chart-key .band { background: var(--accent-soft); outline: 1px solid var(--accent); }
+.method { margin-top: 1rem; }

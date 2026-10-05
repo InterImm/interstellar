@@ -25,6 +25,12 @@
       "children": []
     },
     {
+      "id": "pulsars",
+      "name": "Pulsar ledger",
+      "url": "https://interstellar.interimm.org/pulsars/en/",
+      "children": []
+    },
+    {
       "id": "write",
       "name": "Write back",
       "url": "https://interstellar.interimm.org/archive/2219-signal/en/#write",
@@ -57,6 +63,10 @@
         {
           "title": "Archive · The 2219 signal",
           "url": "https://interstellar.interimm.org/archive/2219-signal/en/"
+        },
+        {
+          "title": "Pulsar ledger (live)",
+          "url": "https://interstellar.interimm.org/pulsars/en/"
         },
         {
           "title": "Write back",

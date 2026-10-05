@@ -25,6 +25,12 @@
       "children": []
     },
     {
+      "id": "pulsars",
+      "name": "脉冲星账本",
+      "url": "https://interstellar.interimm.org/pulsars/",
+      "children": []
+    },
+    {
       "id": "write",
       "name": "回信",
       "url": "https://interstellar.interimm.org/archive/2219-signal/#write",
@@ -57,6 +63,10 @@
         {
           "title": "档案 · 2219 天苑四信号",
           "url": "https://interstellar.interimm.org/archive/2219-signal/"
+        },
+        {
+          "title": "脉冲星账本（实时）",
+          "url": "https://interstellar.interimm.org/pulsars/"
         },
         {
           "title": "回信",
