@@ -1,4 +1,4 @@
-// InterImm phase 2 kit · Water Hole: shared header, footer and small instruments.
+// InterImm phase 2 kit · 667: shared header, footer and small instruments.
 //
 // Source of truth: InterImm/interstellar, kit/. Published at
 // https://interstellar.interimm.org/kit/interimm.js. See kit/README.md.
@@ -22,6 +22,9 @@
 //    <time data-story-clock>          the story time (real time + 70,491 days), ticking; data-format is
 //                                     "time" (default), "date" or "datetime"
 //    <span data-days-since="2219-10-05T03:12:07Z">  whole days since a story instant, ticking
+//    .space                           gets their 23 × 29 picture drawn faintly behind it, row by row
+//                                     (data-message="off" leaves it out)
+//    <span data-glyph="count">        one part of the picture as an icon: count, system, dish, hydrogen
 //    They are also on window.InterImm for pages that create them later.
 (() => {
   document.documentElement.classList.add('js');
@@ -31,7 +34,7 @@
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
   const GITHUB_ICON = '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.921.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>';
-  const MENU_ICON = '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+  const MENU_ICON = '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"/></svg>';
 
   // ------------------------------------------------------------ header and footer
 
@@ -190,12 +193,58 @@
     tickers.push(() => { el.textContent = Math.max(0, Math.floor((storyNow() - t0) / 86400e3)).toLocaleString(document.documentElement.lang || undefined); });
   }
 
-  window.InterImm = Object.assign(window.InterImm || {}, { kit: 'phase2', STORY_OFFSET_MS, storyNow, waterfall, storyClock, daysSince });
+
+  // ------------------------------------------------------------ the message
+
+  // The 667-bit picture from Ross 128 b, 23 × 29, one row per number (most significant bit = left).
+  // Same picture as app/beacon.js. Every .space draws it faintly behind its content, bit by bit
+  // in the order it arrives; [data-glyph] draws one part of it as an icon.
+  const MSG_W = 23, MSG_H = 29;
+  const MSG = [0x000000, 0x001248, 0x048048, 0x208208, 0x000000, 0x249248, 0x000000, 0x0e0000, 0x1f0070, 0x3f8088, 0x3f80a8, 0x3f8088, 0x1f0070, 0x0e0000, 0x000000, 0x000000, 0x110000, 0x110200, 0x0a2100, 0x041080, 0x041080, 0x041080, 0x0e2100, 0x000200, 0x000000, 0x000000, 0x010000, 0x0399c0, 0x000080];
+  const bit = (x, y) => (MSG[y] >> (MSG_W - 1 - x)) & 1;
+  const GLYPHS = { count: [1, 5], system: [7, 13], dish: [16, 23], hydrogen: [26, 28] };
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function messageField(space) {
+    if (space.dataset.message === 'off' || space.querySelector(':scope > .message-field')) return;
+    const c = document.createElement('canvas');
+    c.className = 'message-field'; c.width = MSG_W; c.height = MSG_H; c.setAttribute('aria-hidden', 'true');
+    space.prepend(c);
+    const g = c.getContext('2d');
+    g.fillStyle = '#fff';
+    const draw = (n) => { for (let i = 0; i < n; i++) if (bit(i % MSG_W, (i / MSG_W) | 0)) g.fillRect(i % MSG_W, (i / MSG_W) | 0, 1, 1); };
+    if (still) { draw(MSG_W * MSG_H); return; }
+    // the bits arrive one row at a time, as the beacon sends them
+    let row = 0;
+    const step = () => {
+      g.clearRect(0, 0, MSG_W, MSG_H); draw(++row * MSG_W);
+      if (row < MSG_H) setTimeout(step, 55);
+    };
+    step();
+  }
+
+  function glyph(el) {
+    const part = GLYPHS[el.dataset.glyph];
+    if (!part || el.querySelector('canvas')) return;
+    let x0 = MSG_W, x1 = 0;
+    for (let y = part[0]; y <= part[1]; y++) for (let x = 0; x < MSG_W; x++) if (bit(x, y)) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); }
+    const w = x1 - x0 + 1, h = part[1] - part[0] + 1;
+    const c = document.createElement('canvas');
+    c.width = w; c.height = h; c.setAttribute('aria-hidden', 'true');
+    const g = c.getContext('2d');
+    g.fillStyle = getComputedStyle(el).color;
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) if (bit(x0 + x, part[0] + y)) g.fillRect(x, y, 1, 1);
+    el.append(c);
+  }
+
+  window.InterImm = Object.assign(window.InterImm || {}, { kit: 'phase2', STORY_OFFSET_MS, storyNow, waterfall, storyClock, daysSince, messageField, glyph });
 
   const initInstruments = () => {
     document.querySelectorAll('canvas[data-waterfall]').forEach((c) => waterfall(c));
     document.querySelectorAll('[data-story-clock]').forEach(storyClock);
     document.querySelectorAll('[data-days-since]').forEach(daysSince);
+    document.querySelectorAll('.space').forEach(messageField);
+    document.querySelectorAll('[data-glyph]').forEach(glyph);
     const tick = () => tickers.forEach((t) => t());
     tick();
     if (tickers.length) setInterval(tick, 1000);

@@ -1,9 +1,10 @@
-# InterImm kit, phase 2 · Water Hole
+# InterImm kit, phase 2 · 667
 
 Phase 2 is a conversation across light years, and it looks nothing like phase 1. Phase 1 is paper, ink, serif
-headings and Mars rust. Phase 2 is night only, with two voices: cyan (`--them`) for what reaches us and violet
-(`--us`) for what we send. It has no light theme, no paper and no red. The name comes from the "water hole", the
-radio band between hydrogen (1420 MHz) and hydroxyl (1662 MHz) where two civilisations were expected to meet.
+headings and Mars rust. Phase 2 is built from the first thing they sent: a picture of 667 bits, 23 by 29. Everything
+is pixels on signal blue. Headings are set in a pixel face, corners are square or stepped, shadows are hard, motion
+steps instead of easing, and their picture is drawn behind every hero. Two voices: white-cyan (`--them`) for what
+reaches us and Sol yellow (`--us`) for what we send. No light theme, no paper, no red, no curves.
 
 The design language of every phase 2 InterImm site, and the code that carries it: principles, colours, type,
 scales, header, footer, page layouts, components, chart colours and a few instruments (a live waterfall
@@ -19,7 +20,7 @@ The two kits share markup hooks, class names and token names, so a site switches
 | `https://interstellar.interimm.org/kit/interimm.css` | Stylesheet, including the fonts | `kit/interimm.css` |
 | `https://interstellar.interimm.org/kit/interimm.js` | Header and footer, menu behaviour, instruments | `kit/interimm.js` |
 | `https://interstellar.interimm.org/kit/nav.cn.json`, `nav.en.json` | Phase 2 menu and footer | `kit/nav.*.json` (hand-edited) |
-| `https://interstellar.interimm.org/kit/fonts/` | Unbounded, Instrument Sans, JetBrains Mono (SIL OFL, Latin) | `kit/fonts/` |
+| `https://interstellar.interimm.org/kit/fonts/` | Pixelify Sans, Instrument Sans, JetBrains Mono (SIL OFL, Latin) | `kit/fonts/` |
 | `https://interstellar.interimm.org/kit/` | Live style guide | `kit/index.html` |
 
 ## Using it on another site
@@ -90,8 +91,8 @@ Phase 2 adds:
 - Conversation (the signature): `.exchange` with `.msg.msg-in` / `.msg.msg-out` (and `.msg-waiting`), `.msg-meta`;
   `.transit` / `.transit-out` with `--progress` and an optional `.transit-packet`.
 
-Pick the voice by direction: `.btn-primary` and `.kicker` are cyan (receiving, exploring); `.btn-send`,
-`.kicker-out` and `.is-out` are violet (sending, replying).
+Pick the voice by direction: `.btn-primary` and `.kicker` are white-cyan (receiving, exploring); `.btn-send`,
+`.kicker-out` and `.is-out` are yellow (sending, replying).
 
 ### Instruments
 
@@ -102,10 +103,12 @@ Pick the voice by direction: `.btn-primary` and `.kicker` are cyan (receiving, e
 </figure>
 <time data-story-clock data-format="datetime"></time>     <!-- time (default), date, datetime -->
 <span data-days-since="2219-09-18T03:12:07Z"></span>
+<section class="space">…</section>                        <!-- their picture is drawn behind it; data-message="off" to skip -->
+<span class="tile-icon" data-glyph="dish"></span>          <!-- count, system, dish, hydrogen -->
 ```
 
 The waterfall reads its colours from CSS, pauses when off screen and stays still for
-visitors who prefer reduced motion. The same functions are on `window.InterImm`.
+visitors who prefer reduced motion. The picture arrives row by row, or all at once for those visitors. The same functions are on `window.InterImm`.
 
 ## Changing it
 

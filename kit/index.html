@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
-<title>Water Hole | The phase 2 design language</title>
-<meta name="description" content="Water Hole, the design language of every InterImm phase 2 site: two voices, one conversation across light years.">
+<title>667 | The phase 2 design language</title>
+<meta name="description" content="667, the design language of every InterImm phase 2 site, built from the pixels of the first message from Ross 128 b.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <!-- Other sites use the absolute URLs https://interstellar.interimm.org/kit/interimm.css and .js -->
 <link rel="stylesheet" href="interimm.css">
@@ -13,29 +13,29 @@
 <style>
   /* this page only */
   .swatches { display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); margin: 0 0 2rem; padding: 0; list-style: none; }
-  .swatch { overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); }
-  .swatch span { display: block; height: 3.25rem; border-bottom: 1px solid var(--border); }
+  .swatch { overflow: hidden; border: 2px solid var(--border-strong); background: var(--surface); }
+  .swatch span { display: block; height: 3.25rem; border-bottom: 2px solid var(--border-strong); }
   .swatch code { display: block; padding: 0.45rem 0.7rem 0; font-family: var(--font-mono); font-size: 0.74rem; color: var(--text); }
   .swatch small { display: block; padding: 0 0.7rem 0.5rem; font-size: 0.78rem; color: var(--muted); line-height: 1.4; }
-  .demo-label { margin: 2.5rem 0 1rem; }
-  pre { overflow-x: auto; margin: 0 0 1rem; padding: 1.25rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.6; }
-  .type-row { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 0.25rem 1.5rem; align-items: baseline; padding: 1rem 0; border-top: 1px solid var(--border); }
+  .demo-label { display: flex; margin: 2.5rem 0 1rem; }
+  pre { overflow-x: auto; margin: 0 0 1rem; padding: 1.25rem; border: 2px solid var(--border-strong); background: var(--deep); font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.6; }
+  .type-row { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 0.25rem 1.5rem; align-items: baseline; padding: 1rem 0; border-top: var(--rule); }
   .type-row > code { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
   .type-row > p { margin: 0; }
   @media (max-width: 40rem) { .type-row { grid-template-columns: minmax(0, 1fr); } }
   .scale { display: grid; gap: 0.4rem; margin: 0; padding: 0; list-style: none; }
   .scale li { display: grid; grid-template-columns: 6.5rem auto; align-items: center; gap: 1rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
-  .scale i { display: block; height: 0.6rem; background: var(--beam); border-radius: 2px; }
+  .scale i { display: block; height: var(--px); background: var(--us); }
   .rules { margin: 0; padding-left: 1.2rem; }
   #data .rules { margin-top: 2rem; }
   .principles { grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); }
   .rules li { margin-bottom: 0.5rem; }
   .rules li::marker { color: var(--accent); }
-  .anatomy { display: grid; gap: 1px; margin: 0; padding: 0; list-style: none; border: 1px solid var(--border-strong); border-radius: var(--radius); overflow: hidden; background: var(--border); font-family: var(--font-mono); font-size: 0.75rem; }
+  .anatomy { display: grid; gap: 2px; margin: 0; padding: 0; list-style: none; border: 2px solid var(--border-strong); overflow: hidden; background: var(--border-strong); font-family: var(--font-mono); font-size: 0.75rem; }
   .anatomy li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.7rem 0.9rem; background: var(--surface); color: var(--muted); }
   .anatomy b { color: var(--text); font-weight: 500; }
-  .anatomy .is-space { background: #0b0f22; color: #a0a7c6; }
-  .anatomy .is-space b { color: #eef0f8; }
+  .anatomy .is-space { background: var(--deep); color: var(--them); }
+  .anatomy .is-space b { color: var(--text); }
   .anatomy .is-main { padding-block: 1.6rem; }
   .demo-chart { position: relative; padding: 0; }
   .demo-chart svg { display: block; width: 100%; height: auto; }
@@ -45,9 +45,17 @@
   .checklist { counter-reset: c; list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
   .checklist li { counter-increment: c; display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: 0.75rem; align-items: baseline; }
   .checklist li::before { content: counter(c, decimal-leading-zero); font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent); }
+  .hero-667 h1 { font-size: clamp(6rem, 3rem + 16vw, 15rem); line-height: 0.8; margin-bottom: 0.15em; }
+  .bits { display: grid; grid-template-columns: repeat(23, 1fr); gap: 2px; width: min(100%, 23rem); margin: 0; padding: 0.75rem; background: var(--deep); border: 2px solid var(--text); box-shadow: var(--shadow); }
+  .bits i { aspect-ratio: 1; background: rgb(255 255 255 / 0.07); }
+  .bits i.on { background: var(--text); }
+  .bits i.on.p-count { background: var(--c1); } .bits i.on.p-system { background: var(--c3); } .bits i.on.p-dish { background: var(--c4); } .bits i.on.p-hydrogen { background: var(--c2); }
+  .glyphs { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); }
+  .glyphs .tile-icon { width: 4rem; height: 4rem; padding: 0.6rem; }
+  .tile-icon[data-glyph] { padding: 0.45rem; }
   .toc { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; margin: 1.5rem 0 0; padding: 0; }
-  .toc a { display: inline-block; padding: 0.15rem 0.75rem; border: 1px solid var(--border-strong); border-radius: var(--radius-pill); color: var(--text); font-family: var(--font-mono); font-size: 0.75rem; text-decoration: none; }
-  .toc a:hover { border-color: var(--accent); }
+  .toc a { display: inline-block; padding: 0.15rem 0.75rem; border: 2px solid var(--border-strong); color: var(--text); font-family: var(--font-mono); font-size: 0.75rem; text-decoration: none; text-transform: uppercase; letter-spacing: 0.06em; }
+  .toc a:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
 </style>
 </head>
 <body>
@@ -60,12 +68,12 @@
 </header>
 
 <main id="main">
-  <header class="hero space">
+  <header class="hero space hero-667">
     <div class="wrap hero-grid">
       <div>
         <p class="kicker">InterImm phase 2 · design language</p>
-        <h1>Water <em>Hole</em></h1>
-        <p class="lede">The quiet band between hydrogen at 1420 MHz and hydroxyl at 1662 MHz, where astronomers guessed two civilisations would meet. Every site of the Contact Era is part of that conversation: their voice in cyan, ours in violet, on a night that never turns to day.</p>
+        <h1>667</h1>
+        <p class="lede">The first thing they sent was 667 bits. 667 is 23 × 29, two primes, so the bits fold into one rectangle only, and it is a picture. Every site of the Contact Era is built from that picture: pixels on signal blue, their voice in white-cyan, ours in Sol yellow, and nothing round.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#use">Use it on a site <span>→</span></a>
           <a class="btn btn-ghost" href="https://github.com/InterImm/interstellar/tree/main/kit">Source</a>
@@ -78,7 +86,7 @@
     </div>
     <div class="wrap">
       <ul class="toc">
-        <li><a href="#principles">Principles</a></li><li><a href="#phase1">Not phase 1</a></li><li><a href="#conversation">Conversation</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#colour">Colour</a></li>
+        <li><a href="#principles">Principles</a></li><li><a href="#source">The source</a></li><li><a href="#phase1">Not phase 1</a></li><li><a href="#conversation">Conversation</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#colour">Colour</a></li>
         <li><a href="#type">Type</a></li><li><a href="#space">Space</a></li><li><a href="#components">Components</a></li>
         <li><a href="#data">Data</a></li><li><a href="#instruments">Instruments</a></li><li><a href="#words">Words</a></li>
         <li><a href="#use">Use</a></li><li><a href="#checklist">Checklist</a></li>
@@ -96,18 +104,41 @@
       </header>
       <div class="panel principles">
         <article class="card"><p class="eyebrow">01</p><h3 class="card-title">A conversation, not a voyage</h3><p>Nobody is coming and nobody is going; only messages cross. The pictures are dishes, spectrograms, clocks, logs and letters in transit, never ships or planets seen up close.</p></article>
-        <article class="card"><p class="eyebrow">02</p><h3 class="card-title">Two voices on one night</h3><p>Cyan is what reaches us: their signal, the detection, the current item. Violet is what we send: replies, letters, the send button. Everything else is night. No paper, no red.</p></article>
+        <article class="card"><p class="eyebrow">02</p><h3 class="card-title">Built from their picture</h3><p>Their message is the only image we share with them, so it is the whole visual language: a 4 px grid, a pixel face for headings, square or stepped corners, hard shadows, and the picture itself behind every hero.</p></article>
         <article class="card"><p class="eyebrow">03</p><h3 class="card-title">Every number is a readout</h3><p>Times, distances, coordinates and counts are set in mono with tabular figures, with units, so they line up and read as measured.</p></article>
-        <article class="card"><p class="eyebrow">04</p><h3 class="card-title">Lines are links</h3><p>Dividers are dashed, like a path a message travels; panels are split by hairlines like an instrument rack. Shadows only for things that float.</p></article>
-        <article class="card"><p class="eyebrow">05</p><h3 class="card-title">Only messages move</h3><p>Motion is for live data: a waterfall, a ticking clock, a packet in transit. Nothing decorative animates, and everything stops for reduced motion.</p></article>
+        <article class="card"><p class="eyebrow">04</p><h3 class="card-title">Two voices on signal blue</h3><p>White-cyan is what reaches us: their signal, the detection, the current item. Sol yellow is what we send: replies, letters, the send button. Everything else is blue and white. No paper, no red.</p></article>
+        <article class="card"><p class="eyebrow">05</p><h3 class="card-title">Bits arrive, nothing glides</h3><p>Motion steps instead of easing, like data coming in: a picture filling row by row, a blinking packet, a ticking clock. Everything stops for reduced motion.</p></article>
         <article class="card"><p class="eyebrow">06</p><h3 class="card-title">Static, linked, free</h3><p>No build step, no server, zero running cost. Sites link this kit instead of copying it, so a change here reaches every site.</p></article>
       </div>
     </div>
   </section>
 
 
+  <!-- ============================================================ the source -->
+  <section class="section section-alt" id="source">
+    <div class="wrap split split-center" style="--split: minmax(0, 1fr) minmax(0, 1.1fr)">
+      <figure style="margin:0">
+        <div class="bits" id="bits" role="img" aria-label="The 667-bit picture folded into 23 columns and 29 rows"></div>
+        <figcaption class="note" style="margin-top:0.75rem">The beacon from Ross 128 b, folded 23 wide. Colours mark its four parts.</figcaption>
+      </figure>
+      <div>
+        <header class="section-head">
+          <p class="kicker">The source</p>
+          <h2 class="section-title">One picture, four glyphs</h2>
+          <p class="section-lede">The picture has four parts. The kit draws each as an icon with <code>data-glyph</code>, so every site speaks with their alphabet.</p>
+        </header>
+        <div class="glyphs">
+          <div class="tile"><span class="tile-icon" data-glyph="count"></span><h3 class="tile-title">count</h3><p>One to nine in binary. Use for numbers, data, a catalogue.</p></div>
+          <div class="tile"><span class="tile-icon" data-glyph="system"></span><h3 class="tile-title">system</h3><p>Their star and its one planet, circled. Use for places, planets, the explorer.</p></div>
+          <div class="tile"><span class="tile-icon" data-glyph="dish"></span><h3 class="tile-title">dish</h3><p>A dish and its beam. Use for listening, sending, letters.</p></div>
+          <div class="tile"><span class="tile-icon" data-glyph="hydrogen"></span><h3 class="tile-title">hydrogen</h3><p>The hydrogen line, the unit both sides share. Use for clocks, frequencies, the ledger.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============================================================ not phase 1 -->
-  <section class="section section-alt" id="phase1">
+  <section class="section" id="phase1">
     <div class="wrap">
       <header class="section-head">
         <p class="kicker">Not phase 1</p>
@@ -116,15 +147,15 @@
       </header>
       <div class="table-scroll">
         <table class="data-table">
-          <thead><tr><th></th><th>Phase 1 · interimm.org/kit/</th><th>Phase 2 · Water Hole</th></tr></thead>
+          <thead><tr><th></th><th>Phase 1 · interimm.org/kit/</th><th>Phase 2 · 667</th></tr></thead>
           <tbody>
-            <tr><td class="readout">Ground</td><td>Paper and ink, follows the visitor's light or dark setting</td><td>Night only, deep blue-black, the open sky in heroes</td></tr>
-            <tr><td class="readout">Colour</td><td>One Mars rust, used sparingly</td><td>Two voices: cyan for them, violet for us. No red anywhere</td></tr>
-            <tr><td class="readout">Type</td><td>Source Serif headings, IBM Plex text and data</td><td>Unbounded headings, Instrument Sans text, JetBrains Mono data</td></tr>
-            <tr><td class="readout">Lines</td><td>Thin solid printed rules</td><td>Dashed transmission lines</td></tr>
-            <tr><td class="readout">Controls</td><td>Square ink buttons</td><td>Lit pills: cyan to receive and explore, violet to send</td></tr>
-            <tr><td class="readout">Signature</td><td>The signal line under the header: distance and delay to Mars</td><td>The exchange, the transit line and the waterfall</td></tr>
-            <tr><td class="readout">Brand mark</td><td>The InterImm wordmark</td><td>Two points and the dashed line between them</td></tr>
+            <tr><td class="readout">Ground</td><td>Paper and ink, follows the visitor's light or dark setting</td><td>Signal blue only, a pixel grid and their picture in heroes</td></tr>
+            <tr><td class="readout">Colour</td><td>One Mars rust, used sparingly</td><td>White and blue, with two voices: white-cyan for them, Sol yellow for us. No red</td></tr>
+            <tr><td class="readout">Type</td><td>Source Serif headings, IBM Plex text and data</td><td>Pixelify Sans headings, Instrument Sans text, JetBrains Mono data</td></tr>
+            <tr><td class="readout">Lines</td><td>Thin solid printed rules, soft corners</td><td>Dashed lines of bits, square and stepped corners, hard shadows</td></tr>
+            <tr><td class="readout">Controls</td><td>Square ink buttons</td><td>Notched pixel blocks: white-cyan to receive and explore, yellow to send</td></tr>
+            <tr><td class="readout">Signature</td><td>The signal line under the header: distance and delay to Mars</td><td>Their picture behind every hero, the four glyphs, the exchange and the waterfall</td></tr>
+            <tr><td class="readout">Brand mark</td><td>The InterImm wordmark</td><td>Our star and theirs as pixel squares, one bit between</td></tr>
           </tbody>
         </table>
       </div>
@@ -132,12 +163,12 @@
   </section>
 
   <!-- ============================================================ conversation -->
-  <section class="section" id="conversation">
+  <section class="section section-alt" id="conversation">
     <div class="wrap">
       <header class="section-head">
         <p class="kicker">Conversation</p>
         <h2 class="section-title">An exchange across 11.01 light years</h2>
-        <p class="section-lede">Their messages arrive on the left in cyan, ours leave on the right in violet, and the dashed spine between is the distance. Use it wherever the era shows messages, letters or replies.</p>
+        <p class="section-lede">Their messages arrive on the left in white-cyan, ours leave on the right in yellow, and the dashed spine between is the distance. Use it wherever the era shows messages, letters or replies.</p>
       </header>
       <ol class="exchange">
         <li class="msg msg-in"><p class="msg-meta"><span>Ross 128 b → Sol</span><time>sent 2208-09-13 · heard 2219-09-18</time></p><p>A prime-numbered preamble, then 667 bits that fold into a picture: counting, their star with its one planet circled, a dish, hydrogen.</p></li>
@@ -149,12 +180,12 @@
         <div class="transit transit-out" style="--progress: 0.06"><span>Sol · 2219-10-05</span><span class="transit-packet" aria-hidden="true"></span><span>Ross 128 b · 2230-10-09</span></div>
         <div class="transit" style="--progress: 1"><span>Ross 128 b · 2208-09-13</span><span>Sol · 2219-09-18</span></div>
       </div>
-      <p class="note" style="margin-top:1.5rem">Kickers take a voice too: <code>.kicker</code> listens (cyan), <code>.kicker-out</code> sends (violet). Logs mark what reached us with <code>.is-key</code> and what we sent with <code>.is-out</code>.</p>
+      <p class="note" style="margin-top:1.5rem">Kickers take a voice too: <code>.kicker</code> listens (white-cyan), <code>.kicker-out</code> sends (yellow). Logs mark what reached us with <code>.is-key</code> and what we sent with <code>.is-out</code>.</p>
     </div>
   </section>
 
   <!-- ============================================================ anatomy -->
-  <section class="section section-alt" id="anatomy">
+  <section class="section" id="anatomy">
     <div class="wrap">
       <header class="section-head">
         <p class="kicker">Anatomy</p>
@@ -166,8 +197,8 @@
           <h3>Story page</h3>
           <p class="muted">The entrance, an archive, an essay. Centred, generous, bilingual.</p>
           <ol class="anatomy">
-            <li><b>.site-header</b><span>● The Contact Era / Site · menu</span></li>
-            <li class="is-space"><b>.hero.space</b><span>kicker · h1 · lede · actions · scope</span></li>
+            <li><b>.site-header</b><span>■·■ The Contact Era / Site · menu</span></li>
+            <li class="is-space"><b>.hero.space</b><span>their picture · kicker · h1 · lede · scope</span></li>
             <li class="is-main"><b>.section</b><span>kicker · .section-title · content</span></li>
             <li><b>.section.section-alt</b><span>alternate ground</span></li>
             <li><b>.site-footer</b><span>menu columns · legal</span></li>
@@ -177,7 +208,7 @@
           <h3>Tool</h3>
           <p class="muted">A ledger, an explorer, a decoder. Full width, dense, the data is the hero.</p>
           <ol class="anatomy">
-            <li><b>.site-header[data-width=full]</b><span>● The Contact Era / Tool</span></li>
+            <li><b>.site-header[data-width=full]</b><span>■·■ The Contact Era / Tool</span></li>
             <li class="is-main"><b>.app-shell</b><span>.app-side · .app-main · .app-detail</span></li>
             <li><b>.section</b><span>about · method · sources</span></li>
             <li><b>.site-footer</b><span>menu columns · legal</span></li>
@@ -189,20 +220,20 @@
   </section>
 
   <!-- ============================================================ colour -->
-  <section class="section" id="colour">
+  <section class="section section-alt" id="colour">
     <div class="wrap">
       <header class="section-head">
         <p class="kicker">Colour</p>
         <h2 class="section-title">Roles, not paint</h2>
-        <p class="section-lede">Use the token for the role, never a hex value. Phase 2 is night only; <code>.space</code> is a deeper night with stars, for heroes.</p>
+        <p class="section-lede">Use the token for the role, never a hex value. Phase 2 has one ground, signal blue; <code>.space</code> adds the pixel grid and their picture, for heroes.</p>
       </header>
       <h3>Ground and ink</h3>
       <ul class="swatches">
         <li class="swatch"><span style="background:var(--bg)"></span><code>--bg</code><small>page ground</small></li>
-        <li class="swatch"><span style="background:var(--bg-alt)"></span><code>--bg-alt</code><small>alternate sections, footer</small></li>
+        <li class="swatch"><span style="background:var(--bg-alt)"></span><code>--bg-alt</code><small>alternate sections</small></li>
         <li class="swatch"><span style="background:var(--surface)"></span><code>--surface</code><small>cards, inputs</small></li>
         <li class="swatch"><span style="background:var(--surface-2)"></span><code>--surface-2</code><small>hover</small></li>
-        <li class="swatch"><span style="background:var(--text)"></span><code>--text</code><small>ink, primary button</small></li>
+        <li class="swatch"><span style="background:var(--text)"></span><code>--text</code><small>ink, borders that matter</small></li>
         <li class="swatch"><span style="background:var(--muted)"></span><code>--muted</code><small>secondary text</small></li>
         <li class="swatch"><span style="background:var(--border)"></span><code>--border</code><small>hairlines</small></li>
         <li class="swatch"><span style="background:var(--border-strong)"></span><code>--border-strong</code><small>controls</small></li>
@@ -210,29 +241,30 @@
       <h3>The two voices</h3>
       <ul class="swatches">
         <li class="swatch"><span style="background:var(--them)"></span><code>--them · --accent · --signal</code><small>incoming: their signal, the detection, the current item, primary buttons</small></li>
-        <li class="swatch"><span style="background:var(--them-soft)"></span><code>--them-soft</code><small>selected rows, halos</small></li>
+        <li class="swatch"><span style="background:var(--them-soft)"></span><code>--them-soft</code><small>selected rows, shadows of their messages</small></li>
         <li class="swatch"><span style="background:var(--us)"></span><code>--us · --beam</code><small>outgoing: our replies, letters, the send button</small></li>
         <li class="swatch"><span style="background:var(--us-soft)"></span><code>--us-soft</code><small>our highlights</small></li>
+        <li class="swatch"><span style="background:var(--deep)"></span><code>--deep</code><small>header, footer, inputs, scopes</small></li>
         <li class="swatch"><span style="background:var(--noise)"></span><code>--noise</code><small>the noise floor in a waterfall</small></li>
       </ul>
       <div class="do-dont">
-        <div class="card"><p class="eyebrow">Do</p><h3>Pick the voice by direction</h3><p>Anything that came from them, or that we are looking at, is cyan. Anything we write or send is violet. One cyan subject per chart.</p></div>
-        <div class="card"><p class="eyebrow">Don't</p><h3>Bring back paper or rust</h3><p>No light theme, no red or orange accents, no serif headings: those belong to phase 1. Chart series never use the two voices.</p></div>
+        <div class="card"><p class="eyebrow">Do</p><h3>Pick the voice by direction</h3><p>Anything that came from them, or that we are looking at, is white-cyan. Anything we write or send is yellow. One subject per chart in their voice.</p></div>
+        <div class="card"><p class="eyebrow">Don't</p><h3>Round it off</h3><p>No radii, no blur, no soft shadows, no gradients that ease. No paper, rust or serif: those belong to phase 1. Chart series never use the two voices.</p></div>
       </div>
     </div>
   </section>
 
   <!-- ============================================================ type -->
-  <section class="section section-alt" id="type">
+  <section class="section" id="type">
     <div class="wrap">
       <header class="section-head">
         <p class="kicker">Type</p>
         <h2 class="section-title">Three voices</h2>
-        <p class="section-lede">Unbounded announces, Instrument Sans tells, JetBrains Mono measures. All SIL OFL, self-hosted with the kit (Latin); Chinese uses the system's CJK fonts and gets more line height automatically.</p>
+        <p class="section-lede">Pixelify Sans announces, Instrument Sans tells, JetBrains Mono measures. All SIL OFL, self-hosted with the kit (Latin). Chinese uses the system's CJK fonts at their heaviest weight so it holds its own beside the pixels.</p>
       </header>
-      <div class="type-row"><code>--step-5</code><p style="font-family:var(--font-display);font-size:var(--step-5);font-weight:800;line-height:1;letter-spacing:-0.025em">通联 Contact</p></div>
-      <div class="type-row"><code>--step-4 · hero</code><p style="font-family:var(--font-display);font-size:var(--step-4);font-weight:800;line-height:1.02;letter-spacing:-0.025em">11.01 light years</p></div>
-      <div class="type-row"><code>--step-3 · page</code><p style="font-family:var(--font-display);font-size:var(--step-3);font-weight:800;line-height:1.05">The clocks that heard it</p></div>
+      <div class="type-row"><code>--step-5</code><p style="font-family:var(--font-display);font-size:var(--step-5);font-weight:700;line-height:1">通联 Contact</p></div>
+      <div class="type-row"><code>--step-4 · hero</code><p style="font-family:var(--font-display);font-size:var(--step-4);font-weight:700;line-height:1">11.01 light years</p></div>
+      <div class="type-row"><code>--step-3 · page</code><p style="font-family:var(--font-display);font-size:var(--step-3);font-weight:700;line-height:1">The clocks that heard it</p></div>
       <div class="type-row"><code>--step-2 · section</code><p style="font-family:var(--font-display);font-size:var(--step-2);font-weight:700;line-height:1.1">Fold the beacon</p></div>
       <div class="type-row"><code>--step-1 · lede</code><p style="font-size:var(--step-1);color:var(--muted)">A question sent today reaches them in 2230.</p></div>
       <div class="type-row"><code>--step-0 · body</code><p>Every pulsar ledger in the solar system logged the same faint pattern.</p></div>
@@ -243,12 +275,12 @@
   </section>
 
   <!-- ============================================================ space -->
-  <section class="section" id="space">
+  <section class="section section-alt" id="space">
     <div class="wrap">
       <header class="section-head">
         <p class="kicker">Space and shape</p>
         <h2 class="section-title">A short scale</h2>
-        <p class="section-lede">Spacing in eight steps, three radii. Content sits in <code>.wrap</code> (76 rem); tools use <code>.wrap-full</code>. Layouts stack below 56 rem.</p>
+        <p class="section-lede">Spacing in eight steps on a 4 px grid, and no radii. Content sits in <code>.wrap</code> (76 rem); tools use <code>.wrap-full</code>. Layouts stack below 56 rem.</p>
       </header>
       <div class="split">
         <ul class="scale">
@@ -262,17 +294,17 @@
           <li><span>--space-8 · 4.5</span><i style="width:4.5rem"></i></li>
         </ul>
         <dl class="readouts">
-          <div><dt>--radius-sm</dt><dd>0.55rem · inputs</dd></div>
-          <div><dt>--radius</dt><dd>0.9rem · cards</dd></div>
-          <div><dt>--radius-pill</dt><dd>buttons, chips</dd></div>
-          <div><dt>--dur</dt><dd>0.15s · hovers</dd></div>
+          <div><dt>--px</dt><dd>4px · one bit</dd></div>
+          <div><dt>--notch</dt><dd>one bit cut</dd></div>
+          <div><dt>--radius*</dt><dd>0 · always</dd></div>
+          <div><dt>--dur</dt><dd>0.12s · stepped</dd></div>
         </dl>
       </div>
     </div>
   </section>
 
   <!-- ============================================================ components -->
-  <section class="section section-alt" id="components">
+  <section class="section" id="components">
     <div class="wrap">
       <header class="section-head">
         <p class="kicker">Components</p>
@@ -304,7 +336,7 @@
       <p class="demo-label kicker">.card-grid with .card and .tile</p>
       <div class="card-grid">
         <div class="card"><h3 class="card-title">Card</h3><p>Plain card on the surface colour.</p></div>
-        <div class="tile"><span class="tile-icon">✶</span><h3 class="tile-title">Tile</h3><p>With an icon.</p></div>
+        <div class="tile"><span class="tile-icon" data-glyph="dish"></span><h3 class="tile-title">Tile</h3><p>With a glyph icon.</p></div>
       </div>
 
       <p class="demo-label kicker">Forms: .field, .field-pair, .field-checks, .inline-field</p>
@@ -325,7 +357,7 @@
   </section>
 
   <!-- ============================================================ data -->
-  <section class="section" id="data">
+  <section class="section section-alt" id="data">
     <div class="wrap">
       <header class="section-head">
         <p class="kicker">Data</p>
@@ -375,7 +407,7 @@
   </section>
 
   <!-- ============================================================ instruments -->
-  <section class="section section-alt" id="instruments">
+  <section class="section" id="instruments">
     <div class="wrap">
       <header class="section-head">
         <p class="kicker">Instruments</p>
@@ -392,6 +424,8 @@
           <figcaption><span>&lt;canvas data-waterfall data-line=""&gt; · noise only</span></figcaption>
         </figure>
       </div>
+      <p class="demo-label kicker">.space · their picture, drawn by the kit</p>
+      <div class="space" style="height:16rem;border:2px solid var(--text)"><p class="readout" style="padding:1rem;margin:0">&lt;section class="space"&gt; · data-message="off" to leave it out</p></div>
       <p class="demo-label kicker">.readouts</p>
       <dl class="readouts">
         <div><dt>Story time</dt><dd><time data-story-clock data-format="datetime">–</time></dd></div>
@@ -400,7 +434,7 @@
       </dl>
       <p class="demo-label kicker">.log</p>
       <ol class="log">
-        <li><time>2219-09-18 03:12:07 UTC</time><h3>An entry</h3><p>Timestamped entries down a hairline.</p></li>
+        <li><time>2219-09-18 03:12:07 UTC</time><h3>An entry</h3><p>Timestamped entries down a line of bits.</p></li>
         <li class="is-key"><time>2219-09-18</time><h3>A key entry</h3><p>Something reached us: <code>.is-key</code>.</p></li>
         <li class="is-out"><time>2219-10-05</time><h3>Our entry</h3><p>Something we sent: <code>.is-out</code>.</p></li>
       </ol>
@@ -415,7 +449,7 @@
   </section>
 
   <!-- ============================================================ words -->
-  <section class="section" id="words">
+  <section class="section section-alt" id="words">
     <div class="wrap">
       <header class="section-head">
         <p class="kicker">Words</p>
@@ -440,7 +474,7 @@
   </section>
 
   <!-- ============================================================ use -->
-  <section class="section section-alt" id="use">
+  <section class="section" id="use">
     <div class="wrap">
       <header class="section-head">
         <p class="kicker">Use</p>
@@ -482,7 +516,7 @@
   </section>
 
   <!-- ============================================================ checklist -->
-  <section class="section" id="checklist">
+  <section class="section section-alt" id="checklist">
     <div class="wrap">
       <header class="section-head">
         <p class="kicker">Checklist</p>
@@ -492,8 +526,8 @@
         <li>Links the kit's stylesheet and script from interstellar.interimm.org; no copied kit files.</li>
         <li>Header and footer use the hooks; the site has an entry in <code>nav.cn.json</code> and <code>nav.en.json</code> and sets <code>data-current</code>.</li>
         <li>Its own stylesheet holds only what is its own, using kit tokens; no new hex values except data colours the kit lacks.</li>
-        <li>Night only, at desktop and phone width; nothing moves under reduced motion.</li>
-        <li>Uses the two voices by direction: cyan for what we receive, violet for what we send. No red, no paper.</li>
+        <li>Checked at desktop and phone width; nothing moves under reduced motion.</li>
+        <li>Uses the two voices by direction: white-cyan for what we receive, yellow for what we send. No red, no paper, no curves.</li>
         <li>Numbers are readouts; dates say they are story time; sources are cited.</li>
         <li>Chinese and English, or the language switch is turned off.</li>
         <li>Static, zero running cost.</li>
@@ -503,5 +537,10 @@
 </main>
 
 <footer class="site-footer" data-interimm-footer></footer>
+<script type="module">
+  import { BITS, WIDTH, PARTS } from '../app/beacon.js';
+  const part = (row) => (PARTS.find(([a, b]) => row >= a && row <= b) || [])[2];
+  document.getElementById('bits').innerHTML = BITS.map((b, i) => `<i class="${b ? 'on' : ''} ${b ? 'p-' + part((i / WIDTH) | 0) : ''}"></i>`).join('');
+</script>
 </body>
 </html>
