@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en" class="js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Drift | The Contact Era</title>
+<meta name="description" content="A model of how the Sun and Ross 128 move relative to each other, from the Bronze Age to 150,000 years from now: distance, light delay, and the centuries when they could watch Earth cross the Sun.">
+<link rel="alternate" hreflang="zh-CN" href="https://interstellar.interimm.org/drift/">
+<link rel="alternate" hreflang="en" href="https://interstellar.interimm.org/drift/en/">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../kit/interimm.css">
+<link rel="stylesheet" href="../../app/drift.css">
+<script src="../../kit/interimm.js" defer></script>
+<script type="module" src="../../app/drift.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" data-interimm-header data-lang="en" data-current="drift" data-lang-cn="../">
+  <div class="wrap header-inner">
+    <a class="brand" href="../../en/"><span class="brand-dot" aria-hidden="true"></span><span class="brand-name">The Contact Era</span></a>
+  </div>
+</header>
+
+<main id="main">
+  <header class="hero drift-hero space">
+    <div class="wrap">
+      <p class="kicker">Model · Sun and Ross 128</p>
+      <h1>Two stars, closing at <span class="num">31 km/s</span>.</h1>
+      <p class="lede">The Sun and Ross 128 are not standing still. Ross 128 is falling toward us at an angle, and the gap that every message has to cross is shrinking. It has also swung out of the one narrow band of sky where Earth can be seen crossing the Sun.</p>
+      <dl class="readouts">
+        <div><dt>Distance now</dt><dd id="now-dist">–</dd></div>
+        <div><dt>Closing speed</dt><dd id="now-rv">–</dd></div>
+        <div><dt>Closest in</dt><dd id="now-closest">–</dd></div>
+        <div><dt>They lost sight of Earth</dt><dd id="now-lost">–</dd></div>
+      </dl>
+    </div>
+  </header>
+
+  <section class="section" id="model" aria-labelledby="model-title">
+    <div class="wrap">
+      <header class="section-head section-head-split">
+        <div>
+          <p class="kicker">Model</p>
+          <h2 class="section-title" id="model-title">Pick a year</h2>
+          <p class="section-lede">Drag through time. In recorded history the view is edge-on to Earth's orbit, so you can watch Ross 128 cross the thin band from which Earth is seen passing the Sun. In deep time the map looks down on that plane, with the Sun at the centre.</p>
+        </div>
+        <div class="tabs" role="tablist" aria-label="Time span">
+          <button type="button" role="tab" data-range="history" aria-selected="true">Recorded history</button>
+          <button type="button" role="tab" data-range="deep" aria-selected="false">Deep time</button>
+        </div>
+      </header>
+
+      <div class="drift-controls">
+        <button type="button" class="btn btn-primary btn-sm" id="play" aria-pressed="false">Play</button>
+        <label class="drift-slider">
+          <span class="sr-only">Year</span>
+          <input type="range" id="year" min="-2499" max="4500" step="1" value="2219">
+        </label>
+        <output class="readout drift-year" id="year-out" for="year">2219</output>
+        <button type="button" class="btn btn-ghost btn-sm" id="to-now">Now</button>
+      </div>
+
+      <div class="split drift-grid">
+        <figure class="scope">
+          <canvas id="map" role="img" aria-label="Map seen from above the plane of Earth's orbit: the Sun at the centre and the straight path of Ross 128, with its position in the chosen year"></canvas>
+          <figcaption><span id="map-title">from above · ecliptic plane</span><span id="map-cap">–</span></figcaption>
+        </figure>
+        <dl class="readouts drift-readouts" aria-live="polite">
+          <div><dt>Distance</dt><dd id="r-dist">–</dd></div>
+          <div><dt>Light delay, one way</dt><dd id="r-delay">–</dd></div>
+          <div><dt>Reply, at the earliest</dt><dd id="r-round">–</dd></div>
+          <div><dt>Moving</dt><dd id="r-rv">–</dd></div>
+          <div><dt>Our Sun in their sky</dt><dd id="r-sun">–</dd></div>
+          <div><dt>Their star in ours</dt><dd id="r-star">–</dd></div>
+          <div><dt>Height above Earth's orbit</dt><dd id="r-lat">–</dd></div>
+          <div><dt>Can they see Earth cross the Sun?</dt><dd id="r-transit">–</dd></div>
+        </dl>
+      </div>
+
+      <div class="split drift-charts">
+        <figure class="scope">
+          <canvas id="chart-dist" role="img" aria-label="Distance between the Sun and Ross 128 over time"></canvas>
+          <figcaption><span>distance (ly) = light delay (years)</span><span class="drift-range-cap">–</span></figcaption>
+        </figure>
+        <figure class="scope">
+          <canvas id="chart-lat" role="img" aria-label="How far Ross 128 sits above or below the plane of Earth's orbit, with the band where Earth's transits are visible"></canvas>
+          <figcaption><span>angle from Earth's orbital plane (°)</span><span class="drift-range-cap">–</span></figcaption>
+        </figure>
+      </div>
+      <ul class="legend">
+        <li><i class="sw drift-sw-sun"></i>Sun · us</li>
+        <li><i class="sw drift-sw-them"></i>Ross 128 · them</li>
+        <li><i class="sw drift-sw-zone"></i>Earth transit zone: from here, Earth can be seen crossing the Sun</li>
+        <li><i class="sw sw-dim"></i>the chosen year</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="moments" aria-labelledby="moments-title">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="kicker">Moments</p>
+        <h2 class="section-title" id="moments-title">What the drift means</h2>
+        <p class="section-lede">Dates come from the model below. Click one to jump to it.</p>
+      </header>
+      <ol class="log" id="moments-list"></ol>
+    </div>
+  </section>
+
+  <section class="section" id="method" aria-labelledby="method-title">
+    <div class="wrap prose">
+      <h2 class="section-title" id="method-title">How this is modelled</h2>
+      <p>Ross 128's measured position, parallax and proper motion (Gaia DR3) and radial velocity (−31.0 km/s, Pulkovo compilation) give its velocity relative to the Sun: 37.9 km/s in total, 31.0 of it straight toward us. The model moves it in a straight line at that velocity and measures everything from the Sun. Gravity from the Galaxy and from passing stars is left out, which is fine for tens of thousands of years and drifts by a few tenths of a light year over a hundred thousand.</p>
+      <p>The Earth transit zone is the band within 0.266° of the plane of Earth's orbit, the Sun's radius seen from 1 au. A world inside it sees Earth cross the Sun once a year. The model holds that plane fixed at its J2000 orientation, as Kaltenegger &amp; Faherty (Nature, 2021) did; they found Ross 128 inside the zone from about 1040 BCE to 1120 CE, and this model gives 1142 BCE to 1119 CE. Letting the plane wobble as it really does moves the start to about 1390 BCE and leaves the end where it is.</p>
+      <p>Closest approach: this model gives 6.34 ly about 71,000 years from now. García-Sánchez et al. (2001), with older data and a galactic potential, found 6.23 ly at about the same time. Brightness uses absolute magnitudes 4.83 for the Sun and 13.53 for Ross 128 and ignores dust. Story time is real time plus 70,491 days; the stars move on real time, so "now" here is the story's present, 2219.</p>
+      <p class="note">Source: <a href="https://github.com/InterImm/interstellar/blob/main/lib/drift.js">lib/drift.js</a>. <a href="../../archive/2219-signal/en/">The 2219 signal</a> · <a href="../../pulsars/en/">Pulsar ledger</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" data-interimm-footer>
+  <div class="wrap"><p class="footer-legal"><span>© InterImm</span><a href="../../en/">The Contact Era</a></p></div>
+</footer>
+</body>
+</html>

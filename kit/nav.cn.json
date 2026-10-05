@@ -31,6 +31,12 @@
       "children": []
     },
     {
+      "id": "drift",
+      "name": "两星漂移",
+      "url": "https://interstellar.interimm.org/drift/",
+      "children": []
+    },
+    {
       "id": "explorer",
       "name": "系外行星图鉴",
       "url": "https://interimm.org/exoplanet-explorer/",
@@ -73,6 +79,10 @@
         {
           "title": "脉冲星账本（实时）",
           "url": "https://interstellar.interimm.org/pulsars/"
+        },
+        {
+          "title": "两星漂移 · 太阳与罗斯128",
+          "url": "https://interstellar.interimm.org/drift/"
         },
         {
           "title": "系外行星图鉴（英文）",

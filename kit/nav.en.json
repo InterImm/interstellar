@@ -31,6 +31,12 @@
       "children": []
     },
     {
+      "id": "drift",
+      "name": "Drift",
+      "url": "https://interstellar.interimm.org/drift/en/",
+      "children": []
+    },
+    {
       "id": "explorer",
       "name": "Exoplanet explorer",
       "url": "https://interimm.org/exoplanet-explorer/",
@@ -73,6 +79,10 @@
         {
           "title": "Pulsar ledger (live)",
           "url": "https://interstellar.interimm.org/pulsars/en/"
+        },
+        {
+          "title": "Drift · Sun and Ross 128",
+          "url": "https://interstellar.interimm.org/drift/en/"
         },
         {
           "title": "Exoplanet explorer",
