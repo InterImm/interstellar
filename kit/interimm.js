@@ -1,4 +1,4 @@
-// InterImm phase 2 kit · 667: shared header, footer and small instruments.
+// InterImm phase 2 kit · 137: shared header, footer and small instruments.
 //
 // Source of truth: InterImm/interstellar, kit/. Published at
 // https://interstellar.interimm.org/kit/interimm.js. See kit/README.md.

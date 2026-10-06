@@ -1,7 +1,8 @@
-# InterImm kit, phase 2 · 667
+# InterImm kit, phase 2 · 137
 
 Phase 2 is a conversation across light years, and it looks nothing like phase 1. Phase 1 is paper, ink, serif
-headings and Mars rust. Phase 2 is built from the first thing they sent: a picture of 667 bits, 23 by 29. Everything
+headings and Mars rust. Phase 2 is named 137, for 1/α, the one number both worlds already share and the last
+thing the beacon says. It is built from the first thing they sent: a picture of 667 bits, 23 by 29. Everything
 is pixels on deep blue, with signal blue for heroes. Page titles and big numbers are set in a pixel face (everything you read is Instrument Sans), corners are square or stepped, shadows are hard, motion
 steps instead of easing, and their picture is drawn behind every hero. Two voices: white-cyan (`--them`) for what
 reaches us and Sol yellow (`--us`) for what we send. No light theme, no paper, no red, no curves.
