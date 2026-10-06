@@ -15,6 +15,10 @@
 .signals-split .scope canvas { height: clamp(16rem, 34vw, 24rem); }
 #cv-picture { image-rendering: pixelated; }
 
+/* Readings under the resonance theory: a working theory in the story, not a decoding. */
+.signals-split .theory { padding-left: 0.9rem; border-left: 4px solid var(--them); }
+.signals-split .theory strong { color: var(--them); }
+
 .tick-us, .tick-them { font-style: normal; }
 .tick-us { color: var(--us); }
 .tick-them { color: var(--them); }
