@@ -73,7 +73,7 @@
       <div>
         <p class="kicker">InterImm phase 2 · design language</p>
         <h1>667</h1>
-        <p class="lede">The first thing they sent was 667 bits. 667 is 23 × 29, two primes, so the bits fold into one rectangle only, and it is a picture. Every site of the Contact Era is built from that picture: pixels on signal blue, their voice in white-cyan, ours in Sol yellow, and nothing round.</p>
+        <p class="lede">The first thing they sent was 667 bits. 667 is 23 × 29, two primes, so the bits fold into one rectangle only, and it is a picture. Every site of the Contact Era is built from that picture: pixels on deep and signal blue, their voice in white-cyan, ours in Sol yellow, and nothing round.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#use">Use it on a site <span>→</span></a>
           <a class="btn btn-ghost" href="https://github.com/InterImm/interstellar/tree/main/kit">Source</a>
@@ -104,9 +104,9 @@
       </header>
       <div class="panel principles">
         <article class="card"><p class="eyebrow">01</p><h3 class="card-title">A conversation, not a voyage</h3><p>Nobody is coming and nobody is going; only messages cross. The pictures are dishes, spectrograms, clocks, logs and letters in transit, never ships or planets seen up close.</p></article>
-        <article class="card"><p class="eyebrow">02</p><h3 class="card-title">Built from their picture</h3><p>Their message is the only image we share with them, so it is the whole visual language: a 4 px grid, a pixel face for headings, square or stepped corners, hard shadows, and the picture itself behind every hero.</p></article>
+        <article class="card"><p class="eyebrow">02</p><h3 class="card-title">Built from their picture</h3><p>Their message is the only image we share with them, so it is the whole visual language: a 4 px grid, a pixel face for page titles and big numbers (never for text you read), square or stepped corners, hard shadows, and the picture itself behind every hero.</p></article>
         <article class="card"><p class="eyebrow">03</p><h3 class="card-title">Every number is a readout</h3><p>Times, distances, coordinates and counts are set in mono with tabular figures, with units, so they line up and read as measured.</p></article>
-        <article class="card"><p class="eyebrow">04</p><h3 class="card-title">Two voices on signal blue</h3><p>White-cyan is what reaches us: their signal, the detection, the current item. Sol yellow is what we send: replies, letters, the send button. Everything else is blue and white. No paper, no red.</p></article>
+        <article class="card"><p class="eyebrow">04</p><h3 class="card-title">Two voices on deep blue</h3><p>White-cyan is what reaches us: their signal, the detection, the current item. Sol yellow is what we send: replies, letters, the send button. Everything else is blue and white. No paper, no red.</p></article>
         <article class="card"><p class="eyebrow">05</p><h3 class="card-title">Bits arrive, nothing glides</h3><p>Motion steps instead of easing, like data coming in: a picture filling row by row, a blinking packet, a ticking clock. Everything stops for reduced motion.</p></article>
         <article class="card"><p class="eyebrow">06</p><h3 class="card-title">Static, linked, free</h3><p>No build step, no server, zero running cost. Sites link this kit instead of copying it, so a change here reaches every site.</p></article>
       </div>
@@ -149,7 +149,7 @@
         <table class="data-table">
           <thead><tr><th></th><th>Phase 1 · interimm.org/kit/</th><th>Phase 2 · 667</th></tr></thead>
           <tbody>
-            <tr><td class="readout">Ground</td><td>Paper and ink, follows the visitor's light or dark setting</td><td>Signal blue only, a pixel grid and their picture in heroes</td></tr>
+            <tr><td class="readout">Ground</td><td>Paper and ink, follows the visitor's light or dark setting</td><td>Deep blue for reading; signal blue, a pixel grid and their picture in heroes</td></tr>
             <tr><td class="readout">Colour</td><td>One Mars rust, used sparingly</td><td>White and blue, with two voices: white-cyan for them, Sol yellow for us. No red</td></tr>
             <tr><td class="readout">Type</td><td>Source Serif headings, IBM Plex text and data</td><td>Pixelify Sans headings, Instrument Sans text, JetBrains Mono data</td></tr>
             <tr><td class="readout">Lines</td><td>Thin solid printed rules, soft corners</td><td>Dashed lines of bits, square and stepped corners, hard shadows</td></tr>
@@ -225,10 +225,11 @@
       <header class="section-head">
         <p class="kicker">Colour</p>
         <h2 class="section-title">Roles, not paint</h2>
-        <p class="section-lede">Use the token for the role, never a hex value. Phase 2 has one ground, signal blue; <code>.space</code> adds the pixel grid and their picture, for heroes.</p>
+        <p class="section-lede">Use the token for the role, never a hex value. Pages read on deep blue (<code>--bg</code>). Heroes are <code>.space</code>: signal blue (<code>--sky</code>), the pixel grid and their picture.</p>
       </header>
       <h3>Ground and ink</h3>
       <ul class="swatches">
+        <li class="swatch"><span style="background:var(--sky)"></span><code>--sky</code><small>hero ground (.space)</small></li>
         <li class="swatch"><span style="background:var(--bg)"></span><code>--bg</code><small>page ground</small></li>
         <li class="swatch"><span style="background:var(--bg-alt)"></span><code>--bg-alt</code><small>alternate sections</small></li>
         <li class="swatch"><span style="background:var(--surface)"></span><code>--surface</code><small>cards, inputs</small></li>
@@ -260,12 +261,12 @@
       <header class="section-head">
         <p class="kicker">Type</p>
         <h2 class="section-title">Three voices</h2>
-        <p class="section-lede">Pixelify Sans announces, Instrument Sans tells, JetBrains Mono measures. All SIL OFL, self-hosted with the kit (Latin). Chinese uses the system's CJK fonts at their heaviest weight so it holds its own beside the pixels.</p>
+        <p class="section-lede">Pixelify Sans announces (page titles and display numbers only, never below 2.4 rem), Instrument Sans tells (section titles, headings, text), JetBrains Mono measures. All SIL OFL, self-hosted with the kit (Latin). Chinese uses the system's CJK fonts at their heaviest weight so it holds its own beside the pixels.</p>
       </header>
       <div class="type-row"><code>--step-5</code><p style="font-family:var(--font-display);font-size:var(--step-5);font-weight:700;line-height:1">通联 Contact</p></div>
       <div class="type-row"><code>--step-4 · hero</code><p style="font-family:var(--font-display);font-size:var(--step-4);font-weight:700;line-height:1">11.01 light years</p></div>
       <div class="type-row"><code>--step-3 · page</code><p style="font-family:var(--font-display);font-size:var(--step-3);font-weight:700;line-height:1">The clocks that heard it</p></div>
-      <div class="type-row"><code>--step-2 · section</code><p style="font-family:var(--font-display);font-size:var(--step-2);font-weight:700;line-height:1.1">Fold the beacon</p></div>
+      <div class="type-row"><code>--step-2 · section</code><p style="font-family:var(--font-heading);font-size:var(--step-2);font-weight:700;line-height:1.15;letter-spacing:-0.02em">Fold the beacon</p></div>
       <div class="type-row"><code>--step-1 · lede</code><p style="font-size:var(--step-1);color:var(--muted)">A question sent today reaches them in 2230.</p></div>
       <div class="type-row"><code>--step-0 · body</code><p>Every pulsar ledger in the solar system logged the same faint pattern.</p></div>
       <div class="type-row"><code>--step--1 · note</code><p class="note">Periods from the ATNF Pulsar Catalogue, rounded.</p></div>

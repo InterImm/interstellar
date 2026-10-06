@@ -6,7 +6,7 @@
 
    Phase 2 is a conversation across light years, so it is written in the alphabet
    of the first message: 667 bits that fold into a 23 × 29 picture. Everything is
-   made of square pixels on signal blue. Their voice is the white-cyan of the bits
+   made of square pixels on deep blue, with signal blue for the open sky. Their voice is the white-cyan of the bits
    they sent; ours is the yellow of our own star. No curves, no paper, no red:
    phase 1 is serif type on paper with Mars rust, and phase 2 shares nothing with it
    but class names and markup hooks. Keep changes additive. */
@@ -38,16 +38,17 @@
 :root {
   color-scheme: dark;
 
-  /* signal blue: the ground everything is drawn on */
-  --bg: #1422c2;
-  --bg-alt: #111db0;
-  --surface: #0e19a3;
-  --surface-2: #0b1592;
-  --deep: #08107a;            /* instruments, tools, anything you look into */
+  /* deep blue for reading; signal blue (--sky) only for the open sky of a hero */
+  --sky: #1422c2;
+  --bg: #0d1457;
+  --bg-alt: #0a104a;
+  --surface: #141d6e;
+  --surface-2: #1b267f;
+  --deep: #070b38;            /* instruments, tools, anything you look into */
   --text: #ffffff;
-  --muted: #c3c9ff;
-  --border: rgb(255 255 255 / 0.16);
-  --border-strong: rgb(255 255 255 / 0.42);
+  --muted: #d0d5f7;
+  --border: rgb(255 255 255 / 0.14);
+  --border-strong: rgb(255 255 255 / 0.4);
 
   /* the two voices */
   --them: #9ff8ff;            /* what reaches us: their bits, the signal, the current item */
@@ -67,9 +68,9 @@
   --link: var(--them);
   --focus: var(--us);
   --signal: var(--them);      /* a detection in charts */
-  --noise: #4a5cf0;           /* the noise floor in charts */
+  --noise: #3a4bd6;           /* the noise floor in charts */
   --scope: var(--deep);       /* chart ground */
-  --shadow: 6px 6px 0 rgb(4 8 70 / 0.55);   /* a hard pixel shadow, never a blur */
+  --shadow: 6px 6px 0 rgb(2 4 30 / 0.6);   /* a hard pixel shadow, never a blur */
 
   /* data colours: categorical series never use the two voices */
   --c1: #7dffa8; --c2: #ff8ad8; --c3: #ffa45c; --c4: #c9b3ff;
@@ -80,7 +81,7 @@
   --plot-grid: rgb(255 255 255 / 0.08);
   --plot-axis: rgb(255 255 255 / 0.28);
   --plot-context: rgb(255 255 255 / 0.12);
-  --plot-dim: #7f88d8;
+  --plot-dim: #8890d8;
 
   /* scales: everything snaps to a 4 px pixel */
   --px: 4px;
@@ -90,7 +91,7 @@
   --step--1: 0.875rem;        /* notes, small controls */
   --step-0: 1.0625rem;        /* body */
   --step-1: 1.22rem;          /* ledes */
-  --step-2: clamp(1.9rem, 1.3rem + 2.4vw, 3.1rem);  /* section titles */
+  --step-2: clamp(1.75rem, 1.25rem + 1.9vw, 2.6rem);  /* section titles */
   --step-3: clamp(2.4rem, 1.4rem + 4vw, 4.4rem);    /* page titles */
   --step-4: clamp(2.6rem, 1.3rem + 5vw, 5.2rem);    /* hero titles */
   --step-5: clamp(2.8rem, 1.2rem + 6vw, 6.4rem);    /* the entrance only */
@@ -105,7 +106,9 @@
   --cjk: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Noto Sans SC", "Source Han Sans SC";
   --emoji: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
   --font: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, var(--cjk), sans-serif, var(--emoji);
+  /* pixels are for big type only: page titles and display numbers. Everything you read is Instrument Sans. */
   --font-display: "Pixelify Sans", "JetBrains Mono", ui-monospace, var(--cjk), monospace, var(--emoji);
+  --font-heading: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, var(--cjk), sans-serif, var(--emoji);
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, var(--cjk), monospace;
 }
 
@@ -114,9 +117,9 @@
 
 /* the open sky over a hero: a deeper blue, a pixel grid, and (drawn by interimm.js) their picture */
 .space {
-  --bg: #0f1aa8;
-  --surface: rgb(0 0 60 / 0.28);
-  --surface-2: rgb(0 0 60 / 0.4);
+  --bg: var(--sky);
+  --surface: rgb(0 0 60 / 0.35);
+  --surface-2: rgb(0 0 60 / 0.5);
   color: var(--text);
   position: relative;
   isolation: isolate;
@@ -132,8 +135,8 @@
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 45%);
   mask-image: linear-gradient(90deg, transparent, #000 45%);
 }
-.message-field { position: absolute; z-index: -1; top: 50%; right: 3%; height: 118%; width: auto; aspect-ratio: 23 / 29; transform: translateY(-50%); pointer-events: none; opacity: 0.16; image-rendering: pixelated; }
-@media (max-width: 56rem) { .message-field { opacity: 0.09; right: -10%; } }
+.message-field { position: absolute; z-index: -1; top: 50%; right: 3%; height: 118%; width: auto; aspect-ratio: 23 / 29; transform: translateY(-50%); pointer-events: none; opacity: 0.1; image-rendering: pixelated; }
+@media (max-width: 56rem) { .message-field { opacity: 0.06; right: -10%; } }
 
 /* ---------- base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
@@ -156,12 +159,13 @@ body {
 main { flex: 1; }
 
 h1, h2, h3 {
-  font-family: var(--font-display); font-weight: 700;
-  line-height: 1; letter-spacing: 0; margin: 0 0 0.6em; text-wrap: balance;
+  font-family: var(--font-heading); font-weight: 700;
+  line-height: 1.15; letter-spacing: -0.015em; margin: 0 0 0.6em; text-wrap: balance;
 }
-/* Chinese has no pixel face here: set it heavy and tight so it holds its own beside the pixels */
-h1:lang(zh), h2:lang(zh), h3:lang(zh) { font-weight: 900; letter-spacing: 0.02em; line-height: 1.2; }
-h3 { font-family: var(--font); font-weight: 700; line-height: 1.25; }
+/* only the page title is set in pixels */
+h1 { font-family: var(--font-display); line-height: 1.05; letter-spacing: 0; }
+h1:lang(zh), h2:lang(zh), h3:lang(zh) { font-weight: 800; letter-spacing: 0.02em; line-height: 1.3; }
+h3 { line-height: 1.3; letter-spacing: 0; }
 p { margin: 0 0 1em; text-wrap: pretty; }
 img, video, svg, canvas { max-width: 100%; height: auto; }
 a { color: var(--link); text-underline-offset: 0.22em; text-decoration-style: dotted; text-decoration-thickness: 2px; }
@@ -226,7 +230,7 @@ ul, ol { margin: 0 0 1em; }
 
 .brand {
   display: inline-flex; align-items: center; gap: 0.65rem;
-  font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; letter-spacing: 0.01em;
+  font-family: var(--font-heading); font-weight: 700; font-size: 1.05rem; letter-spacing: 0;
   color: var(--text); text-decoration: none;
 }
 /* phase 2 brand mark, drawn in pixels: our star (yellow), the bits between, their star (white-cyan).
@@ -333,7 +337,7 @@ ul, ol { margin: 0 0 1em; }
 .section-alt { background: var(--bg-alt); border-block: var(--rule); }
 .section-head { margin-bottom: clamp(1.75rem, 4vw, 2.75rem); }
 .section-head-split { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1.25rem 2rem; }
-.section-title { font-size: var(--step-2); margin-bottom: 0.5rem; }
+.section-title { font-size: var(--step-2); margin-bottom: 0.5rem; letter-spacing: -0.02em; }
 .section-lede { max-width: 38rem; margin: 0; color: var(--muted); font-size: 1.08rem; }
 
 /* tiles */
@@ -402,7 +406,7 @@ ul, ol { margin: 0 0 1em; }
 .readouts { display: grid; gap: 0.8rem 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr)); margin: 0; }
 .readouts div { border-top: var(--rule); padding-top: 0.6rem; }
 .readouts dt { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-.readouts dd { margin: 0.15rem 0 0; font-family: var(--font-display); font-variant-numeric: tabular-nums; font-size: 1.35rem; color: var(--text); }
+.readouts dd { margin: 0.15rem 0 0; font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 1.15rem; font-weight: 500; color: var(--text); }
 
 /* a log: timestamped entries down a hairline */
 .log { list-style: none; margin: 0; padding: 0; border-left: var(--rule); }
@@ -437,8 +441,8 @@ ul, ol { margin: 0 0 1em; }
 /* ---------- page anatomy: heroes and splits ---------- */
 /* Every phase 2 page opens with a .hero (a .space one for story pages), then .section blocks. */
 .hero { padding-block: clamp(3rem, 8vw, 5.5rem) clamp(2.5rem, 6vw, 4rem); border-bottom: var(--rule); }
-.hero h1 { font-size: var(--step-4); font-weight: 700; line-height: 0.98; letter-spacing: 0; margin-bottom: 0.45em; }
-.hero h1:lang(zh) { font-weight: 900; line-height: 1.18; letter-spacing: 0.02em; }
+.hero h1 { font-size: var(--step-4); font-weight: 700; line-height: 1.02; letter-spacing: 0; margin-bottom: 0.45em; }
+.hero h1:lang(zh) { font-weight: 800; line-height: 1.2; letter-spacing: 0.02em; }
 .hero h1 em, .hero h1 .num { font-style: normal; color: var(--accent); }
 .hero-xl h1 { font-size: var(--step-5); }
 .hero .lede { max-width: 38rem; margin: 0 0 1rem; color: var(--muted); font-size: clamp(1.05rem, 1rem + 0.4vw, var(--step-1)); }
@@ -574,7 +578,7 @@ input[type="checkbox"], input[type="radio"], input[type="range"] { accent-color:
 /* ---------- inner pages ---------- */
 .page-hero { padding-block: clamp(3.5rem, 9vw, 6.5rem) clamp(2.5rem, 6vw, 4rem); border-bottom: var(--rule); }
 .page-hero h1 { font-size: var(--step-3); font-weight: 700; letter-spacing: 0; line-height: 1; margin-bottom: 0.4em; }
-.page-hero h1:lang(zh) { font-weight: 900; letter-spacing: 0.02em; line-height: 1.2; }
+.page-hero h1:lang(zh) { font-weight: 800; letter-spacing: 0.02em; line-height: 1.2; }
 .page-hero .lede { max-width: 44rem; margin: 0 0 1rem; color: var(--muted); font-size: clamp(1.05rem, 1rem + 0.4vw, 1.22rem); }
 .page-hero .chips { margin: 1rem 0 0; }
 

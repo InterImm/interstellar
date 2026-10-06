@@ -2,7 +2,7 @@
 
 Phase 2 is a conversation across light years, and it looks nothing like phase 1. Phase 1 is paper, ink, serif
 headings and Mars rust. Phase 2 is built from the first thing they sent: a picture of 667 bits, 23 by 29. Everything
-is pixels on signal blue. Headings are set in a pixel face, corners are square or stepped, shadows are hard, motion
+is pixels on deep blue, with signal blue for heroes. Page titles and big numbers are set in a pixel face (everything you read is Instrument Sans), corners are square or stepped, shadows are hard, motion
 steps instead of easing, and their picture is drawn behind every hero. Two voices: white-cyan (`--them`) for what
 reaches us and Sol yellow (`--us`) for what we send. No light theme, no paper, no red, no curves.
 
@@ -72,7 +72,7 @@ Everything in the phase 1 kit's list of building blocks exists here with the sam
 variants, `.chips`, `.card`, `.card-grid`, `.tile`, `.bento`, `.card-link-wrap`, `.card-link`, `.text-link`,
 `.prose`) and the same tokens (`--bg`, `--bg-alt`, `--surface`, `--surface-2`, `--text`, `--muted`, `--border`,
 `--border-strong`, `--accent`, `--accent-hover`, `--accent-text`, `--accent-soft`, `--link`, `--focus`, `--radius`,
-`--font`, `--font-display`, `--font-mono`).
+`--font`, `--font-heading`, `--font-display`, `--font-mono`). Use `--font-display` (pixels) only for page titles and display numbers.
 
 Phase 2 adds:
 
