@@ -1,0 +1,5 @@
+# "We see pulsars. The pulsars are twelve."
+# The same word on two lines is one node with two edges.
++: SELF | LIGHT.ONE | STAR.TIME
+
++: STAR.TIME | ONE | COUNT.12

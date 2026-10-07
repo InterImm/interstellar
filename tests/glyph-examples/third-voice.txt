@@ -1,0 +1,4 @@
+# A third voice sides with them, against us, about our own world.
++: BODY.OTHER | ONE | BODY.AIR
+×: _ | _ | _.WATER
+*: _ | _ | _.AIR

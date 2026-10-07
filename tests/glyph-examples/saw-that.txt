@@ -1,0 +1,5 @@
+# "Your world is water. We saw that."
+# A lone ONE in a node slot is "that": the statement on the line above.
++: BODY.OTHER | ONE | BODY.WATER
+
++: SELF | LIGHT.BEFORE | ONE

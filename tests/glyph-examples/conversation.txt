@@ -1,0 +1,8 @@
+# They speak: three statements. A blank line starts the next edge.
++: BODY.OTHER | ONE | BODY.AIR
+×: _ | _ | _.WATER
+*: _ | _ | _.AIR
+
++: SELF | LIGHT.BEFORE | BODY.OTHER
+
++: SELF | VOICE.ONE | ONE

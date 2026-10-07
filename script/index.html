@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="zh-CN" class="js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>网格文字 | 通联纪</title>
+<meta name="description" content="翻译机怎样记下罗斯128 b 发来的内容：十六个部件，两个部件组成一个词，每一行是知识图谱的一条边，每个声音一个声部。">
+<link rel="alternate" hreflang="zh-CN" href="https://interstellar.interimm.org/script/">
+<link rel="alternate" hreflang="en" href="https://interstellar.interimm.org/script/en/">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../kit/interimm.css">
+<link rel="stylesheet" href="../app/script.css">
+<script src="../kit/interimm.js" defer></script>
+<script type="module" src="../app/script.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到正文</a>
+
+<header class="site-header" data-interimm-header data-lang="cn" data-current="script" data-lang-en="en/">
+  <div class="wrap header-inner">
+    <a class="brand" href="../"><span class="brand-dot" aria-hidden="true"></span><span class="brand-name">通联纪</span></a>
+  </div>
+</header>
+
+<main id="main" data-gs="explainer">
+  <header class="hero gs-hero space">
+    <div class="wrap">
+      <p class="kicker">档案 · 网格文字</p>
+      <h1>写给一个从未见过的声音。</h1>
+      <p class="lede">信标带来的不再只是一幅图，翻译机就需要一种把它记下来的办法。这就是那套文字。它是我们对罗斯128 b 发来内容的转写，不是他们自己的书写；也没有人知道他们长什么样。它出自对他们说话方式的一个想法：一个声音单独只能说出很少的东西，声音汇合，意义才丰富起来。</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="dictionary/">打开词典</a>
+        <a class="btn btn-send" href="convert/">用它写字</a>
+        <a class="btn btn-ghost" href="../signals/#theory">为什么要声音汇合</a>
+      </div>
+      <nav class="tabs gs-tabs" aria-label="网格文字">
+        <a href="./" aria-current="page">原理</a><a href="dictionary/">词典</a><a href="convert/">转换器</a>
+      </nav>
+    </div>
+  </header>
+
+  <p class="wrap note" data-gs-fail hidden>图需要 JavaScript 和词表文件，没能加载。</p>
+
+  <section class="section" id="grid" aria-labelledby="grid-title">
+    <div class="wrap split" style="--split: minmax(0, 1fr) minmax(0, 1fr); align-items: start;">
+      <div class="gs-intro">
+        <p class="kicker">1 · 网格</p>
+        <h2 class="section-title" id="grid-title">一张网格，每个声音一种记号</h2>
+        <ul class="gs-points">
+          <li>一切都画在同一张共享的网格上。</li>
+          <li>每一方只用自己的记号画：<span class="gs-ink-them">+</span> 是罗斯128 b，<span class="gs-ink-us">×</span> 是我们。记号从不互相覆盖，所以总能看出是谁画的。</li>
+          <li>一块 3 × 3 的格子是一个部件，两个部件组成一个词，就像笔画组成汉字。它不是字母表。</li>
+          <li>一行是一句话。其他声音在它下面画出自己的回答。</li>
+        </ul>
+        <p class="muted">到目前为止，他们发来的一切都只用 <span class="gs-ink-them">+</span> 画成。图里的第二个声部是人类可以发回去的回答：是水，不是空气。</p>
+      </div>
+      <figure class="gs-example" data-gs-example="+: BODY.OTHER | ONE | BODY.AIR\n×: _ | _ | _.WATER" style="grid-template-columns: minmax(0, 1fr);"></figure>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="parts" aria-labelledby="parts-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">2 · 部件</p>
+        <h2 class="section-title" id="parts-title">十六个部件</h2>
+        <p class="section-lede">每个部件是一个 3 × 3 的形状，有两种意思：作为事物的意思，和箭头后面作为关系的意思。形状尽量让人猜得出来：封闭的方块是我们，朝某人打开的方块是你们，交叉的光线是光，上升的台阶是声音。</p>
+      </div>
+      <ul class="gs-parts" data-gs-parts></ul>
+    </div>
+  </section>
+
+  <section class="section" id="words" aria-labelledby="words-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">3 · 词</p>
+        <h2 class="section-title" id="words-title">两个部件组成一个词</h2>
+        <p class="section-lede">一个词占两个相邻的位置：左边是<b>类</b>，右边是<b>指</b>，写作 <code>类.指</code>。属于你们的世界是你们的世界；计时的恒星是脉冲星；行进的空气是风。只有一个部件的词，右边空着。所有约定好的词都在<a href="dictionary/">词典</a>里。</p>
+      </div>
+      <ul class="gs-words" data-gs-words="BODY.OTHER BODY.SELF STAR.TIME AIR.PATH LIGHT.BODY VOICE.VOICE PATH.LIGHT TIME.BODY"></ul>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="edges" aria-labelledby="edges-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">4 · 句</p>
+        <h2 class="section-title" id="edges-title">每一行是图谱的一条边</h2>
+        <p class="section-lede">一行宽六个位置（23 格），正好放三个词：一个节点、一个关系、另一个节点。一段文字是一行行叠起来的，所以一段文字就是一张知识图谱。同一个词出现在两行，就是同一个节点；节点位置上单独一个 ONE 表示“那”，指上一行那句话。</p>
+      </div>
+      <div class="split" style="--split: minmax(0, 1fr) minmax(0, 1.3fr); align-items: start; margin-bottom: 2rem;">
+        <div class="prose">
+          <p>关系是一个表示动作的部件，加上一个标出时间或肯定否定的“指”。以 LIGHT（看见）为例：</p>
+        </div>
+        <div class="table-scroll"><table class="data-table">
+          <thead><tr><th>指</th><th>意思</th><th>LIGHT …</th></tr></thead>
+          <tbody>
+            <tr><td><code>_</code></td><td>无时态</td><td>看见</td></tr>
+            <tr><td><code>BEFORE</code></td><td>过去</td><td>看见过</td></tr>
+            <tr><td><code>ONE</code></td><td>现在</td><td>正看见</td></tr>
+            <tr><td><code>AFTER</code></td><td>将来</td><td>将会看见</td></tr>
+            <tr><td><code>PATH</code></td><td>一直</td><td>一直看着</td></tr>
+            <tr><td><code>NOT</code></td><td>否定</td><td>看不见</td></tr>
+            <tr><td><code>OPEN</code></td><td>问：是否？</td><td>看见了吗？</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="gs-examples">
+        <figure class="gs-example" data-gs-example="+: SELF | LIGHT.BEFORE | BODY.OTHER"></figure>
+        <figure class="gs-example" data-gs-example="+: SELF | LIGHT.BEFORE | OTHER\n\n+: SELF | LIGHT.NOT | OTHER"></figure>
+        <figure class="gs-example" data-gs-example="+: BODY.OTHER | ONE | BODY.WATER\n\n+: SELF | LIGHT.BEFORE | ONE"></figure>
+      </div>
+      <p class="note">第二个例子把“影子”那段发射写成了话：我们看见过你们；我们看不见你们了。第三个例子指向自己：你们的世界是水世界，我们看见过那个。</p>
+    </div>
+  </section>
+
+  <section class="section" id="numbers" aria-labelledby="numbers-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">5 · 数</p>
+        <h2 class="section-title" id="numbers-title">数是九个比特</h2>
+        <p class="section-lede">一个数写作 COUNT（一条计数的横线），后面的“指”按九个比特读：从 256 到 1，从左到右，从上到下。COUNT 单独出现是零，所以能写 0 到 511。只有 COUNT 这一类的“指”按比特读，所以数永远不会被错认成词。</p>
+      </div>
+      <div class="gs-number" data-gs-number>
+        <div class="gs-draw"></div>
+        <div class="gs-bits" aria-hidden="true"></div>
+        <div class="gs-number-controls">
+          <label class="field">数 <input type="number" min="0" max="511" step="1" value="137"></label>
+          <input type="range" min="0" max="511" step="1" value="137" aria-label="数">
+          <p class="note">写作 <span class="gs-number-word">COUNT.137</span>。试试 137，第五段发射。</p>
+        </div>
+      </div>
+      <div class="gs-examples" style="margin-top: 1.5rem;">
+        <figure class="gs-example" data-gs-example="+: SELF | LIGHT.ONE | STAR.TIME\n\n+: STAR.TIME | ONE | COUNT.12"></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="voices" aria-labelledby="voices-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker-out">6 · 声音</p>
+        <h2 class="section-title" id="voices-title">往下叠，就是又一个声音</h2>
+        <p class="section-lede">只有新的一方才会在一行下面加一个声部，而且每一方一直用同一个声部，所以声部的数目就是声音的数目。下面声部里的每个部件，回应同一位置上方最近的那个部件。这样任何一方都能逐个部件地赞同、否定或修改任何节点和边。一场对话，就是几个声音一起搭起来的一张图。</p>
+      </div>
+      <div class="table-scroll" style="max-width: 36rem; margin-bottom: 2rem;"><table class="data-table">
+        <thead><tr><th>下面画的</th><th>意思</th></tr></thead>
+        <tbody>
+          <tr><td>同一个部件</td><td>是</td></tr>
+          <tr><td>NOT</td><td>不</td></tr>
+          <tr><td>另一个部件</td><td>换成</td></tr>
+          <tr><td>空位置下面的部件</td><td>还有</td></tr>
+          <tr><td>什么都不画</td><td>未表态</td></tr>
+        </tbody>
+      </table></div>
+      <div class="gs-examples">
+        <figure class="gs-example" data-gs-example="+: BODY.OTHER | ONE | OPEN\n×: _ | _ | BODY.WATER"></figure>
+        <figure class="gs-example" data-gs-example="+: STAR.TIME | ONE | OPEN.COUNT\n×: _ | _ | COUNT.12"></figure>
+        <figure class="gs-example" data-gs-example="+: BODY.OTHER | ONE | BODY.AIR\n×: _ | _ | _.WATER\n*: _ | _ | _.AIR"></figure>
+      </div>
+      <p class="note">提问：任何位置上的 OPEN 都在问“这里填什么？”，下面画的东西就取代它。最后一个例子里，第三个声音 <span class="gs-ink-third">*</span> 在我们的 WATER 下面画了 AIR。它回应的是上方最近的部件，也就是我们的：它站在他们一边，反对我们对自己世界的说法。</p>
+    </div>
+  </section>
+
+  <section class="section" id="machine" aria-labelledby="machine-title">
+    <div class="wrap prose">
+      <p class="kicker">7 · 翻译机</p>
+      <h2 class="section-title" id="machine-title">翻译机怎样读一页</h2>
+      <ol class="gs-steps">
+        <li>把一页切成 3 × 3 的位置。不落在格点上的都是图，比如最早那幅 667 比特的图，而不是文字。</li>
+        <li>在三行的空隙处分出句子，数一数一句有几个声部：那就是有几个声音。</li>
+        <li>把每句的第一个声部读成一条边：节点、关系、节点。同一个词，同一个节点。单独的 ONE 指向上一行。</li>
+        <li>把下面声部的每个部件和上方最近的部件对照，把回答连同画它的声音，挂到那个节点或那条边上。</li>
+      </ol>
+      <p>人类不用学这些符号；翻译机负责读和写，它的词库随着每一页增长。你也可以运行同一台机器：<a href="convert/">转换器</a>在浏览器里把文字变成图，再把图变回文字。它和命令行词典 <a href="https://interimm.github.io/glyph-cli/">glyph</a>（<code>pip install glyph-cli</code>）用的是同一套规则和同一份词表。</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" data-interimm-footer>
+  <div class="wrap"><p class="footer-legal"><span>© InterImm星际移民中心</span><a href="../">通联纪</a></p></div>
+</footer>
+</body>
+</html>
