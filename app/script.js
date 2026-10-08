@@ -5,13 +5,14 @@ import {
   Vocabulary, GlyphError, parsePage, formatPage, render, renderSvg, rowsSvg, decode, readGraph, bandRows,
   pageSymbols, wordStr, isEmpty, structure, ink, numberShape, positions, toDigits, hiddenZeros,
   EMPTY_CELL, BACKGROUND, GRID, BASE,
-} from '../lib/glyph.js';
+} from '../lib/glyph.js?v=8'; // bump ?v= (here, in the pages and in GLYPH_DATA) whenever the script changes
 
 const zh = document.documentElement.lang.toLowerCase().startsWith('zh');
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const LIB = new URL('../lib/', import.meta.url);
+const GLYPH_DATA = '?v=8'; // a phone holding an older cached copy must not mix it with new data
 const HERE = new URL('./', location.href);
 // the section's pages: CN at script/…/, EN at script/…/en/
 const SECTION = new URL('../script/', import.meta.url);
@@ -66,7 +67,7 @@ const message = (err) => {
 // ------------------------------------------------------------------ data
 
 async function loadVocab() {
-  const get = (f) => fetch(new URL(f, LIB)).then((r) => { if (!r.ok) throw new Error(`${f}: ${r.status}`); return r.json(); });
+  const get = (f) => fetch(new URL(f + GLYPH_DATA, LIB)).then((r) => { if (!r.ok) throw new Error(`${f}: ${r.status}`); return r.json(); });
   const [data, z] = await Promise.all([get('glyph-vocab.json'), get('glyph-zh.json')]);
   const en = new Vocabulary(data);
   if (!zh) return { en, voc: en, z: null };
@@ -121,11 +122,16 @@ function explainer({ en, voc }) {
     }).join('');
   }
   for (const el of $$('[data-gs-example]')) {
-    const source = el.dataset.gsExample.replaceAll('\\n', '\n');
-    const page = parsePage(source, en);
-    el.innerHTML = `<div class="gs-draw">${renderSvg(en, page, { cell: 14 })}</div>
-      <figcaption><pre class="gs-src">${esc(formatPage(page).trim())}</pre>${graphHtml(voc, readGraph(voc, page), pageSymbols(page))}
-      <a class="text-link" href="${esc(pageUrl('convert', formatPage(page)))}">${zh ? '在转换器里打开 →' : 'Open in the converter →'}</a></figcaption>`;
+    // one example that can't be read must not stop the rest of the page (the number slider comes after them)
+    try {
+      const source = el.dataset.gsExample.replaceAll('\\n', '\n');
+      const page = parsePage(source, en);
+      el.innerHTML = `<div class="gs-draw">${renderSvg(en, page, { cell: 14 })}</div>
+        <figcaption><pre class="gs-src">${esc(formatPage(page).trim())}</pre>${graphHtml(voc, readGraph(voc, page), pageSymbols(page))}
+        <a class="text-link" href="${esc(pageUrl('convert', formatPage(page)))}">${zh ? '在转换器里打开 →' : 'Open in the converter →'}</a></figcaption>`;
+    } catch (err) {
+      console.error(err);
+    }
   }
   for (const el of $$('[data-gs-number]')) {
     const input = $('input[type=range]', el), num = $('input[type=number]', el), out = $('.gs-draw', el), bits = $('.gs-bits', el);
