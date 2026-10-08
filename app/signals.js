@@ -3,7 +3,7 @@
 import {
   RATE, renderDuet, renderChorus, renderNote, phaseRows, chorusOffsets, DUET, NOTE_PAIR, NOTE_HZ, renderShadow, shadowSequence, renderPulsars, pulsarShifts, renderChords, CHORDS, LINES,
   renderAlpha, alphaRounds, ALPHA_INV,
-} from '../lib/signals.js';
+} from '../lib/signals.js?v=2';
 
 const zh = document.documentElement.lang.toLowerCase().startsWith('zh');
 const $ = (s) => document.querySelector(s);
