@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
 <title>网格文字 | 通联纪</title>
-<meta name="description" content="翻译机怎样记下罗斯128 b 发来的内容。这是我们表示他们语言的方式，不是他们自己的书写：十六个部件，两个部件组成一个词，每一行是知识图谱的一条边，每个声音一个声部。">
+<meta name="description" content="翻译机怎样记下罗斯128 b 发来的内容。这是我们表示他们语言的方式，不是他们自己的书写：十六个部件，两个部件组成一个词，每个三元组是知识图谱的一条边，每个声音一个声部。">
 <link rel="alternate" hreflang="zh-CN" href="https://interstellar.interimm.org/script/">
 <link rel="alternate" hreflang="en" href="https://interstellar.interimm.org/script/en/">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
@@ -160,7 +160,7 @@
         <figure class="gs-example" data-gs-example="+: STAR.TIME | ONE | OPEN.COUNT\n×: _ | _ | COUNT.12"></figure>
         <figure class="gs-example" data-gs-example="+: BODY.OTHER | ONE | BODY.AIR\n×: _ | _ | _.WATER\n*: _ | _ | _.AIR"></figure>
       </div>
-      <p class="note">提问：任何位置上的 OPEN 都在问“这里填什么？”，下面画的东西就取代它。最后一个例子里，第三个声音 <span class="gs-ink-third">*</span> 在我们的 WATER 下面画了 AIR。它回应的是上方最近的部件，也就是我们的：它站在他们一边，反对我们对自己世界的说法。</p>
+      <p class="note">提问：任何位置上的 OPEN 都在问“这里填什么？”，下面画的东西就取代它。最后一个例子里，第三个声音 <span class="gs-ink-third">*</span> 在我们的 WATER 下面说了 AIR。它回应的是上方最近的部件，也就是我们的：它站在他们一边，反对我们对自己世界的说法。</p>
     </div>
   </section>
 
@@ -172,7 +172,7 @@
         <li>在三排的空隙处分出行，数一数一行有几个声部：那就是有几个声音。</li>
         <li>按 1、2、4 格的空隙把每一行切成三元组、词和部件。切不成完整部件的都是图，比如最早那幅 667 比特的图，而不是文字。</li>
         <li>把每个三元组的第一个声部读成一条边：节点、关系、节点。同一个词，同一个节点。单独的 ONE 指向前一个三元组。</li>
-        <li>把下面声部的每个部件和上方最近的部件对照，把回答连同画它的声音，挂到那个节点或那条边上。</li>
+        <li>把下面声部的每个部件和上方最近的部件对照，把回答连同说它的声音，挂到那个节点或那条边上。</li>
       </ol>
       <p>人类不用学这些符号；翻译机负责读和写，它的词库随着每一页增长。你也可以运行同一台机器：<a href="convert/">转换器</a>在浏览器里把文字变成图，再把图变回文字。它和命令行词典 <a href="https://interimm.github.io/glyph-cli/">glyph</a>（<code>pip install glyph-cli</code>）用的是同一套规则和同一份词表。</p>
     </div>
