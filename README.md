@@ -27,6 +27,13 @@ and regenerate the fixtures with that release installed (`pip install glyph-cli=
 The previous Hugo site (2022, "飞向恒星 / we must leave the solar system") is in the git history. The draft about
 the first Earth–Mars conflict lives on the branch `cms/interstellar/草稿`.
 
+## Caching
+
+Phones keep old copies of scripts, so a page can load new HTML with an old script and break. The archive, /signals/
+and kit pages load their scripts and styles with `?v=N`, and `app/signal.js` and `app/signals.js` import
+`lib/signals.js?v=N`. Bump N in all of those places whenever any of those files change. The /script/ pages do the same
+with their own number (see `app/script.js`).
+
 ## Story canon used here
 
 - Story time = real time + 70,491 days. The present is 2219.

@@ -1,7 +1,7 @@
 // The archive page: hero readouts, the duet heard from four stations and the letter outbox.
 // Everything runs in the browser; letters are kept in this browser only.
 import { ROSS_128 as STAR, YEAR_MS, LY_KM, message, messageProgress, emitted, storyNow, storyFromReal, realFromStory } from '../lib/light.js';
-import { RATE, renderDuet, phaseRows, STATIONS } from '../lib/signals.js';
+import { RATE, renderDuet, phaseRows, STATIONS } from '../lib/signals.js?v=2';
 
 const zh = document.documentElement.lang.toLowerCase().startsWith('zh');
 const T = zh ? {
