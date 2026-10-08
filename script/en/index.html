@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
 <title>The grid script | The Contact Era</title>
-<meta name="description" content="How the translating machine writes down what Ross 128 b sends, our way of representing their language rather than their own writing: sixteen parts, two-part words, every line an edge of a knowledge graph, and one band per voice.">
+<meta name="description" content="How the translating machine writes down what Ross 128 b sends, our way of representing their language rather than their own writing: sixteen parts, two-part words, every triplet an edge of a knowledge graph, and one band per voice.">
 <link rel="alternate" hreflang="zh-CN" href="https://interstellar.interimm.org/script/">
 <link rel="alternate" hreflang="en" href="https://interstellar.interimm.org/script/en/">
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
@@ -160,7 +160,7 @@
         <figure class="gs-example" data-gs-example="+: STAR.TIME | ONE | OPEN.COUNT\n×: _ | _ | COUNT.12"></figure>
         <figure class="gs-example" data-gs-example="+: BODY.OTHER | ONE | BODY.AIR\n×: _ | _ | _.WATER\n*: _ | _ | _.AIR"></figure>
       </div>
-      <p class="note">Questions: OPEN in any position asks "what goes here?", and whatever is drawn under it replaces it. In the last example a third voice, <span class="gs-ink-third">*</span>, draws AIR under our WATER. It answers the nearest part above, which is ours: it sides with them, against us, about our own world.</p>
+      <p class="note">Questions: OPEN in any position asks "what goes here?", and whatever is drawn under it replaces it. In the last example a third voice, <span class="gs-ink-third">*</span>, says AIR under our WATER. It answers the nearest part above, which is ours: it sides with them, against us, about our own world.</p>
     </div>
   </section>
 
@@ -172,7 +172,7 @@
         <li>Split the page into lines at the three-row gaps, and count the bands in a line: that is the number of voices.</li>
         <li>Cut each line into triplets, words and parts at the 1, 2 and 4 cell gaps. Anything that won't cut into whole parts is a picture, like the first 667-bit message, not text.</li>
         <li>Read the first band of each triplet as an edge: node, relation, node. Same word, same node. A lone ONE points at the triplet before.</li>
-        <li>Read every part in a lower band against the nearest part above it, and attach the answer to that node or edge, with the voice that drew it.</li>
+        <li>Read every part in a lower band against the nearest part above it, and attach the answer to that node or edge, with the voice that said it.</li>
       </ol>
       <p>Humans don't learn the signs; the machine reads and writes them, and its lexicon grows with every page. You can run the same machine: the <a href="../convert/en/">converter</a> turns text into drawings and drawings back into text, in your browser. It follows the same rules and the same vocabulary as <a href="https://interimm.github.io/glyph-cli/">glyph</a>, the command-line dictionary (<code>pip install glyph-cli</code>).</p>
     </div>

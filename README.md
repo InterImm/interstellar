@@ -10,7 +10,9 @@ Static files, no build step, no server, zero running cost. Published with GitHub
 | --- | --- |
 | `index.html`, `en/index.html` | The entrance: the era at a glance, Chinese and English |
 | `archive/2219-signal/` | The full record of the 2219 signal from Ross 128 b: the log, arrival times, the beacon decoder, letters |
-| `script/` | The grid script: how the translating machine writes down what Ross 128 b sends (`script/`), the online dictionary (`script/dictionary/`) and a converter between page source and drawings (`script/convert/`), Chinese with English under `en/`. `lib/glyph.js` is a JavaScript port of [glyph-cli](https://github.com/InterImm/glyph-cli) 0.2.0 and `lib/glyph-vocab.json` is its bundled vocabulary; `lib/glyph-zh.json` holds the Chinese glosses |
+| `script/` | The grid script: how the translating machine writes down what Ross 128 b sends (`script/`), the online dictionary (`script/dictionary/`) and a converter between page source and drawings (`script/convert/`), Chinese with English under `en/`. `lib/glyph.js` is a JavaScript port of [glyph-cli](https://github.com/InterImm/glyph-cli) 0.3.0 (grammar v8) and `lib/glyph-vocab.json` is its bundled vocabulary; `lib/glyph-zh.json` holds the Chinese glosses |
+| `signals/` | The five transmissions (picture, shadow, pulsars, chords, 137), each playable, and the resonance theory of their speech; the sound is computed by `lib/signals.js` |
+| `drift/` | Drift: how the Sun and Ross 128 move relative to each other, from the Bronze Age to the closest approach (`lib/drift.js`) |
 | `pulsars/` | The pulsar ledger, live: the pulsars that keep the MC clock, the ledger nodes and the timing residuals where the beacon repeats. Self-contained (its own page, `app/pulsars.js` and `app/pulsars.css`) so it can move to its own repo later |
 | `kit/` | The phase 2 design kit, 137, published at https://interstellar.interimm.org/kit/ ([kit/README.md](kit/README.md)) |
 | `app/` | Page scripts and styles |
@@ -20,7 +22,7 @@ Run it locally with any static server, for example `python3 -m http.server`, and
 
 `npm test` checks `lib/glyph.js` against what glyph-cli itself outputs (`tests/glyph-cli-fixtures.json`). After a new glyph-cli
 release or a vocabulary change, copy its `vocab.json` to `lib/glyph-vocab.json`, add the Chinese glosses to `lib/glyph-zh.json`,
-and regenerate the fixtures with `pip install glyph-cli` and `python3 scripts/glyph_fixtures.py`.
+and regenerate the fixtures with that release installed (`pip install glyph-cli==0.3.0`; until it is on PyPI, `pip install git+https://github.com/InterImm/glyph-cli`) and `python3 scripts/glyph_fixtures.py`.
 
 The previous Hugo site (2022, "飞向恒星 / we must leave the solar system") is in the git history. The draft about
 the first Earth–Mars conflict lives on the branch `cms/interstellar/草稿`.
@@ -30,7 +32,7 @@ the first Earth–Mars conflict lives on the branch `cms/interstellar/草稿`.
 - Story time = real time + 70,491 days. The present is 2219.
 - No interstellar ships on either side; contact is communication only.
 - The source is Ross 128 b, a real temperate planet (at least 1.4 Earth masses, 9.87-day orbit, tidally locked) around
-  the old, quiet red dwarf Ross 128 in Virgo, 11.01 light years away. The transmitter rides on the planet, so the tone
+  the old, quiet red dwarf Ross 128 in Virgo, 10.98 light years away. The transmitter rides on the planet, so the tone
   drifts with its orbit.
 - The signal: first detected 2219-09-18 03:12:07 UTC by the MC ledger's pulsar-timing node on the lunar far side, then
   Earth, Isidis (Mars) and Ceres; made public 2219-10-05. 1420.405 MHz, prime-spaced preamble, a 667-bit picture
