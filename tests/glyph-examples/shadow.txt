@@ -1,0 +1,5 @@
+# "We no longer see you." (the shadow transmission)
+# Change over time is two edges: we saw you; we do not see you.
++: SELF | LIGHT.BEFORE | OTHER
+
++: SELF | LIGHT.NOT | OTHER

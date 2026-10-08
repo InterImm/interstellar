@@ -1,0 +1,117 @@
+/* The grid script pages only. Everything shared is in kit/interimm.css. */
+.gs-hero h1 { font-size: var(--step-4); }
+.gs-hero .lede { max-width: 46rem; }
+.gs-tabs { margin-top: 1.75rem; background: var(--deep); }
+
+/* drawings: square pixels, never smoothed */
+.gs-draw svg { display: block; width: 100%; height: auto; image-rendering: pixelated; }
+.gs-draw-part { width: 3.25rem; flex: none; }
+.gs-draw-word { width: 6rem; flex: none; }
+.gs-draw { border: 2px solid var(--border-strong); background: var(--bg); }
+
+.gs-intro { display: grid; gap: 1rem; max-width: 42rem; }
+.gs-intro p { margin: 0; }
+.gs-points { display: grid; gap: 0.6rem; margin: 0; padding-left: 1.25rem; }
+.gs-points li::marker { color: var(--them); font-family: var(--font-mono); }
+
+/* the sixteen parts */
+.gs-parts { display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 13.5rem), 1fr)); list-style: none; margin: 0; padding: 0; }
+.gs-part { display: flex; gap: 0.85rem; align-items: center; padding: 0.6rem; background: var(--surface); border: 2px solid var(--border); }
+.gs-part > div:last-child { display: grid; gap: 0.1rem; min-width: 0; }
+.gs-part code, .gs-word code, .gs-entry code { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.06em; color: var(--them); }
+.gs-part strong { font-size: 1rem; }
+.gs-part span { font-size: 0.85rem; color: var(--muted); }
+.gs-part span::before { content: "→ "; color: var(--us); }
+
+/* words */
+.gs-words { display: flex; flex-wrap: wrap; gap: 0.75rem; list-style: none; margin: 0; padding: 0; }
+.gs-word { display: grid; gap: 0.3rem; justify-items: start; padding: 0.6rem; background: var(--surface); border: 2px solid var(--border); }
+.gs-word span { font-size: 0.92rem; }
+
+/* worked examples: a drawing beside its source and the graph it reads */
+.gs-examples { display: grid; gap: 1.5rem; }
+.gs-example { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.25rem; align-items: start; margin: 0; padding: 1rem; background: var(--surface); border: 2px solid var(--border-strong); box-shadow: var(--shadow); }
+.gs-example > .gs-draw { max-width: 30rem; }
+.gs-example figcaption { display: grid; gap: 0.75rem; justify-items: start; min-width: 0; }
+.gs-example h3 { margin: 0; font-size: 1.05rem; }
+.gs-src, .gs-rows { margin: 0; padding: 0.6rem 0.75rem; max-width: 100%; overflow-x: auto; background: var(--deep); border: 2px solid var(--border); font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.45; white-space: pre; color: var(--text); }
+.gs-rows { line-height: 1.15; letter-spacing: 0.08em; }
+
+/* the graph a page reads as */
+.gs-graph { display: grid; gap: 0.6rem; margin: 0; padding: 0; list-style: none; counter-reset: edge; }
+.gs-graph li { counter-increment: edge; display: grid; gap: 0.25rem; }
+.gs-graph p { margin: 0; }
+.gs-edge { display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; }
+.gs-edge::before { content: counter(edge) "."; font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); }
+.gs-node { padding: 0.05rem 0.5rem; border: 2px solid var(--text); background: var(--bg); }
+.gs-rel { font-family: var(--font-mono); font-size: 0.82rem; color: var(--muted); }
+.gs-rel::before { content: "—"; }
+.gs-rel::after { content: "→"; }
+.gs-reply { display: flex; flex-wrap: wrap; gap: 0.25rem 0.75rem; padding-left: 1.4rem; font-size: 0.9rem; color: var(--muted); }
+.gs-reply i { font-style: normal; font-family: var(--font-mono); font-size: 0.78rem; color: var(--text); }
+.gs-sym { display: inline-grid; place-items: center; width: 1.4rem; height: 1.4rem; background: var(--ink); color: var(--deep); font-family: var(--font-mono); font-size: 0.85rem; }
+
+/* numbers */
+.gs-number { display: flex; flex-wrap: wrap; gap: 1.25rem 2rem; align-items: center; padding: 1rem; background: var(--surface); border: 2px solid var(--border-strong); }
+.gs-number .gs-draw { width: 9rem; }
+.gs-number-controls { display: grid; gap: 0.6rem; min-width: min(100%, 16rem); flex: 1; }
+.gs-number-controls input[type=range] { width: 100%; accent-color: var(--them); }
+.gs-number-word { font-family: var(--font-mono); color: var(--them); }
+.gs-bits { display: grid; grid-template-columns: repeat(3, 3rem); gap: 2px; font-family: var(--font-mono); font-size: 0.75rem; text-align: center; }
+.gs-bits span { padding: 0.25rem 0; background: var(--deep); color: var(--muted); }
+.gs-bits span.on { background: var(--them); color: var(--them-ink); }
+
+/* the dictionary */
+.gs-search { display: grid; gap: 0.9rem; margin-bottom: 1.5rem; }
+.gs-search .field { max-width: 32rem; }
+.gs-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.gs-chips button { font: inherit; font-size: 0.85rem; padding: 0.25rem 0.7rem; color: var(--muted); background: none; border: 2px solid var(--border-strong); cursor: pointer; }
+.gs-chips button:hover { color: var(--text); border-color: var(--text); }
+.gs-chips button[aria-pressed="true"] { color: var(--them-ink); background: var(--them); border-color: var(--them); }
+.gs-count { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); }
+.gs-built { display: flex; gap: 1.25rem; align-items: center; margin-bottom: 1.25rem; padding: 1rem; background: var(--surface-2); border: 2px solid var(--us); box-shadow: 6px 6px 0 var(--us-soft); }
+.gs-built[hidden] { display: none; }
+.gs-built .kicker { margin: 0 0 0.25rem; color: var(--us); }
+.gs-built p { margin: 0; }
+.gs-entries { display: grid; gap: 0.6rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr)); list-style: none; margin: 0; padding: 0; }
+.gs-entry { display: flex; gap: 1rem; align-items: flex-start; padding: 0.75rem; background: var(--surface); border: 2px solid var(--border); scroll-margin-top: 5rem; }
+.gs-entry:target { border-color: var(--them); }
+.gs-entry-text { display: grid; gap: 0.2rem; min-width: 0; }
+.gs-entry-text p, .gs-built .gs-entry-head { margin: 0; }
+.gs-entry-head { display: flex; flex-wrap: wrap; gap: 0.25rem 0.6rem; align-items: baseline; }
+.gs-entry-head strong { font-size: 1.05rem; }
+.gs-entry-en, .gs-entry-note { font-size: 0.88rem; color: var(--muted); }
+.gs-entry-meta { display: flex; flex-wrap: wrap; gap: 0.2rem 0.9rem; font-size: 0.78rem; color: var(--muted); }
+.gs-entry-meta span { font-family: var(--font-mono); }
+.gs-none { color: var(--muted); }
+.gs-parts-table .gs-draw-part { width: 2.25rem; }
+.gs-parts-table td { vertical-align: middle; }
+
+/* the converter */
+.gs-pane { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 1.5rem; align-items: start; }
+.gs-pane > div { display: grid; gap: 0.9rem; min-width: 0; align-content: start; }
+.gs-pane .field textarea { font-family: var(--font-mono); font-size: 0.88rem; min-height: 10rem; white-space: pre; overflow-x: auto; }
+#gs-drawing { min-height: 12rem; line-height: 1.15; letter-spacing: 0.08em; }
+.gs-error { margin: 0; padding: 0.5rem 0.75rem; border: 2px solid var(--us); color: var(--us); background: var(--us-soft); font-size: 0.9rem; }
+.gs-out .gs-draw { max-width: 28rem; }
+.gs-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.gs-editor { touch-action: none; cursor: crosshair; max-width: 30rem; }
+.gs-palette { display: grid; grid-template-columns: repeat(auto-fill, minmax(4.4rem, 1fr)); gap: 0.35rem; }
+.gs-palette button { display: grid; justify-items: center; gap: 0.25rem; padding: 0.35rem 0.2rem; font: inherit; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.04em; color: var(--muted); background: var(--deep); border: 2px solid var(--border); cursor: pointer; }
+.gs-palette button .gs-draw-part { width: 1.6rem; border: 0; }
+.gs-palette button:hover { color: var(--text); border-color: var(--text); }
+.gs-palette button[aria-pressed="true"] { color: var(--text); border-color: var(--them); background: var(--surface-2); }
+.gs-controls { display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem; align-items: end; }
+.gs-controls .field { min-width: 6rem; }
+.gs-symbols { display: flex; flex-wrap: wrap; gap: 0.25rem 0.9rem; align-items: center; margin: 0; padding: 0; border: 0; }
+.gs-symbols legend { padding: 0; margin-bottom: 0.35rem; font-size: 0.9rem; color: var(--muted); }
+.gs-symbols label { display: inline-flex; gap: 0.35rem; align-items: center; font-size: 0.92rem; }
+.gs-symbols input[type=text] { width: 2.4rem; padding: 0.15rem 0.3rem; font: inherit; font-family: var(--font-mono); text-align: center; color: var(--text); background: var(--deep); border: 2px solid var(--border-strong); }
+.gs-ink-them { color: var(--them); font-family: var(--font-mono); }
+.gs-ink-us { color: var(--us); font-family: var(--font-mono); }
+.gs-ink-third { color: var(--c4); font-family: var(--font-mono); }
+.gs-steps { display: grid; gap: 0.5rem; margin: 0; padding-left: 1.4rem; max-width: 44rem; }
+
+@media (max-width: 52rem) {
+  .gs-example, .gs-pane { grid-template-columns: minmax(0, 1fr); }
+}

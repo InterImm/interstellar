@@ -31,6 +31,12 @@
       "children": []
     },
     {
+      "id": "script",
+      "name": "网格文字",
+      "url": "https://interstellar.interimm.org/script/",
+      "children": []
+    },
+    {
       "id": "pulsars",
       "name": "脉冲星账本",
       "url": "https://interstellar.interimm.org/pulsars/",
@@ -85,6 +91,10 @@
         {
           "title": "五段发射（可收听）",
           "url": "https://interstellar.interimm.org/signals/"
+        },
+        {
+          "title": "网格文字 · 词典与转换器",
+          "url": "https://interstellar.interimm.org/script/"
         },
         {
           "title": "脉冲星账本（实时）",
