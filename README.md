@@ -32,7 +32,7 @@ the first Earth–Mars conflict lives on the branch `cms/interstellar/草稿`.
 - Story time = real time + 70,491 days. The present is 2219.
 - No interstellar ships on either side; contact is communication only.
 - The source is Ross 128 b, a real temperate planet (at least 1.4 Earth masses, 9.87-day orbit, tidally locked) around
-  the old, quiet red dwarf Ross 128 in Virgo, 11.01 light years away. The transmitter rides on the planet, so the tone
+  the old, quiet red dwarf Ross 128 in Virgo, 10.98 light years away. The transmitter rides on the planet, so the tone
   drifts with its orbit.
 - The signal: first detected 2219-09-18 03:12:07 UTC by the MC ledger's pulsar-timing node on the lunar far side, then
   Earth, Isidis (Mars) and Ceres; made public 2219-10-05. 1420.405 MHz, prime-spaced preamble, a 667-bit picture
