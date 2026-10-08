@@ -22,9 +22,10 @@
 //    <time data-story-clock>          the story time (real time + 70,491 days), ticking; data-format is
 //                                     "time" (default), "date" or "datetime"
 //    <span data-days-since="2219-10-05T03:12:07Z">  whole days since a story instant, ticking
-//    .space                           gets their 23 × 29 picture drawn faintly behind it, row by row
-//                                     (data-message="off" leaves it out)
-//    <span data-glyph="count">        one part of the picture as an icon: count, system, dish, hydrogen
+//    .space                           gets the duet drawn faintly behind it, row by row: their first signal
+//                                     as a phaseogram (data-message="off" leaves it out)
+//    <span data-glyph="duet">         an icon from the duet: pulsar, duet, beat, chorus (the old names
+//                                     count, system, dish and hydrogen still work)
 //    They are also on window.InterImm for pages that create them later.
 (() => {
   document.documentElement.classList.add('js');
@@ -196,13 +197,29 @@
 
   // ------------------------------------------------------------ the message
 
-  // The 667-bit picture from Ross 128 b, 23 × 29, one row per number (most significant bit = left).
-  // Same picture as app/beacon.js. Every .space draws it faintly behind its content, bit by bit
-  // in the order it arrives; [data-glyph] draws one part of it as an icon.
-  const MSG_W = 23, MSG_H = 29;
-  const MSG = [0x000000, 0x001248, 0x048048, 0x208208, 0x000000, 0x249248, 0x000000, 0x0e0000, 0x1f0070, 0x3f8088, 0x3f80a8, 0x3f8088, 0x1f0070, 0x0e0000, 0x000000, 0x000000, 0x110000, 0x110200, 0x0a2100, 0x041080, 0x041080, 0x041080, 0x0e2100, 0x000200, 0x000000, 0x000000, 0x010000, 0x0399c0, 0x000080];
-  const bit = (x, y) => (MSG[y] >> (MSG_W - 1 - x)) & 1;
-  const GLYPHS = { count: [1, 5], system: [7, 13], dish: [16, 23], hydrogen: [26, 28] };
+  // Their first signal, the duet, as a phaseogram: one row per step through a pass, one period of the
+  // pulsar J1909−3744 across. The pulsar's pulse is the middle column; theirs sits on it (in step), slips
+  // across exactly one period (one beat) and locks back. Same model as lib/signals.js. Every .space draws
+  // it faintly behind its content, row by row as the pass goes; [data-glyph] draws a small icon.
+  const MSG_W = 25, MSG_H = 30, MID = 12;
+  const slipAt = (s) => { const u = Math.min(1, Math.max(0, (s - 0.3) / 0.4)); return u - Math.sin(2 * Math.PI * u) / (2 * Math.PI); };
+  const theirCol = (y) => (MID + Math.round(slipAt((y + 0.5) / MSG_H) * MSG_W)) % MSG_W;
+  // their pulse, joined to the row above by a stepped run so the slip reads as one line
+  const onTrace = (x, y) => {
+    const c = theirCol(y), p = y ? theirCol(y - 1) : c;
+    let d = c - p; if (d > MSG_W / 2) d -= MSG_W; if (d < -MSG_W / 2) d += MSG_W;
+    for (let k = 0; k <= Math.abs(d); k++) if ((p + Math.sign(d) * k + MSG_W) % MSG_W === x) return true;
+    return false;
+  };
+  // 1 = the pulsar's column (drawn dimmer), 2 = their pulse
+  const cellAt = (x, y) => (onTrace(x, y) ? 2 : x === MID ? 1 : 0);
+  const ICONS = {
+    pulsar: ['#...#...#', '#...#...#', '#...#...#', '#...#...#', '#...#...#', '#...#...#', '#########'],
+    duet: ['#...#...#', '#...#...#', '#...#...#', '.........', '#...#...#', '#...#...#', '#...#...#'],
+    beat: ['#...#...#..', '#...#...#..', '#...#...#..', '...........', '#....#....#', '#....#....#', '#....#....#'],
+    chorus: ['#.#..#.#..#', '.#.#.#..#..', '..#.#.##...', '...###.#...', '....###....', '.....#.....', '.....#.....'],
+  };
+  const ALIAS = { count: 'beat', system: 'chorus', dish: 'duet', hydrogen: 'pulsar' };
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function messageField(space) {
@@ -211,33 +228,35 @@
     c.className = 'message-field'; c.width = MSG_W; c.height = MSG_H; c.setAttribute('aria-hidden', 'true');
     space.prepend(c);
     const g = c.getContext('2d');
-    g.fillStyle = '#fff';
-    const draw = (n) => { for (let i = 0; i < n; i++) if (bit(i % MSG_W, (i / MSG_W) | 0)) g.fillRect(i % MSG_W, (i / MSG_W) | 0, 1, 1); };
-    if (still) { draw(MSG_W * MSG_H); return; }
-    // the bits arrive one row at a time, as the beacon sends them
-    let row = 0;
-    const step = () => {
-      g.clearRect(0, 0, MSG_W, MSG_H); draw(++row * MSG_W);
-      if (row < MSG_H) setTimeout(step, 55);
+    const draw = (rows) => {
+      g.clearRect(0, 0, MSG_W, MSG_H);
+      for (let y = 0; y < MSG_H; y++) {
+        g.fillStyle = 'rgba(255,255,255,0.45)'; g.fillRect(MID, y, 1, 1);
+        if (y < rows) { g.fillStyle = '#fff'; for (let x = 0; x < MSG_W; x++) if (onTrace(x, y)) g.fillRect(x, y, 1, 1); }
+      }
     };
+    if (still) { draw(MSG_H); return; }
+    // the rows arrive one at a time, as the pass goes
+    let row = 0;
+    const step = () => { draw(++row); if (row < MSG_H) setTimeout(step, 70); };
     step();
   }
 
   function glyph(el) {
-    const part = GLYPHS[el.dataset.glyph];
-    if (!part || el.querySelector('canvas')) return;
-    let x0 = MSG_W, x1 = 0;
-    for (let y = part[0]; y <= part[1]; y++) for (let x = 0; x < MSG_W; x++) if (bit(x, y)) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); }
-    const w = x1 - x0 + 1, h = part[1] - part[0] + 1;
+    const icon = ICONS[el.dataset.glyph] || ICONS[ALIAS[el.dataset.glyph]];
+    if (!icon || el.querySelector('canvas')) return;
+    const w = icon[0].length, h = icon.length;
     const c = document.createElement('canvas');
     c.width = w; c.height = h; c.setAttribute('aria-hidden', 'true');
     const g = c.getContext('2d');
     g.fillStyle = getComputedStyle(el).color;
-    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) if (bit(x0 + x, part[0] + y)) g.fillRect(x, y, 1, 1);
+    icon.forEach((row, y) => [...row].forEach((ch, x) => { if (ch === '#') g.fillRect(x, y, 1, 1); }));
     el.append(c);
   }
 
-  window.InterImm = Object.assign(window.InterImm || {}, { kit: 'phase2', STORY_OFFSET_MS, storyNow, waterfall, storyClock, daysSince, messageField, glyph });
+  const duet = { width: MSG_W, height: MSG_H, cell: cellAt };
+
+  window.InterImm = Object.assign(window.InterImm || {}, { kit: 'phase2', STORY_OFFSET_MS, storyNow, waterfall, storyClock, daysSince, messageField, glyph, duet });
 
   const initInstruments = () => {
     document.querySelectorAll('canvas[data-waterfall]').forEach((c) => waterfall(c));

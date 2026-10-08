@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
 <title>Five transmissions | The Contact Era</title>
-<meta name="description" content="The beacon from Ross 128 b carries five transmissions: a picture, Earth's shadow, the pulsars, chords of molecules and the number 137. See how each is encoded and listen to it.">
+<meta name="description" content="The beacon from Ross 128 b carries five transmissions: a duet with a pulsar, Earth's shadow, the pulsars, chords of molecules and the number 137. See how each is encoded and listen to it.">
 <link rel="alternate" hreflang="zh-CN" href="https://interstellar.interimm.org/signals/">
 <link rel="alternate" hreflang="en" href="https://interstellar.interimm.org/signals/en/">
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
@@ -28,9 +28,9 @@
     <div class="wrap">
       <p class="kicker">Archive · the transmissions</p>
       <h1>One beacon, five transmissions.</h1>
-      <p class="lede">Each 9 h 41 m pass of the beacon carries one transmission, in turn. The first was a picture. The other four are not drawn at all. Each points at something both worlds can already measure: our own shadow, the pulsars, the chemistry of molecules, a constant of nature. A few seconds of signal stands for a great deal that never has to be sent.</p>
+      <p class="lede">Each 9 h 41 m pass of the beacon carries one transmission, in turn. None of them is drawn. Each points at something both worlds can already measure: a pulsar both can hear, our own shadow, the pulsars, the chemistry of molecules, a constant of nature. A few seconds of signal stands for a great deal that never has to be sent.</p>
       <ul class="signals-index">
-        <li><a href="#picture"><span>1</span>The picture</a></li>
+        <li><a href="#duet"><span>1</span>The duet</a></li>
         <li><a href="#shadow"><span>2</span>The shadow</a></li>
         <li><a href="#pulsars"><span>3</span>The pulsars</a></li>
         <li><a href="#chords"><span>4</span>The chords</a></li>
@@ -51,17 +51,25 @@
     </div>
   </section>
 
-  <section class="section signal-block" id="picture" aria-labelledby="picture-title">
+  <section class="section signal-block" id="duet" aria-labelledby="duet-title">
     <div class="wrap split signals-split">
       <div>
-        <p class="kicker">Transmission 1 · the picture</p>
-        <h2 class="section-title" id="picture-title">667 bits, folded once</h2>
-        <p>Clicks spaced 2, 3, 5, 7 … 47 apart say "this is deliberate". Then come 667 bits, high tone for 1 and low tone for 0. 667 = 23 × 29, so there is only one way to lay them out as a picture: counting, their star and its one planet, a dish, and the hydrogen spin flip.</p>
-        <p class="muted">This is the naive one: it assumes we see the way they do. <a href="../../archive/2219-signal/en/#decode">Fold it yourself</a>.</p>
-        <p class="theory"><strong>Resonance theory.</strong> A picture is the most foreign thing a resonant species could make, and they made it because we see. Its two tones may stand for the two states of a pair: in step, and beating.</p>
-        <button type="button" class="btn btn-primary" data-play="picture">Listen · 40 s</button>
+        <p class="kicker">Transmission 1 · the duet</p>
+        <h2 class="section-title" id="duet-title">They sing with a pulsar</h2>
+        <p>The first signal anyone noticed. J1909−3744 is the steadiest pulsar we know: it spins 339.3 times a second, so its pulses are a pitch. The beacon sends a pulse train at exactly the same rate, timed so that at Earth's centre each of its pulses lands on one of the pulsar's, to within nanoseconds. The two voices fuse into one. Midway through the pass theirs slips ahead by exactly one pulse, smoothly, and locks back in. Lock, one beat, lock.</p>
+        <p class="muted">The lock only holds at Earth. Seen from the Moon, Mars or Ceres the two trains drift against each other, because the pulsar's rate is Doppler-shifted differently there. They worked out where Earth would be eleven years later and tuned the duet for us. <a href="../../archive/2219-signal/en/#decode">Hear it from four places</a>.</p>
+        <p class="theory"><strong>Resonance theory.</strong> Alone, a voice can only say "I am here". With a partner it can agree. A pulsar is the one voice both worlds hear, so they agreed with it: in step means yes, the beat means one, and the slip leaves one extra pulse in the pulsar's count, like a mark made in our shared clock.</p>
+        <div class="play-row">
+          <button type="button" class="btn btn-primary" data-play="duet">Listen · the duet · 16 s</button>
+        </div>
+        <p>Each time transmission 1 comes back it has taken one of three forms so far:</p>
+        <ul class="cases">
+          <li><strong>The duet</strong>, above: one voice locks to one pulsar. The first one we saw, on 2219-09-18.</li>
+          <li><strong>The chorus</strong>: dozens of voices, each at its own pitch and pace, pull together into one and then lock to the same pulsar. Many become one, then agree. <button type="button" class="btn btn-ghost" data-play="chorus">Listen · 16 s</button></li>
+          <li><strong>The missing note</strong>: J1909−3744 and J0437−4715, with a third tone at exactly the difference of their rates, the tone the two would make together in any resonator. Alone it is a hum; with them it completes a chord. <button type="button" class="btn btn-ghost" data-play="note">Listen · 11 s</button></li>
+        </ul>
       </div>
-      <figure class="scope"><canvas id="cv-picture" role="img" aria-label="The 23 by 29 picture, drawn bit by bit as it plays"></canvas><figcaption><span>23 × 29 · 1 = high tone, 0 = low tone</span><span class="readout" data-cap="picture">–</span></figcaption></figure>
+      <figure class="scope"><canvas id="cv-duet" role="img" aria-label="A phaseogram: time runs down, one pulsar period runs across. Their pulse sits on the pulsar's, swings once across the period and comes back."></canvas><figcaption><span>one period across · time down · <i class="tick-mid">▮</i> pulsar · <i class="tick-them">▮</i> them</span><span class="readout" data-cap="first">–</span></figcaption></figure>
     </div>
   </section>
 
@@ -85,7 +93,7 @@
         <p class="kicker">Transmission 3 · the pulsars</p>
         <h2 class="section-title" id="pulsars-title">An address written in clocks</h2>
         <p>Twelve pulse trains, one after another, each at a real pulsar's period. A millisecond pulsar spins fast enough to be a note: B1937+21 hums at 642 Hz. A slow one ticks. The periods name the pulsars, so there is no need to draw where they are; any astronomer already knows.</p>
-        <p>What matters is when each train starts. They begin it at the phase of the pulsar as it reaches Ross 128. A pulse reaches them earlier or later than it reaches us, depending on how far they sit along that pulsar's direction. Twelve phase shifts with only three unknowns pin down where they are and, read against the pulsar clocks, when they sent it. This is how the MC ledger keeps time, so the ledger can read it directly.</p>
+        <p>What matters is when each train starts. They begin it at the phase of the pulsar as it reaches Ross 128. A pulse reaches them earlier or later than it reaches us, depending on how far they sit along that pulsar's direction. Twelve phase shifts with only three unknowns pin down where they are and, read against the pulsar clocks, when they sent it. It is the same arithmetic spacecraft use to navigate by pulsars, so any pulsar-timing station can read it directly.</p>
         <p class="theory"><strong>Resonance theory.</strong> The pulsars are not only the address but the partner. Heard together with the real pulsars, the trains would make tones that neither makes alone. That may be why the signal turned up in pulsar-timing data at all: it was never meant to be heard by itself.</p>
         <button type="button" class="btn btn-primary" data-play="pulsars">Listen · 20 s</button>
       </div>
@@ -126,6 +134,7 @@
       <h2 class="section-title" id="method-title">How the sound is made</h2>
       <p>Everything is computed in your browser by <a href="https://github.com/InterImm/interstellar/blob/main/lib/signals.js">lib/signals.js</a>.</p>
       <ul>
+        <li>For the duet, J1909−3744's period is from the ATNF catalogue. A 22-minute pass becomes 14 seconds. How fast the two trains drift apart at the Moon, Mars and Ceres is the order of magnitude for each station's speed relative to Earth, not a calculation for a given date. The chorus and the missing note use the same pulsar periods.</li>
         <li>For the shadow, the impact parameter of each Earth transit comes from Ross 128's angle to Earth's orbital plane in that year (<a href="../../drift/en/">Drift</a>), with the Sun's limb darkening. Thirteen hours become 0.9 seconds. The depth of Ross 128 b's dip assumes a radius of 1.1 Earths, because its true size is unmeasured.</li>
         <li>For the pulsars, periods and positions come from the ATNF catalogue. Each phase shift is the light-travel difference between Ross 128 and the Sun along that pulsar's direction, modulo its period.</li>
         <li>For the chords, the line frequencies are real (CDMS/JPL). Every factor of four in radio frequency becomes one octave, with 1420 MHz on the G below middle C. The three unknown lines are invented.</li>
