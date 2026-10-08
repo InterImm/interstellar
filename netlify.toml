@@ -1,6 +1,0 @@
-# The live site is served by GitHub Pages from main. Netlify still builds
-# deploy previews for pull requests with the old Hugo settings, which fail
-# now that the site is plain static files. Publish the repo root as-is.
-[build]
-  publish = "."
-  command = "echo 'static site, no build step'"
