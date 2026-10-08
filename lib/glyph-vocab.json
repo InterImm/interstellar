@@ -111,18 +111,18 @@
   },
   "BEFORE": {
    "shape": [
+    "...",
     "#..",
-    "###",
-    "#.."
+    "..."
    ],
    "thing": "earlier",
    "relation": null
   },
   "AFTER": {
    "shape": [
+    "...",
     "..#",
-    "###",
-    "..#"
+    "..."
    ],
    "thing": "later",
    "relation": null

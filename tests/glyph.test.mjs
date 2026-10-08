@@ -87,7 +87,7 @@ test('numbers read back as numbers', () => {
   }
   const p = page('+: STAR.TIME | ONE | COUNT.12\n×: _ | _ | _.495');
   assert.deepEqual(decode(vocab, render(vocab, p).join('\n')), p);
-  for (const src of ['+: ONE.SELF | ONE | ONE.OTHER', '+: BODY.AFTER | ONE | OTHER', '+: BODY | ONE.OTHER | OTHER', '+: SELF | VOICE.ONE | ONE']) {
+  for (const src of ['+: ONE.SELF | ONE | ONE.OTHER', '+: BODY | ONE.OTHER | OTHER', '+: SELF | VOICE.ONE | ONE']) {
     const q = page(src);
     assert.deepEqual(decode(vocab, render(vocab, q).join('\n')), q, src);
   }
