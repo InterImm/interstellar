@@ -11,23 +11,10 @@
 .triangulation .data-table { margin: 1rem 0; }
 .triangulation .note { margin: 0; }
 
-/* the beacon */
+/* the duet */
 .step { margin-bottom: 2rem; }
 .step h3 { font-size: 1.05rem; margin-bottom: 0.4rem; }
 .step p { color: var(--muted); }
-#preamble { display: block; width: 100%; height: auto; margin-top: 0.75rem; padding: 0.75rem; border: 1px solid var(--border); border-radius: 0.6rem; background: var(--scope); }
-#preamble .pulses { fill: var(--signal); }
-#preamble .gaps { fill: var(--muted); font: 7px var(--font-mono); text-anchor: middle; }
-.bitstrip { margin: 0.75rem 0 0; padding: 0.75rem; border: 1px solid var(--border); border-radius: 0.6rem; background: var(--scope); font-family: var(--font-mono); font-size: 0.68rem; line-height: 1.5; color: var(--muted); word-break: break-all; max-height: 7.5rem; overflow: hidden; -webkit-mask-image: linear-gradient(#000 60%, transparent); mask-image: linear-gradient(#000 60%, transparent); }
-.fold-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; margin-bottom: 1rem; }
-.fold-controls input[type="range"] { flex: 1 1 12rem; }
-.fold-controls output { min-width: 7.5rem; font-family: var(--font-mono); font-size: 0.85rem; color: var(--text); }
-.fold-stage { display: grid; place-items: center; padding: 1rem; min-height: 20rem; }
-.fold-stage canvas { display: block; max-width: 100%; height: auto; max-height: 34rem; image-rendering: pixelated; }
-#fold-verdict { margin: 0.75rem 0 0; font-family: var(--font-mono); font-size: 0.82rem; color: var(--muted); }
-#fold-verdict.is-found { color: var(--accent); }
-#fold-legend { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; gap: 0.4rem; font-size: 0.92rem; }
-#fold-legend .readout { color: var(--accent); margin-right: 0.5rem; font-size: 0.8rem; }
 
 /* nobody is coming */
 .distance { text-align: left; }
@@ -66,3 +53,11 @@
 .letter-actions .btn { min-height: 2.1rem; padding: 0.3rem 0.9rem; font-size: 0.85rem; }
 
 .canon-note { margin-top: 1.5rem; font-size: 0.82rem; color: var(--muted); }
+
+/* the duet, heard from four stations */
+.station-pick { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+.station-pick .btn[aria-pressed="true"] { border-color: var(--them); color: var(--them); }
+.duet-stage { display: grid; place-items: center; padding: 1rem; }
+.duet-stage canvas { display: block; width: 100%; height: clamp(18rem, 40vw, 26rem); }
+#duet-verdict { margin: 0.75rem 0 1rem; font-family: var(--font-mono); font-size: 0.82rem; color: var(--muted); min-height: 2.6em; }
+#duet-verdict.is-found { color: var(--accent); }

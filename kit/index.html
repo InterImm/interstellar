@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
 <title>137 | The phase 2 design language</title>
-<meta name="description" content="137, the design language of every InterImm phase 2 site: named for the one number both worlds share, drawn in the pixels of the first message from Ross 128 b.">
+<meta name="description" content="137, the design language of every InterImm phase 2 site: named for the one number both worlds share, drawn like the instruments that heard the first signal from Ross 128 b.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <!-- Other sites use the absolute URLs https://interstellar.interimm.org/kit/interimm.css and .js -->
 <link rel="stylesheet" href="interimm.css">
@@ -46,10 +46,9 @@
   .checklist li { counter-increment: c; display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: 0.75rem; align-items: baseline; }
   .checklist li::before { content: counter(c, decimal-leading-zero); font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent); }
   .hero-137 h1 { font-size: clamp(6rem, 3rem + 16vw, 15rem); line-height: 0.8; margin-bottom: 0.15em; }
-  .bits { display: grid; grid-template-columns: repeat(23, 1fr); gap: 2px; width: min(100%, 23rem); margin: 0; padding: 0.75rem; background: var(--deep); border: 2px solid var(--text); box-shadow: var(--shadow); }
+  .bits { display: grid; grid-template-columns: repeat(25, 1fr); gap: 2px; width: min(100%, 23rem); margin: 0; padding: 0.75rem; background: var(--deep); border: 2px solid var(--text); box-shadow: var(--shadow); }
   .bits i { aspect-ratio: 1; background: rgb(255 255 255 / 0.07); }
-  .bits i.on { background: var(--text); }
-  .bits i.on.p-count { background: var(--c1); } .bits i.on.p-system { background: var(--c3); } .bits i.on.p-dish { background: var(--c4); } .bits i.on.p-hydrogen { background: var(--c2); }
+  .bits i.pulsar { background: var(--plot-dim); } .bits i.them { background: var(--them); }
   .glyphs { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); }
   .glyphs .tile-icon { width: 4rem; height: 4rem; padding: 0.6rem; }
   .tile-icon[data-glyph] { padding: 0.45rem; }
@@ -73,7 +72,7 @@
       <div>
         <p class="kicker">InterImm phase 2 · design language</p>
         <h1>137</h1>
-        <p class="lede">137 is the last thing the beacon says: 1/α, the fine-structure constant, the one number any physicist in any world would recognise. It names the design language because it is what both sides already share. The look comes from the first thing they sent, 667 bits that fold into a 23 × 29 picture. Every site of the Contact Era is built from that picture: pixels on deep and signal blue, their voice in white-cyan, ours in Sol yellow, and nothing round.</p>
+        <p class="lede">137 is the last thing the beacon says: 1/α, the fine-structure constant, the one number any physicist in any world would recognise. It names the design language because it is what both sides already share. The look comes from the first thing we heard: their voice keeping time with a pulsar, drawn the way timing stations plot it, as pulses on a grid. Every site of the Contact Era is built from that plot: pixels on deep and signal blue, their voice in white-cyan, ours in Sol yellow, and nothing round.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#use">Use it on a site <span>→</span></a>
           <a class="btn btn-ghost" href="https://github.com/InterImm/interstellar/tree/main/kit">Source</a>
@@ -104,10 +103,10 @@
       </header>
       <div class="panel principles">
         <article class="card"><p class="eyebrow">01</p><h3 class="card-title">A conversation, not a voyage</h3><p>Nobody is coming and nobody is going; only messages cross. The pictures are dishes, spectrograms, clocks, logs and letters in transit, never ships or planets seen up close.</p></article>
-        <article class="card"><p class="eyebrow">02</p><h3 class="card-title">Built from their picture</h3><p>Their message is the only image we share with them, so it is the whole visual language: a 4 px grid, a pixel face for page titles and big numbers (never for text you read), square or stepped corners, hard shadows, and the picture itself behind every hero.</p></article>
+        <article class="card"><p class="eyebrow">02</p><h3 class="card-title">Built from the duet</h3><p>Their first signal is pulses on a clock we share with them, so that is the whole visual language: a 4 px grid, a pixel face for page titles and big numbers (never for text you read), square or stepped corners, hard shadows, and the duet itself behind every hero.</p></article>
         <article class="card"><p class="eyebrow">03</p><h3 class="card-title">Every number is a readout</h3><p>Times, distances, coordinates and counts are set in mono with tabular figures, with units, so they line up and read as measured.</p></article>
         <article class="card"><p class="eyebrow">04</p><h3 class="card-title">Two voices on deep blue</h3><p>White-cyan is what reaches us: their signal, the detection, the current item. Sol yellow is what we send: replies, letters, the send button. Everything else is blue and white. No paper, no red.</p></article>
-        <article class="card"><p class="eyebrow">05</p><h3 class="card-title">Bits arrive, nothing glides</h3><p>Motion steps instead of easing, like data coming in: a picture filling row by row, a blinking packet, a ticking clock. Everything stops for reduced motion.</p></article>
+        <article class="card"><p class="eyebrow">05</p><h3 class="card-title">Bits arrive, nothing glides</h3><p>Motion steps instead of easing, like data coming in: a phaseogram filling row by row, a blinking packet, a ticking clock. Everything stops for reduced motion.</p></article>
         <article class="card"><p class="eyebrow">06</p><h3 class="card-title">Static, linked, free</h3><p>No build step, no server, zero running cost. Sites link this kit instead of copying it, so a change here reaches every site.</p></article>
       </div>
     </div>
@@ -118,20 +117,20 @@
   <section class="section section-alt" id="source">
     <div class="wrap split split-center" style="--split: minmax(0, 1fr) minmax(0, 1.1fr)">
       <figure style="margin:0">
-        <div class="bits" id="bits" role="img" aria-label="The 667-bit picture folded into 23 columns and 29 rows"></div>
-        <figcaption class="note" style="margin-top:0.75rem">The beacon from Ross 128 b, folded 23 wide. Colours mark its four parts.</figcaption>
+        <div class="bits" id="bits" role="img" aria-label="The duet as a phaseogram: their pulse sits on the pulsar's, swings once across the period and comes back"></div>
+        <figcaption class="note" style="margin-top:0.75rem">The duet from Ross 128 b: one period of J1909−3744 across, the pass running down. Grey is the pulsar, white-cyan is them.</figcaption>
       </figure>
       <div>
         <header class="section-head">
           <p class="kicker">The source</p>
-          <h2 class="section-title">One picture, four glyphs</h2>
-          <p class="section-lede">The picture has four parts. The kit draws each as an icon with <code>data-glyph</code>, so every site draws with pieces of their picture.</p>
+          <h2 class="section-title">One duet, four glyphs</h2>
+          <p class="section-lede">The kit draws four small icons from the duet with <code>data-glyph</code>, so every site draws with pieces of their first signal.</p>
         </header>
         <div class="glyphs">
-          <div class="tile"><span class="tile-icon" data-glyph="count"></span><h3 class="tile-title">count</h3><p>One to seven in three-bit binary. Use for numbers, data, a catalogue.</p></div>
-          <div class="tile"><span class="tile-icon" data-glyph="system"></span><h3 class="tile-title">system</h3><p>Their star and its one planet, circled. Use for places, planets, the explorer.</p></div>
-          <div class="tile"><span class="tile-icon" data-glyph="dish"></span><h3 class="tile-title">dish</h3><p>A dish and its beam. Use for listening, sending, letters.</p></div>
-          <div class="tile"><span class="tile-icon" data-glyph="hydrogen"></span><h3 class="tile-title">hydrogen</h3><p>The hydrogen line, the unit both sides share. Use for clocks, frequencies, the ledger.</p></div>
+          <div class="tile"><span class="tile-icon" data-glyph="pulsar"></span><h3 class="tile-title">pulsar</h3><p>One steady pulse train. Use for clocks, time, frequencies.</p></div>
+          <div class="tile"><span class="tile-icon" data-glyph="duet"></span><h3 class="tile-title">duet</h3><p>Two trains in step. Use for listening, replies, letters, agreement.</p></div>
+          <div class="tile"><span class="tile-icon" data-glyph="beat"></span><h3 class="tile-title">beat</h3><p>Two trains drifting apart. Use for numbers, data, change, a question.</p></div>
+          <div class="tile"><span class="tile-icon" data-glyph="chorus"></span><h3 class="tile-title">chorus</h3><p>Many voices gathering into one. Use for places, catalogues, the explorer.</p></div>
         </div>
       </div>
     </div>
@@ -149,12 +148,12 @@
         <table class="data-table">
           <thead><tr><th></th><th>Phase 1 · interimm.org/kit/</th><th>Phase 2 · 137</th></tr></thead>
           <tbody>
-            <tr><td class="readout">Ground</td><td>Paper and ink, follows the visitor's light or dark setting</td><td>Deep blue for reading; signal blue, a pixel grid and their picture in heroes</td></tr>
+            <tr><td class="readout">Ground</td><td>Paper and ink, follows the visitor's light or dark setting</td><td>Deep blue for reading; signal blue, a pixel grid and the duet in heroes</td></tr>
             <tr><td class="readout">Colour</td><td>One Mars rust, used sparingly</td><td>White and blue, with two voices: white-cyan for them, Sol yellow for us. No red</td></tr>
             <tr><td class="readout">Type</td><td>Source Serif headings, IBM Plex text and data</td><td>Pixelify Sans headings, Instrument Sans text, JetBrains Mono data</td></tr>
             <tr><td class="readout">Lines</td><td>Thin solid printed rules, soft corners</td><td>Dashed lines of bits, square and stepped corners, hard shadows</td></tr>
             <tr><td class="readout">Controls</td><td>Square ink buttons</td><td>Notched pixel blocks: white-cyan to receive and explore, yellow to send</td></tr>
-            <tr><td class="readout">Signature</td><td>The signal line under the header: distance and delay to Mars</td><td>Their picture behind every hero, the four glyphs, the exchange and the waterfall</td></tr>
+            <tr><td class="readout">Signature</td><td>The signal line under the header: distance and delay to Mars</td><td>The duet behind every hero, the four glyphs, the exchange and the waterfall</td></tr>
             <tr><td class="readout">Brand mark</td><td>The InterImm wordmark</td><td>Our star and theirs as pixel squares, one bit between</td></tr>
           </tbody>
         </table>
@@ -171,8 +170,8 @@
         <p class="section-lede">Their messages arrive on the left in white-cyan, ours leave on the right in yellow, and the dashed spine between is the distance. Use it wherever the era shows messages, letters or replies.</p>
       </header>
       <ol class="exchange">
-        <li class="msg msg-in"><p class="msg-meta"><span>Ross 128 b → Sol</span><time>sent 2208-09-24 · heard 2219-09-18</time></p><p>A prime-numbered preamble, then 667 bits that fold into a picture: counting, their star with its one planet circled, a dish, hydrogen.</p></li>
-        <li class="msg msg-out"><p class="msg-meta"><span>Sol → Ross 128 b</span><time>sent 2219-10-05 · arrives 2230-09-27</time></p><p>We heard you. Here is how we count, where we are, and the same line of hydrogen you used.</p></li>
+        <li class="msg msg-in"><p class="msg-meta"><span>Ross 128 b → Sol</span><time>sent 2208-09-24 · heard 2219-09-18</time></p><p>A pulse train in step with the pulsar J1909−3744, tuned so that only Earth hears the two in tune. One slow beat, then in step again.</p></li>
+        <li class="msg msg-out"><p class="msg-meta"><span>Sol → Ross 128 b</span><time>sent 2219-10-05 · arrives 2230-09-27</time></p><p>We heard you. Here is the same pulsar, with our voice in step beside yours.</p></li>
         <li class="msg msg-in msg-waiting"><p class="msg-meta"><span>Ross 128 b → Sol</span><time>earliest answer 2241-09-19</time></p><p class="muted">Waiting. Nothing we send can be answered sooner than twice the distance.</p></li>
       </ol>
       <p class="demo-label kicker kicker-out">.transit · a message on its way</p>
@@ -198,7 +197,7 @@
           <p class="muted">The entrance, an archive, an essay. Centred, generous, bilingual.</p>
           <ol class="anatomy">
             <li><b>.site-header</b><span>■·■ The Contact Era / Site · menu</span></li>
-            <li class="is-space"><b>.hero.space</b><span>their picture · kicker · h1 · lede · scope</span></li>
+            <li class="is-space"><b>.hero.space</b><span>the duet · kicker · h1 · lede · scope</span></li>
             <li class="is-main"><b>.section</b><span>kicker · .section-title · content</span></li>
             <li><b>.section.section-alt</b><span>alternate ground</span></li>
             <li><b>.site-footer</b><span>menu columns · legal</span></li>
@@ -225,7 +224,7 @@
       <header class="section-head">
         <p class="kicker">Colour</p>
         <h2 class="section-title">Roles, not paint</h2>
-        <p class="section-lede">Use the token for the role, never a hex value. Pages read on deep blue (<code>--bg</code>). Heroes are <code>.space</code>: signal blue (<code>--sky</code>), the pixel grid and their picture.</p>
+        <p class="section-lede">Use the token for the role, never a hex value. Pages read on deep blue (<code>--bg</code>). Heroes are <code>.space</code>: signal blue (<code>--sky</code>), the pixel grid and the duet.</p>
       </header>
       <h3>Ground and ink</h3>
       <ul class="swatches">
@@ -329,7 +328,7 @@
 
       <p class="demo-label kicker">.panel with .card-link-wrap</p>
       <div class="panel">
-        <article class="card card-link-wrap"><p class="eyebrow">Signal</p><h3 class="card-title"><a class="card-link" href="../archive/2219-signal/en/#decode">Decode the beacon</a></h3><p>Fold the raw data, find the prime spacing, see the picture.</p><p class="card-cta">Open <span>→</span></p></article>
+        <article class="card card-link-wrap"><p class="eyebrow">Signal</p><h3 class="card-title"><a class="card-link" href="../archive/2219-signal/en/#decode">Hear the duet</a></h3><p>Their voice and a pulsar, heard from four stations. Only one hears them in tune.</p><p class="card-cta">Open <span>→</span></p></article>
         <article class="card card-link-wrap"><p class="eyebrow">Ledger</p><h3 class="card-title"><a class="card-link" href="../pulsars/en/">The clocks that heard it</a></h3><p>Pulsars, ledger nodes and the residuals where the beacon shows.</p><p class="card-cta">Open <span>→</span></p></article>
         <article class="card card-link-wrap"><p class="eyebrow">Explorer</p><h3 class="card-title"><a class="card-link" href="https://interimm.org/exoplanet-explorer/">Every known planet</a></h3><p>Filter, plot and rank the catalogue.</p><p class="card-cta">Open <span>→</span></p></article>
       </div>
@@ -337,7 +336,7 @@
       <p class="demo-label kicker">.card-grid with .card and .tile</p>
       <div class="card-grid">
         <div class="card"><h3 class="card-title">Card</h3><p>Plain card on the surface colour.</p></div>
-        <div class="tile"><span class="tile-icon" data-glyph="dish"></span><h3 class="tile-title">Tile</h3><p>With a glyph icon.</p></div>
+        <div class="tile"><span class="tile-icon" data-glyph="duet"></span><h3 class="tile-title">Tile</h3><p>With a glyph icon.</p></div>
       </div>
 
       <p class="demo-label kicker">Forms: .field, .field-pair, .field-checks, .inline-field</p>
@@ -425,7 +424,7 @@
           <figcaption><span>&lt;canvas data-waterfall data-line=""&gt; · noise only</span></figcaption>
         </figure>
       </div>
-      <p class="demo-label kicker">.space · their picture, drawn by the kit</p>
+      <p class="demo-label kicker">.space · the duet, drawn by the kit</p>
       <div class="space" style="height:16rem;border:2px solid var(--text)"><p class="readout" style="padding:1rem;margin:0">&lt;section class="space"&gt; · data-message="off" to leave it out</p></div>
       <p class="demo-label kicker">.readouts</p>
       <dl class="readouts">
@@ -539,9 +538,11 @@
 
 <footer class="site-footer" data-interimm-footer></footer>
 <script type="module">
-  import { BITS, WIDTH, PARTS } from '../app/beacon.js';
-  const part = (row) => (PARTS.find(([a, b]) => row >= a && row <= b) || [])[2];
-  document.getElementById('bits').innerHTML = BITS.map((b, i) => `<i class="${b ? 'on' : ''} ${b ? 'p-' + part((i / WIDTH) | 0) : ''}"></i>`).join('');
+  // the same phaseogram the kit draws behind every hero
+  const { width, height, cell } = window.InterImm.duet;
+  let html = '';
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) html += `<i class="${['', 'pulsar', 'them'][cell(x, y)]}"></i>`;
+  document.getElementById('bits').innerHTML = html;
 </script>
 </body>
 </html>

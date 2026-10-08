@@ -2,9 +2,9 @@
 
 Phase 2 is a conversation across light years, and it looks nothing like phase 1. Phase 1 is paper, ink, serif
 headings and Mars rust. Phase 2 is named 137, for 1/α, the one number both worlds already share and the last
-thing the beacon says. It is built from the first thing they sent: a picture of 667 bits, 23 by 29. Everything
+thing the beacon says. It is drawn like the instruments that heard their first signal, a duet with a pulsar. Everything
 is pixels on deep blue, with signal blue for heroes. Page titles and big numbers are set in a pixel face (everything you read is Instrument Sans), corners are square or stepped, shadows are hard, motion
-steps instead of easing, and their picture is drawn behind every hero. Two voices: white-cyan (`--them`) for what
+steps instead of easing, and the duet is drawn behind every hero as a phaseogram (one pulsar period across, time down). Two voices: white-cyan (`--them`) for what
 reaches us and Sol yellow (`--us`) for what we send. No light theme, no paper, no red, no curves.
 
 The design language of every phase 2 InterImm site, and the code that carries it: principles, colours, type,
@@ -104,12 +104,13 @@ Pick the voice by direction: `.btn-primary` and `.kicker` are white-cyan (receiv
 </figure>
 <time data-story-clock data-format="datetime"></time>     <!-- time (default), date, datetime -->
 <span data-days-since="2219-09-18T03:12:07Z"></span>
-<section class="space">…</section>                        <!-- their picture is drawn behind it; data-message="off" to skip -->
-<span class="tile-icon" data-glyph="dish"></span>          <!-- count, system, dish, hydrogen -->
+<section class="space">…</section>                        <!-- the duet is drawn behind it; data-message="off" to skip -->
+<span class="tile-icon" data-glyph="duet"></span>          <!-- pulsar, duet, beat, chorus -->
 ```
 
 The waterfall reads its colours from CSS, pauses when off screen and stays still for
-visitors who prefer reduced motion. The picture arrives row by row, or all at once for those visitors. The same functions are on `window.InterImm`.
+visitors who prefer reduced motion. The duet arrives row by row, or all at once for those visitors. The old icon names (count, system, dish,
+hydrogen) still work and map to beat, chorus, duet and pulsar. The same functions are on `window.InterImm`.
 
 ## Changing it
 

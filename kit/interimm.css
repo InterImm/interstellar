@@ -5,10 +5,10 @@
    See kit/README.md and the spec page at https://interstellar.interimm.org/kit/.
 
    137 is 1/α, the one number both worlds already share. Phase 2 is a conversation
-   across light years, so it is written in the alphabet
-   of the first message: 667 bits that fold into a 23 × 29 picture. Everything is
-   made of square pixels on deep blue, with signal blue for the open sky. Their voice is the white-cyan of the bits
-   they sent; ours is the yellow of our own star. No curves, no paper, no red:
+   across light years, so it is drawn like the instruments that heard it: their first
+   signal, a duet with a pulsar, plotted as pulses on a grid. Everything is
+   made of square pixels on deep blue, with signal blue for the open sky. Their voice is
+   white-cyan; ours is the yellow of our own star. No curves, no paper, no red:
    phase 1 is serif type on paper with Mars rust, and phase 2 shares nothing with it
    but class names and markup hooks. Keep changes additive. */
 
@@ -136,7 +136,7 @@
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 45%);
   mask-image: linear-gradient(90deg, transparent, #000 45%);
 }
-.message-field { position: absolute; z-index: -1; top: 50%; right: 3%; height: 118%; width: auto; aspect-ratio: 23 / 29; transform: translateY(-50%); pointer-events: none; opacity: 0.1; image-rendering: pixelated; }
+.message-field { position: absolute; z-index: -1; top: 50%; right: 3%; height: 118%; width: auto; aspect-ratio: 25 / 30; transform: translateY(-50%); pointer-events: none; opacity: 0.1; image-rendering: pixelated; }
 @media (max-width: 56rem) { .message-field { opacity: 0.06; right: -10%; } }
 
 /* ---------- base ---------- */
@@ -353,7 +353,7 @@ ul, ol { margin: 0 0 1em; }
   display: inline-grid; place-items: center; width: 2.75rem; height: 2.75rem; margin-bottom: 1.25rem;
   background: var(--them); color: var(--them-ink);
 }
-/* glyphs: a part of the 667-bit picture drawn as an icon by the kit (data-glyph="count|system|dish|hydrogen") */
+/* glyphs: small pixel icons from the duet, drawn by the kit (data-glyph="pulsar|duet|beat|chorus") */
 [data-glyph] canvas { display: block; width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
 .tile-title { font-size: 1.1rem; margin-bottom: 0.4rem; }
 .tile p { color: var(--muted); font-size: 0.97rem; }

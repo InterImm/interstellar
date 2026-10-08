@@ -1,7 +1,7 @@
-// The entrance page: hero readouts, the beacon decoder and the letter outbox.
+// The archive page: hero readouts, the duet heard from four stations and the letter outbox.
 // Everything runs in the browser; letters are kept in this browser only.
 import { ROSS_128 as STAR, YEAR_MS, LY_KM, message, messageProgress, emitted, storyNow, storyFromReal, realFromStory } from '../lib/light.js';
-import { BITS, PRIMES, WIDTH, HEIGHT, PARTS } from './beacon.js';
+import { RATE, renderDuet, phaseRows, STATIONS } from '../lib/signals.js';
 
 const zh = document.documentElement.lang.toLowerCase().startsWith('zh');
 const T = zh ? {
@@ -18,10 +18,14 @@ const T = zh ? {
   tooShort: '先写点什么。',
   saved: '已发出。它会以光速走 10.98 年。',
   unsaved: '已发出，但这个浏览器不能保存它；刷新后就看不到了。',
-  fold: (w) => `每行 ${w} 位`,
-  found: `23 × 29 = 667。两个都是质数，只有这一种折法能成图。`,
-  notYet: (w) => (667 % w === 0 ? `${w} 能整除 667，但图是斜的。试试另一个因数。` : `${w} 除不尽 667，最后一行是残的。`),
-  parts: { count: '数数：1 到 7，用三位二进制', system: '一颗小恒星，只有一颗行星，被圈了起来', dish: '一面天线，向外发出电波', hydrogen: '氢原子的自旋翻转：1420.405 MHz，就是这个频率' },
+  listen: '收听 · 16 秒', stop: '停止',
+  verdict: {
+    earth: '合拍大约七分钟，一次慢慢的拍频，然后又合拍。这是为这里调的。',
+    farside: '速率相同，但差着零点几个脉冲，而且慢慢漂移：每次经过多出两次左右的拍频。',
+    isidis: '两串脉冲每次经过要相互滑过五十次左右。始终没有合上。',
+    ceres: '和火星一样始终合不上，只是朝另一个方向滑，每次经过四十多次。',
+  },
+  plot: (name) => `${name}看到的相位图：时间向下，横向一个脉冲星周期`,
   km: (n) => `${n} 公里`,
   years: (n) => `${n} 年`,
 } : {
@@ -38,10 +42,14 @@ const T = zh ? {
   tooShort: 'Write something first.',
   saved: 'Sent. It will travel at light speed for 10.98 years.',
   unsaved: 'Sent, but this browser could not keep it; it will be gone after a reload.',
-  fold: (w) => `${w} bits per row`,
-  found: '23 × 29 = 667. Both are prime, so this is the only fold that makes a picture.',
-  notYet: (w) => (667 % w === 0 ? `${w} divides 667, but the picture is skewed. Try the other factor.` : `${w} does not divide 667; the last row is ragged.`),
-  parts: { count: 'Counting: 1 to 7, in three-bit binary', system: 'A small star with one planet, circled', dish: 'A dish, sending waves outward', hydrogen: 'The hydrogen spin flip: 1420.405 MHz, the frequency they chose' },
+  listen: 'Listen · 16 s', stop: 'Stop',
+  verdict: {
+    earth: 'In step for about seven minutes, one slow beat, in step again. Tuned for here.',
+    farside: 'The same rate, but a fraction of a pulse apart and slowly drifting: about two extra beats per pass.',
+    isidis: 'The two trains slide past each other about fifty times a pass. They never settle.',
+    ceres: 'Never in step, as at Mars, but sliding the other way, over forty times a pass.',
+  },
+  plot: (name) => `The phaseogram heard at ${name}: time runs down, one pulsar period across`,
   km: (n) => `${n} km`,
   years: (n) => `${n} yr`,
 };
@@ -69,67 +77,86 @@ function readouts() {
   set('dist-km', nf(STAR.distance * LY_KM / 1e12, 1));
 }
 
-// ------------------------------------------------------------------ the beacon
+// ------------------------------------------------------------------ the duet, from four stations
 
-function preamble() {
-  const strip = $('#bitstrip');
-  if (strip) strip.textContent = BITS.join('');
-  const svg = $('#preamble');
-  if (!svg) return;
-  // pulses separated by gaps of 2, 3, 5, 7, ... units
-  const unit = 4, h = 36;
-  let x = 6;
-  const marks = [];
-  const labels = [];
-  for (const p of PRIMES) {
-    marks.push(`<rect x="${x}" y="6" width="2" height="${h - 12}" rx="1" />`);
-    labels.push(`<text x="${x + (p * unit) / 2 + 1}" y="${h + 8}">${p}</text>`);
-    x += p * unit;
-  }
-  marks.push(`<rect x="${x}" y="6" width="2" height="${h - 12}" rx="1" />`);
-  svg.setAttribute('viewBox', `0 0 ${x + 8} ${h + 12}`);
-  svg.innerHTML = `<g class="pulses">${marks.join('')}</g><g class="gaps">${labels.join('')}</g>`;
+const ROWS = 48, COLS = 31;
+let station = STATIONS[0];
+let audio = null, playing = null;
+
+// Columns to light in row r: their pulse, joined to the row above by a stepped run when the step is small
+// (a slow slip reads as one line; a fast drift stays as scattered dots).
+function traceCols(rows, r, cols, mid) {
+  const colOf = (ph) => (Math.round(mid + ph * cols) % cols + cols) % cols;
+  const c = colOf(rows[r]);
+  if (!r) return [c];
+  const p = colOf(rows[r - 1]);
+  let d = c - p; if (d > cols / 2) d -= cols; if (d < -cols / 2) d += cols;
+  if (Math.abs(d) > cols / 4) return [c];
+  return Array.from({ length: Math.abs(d) + 1 }, (_, k) => (p + Math.sign(d) * k + cols) % cols);
 }
 
-function decoder() {
-  const canvas = $('#fold');
-  const range = $('#fold-width');
-  if (!canvas || !range) return;
-  const out = $('#fold-value');
-  const verdict = $('#fold-verdict');
-  const legend = $('#fold-legend');
+function drawDuet(t = null, sig = null) {
+  const canvas = $('#duet');
+  if (!canvas) return;
+  const W = canvas.clientWidth || 300, H = canvas.clientHeight || 360;
+  const dpr = Math.min(2, devicePixelRatio || 1);
+  canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
   const ctx = canvas.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const s = getComputedStyle(canvas), col = (v) => s.getPropertyValue(v).trim();
+  const cell = Math.floor(Math.min((W - 16) / COLS, (H - 16) / ROWS));
+  const x0 = Math.round((W - cell * COLS) / 2), y0 = Math.round((H - cell * ROWS) / 2), mid = (COLS - 1) / 2;
+  const rows = phaseRows(ROWS, station);
+  const upto = t == null || !sig ? ROWS : Math.round(Math.max(0, Math.min(1, (t - sig.intro) / sig.pass)) * ROWS);
+  const sq = (c, r, colour) => { ctx.fillStyle = colour; ctx.fillRect(x0 + c * cell, y0 + r * cell, cell - 1, cell - 1); };
+  for (let r = 0; r < ROWS; r++) {
+    for (let c = 0; c < COLS; c++) sq(c, r, col('--plot-grid'));
+    sq(mid, r, col('--plot-dim'));
+    if (r < upto) for (const c of traceCols(rows, r, COLS, mid)) sq(c, r, col('--them'));
+  }
+  canvas.setAttribute('aria-label', T.plot(station.name[zh ? 'zh' : 'en']));
+}
 
-  const draw = () => {
-    const w = Number(range.value);
-    const rows = Math.ceil(BITS.length / w);
-    const cell = Math.max(3, Math.floor(Math.min(560 / w, 560 / rows)));
-    canvas.width = w * cell;
-    canvas.height = rows * cell;
-    const s = getComputedStyle(canvas);
-    ctx.fillStyle = s.getPropertyValue('--scope').trim() || '#0d1228';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    const solved = w === WIDTH;
-    BITS.forEach((b, i) => {
-      if (!b) return;
-      const x = (i % w) * cell, y = Math.floor(i / w) * cell;
-      ctx.fillStyle = solved ? s.getPropertyValue('--signal').trim() : s.getPropertyValue('--noise').trim();
-      ctx.fillRect(x + 0.5, y + 0.5, cell - 1, cell - 1);
-    });
-    out.textContent = T.fold(w);
-    canvas.setAttribute('aria-label', solved ? Object.values(T.parts).join('. ') : T.fold(w));
-    verdict.textContent = solved ? T.found : T.notYet(w);
-    verdict.classList.toggle('is-found', solved);
-    legend.hidden = !solved;
-    if (solved) {
-      legend.style.setProperty('--rows', HEIGHT);
-      legend.innerHTML = PARTS.map(([a, b, key]) => `<li style="--from:${a};--to:${b + 1}"><span class="readout">${pad(a)}–${pad(b)}</span> ${T.parts[key]}</li>`).join('');
-    }
+function stopDuet() {
+  if (!playing) return;
+  const p = playing; playing = null;
+  try { p.source.stop(); } catch { /* already ended */ }
+  $('#duet-play').textContent = T.listen;
+  drawDuet();
+}
+
+function playDuet() {
+  if (playing) { stopDuet(); return; }
+  audio ??= new (window.AudioContext || window.webkitAudioContext)();
+  audio.resume?.();
+  const sig = renderDuet({ station });
+  const buf = audio.createBuffer(1, sig.samples.length, RATE);
+  buf.getChannelData(0).set(sig.samples);
+  const source = audio.createBufferSource();
+  source.buffer = buf; source.connect(audio.destination);
+  const start = audio.currentTime + 0.05;
+  source.start(start);
+  playing = { source };
+  source.onended = () => { if (playing?.source === source) stopDuet(); };
+  $('#duet-play').textContent = T.stop;
+  const tick = () => { if (playing?.source !== source) return; drawDuet(audio.currentTime - start, sig); requestAnimationFrame(tick); };
+  requestAnimationFrame(tick);
+}
+
+function duetDemo() {
+  if (!$('#duet')) return;
+  const pick = (id) => {
+    station = STATIONS.find((x) => x.id === id) || STATIONS[0];
+    document.querySelectorAll('[data-station]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.station === station.id)));
+    $('#duet-verdict').textContent = T.verdict[station.id];
+    $('#duet-verdict').classList.toggle('is-found', station.id === 'earth');
+    stopDuet();
+    drawDuet();
   };
-  range.addEventListener('input', draw);
-  $('#fold-hint')?.addEventListener('click', () => { range.value = WIDTH; draw(); range.focus(); });
-  matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', draw);
-  draw();
+  document.querySelectorAll('[data-station]').forEach((b) => b.addEventListener('click', () => pick(b.dataset.station)));
+  $('#duet-play').addEventListener('click', playDuet);
+  addEventListener('resize', () => { if (!playing) drawDuet(); });
+  pick('earth');
 }
 
 // ------------------------------------------------------------------ letters
@@ -225,8 +252,7 @@ function letterForm() {
 // ------------------------------------------------------------------ start
 
 readouts();
-preamble();
-decoder();
+duetDemo();
 sharedFromUrl();
 letterForm();
 renderOutbox();

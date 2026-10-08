@@ -1,8 +1,7 @@
 // Five transmissions: draw each one, and play it. The signals themselves are built in lib/signals.js;
 // this file only draws them in the kit's pixel style and drives the audio (Web Audio, started by a click).
-import { BITS, PRIMES, WIDTH, HEIGHT } from './beacon.js';
 import {
-  RATE, renderPicture, renderShadow, shadowSequence, renderPulsars, pulsarShifts, renderChords, CHORDS, LINES,
+  RATE, renderDuet, renderChorus, renderNote, phaseRows, chorusOffsets, DUET, NOTE_PAIR, NOTE_HZ, renderShadow, shadowSequence, renderPulsars, pulsarShifts, renderChords, CHORDS, LINES,
   renderAlpha, alphaRounds, ALPHA_INV,
 } from '../lib/signals.js';
 
@@ -13,12 +12,14 @@ const nf = (n, d = 0) => n.toLocaleString(zh ? 'zh-CN' : 'en', { maximumFraction
 const yr = (y) => { const bce = y <= 0 ? Math.max(1, Math.round((1 - y) / 100) * 100) : 0; return zh ? (bce ? `前${bce}` : `${y}`) : bce ? `${bce} BCE` : `${y}`; };
 
 const T = zh ? {
-  listen: '收听', stop: '停止', bit: (i) => `第 ${i + 1} / 667 位`, prime: (p) => `前导 · ${p}`, ready: '点“收听”',
+  listen: '收听', stop: '停止', ready: '点“收听”',
+  first: { pulsar: `${DUET.name} 独自 · 339 Hz`, lock: '合拍', slip: '滑过一个脉冲', gather: '许多声音正在聚拢', one: `${NOTE_PAIR[0].name}`, two: `再加上 ${NOTE_PAIR[1].name}`, chord: `第三个音 · ${Math.round(NOTE_HZ)} Hz · 两者之差` },
   earth: (y, h) => `地球 · ${yr(y)} · ${h ? `${nf(h, 1)} 小时` : '没有凌日'}`, ross: '罗斯128 b · 1.3 小时 · 深 31 倍',
   pulsar: (p) => `${p.name} · ${p.p < 0.1 ? `${nf(1 / p.p, 0)} Hz` : `每 ${nf(p.p, 2)} 秒一下`}`, all: '十二颗一起',
   chord: (i) => `和弦 ${i + 1} · ${chordName(i)}`, round: (k) => `第 ${k + 1} 轮 · 滑移 ${nf((k * ALPHA_INV) % 1, 3)}`,
 } : {
-  listen: 'Listen', stop: 'Stop', bit: (i) => `bit ${i + 1} of 667`, prime: (p) => `preamble · ${p}`, ready: 'press Listen',
+  listen: 'Listen', stop: 'Stop', ready: 'press Listen',
+  first: { pulsar: `${DUET.name} alone · 339 Hz`, lock: 'in step', slip: 'slipping by one pulse', gather: 'voices gathering', one: `${NOTE_PAIR[0].name}`, two: `and ${NOTE_PAIR[1].name}`, chord: `a third tone · ${Math.round(NOTE_HZ)} Hz · the difference` },
   earth: (y, h) => `Earth · ${yr(y)} · ${h ? `${nf(h, 1)} h` : 'no transit'}`, ross: 'Ross 128 b · 1.3 h · 31× deeper',
   pulsar: (p) => `${p.name} · ${p.p < 0.1 ? `${nf(1 / p.p, 0)} Hz` : `one tick per ${nf(p.p, 2)} s`}`, all: 'all twelve together',
   chord: (i) => `chord ${i + 1} · ${chordName(i)}`, round: (k) => `round ${k + 1} · slip ${nf((k * ALPHA_INV) % 1, 3)}`,
@@ -44,23 +45,67 @@ const px = (v) => Math.round(v) + 0.5;
 // the event sounding at time t, or null
 const current = (events, t) => (t == null ? null : events.filter((e) => e.t <= t).pop() ?? null);
 
-// ------------------------------------------------------------------ 1. picture
+// ------------------------------------------------------------------ 1. the duet, and its other cases
 
-function drawPicture(t) {
-  const { ctx, W, H, col } = prep($('#cv-picture'));
-  const sig = signal('picture');
+// A phaseogram: time runs down, one pulsar period runs across. The pulsar's pulse is the column in the middle;
+// theirs is drawn on top. Rows fill in as the sound plays.
+const ROWS = 40, COLS = 31;
+const DUET_ROWS = phaseRows(ROWS);
+let firstShown = 'duet';
+
+// Columns to light in row r: their pulse, joined to the row above by a stepped run when the step is small
+// (a slow slip reads as one line; a fast drift stays as scattered dots).
+function traceCols(rows, r, cols, mid) {
+  const colOf = (ph) => (Math.round(mid + ph * cols) % cols + cols) % cols;
+  const c = colOf(rows[r]);
+  if (!r) return [c];
+  const p = colOf(rows[r - 1]);
+  let d = c - p; if (d > cols / 2) d -= cols; if (d < -cols / 2) d += cols;
+  if (Math.abs(d) > cols / 4) return [c];
+  return Array.from({ length: Math.abs(d) + 1 }, (_, k) => (p + Math.sign(d) * k + cols) % cols);
+}
+
+function drawFirst(id, t) {
+  firstShown = id;
+  const { ctx, W, H, col } = prep($('#cv-duet'));
+  const sig = signal(id);
   const ev = current(sig.events, t);
-  const upto = t == null ? BITS.length : ev?.kind === 'bit' ? ev.i + 1 : 0;
-  const cell = Math.floor(Math.min((W - 24) / WIDTH, (H - 24) / HEIGHT));
-  const x0 = Math.round((W - cell * WIDTH) / 2), y0 = Math.round((H - cell * HEIGHT) / 2);
-  for (let i = 0; i < BITS.length; i++) {
-    const x = x0 + (i % WIDTH) * cell, y = y0 + Math.floor(i / WIDTH) * cell;
-    ctx.fillStyle = i < upto ? (BITS[i] ? col('--them') : col('--plot-grid')) : col('--plot-grid');
-    if (i < upto || !BITS[i]) ctx.fillRect(x, y, cell - 1, cell - 1);
-    else { ctx.globalAlpha = 0.25; ctx.fillStyle = col('--plot-dim'); ctx.fillRect(x, y, cell - 1, cell - 1); ctx.globalAlpha = 1; }
+  if (id === 'note') return drawNote(ctx, W, H, col, ev, t);
+  const cell = Math.floor(Math.min((W - 24) / COLS, (H - 24) / ROWS));
+  const x0 = Math.round((W - cell * COLS) / 2), y0 = Math.round((H - cell * ROWS) / 2);
+  const mid = (COLS - 1) / 2;
+  const colOf = (ph) => (Math.round(mid + ph * COLS) % COLS + COLS) % COLS;
+  // how many rows have been heard: none during the intro, then in step with the pass
+  const s = t == null ? 1 : Math.max(0, Math.min(1, (t - sig.intro) / sig.pass));
+  const upto = Math.round(s * ROWS);
+  const sq = (c, r, colour, a = 1) => { ctx.globalAlpha = a; ctx.fillStyle = colour; ctx.fillRect(x0 + c * cell, y0 + r * cell, cell - 1, cell - 1); ctx.globalAlpha = 1; };
+  for (let r = 0; r < ROWS; r++) {
+    for (let c = 0; c < COLS; c++) sq(c, r, col('--plot-grid'));
+    sq(mid, r, col('--plot-dim'));
+    if (r >= upto) continue;
+    if (id === 'duet') for (const c of traceCols(DUET_ROWS, r, COLS, mid)) sq(c, r, col('--them'));
+    else for (const o of chorusOffsets((r + 0.5) / ROWS)) sq(colOf(o - Math.floor(o)), r, col('--them'), 0.35);
   }
-  if (ev?.kind === 'bit') { const x = x0 + (ev.i % WIDTH) * cell, y = y0 + Math.floor(ev.i / WIDTH) * cell; ctx.strokeStyle = col('--us'); ctx.strokeRect(px(x - 1), px(y - 1), cell, cell); }
-  caption('picture', ev ? (ev.kind === 'bit' ? T.bit(ev.i) : T.prime(ev.p)) : null);
+  if (t != null && upto < ROWS) { ctx.strokeStyle = col('--us'); ctx.strokeRect(px(x0 - 1), px(y0 + upto * cell - 1), COLS * cell, cell); }
+  caption('first', ev && t < ev.end ? T.first[ev.kind] : null);
+}
+
+// The missing note: three bars on a frequency axis, the two pulsars and their difference.
+function drawNote(ctx, W, H, col, ev, t) {
+  const lo = 120, hi = 380, left = 16, right = W - 16, base = H - 34, top = 24;
+  const X = (f) => left + ((f - lo) / (hi - lo)) * (right - left);
+  ctx.fillStyle = col('--plot-axis'); ctx.fillRect(left, base, right - left, 1);
+  ctx.fillStyle = col('--muted'); ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+  for (const f of [150, 200, 250, 300, 350]) ctx.fillText(`${f} Hz`, X(f), H - 12);
+  const step = t == null ? 3 : ev ? ['one', 'two', 'chord'].indexOf(ev.kind) + 1 : 0;
+  const bars = [[1 / NOTE_PAIR[0].p, NOTE_PAIR[0].name, '--plot-dim', 1], [1 / NOTE_PAIR[1].p, NOTE_PAIR[1].name, '--plot-dim', 2], [NOTE_HZ, zh ? '他们' : 'them', '--them', 3]];
+  for (const [f, label, c, k] of bars) {
+    ctx.globalAlpha = step >= k ? 1 : 0.2;
+    ctx.fillStyle = col(c); ctx.fillRect(Math.round(X(f)) - 4, top + 16, 8, base - top - 16);
+    ctx.fillStyle = col(c === '--them' ? '--them' : '--text'); ctx.fillText(label, X(f), top + 8);
+    ctx.globalAlpha = 1;
+  }
+  caption('first', ev && t < ev.end ? T.first[ev.kind] : null);
 }
 
 // ------------------------------------------------------------------ 2. shadow
@@ -179,13 +224,15 @@ function drawNumber(t) {
 // ------------------------------------------------------------------ signals, built once each
 
 const BUILD = {
-  picture: () => renderPicture(BITS, PRIMES),
+  duet: () => renderDuet(),
+  chorus: () => renderChorus(),
+  note: () => renderNote(),
   shadow: () => renderShadow(shadowSequence()),
   pulsars: () => renderPulsars(PSR),
   chords: () => renderChords(),
   number: () => renderAlpha({ rounds: 6 }),
 };
-const DRAW = { picture: drawPicture, shadow: drawShadow, pulsars: drawPulsars, chords: drawChords, number: drawNumber };
+const DRAW = { duet: (t) => drawFirst('duet', t), chorus: (t) => drawFirst('chorus', t), note: (t) => drawFirst('note', t), shadow: drawShadow, pulsars: drawPulsars, chords: drawChords, number: drawNumber };
 const cache = {};
 const signal = (id) => (cache[id] ??= BUILD[id]());
 function caption(id, text) { const el = document.querySelector(`[data-cap="${id}"]`); if (el) el.textContent = text ?? T.ready; }
@@ -229,7 +276,11 @@ function play(id, button) {
 
 document.querySelectorAll('[data-play]').forEach((b) => b.addEventListener('click', () => play(b.dataset.play, b)));
 
-const drawAll = () => Object.keys(DRAW).forEach((id) => { if (playing?.id !== id) DRAW[id](null); });
+// transmission 1 has three cases on one canvas: redraw whichever was shown last
+const drawAll = () => ['first', 'shadow', 'pulsars', 'chords', 'number'].forEach((id) => {
+  const key = id === 'first' ? firstShown : id;
+  if (id === 'first' ? !['duet', 'chorus', 'note'].includes(playing?.id) : playing?.id !== id) DRAW[key](null);
+});
 let resizeTimer;
 addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(drawAll, 100); });
 drawAll();

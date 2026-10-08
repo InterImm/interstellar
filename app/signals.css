@@ -13,7 +13,7 @@
 .signals-split p { margin: 0; max-width: 38rem; }
 .signals-split .section-title { margin: 0; }
 .signals-split .scope canvas { height: clamp(16rem, 34vw, 24rem); }
-#cv-picture { image-rendering: pixelated; }
+
 
 /* Readings under the resonance theory: a working theory in the story, not a decoding. */
 .signals-split .theory { padding-left: 0.9rem; border-left: 4px solid var(--them); }
@@ -24,3 +24,9 @@
 .tick-them { color: var(--them); }
 
 @media (max-width: 52rem) { .signals-split { --split: minmax(0, 1fr); } }
+
+/* Transmission 1: its three cases, and the pulsar's own column in the phaseogram */
+.play-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.cases { display: grid; gap: 0.6rem; margin: 0; padding-left: 1.1rem; max-width: 38rem; }
+.cases .btn { margin-left: 0.4rem; padding-block: 0.2rem; font-size: 0.85rem; vertical-align: baseline; }
+.tick-mid { font-style: normal; color: var(--plot-dim); }
