@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN" class="js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>网格文字转换器 | 通联纪</title>
+<meta name="description" content="把网格文字写成文字，看它画出来；或者在网格上画，再读回文字和知识图谱。全部在浏览器里运行。">
+<link rel="alternate" hreflang="zh-CN" href="https://interstellar.interimm.org/script/convert/">
+<link rel="alternate" hreflang="en" href="https://interstellar.interimm.org/script/convert/en/">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../kit/interimm.css">
+<link rel="stylesheet" href="../../app/script.css">
+<script src="../../kit/interimm.js" defer></script>
+<script type="module" src="../../app/script.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到正文</a>
+
+<header class="site-header" data-interimm-header data-lang="cn" data-current="script" data-lang-en="en/">
+  <div class="wrap header-inner">
+    <a class="brand" href="../../"><span class="brand-dot" aria-hidden="true"></span><span class="brand-name">通联纪</span></a>
+  </div>
+</header>
+
+<main id="main" data-gs="converter">
+  <header class="hero gs-hero">
+    <div class="wrap">
+      <p class="kicker-out">网格文字 · 转换器</p>
+      <h1>文字变图，图变文字</h1>
+      <p class="lede">把一页写成文字，看它画出来；或者在网格上画，再把它读回来。两个方向都会像翻译机那样，把这一页读成一张图。所有内容都不会离开你的浏览器。</p>
+      <nav class="tabs gs-tabs" aria-label="网格文字">
+        <a href="../">原理</a><a href="../dictionary/">词典</a><a href="./" aria-current="page">转换器</a>
+      </nav>
+    </div>
+  </header>
+
+  <p class="wrap note" data-gs-fail hidden>转换器需要 JavaScript 和词表文件，没能加载。</p>
+
+  <section class="section" id="forward" aria-labelledby="forward-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title" id="forward-title">文字 → 图</h2>
+        <p class="section-lede">每行一个声部：<code>符号: 节点 | 关系 | 节点</code>。词写成<a href="../dictionary/">词典</a>里的 <code>类.指</code>，数写成 <code>COUNT.n</code>，<code>_</code> 表示空。一句下面的行是其他声音在回应它。空一行开始下一句。<code>#</code> 后面是注释。</p>
+      </div>
+      <div class="gs-pane">
+        <div>
+          <label class="field">例子
+            <select id="gs-examples">
+              <option value="">选一个例子 …</option>
+              <option value="# 他们说话：三句。空一行开始下一条边。\n+: BODY.OTHER | ONE | BODY.AIR\n×: _ | _ | _.WATER\n*: _ | _ | _.AIR\n\n+: SELF | LIGHT.BEFORE | BODY.OTHER\n\n+: SELF | VOICE.ONE | ONE\n">一场对话</option>
+              <option value="# “我们看见过你们的世界。”\n+: SELF | LIGHT.BEFORE | BODY.OTHER\n">我们看见过你们的世界</option>
+              <option value="# “我们看不见你们了。”（影子那段发射）\n+: SELF | LIGHT.BEFORE | OTHER\n\n+: SELF | LIGHT.NOT | OTHER\n">我们看不见你们了</option>
+              <option value="# “你们的世界是水世界。我们看见过那个。”\n+: BODY.OTHER | ONE | BODY.WATER\n\n+: SELF | LIGHT.BEFORE | ONE\n">我们看见过那个</option>
+              <option value="# “我们看见脉冲星。脉冲星有十二颗。”\n+: SELF | LIGHT.ONE | STAR.TIME\n\n+: STAR.TIME | ONE | COUNT.12\n">十二颗脉冲星</option>
+              <option value="# “你们的世界是什么？”我们的回答：水世界。\n+: BODY.OTHER | ONE | OPEN\n×: _ | _ | BODY.WATER\n">一个问题</option>
+              <option value="# “脉冲星有多少颗？”十二颗。\n+: STAR.TIME | ONE | OPEN.COUNT\n×: _ | _ | COUNT.12\n">多少？</option>
+              <option value="# 第三个声音站在他们一边，反对我们对自己世界的说法。\n+: BODY.OTHER | ONE | BODY.AIR\n×: _ | _ | _.WATER\n*: _ | _ | _.AIR\n">第三个声音</option>
+            </select>
+          </label>
+          <label class="field">页面源文 <textarea id="gs-src" rows="9" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea></label>
+          <p class="gs-error" id="gs-src-err" role="alert" hidden></p>
+          <p class="note">符号：<span class="gs-ink-them">+</span> 是他们，<span class="gs-ink-us">×</span> 是我们；其他任何单个字符是另一个声音。</p>
+        </div>
+        <div class="gs-out">
+          <div class="gs-draw" id="gs-out" role="img" aria-label="画出来的这一页"></div>
+          <div class="gs-actions">
+            <button type="button" class="btn btn-sm btn-ghost" id="gs-copy-rows">复制文字图</button>
+            <button type="button" class="btn btn-sm btn-ghost" id="gs-svg">下载 SVG</button>
+            <button type="button" class="btn btn-sm btn-ghost" id="gs-link">复制链接</button>
+            <button type="button" class="btn btn-sm btn-send" id="gs-to-editor">修改这幅图 ↓</button>
+          </div>
+          <div id="gs-graph" aria-live="polite"></div>
+          <details><summary class="note">用文字表示的图</summary><pre class="gs-rows" id="gs-rows"></pre></details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="reverse" aria-labelledby="reverse-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title" id="reverse-title">图 → 文字</h2>
+        <p class="section-lede">选一个部件，点一个位置把它盖上去；或者选“单格”随手画。颜色浅一些的方块是格点：文字只会落在那里，画在它们之间的记号会让它变成一幅图。也可以粘贴用文字表示的图，每行一排，<code>.</code> 表示空格。</p>
+      </div>
+      <div class="gs-pane">
+        <div>
+          <div class="gs-controls">
+            <fieldset class="gs-symbols">
+              <legend>用谁的记号</legend>
+              <label><input type="radio" name="gs-symbol" value="+" checked> <span class="gs-ink-them">+</span> 他们</label>
+              <label><input type="radio" name="gs-symbol" value="×"> <span class="gs-ink-us">×</span> 我们</label>
+              <label><input type="radio" name="gs-symbol" value="other"> 其他 <input type="text" id="gs-own" value="*" maxlength="2" aria-label="另一个声音的符号"></label>
+            </fieldset>
+          </div>
+          <div class="gs-palette" id="gs-palette" role="group" aria-label="部件"></div>
+          <div class="gs-controls">
+            <label class="field">数 <input type="number" id="gs-num" min="0" max="511" value="12"></label>
+            <label class="field">句数 <input type="number" id="gs-lines" min="1" max="12" value="2"></label>
+            <label class="field">声音数 <select id="gs-voices"><option>1</option><option selected>2</option><option>3</option></select></label>
+            <button type="button" class="btn btn-sm btn-ghost" id="gs-clear">清空</button>
+          </div>
+          <div class="gs-draw gs-editor" id="gs-editor" aria-label="画图的网格；旁边的文本框里是同一幅图"></div>
+        </div>
+        <div>
+          <label class="field">用文字表示的图 <textarea id="gs-drawing" rows="10" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea></label>
+          <p class="gs-error" id="gs-back-err" role="alert" hidden></p>
+          <p class="note">读回的页面源文：</p>
+          <pre class="gs-src" id="gs-back" aria-live="polite"></pre>
+          <div class="gs-actions"><button type="button" class="btn btn-sm btn-primary" id="gs-to-source">用作文字 ↑</button></div>
+          <div id="gs-back-graph"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" data-interimm-footer>
+  <div class="wrap"><p class="footer-legal"><span>© InterImm星际移民中心</span><a href="../../">通联纪</a></p></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en" class="js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Grid script converter | The Contact Era</title>
+<meta name="description" content="Write a page of the grid script as text and see it drawn, or draw on the grid and read it back as text and as a knowledge graph. Runs in your browser.">
+<link rel="alternate" hreflang="zh-CN" href="https://interstellar.interimm.org/script/convert/">
+<link rel="alternate" hreflang="en" href="https://interstellar.interimm.org/script/convert/en/">
+<link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../kit/interimm.css">
+<link rel="stylesheet" href="../../../app/script.css">
+<script src="../../../kit/interimm.js" defer></script>
+<script type="module" src="../../../app/script.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" data-interimm-header data-lang="en" data-current="script" data-lang-cn="../">
+  <div class="wrap header-inner">
+    <a class="brand" href="../../../en/"><span class="brand-dot" aria-hidden="true"></span><span class="brand-name">The Contact Era</span></a>
+  </div>
+</header>
+
+<main id="main" data-gs="converter">
+  <header class="hero gs-hero">
+    <div class="wrap">
+      <p class="kicker-out">Grid script · converter</p>
+      <h1>Text to grid, grid to text</h1>
+      <p class="lede">Write a page as text and see it drawn, or draw on the grid and read it back. Both ways also read the page as a graph, the way the translating machine does. Nothing leaves your browser.</p>
+      <nav class="tabs gs-tabs" aria-label="Grid script">
+        <a href="../../en/">The idea</a><a href="../../dictionary/en/">Dictionary</a><a href="./" aria-current="page">Converter</a>
+      </nav>
+    </div>
+  </header>
+
+  <p class="wrap note" data-gs-fail hidden>The converter needs JavaScript and the vocabulary file; they could not load.</p>
+
+  <section class="section" id="forward" aria-labelledby="forward-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title" id="forward-title">Text → drawing</h2>
+        <p class="section-lede">One band per row: <code>SYMBOL: node | relation | node</code>. Words are <code>KIND.WHICH</code> from the <a href="../../dictionary/en/">dictionary</a>, numbers are <code>COUNT.n</code>, and <code>_</code> is empty. Rows under a statement are other voices answering it. A blank row starts the next statement. <code>#</code> starts a comment.</p>
+      </div>
+      <div class="gs-pane">
+        <div>
+          <label class="field">Examples
+            <select id="gs-examples">
+              <option value="">Pick an example …</option>
+              <option value="# They speak: three statements. A blank line starts the next edge.\n+: BODY.OTHER | ONE | BODY.AIR\n×: _ | _ | _.WATER\n*: _ | _ | _.AIR\n\n+: SELF | LIGHT.BEFORE | BODY.OTHER\n\n+: SELF | VOICE.ONE | ONE\n">A conversation</option>
+              <option value="# &quot;We saw your world.&quot;\n+: SELF | LIGHT.BEFORE | BODY.OTHER\n">We saw your world</option>
+              <option value="# &quot;We no longer see you.&quot; (the shadow transmission)\n+: SELF | LIGHT.BEFORE | OTHER\n\n+: SELF | LIGHT.NOT | OTHER\n">We no longer see you</option>
+              <option value="# &quot;Your world is water. We saw that.&quot;\n+: BODY.OTHER | ONE | BODY.WATER\n\n+: SELF | LIGHT.BEFORE | ONE\n">We saw that</option>
+              <option value="# &quot;We see pulsars. The pulsars are twelve.&quot;\n+: SELF | LIGHT.ONE | STAR.TIME\n\n+: STAR.TIME | ONE | COUNT.12\n">Twelve pulsars</option>
+              <option value="# &quot;Your world is what?&quot; and our answer: a water-world.\n+: BODY.OTHER | ONE | OPEN\n×: _ | _ | BODY.WATER\n">A question</option>
+              <option value="# &quot;How many pulsars?&quot; Twelve.\n+: STAR.TIME | ONE | OPEN.COUNT\n×: _ | _ | COUNT.12\n">How many?</option>
+              <option value="# A third voice sides with them, against us, about our own world.\n+: BODY.OTHER | ONE | BODY.AIR\n×: _ | _ | _.WATER\n*: _ | _ | _.AIR\n">A third voice</option>
+            </select>
+          </label>
+          <label class="field">Page source <textarea id="gs-src" rows="9" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea></label>
+          <p class="gs-error" id="gs-src-err" role="alert" hidden></p>
+          <p class="note">Symbols: <span class="gs-ink-them">+</span> is them, <span class="gs-ink-us">×</span> is us; any other single character is another voice.</p>
+        </div>
+        <div class="gs-out">
+          <div class="gs-draw" id="gs-out" role="img" aria-label="The page, drawn"></div>
+          <div class="gs-actions">
+            <button type="button" class="btn btn-sm btn-ghost" id="gs-copy-rows">Copy as text</button>
+            <button type="button" class="btn btn-sm btn-ghost" id="gs-svg">Download SVG</button>
+            <button type="button" class="btn btn-sm btn-ghost" id="gs-link">Copy link</button>
+            <button type="button" class="btn btn-sm btn-send" id="gs-to-editor">Edit the drawing ↓</button>
+          </div>
+          <div id="gs-graph" aria-live="polite"></div>
+          <details><summary class="note">The drawing as text</summary><pre class="gs-rows" id="gs-rows"></pre></details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="reverse" aria-labelledby="reverse-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title" id="reverse-title">Drawing → text</h2>
+        <p class="section-lede">Pick a part and click a position to stamp it, or pick "one cell" and draw freely. The lighter squares are the lattice: text only ever sits there, so a mark between them makes it a picture. You can also paste a drawing as text, one row per line, with <code>.</code> for empty cells.</p>
+      </div>
+      <div class="gs-pane">
+        <div>
+          <div class="gs-controls">
+            <fieldset class="gs-symbols">
+              <legend>Draw as</legend>
+              <label><input type="radio" name="gs-symbol" value="+" checked> <span class="gs-ink-them">+</span> them</label>
+              <label><input type="radio" name="gs-symbol" value="×"> <span class="gs-ink-us">×</span> us</label>
+              <label><input type="radio" name="gs-symbol" value="other"> other <input type="text" id="gs-own" value="*" maxlength="2" aria-label="Another voice's symbol"></label>
+            </fieldset>
+          </div>
+          <div class="gs-palette" id="gs-palette" role="group" aria-label="Parts"></div>
+          <div class="gs-controls">
+            <label class="field">Number <input type="number" id="gs-num" min="0" max="511" value="12"></label>
+            <label class="field">Lines <input type="number" id="gs-lines" min="1" max="12" value="2"></label>
+            <label class="field">Voices <select id="gs-voices"><option>1</option><option selected>2</option><option>3</option></select></label>
+            <button type="button" class="btn btn-sm btn-ghost" id="gs-clear">Clear</button>
+          </div>
+          <div class="gs-draw gs-editor" id="gs-editor" aria-label="Drawing grid; the text box below has the same drawing"></div>
+        </div>
+        <div>
+          <label class="field">The drawing as text <textarea id="gs-drawing" rows="10" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea></label>
+          <p class="gs-error" id="gs-back-err" role="alert" hidden></p>
+          <p class="note">Read back as page source:</p>
+          <pre class="gs-src" id="gs-back" aria-live="polite"></pre>
+          <div class="gs-actions"><button type="button" class="btn btn-sm btn-primary" id="gs-to-source">Use as text ↑</button></div>
+          <div id="gs-back-graph"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" data-interimm-footer>
+  <div class="wrap"><p class="footer-legal"><span>© InterImm</span><a href="../../../en/">The Contact Era</a></p></div>
+</footer>
+</body>
+</html>

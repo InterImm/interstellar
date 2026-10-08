@@ -1,0 +1,545 @@
+{
+ "version": 1,
+ "parts": {
+  "SELF": {
+   "shape": [
+    "###",
+    "#.#",
+    "###"
+   ],
+   "thing": "we",
+   "relation": "know"
+  },
+  "OTHER": {
+   "shape": [
+    "###",
+    "#..",
+    "###"
+   ],
+   "thing": "you",
+   "relation": "answer"
+  },
+  "STAR": {
+   "shape": [
+    ".#.",
+    "###",
+    ".#."
+   ],
+   "thing": "star",
+   "relation": "shine on"
+  },
+  "LIGHT": {
+   "shape": [
+    "#.#",
+    ".#.",
+    "#.#"
+   ],
+   "thing": "light",
+   "relation": "see"
+  },
+  "BODY": {
+   "shape": [
+    "###",
+    "###",
+    "###"
+   ],
+   "thing": "world, matter",
+   "relation": "have, contain"
+  },
+  "AIR": {
+   "shape": [
+    "#.#",
+    "...",
+    "#.#"
+   ],
+   "thing": "air",
+   "relation": "carry"
+  },
+  "WATER": {
+   "shape": [
+    "###",
+    "...",
+    "###"
+   ],
+   "thing": "water",
+   "relation": "flow to"
+  },
+  "TIME": {
+   "shape": [
+    "#.#",
+    "#.#",
+    "#.#"
+   ],
+   "thing": "time",
+   "relation": "last, wait"
+  },
+  "VOICE": {
+   "shape": [
+    "#..",
+    "##.",
+    "###"
+   ],
+   "thing": "sound",
+   "relation": "say, send"
+  },
+  "PATH": {
+   "shape": [
+    "...",
+    "###",
+    "..."
+   ],
+   "thing": "way, between",
+   "relation": "go to, reach"
+  },
+  "NOT": {
+   "shape": [
+    "#..",
+    ".#.",
+    "..#"
+   ],
+   "thing": "not",
+   "relation": null
+  },
+  "ONE": {
+   "shape": [
+    "...",
+    ".#.",
+    "..."
+   ],
+   "thing": "one, this, the same",
+   "relation": "is, equals"
+  },
+  "BEFORE": {
+   "shape": [
+    "...",
+    "#..",
+    "..."
+   ],
+   "thing": "earlier",
+   "relation": null
+  },
+  "AFTER": {
+   "shape": [
+    "...",
+    "..#",
+    "..."
+   ],
+   "thing": "later",
+   "relation": null
+  },
+  "OPEN": {
+   "shape": [
+    ".#.",
+    "#.#",
+    ".#."
+   ],
+   "thing": "what goes here?",
+   "relation": null
+  },
+  "COUNT": {
+   "shape": [
+    "...",
+    "...",
+    "###"
+   ],
+   "thing": "number",
+   "relation": null
+  }
+ },
+ "markers": {
+  "_": "no tense",
+  "BEFORE": "past",
+  "ONE": "now",
+  "AFTER": "future",
+  "PATH": "always",
+  "NOT": "not",
+  "OPEN": "asked: does it?"
+ },
+ "words": [
+  {
+   "kind": "SELF",
+   "which": null,
+   "gloss": "we",
+   "domain": "People and voices",
+   "note": "the one drawing"
+  },
+  {
+   "kind": "OTHER",
+   "which": null,
+   "gloss": "you",
+   "domain": "People and voices",
+   "note": "the one reading"
+  },
+  {
+   "kind": "OTHER",
+   "which": "OTHER",
+   "gloss": "a third party",
+   "domain": "People and voices",
+   "note": "\"another you\""
+  },
+  {
+   "kind": "ONE",
+   "which": "SELF",
+   "gloss": "one of us",
+   "domain": "People and voices",
+   "note": "an individual"
+  },
+  {
+   "kind": "ONE",
+   "which": "OTHER",
+   "gloss": "one of you",
+   "domain": "People and voices",
+   "note": "a human, to them"
+  },
+  {
+   "kind": "VOICE",
+   "which": "SELF",
+   "gloss": "our voice",
+   "domain": "People and voices",
+   "note": ""
+  },
+  {
+   "kind": "VOICE",
+   "which": "OTHER",
+   "gloss": "your voice",
+   "domain": "People and voices",
+   "note": ""
+  },
+  {
+   "kind": "STAR",
+   "which": null,
+   "gloss": "star",
+   "domain": "Sky",
+   "note": ""
+  },
+  {
+   "kind": "STAR",
+   "which": "SELF",
+   "gloss": "our star",
+   "domain": "Sky",
+   "note": "Ross 128"
+  },
+  {
+   "kind": "STAR",
+   "which": "OTHER",
+   "gloss": "your star",
+   "domain": "Sky",
+   "note": "the Sun"
+  },
+  {
+   "kind": "STAR",
+   "which": "TIME",
+   "gloss": "pulsar",
+   "domain": "Sky",
+   "note": "a timing star"
+  },
+  {
+   "kind": "STAR",
+   "which": "STAR",
+   "gloss": "galaxy",
+   "domain": "Sky",
+   "note": "star of stars"
+  },
+  {
+   "kind": "AIR",
+   "which": "NOT",
+   "gloss": "space",
+   "domain": "Sky",
+   "note": "no air"
+  },
+  {
+   "kind": "LIGHT",
+   "which": "PATH",
+   "gloss": "ray, signal",
+   "domain": "Sky",
+   "note": "light going"
+  },
+  {
+   "kind": "LIGHT",
+   "which": "BODY",
+   "gloss": "transit, shadow",
+   "domain": "Sky",
+   "note": "light with a world in it"
+  },
+  {
+   "kind": "BODY",
+   "which": null,
+   "gloss": "world, matter",
+   "domain": "Worlds",
+   "note": ""
+  },
+  {
+   "kind": "BODY",
+   "which": "SELF",
+   "gloss": "our world",
+   "domain": "Worlds",
+   "note": "Ross 128 b"
+  },
+  {
+   "kind": "BODY",
+   "which": "OTHER",
+   "gloss": "your world",
+   "domain": "Worlds",
+   "note": "Earth"
+  },
+  {
+   "kind": "BODY",
+   "which": "AIR",
+   "gloss": "air-world",
+   "domain": "Worlds",
+   "note": ""
+  },
+  {
+   "kind": "BODY",
+   "which": "WATER",
+   "gloss": "water-world",
+   "domain": "Worlds",
+   "note": ""
+  },
+  {
+   "kind": "BODY",
+   "which": "BODY",
+   "gloss": "rock, ground",
+   "domain": "Worlds",
+   "note": "matter of matter"
+  },
+  {
+   "kind": "BODY",
+   "which": "PATH",
+   "gloss": "orbit",
+   "domain": "Worlds",
+   "note": "a world going"
+  },
+  {
+   "kind": "LIGHT",
+   "which": null,
+   "gloss": "light",
+   "domain": "Their surface",
+   "note": ""
+  },
+  {
+   "kind": "LIGHT",
+   "which": "NOT",
+   "gloss": "dark, the night side",
+   "domain": "Their surface",
+   "note": ""
+  },
+  {
+   "kind": "PATH",
+   "which": "LIGHT",
+   "gloss": "terminator",
+   "domain": "Their surface",
+   "note": "the way between light and dark"
+  },
+  {
+   "kind": "AIR",
+   "which": null,
+   "gloss": "air",
+   "domain": "Their surface",
+   "note": ""
+  },
+  {
+   "kind": "AIR",
+   "which": "PATH",
+   "gloss": "wind",
+   "domain": "Their surface",
+   "note": "air going"
+  },
+  {
+   "kind": "AIR",
+   "which": "WATER",
+   "gloss": "cloud",
+   "domain": "Their surface",
+   "note": "watery air"
+  },
+  {
+   "kind": "WATER",
+   "which": null,
+   "gloss": "water",
+   "domain": "Their surface",
+   "note": ""
+  },
+  {
+   "kind": "WATER",
+   "which": "PATH",
+   "gloss": "river",
+   "domain": "Their surface",
+   "note": "water going"
+  },
+  {
+   "kind": "WATER",
+   "which": "BODY",
+   "gloss": "ice",
+   "domain": "Their surface",
+   "note": "solid water"
+  },
+  {
+   "kind": "WATER",
+   "which": "NOT",
+   "gloss": "dry land",
+   "domain": "Their surface",
+   "note": ""
+  },
+  {
+   "kind": "TIME",
+   "which": null,
+   "gloss": "time",
+   "domain": "Time",
+   "note": ""
+  },
+  {
+   "kind": "TIME",
+   "which": "BEFORE",
+   "gloss": "the past, before",
+   "domain": "Time",
+   "note": ""
+  },
+  {
+   "kind": "TIME",
+   "which": "ONE",
+   "gloss": "now",
+   "domain": "Time",
+   "note": ""
+  },
+  {
+   "kind": "TIME",
+   "which": "AFTER",
+   "gloss": "the future, after",
+   "domain": "Time",
+   "note": ""
+  },
+  {
+   "kind": "TIME",
+   "which": "PATH",
+   "gloss": "always",
+   "domain": "Time",
+   "note": "time going on"
+  },
+  {
+   "kind": "TIME",
+   "which": "NOT",
+   "gloss": "never",
+   "domain": "Time",
+   "note": ""
+  },
+  {
+   "kind": "TIME",
+   "which": "BODY",
+   "gloss": "year",
+   "domain": "Time",
+   "note": "one orbit"
+  },
+  {
+   "kind": "TIME",
+   "which": "VOICE",
+   "gloss": "rhythm, beat",
+   "domain": "Time",
+   "note": ""
+  },
+  {
+   "kind": "TIME",
+   "which": "TIME",
+   "gloss": "an age",
+   "domain": "Time",
+   "note": "time of times"
+  },
+  {
+   "kind": "VOICE",
+   "which": null,
+   "gloss": "sound, voice",
+   "domain": "Sound and talk",
+   "note": ""
+  },
+  {
+   "kind": "VOICE",
+   "which": "PATH",
+   "gloss": "message",
+   "domain": "Sound and talk",
+   "note": "voice going"
+  },
+  {
+   "kind": "VOICE",
+   "which": "NOT",
+   "gloss": "silence",
+   "domain": "Sound and talk",
+   "note": ""
+  },
+  {
+   "kind": "VOICE",
+   "which": "VOICE",
+   "gloss": "conversation",
+   "domain": "Sound and talk",
+   "note": "voice with voice"
+  },
+  {
+   "kind": "VOICE",
+   "which": "ONE",
+   "gloss": "monologue",
+   "domain": "Sound and talk",
+   "note": "one voice"
+  },
+  {
+   "kind": "VOICE",
+   "which": "AIR",
+   "gloss": "speech",
+   "domain": "Sound and talk",
+   "note": "sound in air"
+  },
+  {
+   "kind": "VOICE",
+   "which": "LIGHT",
+   "gloss": "radio",
+   "domain": "Sound and talk",
+   "note": "sound carried by light"
+  },
+  {
+   "kind": "VOICE",
+   "which": "BODY",
+   "gloss": "resonator, instrument",
+   "domain": "Sound and talk",
+   "note": "a body that sounds"
+  },
+  {
+   "kind": "VOICE",
+   "which": "OPEN",
+   "gloss": "a question",
+   "domain": "Sound and talk",
+   "note": ""
+  },
+  {
+   "kind": "ONE",
+   "which": null,
+   "gloss": "that",
+   "domain": "Logic and number",
+   "note": "alone in a node slot: the line above"
+  },
+  {
+   "kind": "ONE",
+   "which": "ONE",
+   "gloss": "the same",
+   "domain": "Logic and number",
+   "note": ""
+  },
+  {
+   "kind": "ONE",
+   "which": "NOT",
+   "gloss": "different",
+   "domain": "Logic and number",
+   "note": ""
+  },
+  {
+   "kind": "OPEN",
+   "which": "COUNT",
+   "gloss": "how many?",
+   "domain": "Logic and number",
+   "note": "\"what number?\"; answer with COUNT.n"
+  },
+  {
+   "kind": "OPEN",
+   "which": null,
+   "gloss": "what?",
+   "domain": "Logic and number",
+   "note": ""
+  }
+ ]
+}

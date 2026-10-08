@@ -1,0 +1,4 @@
+# "How many pulsars?" Twelve.
+# OPEN.COUNT asks "what number?"; the answer COUNT.12 replaces OPEN with COUNT, and COUNT with the bits.
++: STAR.TIME | ONE | OPEN.COUNT
+×: _ | _ | COUNT.12

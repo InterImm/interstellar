@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN" class="js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>网格文字词典 | 通联纪</title>
+<meta name="description" content="网格文字里所有约定好的词，画出来，附上意思。按意思搜索，或者直接写出一个词，看它怎么画、怎么读。">
+<link rel="alternate" hreflang="zh-CN" href="https://interstellar.interimm.org/script/dictionary/">
+<link rel="alternate" hreflang="en" href="https://interstellar.interimm.org/script/dictionary/en/">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../kit/interimm.css">
+<link rel="stylesheet" href="../../app/script.css">
+<script src="../../kit/interimm.js" defer></script>
+<script type="module" src="../../app/script.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到正文</a>
+
+<header class="site-header" data-interimm-header data-lang="cn" data-current="script" data-lang-en="en/">
+  <div class="wrap header-inner">
+    <a class="brand" href="../../"><span class="brand-dot" aria-hidden="true"></span><span class="brand-name">通联纪</span></a>
+  </div>
+</header>
+
+<main id="main" data-gs="dictionary">
+  <header class="hero gs-hero">
+    <div class="wrap">
+      <p class="kicker">网格文字 · 词典</p>
+      <h1>词库</h1>
+      <p class="lede">翻译机到目前为止约定好的每一个词，按发送时的样子画出来。可以按意思搜索（中文或英文），也可以直接写出一个词，比如 <code>BODY.STAR</code> 或 <code>COUNT.42</code>，即使它还不在词典里，也能看到它怎么画、怎么读。</p>
+      <nav class="tabs gs-tabs" aria-label="网格文字">
+        <a href="../">原理</a><a href="./" aria-current="page">词典</a><a href="../convert/">转换器</a>
+      </nav>
+    </div>
+  </header>
+
+  <p class="wrap note" data-gs-fail hidden>词典需要 JavaScript 和词表文件，没能加载。</p>
+
+  <section class="section" id="words" aria-labelledby="words-title">
+    <div class="wrap">
+      <h2 class="sr-only" id="words-title">词</h2>
+      <div class="gs-search">
+        <label class="field">搜索意思，或写出一个词 <input id="gs-q" type="search" autocomplete="off" spellcheck="false" placeholder="风、脉冲星、BODY.OTHER …"></label>
+        <div class="gs-chips" id="gs-domains" role="group" aria-label="分类"></div>
+        <p class="gs-count" id="gs-count" aria-live="polite"></p>
+      </div>
+      <div class="gs-built" id="gs-built" hidden></div>
+      <ul class="gs-entries" id="gs-results"></ul>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="parts" aria-labelledby="parts-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title" id="parts-title">十六个部件</h2>
+        <p class="section-lede">每个词都由它们拼成。部件在节点里表示事物，在关系里表示动作。不在词典里的词，也能按它的两个部件读出来。</p>
+      </div>
+      <div class="table-scroll"><table class="data-table gs-parts-table">
+        <thead><tr><th>形状</th><th>部件</th><th>作为事物</th><th>作为关系</th></tr></thead>
+        <tbody id="gs-parts-table"></tbody>
+      </table></div>
+      <p class="note" style="margin-top: 1rem;">同一份词表也随命令行词典 <a href="https://interimm.github.io/glyph-cli/">glyph</a> 一起发布。部件怎样组合，见<a href="../">原理</a>。</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" data-interimm-footer>
+  <div class="wrap"><p class="footer-legal"><span>© InterImm星际移民中心</span><a href="../../">通联纪</a></p></div>
+</footer>
+</body>
+</html>
