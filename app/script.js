@@ -3,7 +3,8 @@
 // and wires up the controls. The page says which parts it has with data-gs-* attributes.
 import {
   Vocabulary, GlyphError, parsePage, formatPage, render, renderSvg, rowsSvg, decode, readGraph, bandRows,
-  pageSymbols, wordStr, isEmpty, structure, ink, numberShape, WIDTH, POSITIONS, EMPTY_CELL, BACKGROUND, GRID,
+  pageSymbols, wordStr, isEmpty, structure, ink, numberShape, positions, toDigits, hiddenZeros,
+  EMPTY_CELL, BACKGROUND, GRID, BASE,
 } from '../lib/glyph.js';
 
 const zh = document.documentElement.lang.toLowerCase().startsWith('zh');
@@ -21,37 +22,37 @@ const pageUrl = (name, source) => {
 };
 
 const T = zh ? {
-  slots: { subject: '前节点', relation: '关系', object: '后节点' }, halves: { kind: '类', which: '指' },
+  slots: { subject: '前节点', relation: '关系', object: '后节点' }, halves: { kind: '类', which: '指' }, digit: (n) => `第 ${n} 位`,
   meaning: { yes: '是', no: '不', instead: '换成', 'and also': '还有' },
   to: (s) => `（回应 ${s}）`, quote: (s) => `“${s}”`, noComment: '在场，未表态',
-  statement: (n) => `[第 ${n} 句]`, thatNothing: '[“那”：上面没有句子]', notInVocabulary: '（不在词典中）',
+  statement: (n) => `[第 ${n} 个三元组]`, thatNothing: '[“那”：前面没有三元组]', notInVocabulary: '（不在词典中）',
   part: '部件', asThing: '作为事物', asRelation: '作为关系', none: '—',
   results: (n) => `${n} 个词`, noResults: '没有找到。试试别的词，或者直接写出一个词，比如 BODY.STAR。',
-  composed: '拼出来的词', inVocab: '词典里的词', notIn: '还不在词典里：这是按部件拼出的读法。', number: '数', numberNote: '数是内置的：COUNT 后面的九个比特。',
+  composed: '拼出来的词', inVocab: '词典里的词', notIn: '还不在词典里：这是按部件拼出的读法。', number: '数', numberNote: '数是内置的：COUNT 后面跟着 512 进制的数位，每位九个比特。',
+  hiddenZero: (n) => `第 ${n} 个三元组在行尾以 0 数位结尾。0 位画出来是空的，读的人看不出这个数在哪里结束：把它放到前节点，或者在后面再写一个三元组。`,
   all: '全部', draw: '在转换器里画', copied: '已复制', copy: '复制', linkCopied: '链接已复制',
   empty: '空', voice: (s) => `声部 ${s}`, edges: '读出的图', nodes: '节点',
   errLine: (n) => `第 ${n} 行：`,
   err: {
-    unknownPart: (a) => `未知的部件：${a.part}`, range: (a) => `数超出 0–511：${a.n}`,
+    unknownPart: (a) => `未知的部件：${a.part}`, digit: (a) => `每个数位是 0–511（512 进制）：${a.s}`,
+    leadingZero: (a) => `数不以 0 数位开头：${a.s}`, tooLong: (a) => `只有数才会多于两个位置：${a.s}`, whole: (a) => `只能是零或正整数：${a.n}`,
     numberKind: (a) => `数要以 COUNT 为类，比如 COUNT.${a.n}（写的是 ${a.s}）`,
     countWhich: (a) => `COUNT 的“指”只能是数，比如 COUNT.12（写的是 ${a.s}）`,
     symbol: (a) => `符号是一个字符，不能是空格或 # . : _ |（写的是 “${a.symbol}”）`,
     format: () => '应写成“符号: 节点 | 关系 | 节点”', slots: (a) => `要正好三个位置，用 | 分开，现在是 ${a.n} 个`,
-    width: (a) => `第 ${a.row} 行有 ${a.len} 格宽；文字总是 23 格（不在格点上：是一幅图吗？）`,
-    between: (a) => `第 ${a.row} 行第 ${a.col} 列：标记落在两个位置之间（是一幅图吗？）`,
-    structure: () => '这些行排不成句子和声部；这是一幅图，而不是文字吗？',
-    mixed: (a) => `第 ${a.from}–${a.to} 行：一个声部里混用了几种符号`,
-    notPart: (a) => `第 ${a.from}–${a.to} 行，第 ${a.pos} 个位置：不是部件`,
-    notWhich: (a) => `第 ${a.from}–${a.to} 行，第 ${a.pos} 个位置：这里既不是部件，也不是数`,
+    structure: () => '这些排分不成行和声部；这是一幅图，而不是文字吗？',
+    gaps: (a) => `第 ${a.from}–${a.to} 排：这些记号按 1、2、4 格的空隙切不成 3 × 3 的部件（是一幅图吗？）`,
+    mixed: (a) => `第 ${a.from}–${a.to} 排：一个声部里混用了几种符号`,
   },
 } : {
-  slots: { subject: 'subject', relation: 'relation', object: 'object' }, halves: { kind: 'kind', which: 'which' },
+  slots: { subject: 'subject', relation: 'relation', object: 'object' }, halves: { kind: 'kind', which: 'which' }, digit: (n) => `digit ${n}`,
   meaning: { yes: 'yes', no: 'no', instead: 'instead', 'and also': 'and also' },
   to: (s) => ` (to ${s})`, quote: (s) => `"${s}"`, noComment: 'present, no comment',
-  statement: (n) => `[statement ${n}]`, thatNothing: '[that: nothing above]', notInVocabulary: '(not in vocabulary)',
+  statement: (n) => `[triplet ${n}]`, thatNothing: '[that: nothing before]', notInVocabulary: '(not in vocabulary)',
   part: 'part', asThing: 'as a thing', asRelation: 'as a relation', none: '—',
   results: (n) => `${n} word${n === 1 ? '' : 's'}`, noResults: 'Nothing found. Try another word, or write one out, like BODY.STAR.',
-  composed: 'A word you built', inVocab: 'In the dictionary', notIn: 'Not in the dictionary yet: this is how its parts read.', number: 'A number', numberNote: 'Numbers are built in: nine bits after COUNT.',
+  composed: 'A word you built', inVocab: 'In the dictionary', notIn: 'Not in the dictionary yet: this is how its parts read.', number: 'A number', numberNote: 'Numbers are built in: COUNT and base-512 digits, nine bits each.',
+  hiddenZero: (n) => `Triplet ${n} ends its line with a number ending in a 0 digit. A 0 digit is drawn blank, so a reader can't see where the number ends: move it to the subject, or put another triplet after it.`,
   all: 'All', draw: 'Draw in the converter', copied: 'Copied', copy: 'Copy', linkCopied: 'Link copied',
   empty: 'empty', voice: (s) => `voice ${s}`, edges: 'The graph it reads', nodes: 'Nodes',
   errLine: () => '', err: {},
@@ -84,8 +85,8 @@ async function loadVocab() {
 
 // ------------------------------------------------------------------ drawing helpers
 
-const svgOf = (rows, symbols, cell = 12, width = WIDTH) => rowsSvg(rows, symbols, { cell, width });
-const wordSvg = (vocab, w, symbol = '+') => svgOf(bandRows(vocab, [w.kind, w.which], symbol), [symbol], 12, 7);
+const svgOf = (rows, symbols, cell = 12, width) => rowsSvg(rows, symbols, { cell, width });
+const wordSvg = (vocab, w, symbol = '+') => svgOf(bandRows(vocab, positions(w), symbol), [symbol], 12);
 const partSvg = (shape, symbol = '+') => svgOf(shape.map((r) => r.replaceAll('#', symbol)), [symbol], 12, 3);
 
 function graphHtml(voc, g, symbols) {
@@ -96,7 +97,7 @@ function graphHtml(voc, g, symbols) {
       <span class="gs-rel">${esc(e.relation || T.none)}</span>
       <span class="gs-node">${esc(label(e.object))}</span></p>
     ${e.replies.map((r) => `<p class="gs-reply">${sym(r.symbol)} ${r.responses.length ? r.responses.map((x) =>
-      `<span><i>${T.slots[x.slot]}.${T.halves[x.half]}</i> ${T.meaning[x.meaning]}${x.meaning === 'yes' || x.meaning === 'no' ? '' : ' ' + esc(T.quote(x.part))}${x.to ? esc(T.to(x.to)) : ''}</span>`).join('') : `<span>${T.noComment}</span>`}</p>`).join('')}
+      `<span><i>${T.slots[x.slot]}.${T.halves[x.half] ?? T.digit(x.half.split(' ')[1])}</i> ${T.meaning[x.meaning]}${x.meaning === 'yes' || x.meaning === 'no' ? '' : ' ' + esc(T.quote(x.part))}${x.to ? esc(T.to(x.to)) : ''}</span>`).join('') : `<span>${T.noComment}</span>`}</p>`).join('')}
   </li>`).join('')}</ol>`;
 }
 
@@ -129,14 +130,19 @@ function explainer({ en, voc }) {
   for (const el of $$('[data-gs-number]')) {
     const input = $('input[type=range]', el), num = $('input[type=number]', el), out = $('.gs-draw', el), bits = $('.gs-bits', el);
     const show = (n) => {
-      n = Math.max(0, Math.min(511, Math.round(+n || 0)));
-      input.value = num.value = n;
+      n = Math.max(0, Math.min(+num.max || 511, Math.round(+n || 0)));
+      num.value = n;
+      input.value = Math.min(n, 511);
       const w = en.parse(`COUNT.${n}`);
       out.innerHTML = wordSvg(en, w);
-      const sh = numberShape(n);
+      // the bits of the last digit; a bigger number shows how its digits add up
+      const ds = toDigits(n);
+      const sh = numberShape(ds[ds.length - 1]);
       const vals = [256, 128, 64, 32, 16, 8, 4, 2, 1];
       bits.innerHTML = sh.join('').split('').map((c, i) => `<span class="${c === '#' ? 'on' : ''}">${vals[i]}</span>`).join('');
-      $('.gs-number-word', el).textContent = wordStr(w);
+      const term = (d, p) => (p === 0 ? `${d}` : p === 1 ? `${d} × ${BASE}` : `${d} × ${BASE}^${p}`);
+      const sum = ds.length > 1 ? ` = ${ds.map((d, i) => term(d, ds.length - 1 - i)).join(' + ')}` : '';
+      $('.gs-number-word', el).textContent = wordStr(w) + sum;
     };
     input.addEventListener('input', () => show(input.value));
     num.addEventListener('input', () => show(num.value));
@@ -179,7 +185,7 @@ function dictionary({ en, voc }) {
     const t = q.value.trim().toLowerCase();
     // a word written out (BODY.STAR, count.42): show how it draws and reads, in the dictionary or not
     built.hidden = true;
-    if (t && /^[a-z_]+(\.[a-z0-9_]*)?$/i.test(t)) {
+    if (t && /^[a-z_]+(\.[a-z0-9_]*)*$/i.test(t)) {
       try {
         const w = en.parse(t);
         if (!isEmpty(w)) {
@@ -213,18 +219,21 @@ const SYMBOLS = ['+', '×', '*'];
 
 function converter({ en, voc }) {
   const src = $('#gs-src'), out = $('#gs-out'), rowsOut = $('#gs-rows'), graphOut = $('#gs-graph'), errOut = $('#gs-src-err');
-  const examples = $('#gs-examples');
+  const examples = $('#gs-examples'), perLineIn = $('#gs-per-line');
   let lastRows = [];
+  const perLine = () => +perLineIn.value || 2;
 
   // ---- source -> drawing
   const fromSource = () => {
     try {
       const page = parsePage(src.value, en);
-      lastRows = render(en, page);
-      out.innerHTML = page.lines.length ? renderSvg(en, page, { cell: 16 }) : '';
+      lastRows = render(en, page, perLine());
+      out.innerHTML = page.triplets.length ? renderSvg(en, page, { cell: 16, perLine: perLine() }) : '';
       rowsOut.textContent = lastRows.join('\n');
-      graphOut.innerHTML = page.lines.length ? graphHtml(voc, readGraph(voc, page), pageSymbols(page)) : '';
-      errOut.hidden = true;
+      graphOut.innerHTML = page.triplets.length ? graphHtml(voc, readGraph(voc, page), pageSymbols(page)) : '';
+      const hidden = hiddenZeros(page, perLine());
+      errOut.textContent = hidden.map(T.hiddenZero).join(' ');
+      errOut.hidden = !hidden.length;
       src.removeAttribute('aria-invalid');
     } catch (err) {
       errOut.textContent = message(err); errOut.hidden = false;
@@ -232,6 +241,7 @@ function converter({ en, voc }) {
     }
   };
   src.addEventListener('input', fromSource);
+  perLineIn.addEventListener('change', fromSource);
   examples.addEventListener('change', () => {
     const opt = examples.selectedOptions[0];
     if (!opt.value) return;
@@ -240,7 +250,7 @@ function converter({ en, voc }) {
   $('#gs-copy-rows').addEventListener('click', (ev) => copyText(lastRows.join('\n') + '\n', ev.currentTarget));
   $('#gs-svg').addEventListener('click', () => {
     try {
-      const blob = new Blob([renderSvg(en, parsePage(src.value, en))], { type: 'image/svg+xml' });
+      const blob = new Blob([renderSvg(en, parsePage(src.value, en), { perLine: perLine() })], { type: 'image/svg+xml' });
       const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: 'grid-script.svg' });
       a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
     } catch { /* the error is already on screen */ }
@@ -258,7 +268,7 @@ function converter({ en, voc }) {
 
   // ---- drawing -> source: an editor grid, mirrored in a text area
   const drawing = $('#gs-drawing'), editor = $('#gs-editor'), back = $('#gs-back'), backGraph = $('#gs-back-graph'), backErr = $('#gs-back-err');
-  const linesIn = $('#gs-lines'), voicesIn = $('#gs-voices'), palette = $('#gs-palette'), numIn = $('#gs-num');
+  const linesIn = $('#gs-lines'), voicesIn = $('#gs-voices'), palette = $('#gs-palette'), numIn = $('#gs-num'), widthIn = $('#gs-width');
   let grid = [];            // rows of characters
   let symbol = '+';
   let tool = 'BODY';        // a part name, 'NUMBER', 'CELL' or 'ERASE'
@@ -266,21 +276,26 @@ function converter({ en, voc }) {
 
   const heightFor = (lines, voices) => lines * (4 * voices - 1) + LINE_GAP_ROWS * (lines - 1);
   const LINE_GAP_ROWS = 3;
+  const cols = () => Math.max(7, Math.min(120, Math.round(+widthIn.value || 45)));
   const resize = (h) => {
-    const blank = () => Array(WIDTH).fill(EMPTY_CELL);
-    grid = Array.from({ length: h }, (_, r) => grid[r] || blank());
+    const w = cols();
+    grid = Array.from({ length: h }, (_, r) => {
+      const row = (grid[r] || []).slice(0, w);
+      while (row.length < w) row.push(EMPTY_CELL);
+      return row;
+    });
   };
   const drawEditor = () => {
     const symbols = [...new Set(SYMBOLS.concat(grid.flat().filter((c) => c !== EMPTY_CELL)))];
-    // lattice positions are a shade lighter, so the grid shows where parts go
+    // the rows where bands go are a shade lighter, so the grid shows where parts can sit
     const voices = +voicesIn.value, period = 4 * voices - 1 + LINE_GAP_ROWS;
-    const w = (WIDTH + 2) * CELL, h = (grid.length + 2) * CELL, size = CELL - 2;
+    const w = (cols() + 2) * CELL, h = (grid.length + 2) * CELL, size = CELL - 2;
     const out = [`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" shape-rendering="crispEdges"><rect width="100%" height="100%" fill="${BACKGROUND}"/>`];
     grid.forEach((row, r) => {
       const at = r % period;
       const onRow = at < 4 * voices - 1 && at % 4 !== 3;
       row.forEach((ch, c) => {
-        const fill = ch !== EMPTY_CELL ? ink(ch, symbols) : onRow && c % 4 !== 3 ? '#26339a' : GRID;
+        const fill = ch !== EMPTY_CELL ? ink(ch, symbols) : onRow ? '#26339a' : GRID;
         out.push(`<rect x="${(c + 1) * CELL + 1}" y="${(r + 1) * CELL + 1}" width="${size}" height="${size}" fill="${fill}"/>`);
       });
     });
@@ -290,8 +305,10 @@ function converter({ en, voc }) {
   const fromDrawing = (load = false) => {
     if (load) {
       const rows = drawing.value.split(/\r?\n/).map((r) => r.trim()).filter(Boolean);
-      if (rows.length && rows.every((r) => [...r].length === WIDTH)) {
-        grid = rows.map((r) => [...r]);
+      if (rows.length) {
+        const w = Math.max(...rows.map((r) => [...r].length));
+        grid = rows.map((r) => { const row = [...r]; while (row.length < w) row.push(EMPTY_CELL); return row; });
+        widthIn.value = w;
         // the voices per line as the machine reads them, so the editor shades the right positions
         try {
           const v = structure(rows);
@@ -303,7 +320,7 @@ function converter({ en, voc }) {
     try {
       const page = decode(en, drawing.value);
       back.textContent = formatPage(page);
-      backGraph.innerHTML = page.lines.length ? graphHtml(voc, readGraph(voc, page), pageSymbols(page)) : '';
+      backGraph.innerHTML = page.triplets.length ? graphHtml(voc, readGraph(voc, page), pageSymbols(page)) : '';
       backErr.hidden = true;
     } catch (err) {
       back.textContent = ''; backGraph.innerHTML = '';
@@ -313,12 +330,13 @@ function converter({ en, voc }) {
   const relayout = () => { resize(heightFor(+linesIn.value, +voicesIn.value)); drawEditor(); fromDrawing(); };
   linesIn.addEventListener('change', () => { linesIn.value = Math.max(1, Math.min(12, Math.round(+linesIn.value || 1))); relayout(); });
   voicesIn.addEventListener('change', relayout);
+  widthIn.addEventListener('change', () => { widthIn.value = cols(); relayout(); });
   drawing.addEventListener('input', () => fromDrawing(true));
   $('#gs-clear').addEventListener('click', () => { grid = []; relayout(); });
 
   // the palette: one button per part, a number, a single cell, the eraser
   const tools = [...Object.values(en.parts).map((p) => ({ id: p.name, label: p.name, shape: p.shape })),
-    { id: 'NUMBER', label: zh ? '数' : 'number', shape: numberShape(5) },
+    { id: 'NUMBER', label: zh ? '数位' : 'digit', shape: numberShape(5) },
     { id: 'CELL', label: zh ? '单格' : 'one cell', shape: ['...', '.#.', '...'] },
     { id: 'ERASE', label: zh ? '擦除' : 'erase', shape: ['...', '...', '...'] }];
   palette.innerHTML = tools.map((t) => `<button type="button" data-tool="${t.id}" aria-pressed="${t.id === tool}" title="${t.label}">
@@ -340,17 +358,17 @@ function converter({ en, voc }) {
 
   const paint = (ev, dragging) => {
     const box = editor.firstElementChild.getBoundingClientRect();
-    const scale = box.width / ((WIDTH + 2) * CELL);
+    const scale = box.width / ((cols() + 2) * CELL);
     const c = Math.floor((ev.clientX - box.left) / scale / CELL) - 1;
     const r = Math.floor((ev.clientY - box.top) / scale / CELL) - 1;
-    if (r < 0 || c < 0 || r >= grid.length || c >= WIDTH) return;
+    if (r < 0 || c < 0 || r >= grid.length || c >= cols()) return;
     if (tool === 'CELL') {
       if (dragging) grid[r][c] = paint.mode;
       else { paint.mode = grid[r][c] === EMPTY_CELL ? symbol : EMPTY_CELL; grid[r][c] = paint.mode; }
     } else {
       if (dragging) return;
-      // stamp a whole part into the lattice position under the pointer
-      const p = Math.floor(c / 4);
+      // stamp a whole part with its left edge on the cell under the pointer (kept inside the grid)
+      const left = Math.min(c, cols() - 3);
       const voices = +voicesIn.value, period = 4 * voices - 1 + LINE_GAP_ROWS;
       const at = r % period;
       if (at >= 4 * voices - 1) return;
@@ -359,7 +377,7 @@ function converter({ en, voc }) {
         ? numberShape(Math.max(0, Math.min(511, Math.round(+numIn.value || 0)))) : en.parts[tool].shape;
       const ch = tool === 'ERASE' ? EMPTY_CELL : symbol;
       for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) {
-        if (top + i < grid.length) grid[top + i][p * 4 + j] = shape[i][j] === '#' ? ch : EMPTY_CELL;
+        if (top + i < grid.length) grid[top + i][left + j] = shape[i][j] === '#' ? ch : EMPTY_CELL;
       }
     }
     drawEditor(); fromDrawing();

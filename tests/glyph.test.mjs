@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import {
   Vocabulary, GlyphError, parsePage, formatPage, render, renderSvg, decode, readGraph, formatGraph, drawWords,
-  numberShape, wordStr, word, bandRows, WIDTH, responseText,
+  numberShape, wordStr, word, bandRows, responseText, positions, value, toDigits, hiddenZeros,
 } from '../lib/glyph.js';
 
 const read = (p) => readFileSync(new URL(p, import.meta.url), 'utf8');
@@ -25,6 +25,7 @@ for (const [name, ex] of Object.entries(CLI.examples)) {
     const p = page(ex.source);
     assert.equal(formatPage(p), ex.formatted);
     assert.deepEqual(render(vocab, p), ex.rows);
+    assert.deepEqual(render(vocab, p, 1), ex.rows_one_per_line);
     assert.deepEqual(formatGraph(vocab, readGraph(vocab, p)), ex.graph);
     assert.equal(renderSvg(vocab, p), ex.svg);
     assert.equal(formatPage(decode(vocab, ex.rows.join('\n'))), ex.decoded);
@@ -54,41 +55,55 @@ test('parsing words matches glyph-cli', () => {
   }
 });
 
-test('numbers are nine bits, as in glyph-cli', () => {
+test('numbers are base-512 digits of nine bits, as in glyph-cli', () => {
+  assert.deepEqual(toDigits(2219), [4, 171]);
+  assert.equal(value(vocab.parse('COUNT.4.171')), 2219);
+  assert.deepEqual(positions(vocab.parse('COUNT.4.171')), ['COUNT', 4, 171]);
+  assert.deepEqual(positions(vocab.parse('SELF')), ['SELF']);
   assert.deepEqual(numberShape(137), ['.#.', '..#', '..#']);
   assert.deepEqual(numberShape(12), ['...', '..#', '#..']);
   for (const [n, rows] of Object.entries(CLI.numbers)) assert.deepEqual(drawWords(vocab, [vocab.parse(`COUNT.${n}`)]), rows);
 });
 
 test('no number draws like a word', () => {
-  const words = new Set(vocab.entries.map((e) => bandRows(vocab, [e.word.kind, e.word.which], '#').join('/')));
+  const words = new Set(vocab.entries.map((e) => bandRows(vocab, positions(e.word), '#').join('/')));
   for (let n = 1; n < 512; n++) assert.ok(!words.has(bandRows(vocab, ['COUNT', n], '#').join('/')), String(n));
 });
 
-test('lines are padded to the page voices', () => {
-  const rows = render(vocab, page('+: SELF | ONE | OTHER\n×: _ | _ | _.NOT\n\n+: SELF | ONE | SELF'));
+test('triplets are padded to the page voices and spaced 1, 2, 4', () => {
+  const p = page('+: SELF | ONE | OTHER\n×: _ | _ | _.NOT\n\n+: SELF | ONE | SELF.OTHER');
+  const rows = render(vocab, p, 1);
   assert.equal(rows.length, 7 + 3 + 7);
-  assert.ok(rows.every((r) => [...r].length === WIDTH));
+  assert.equal(new Set(rows.map((r) => r.length)).size, 1);
+  assert.deepEqual(render(vocab, p)[0], '+++.......+++........+++.......+++.+++');
 });
 
 test('numbers read back as numbers', () => {
-  for (const n of [0, 1, 12, 16, 137, 170, 273, 487, 495, 511]) {
-    const back = decode(vocab, render(vocab, page(`+: STAR.TIME | ONE | COUNT.${n}`)).join('\n'));
-    assert.equal(wordStr(back.lines[0].bands[0].words[2]), n === 0 ? 'COUNT' : `COUNT.${n}`);
+  for (const n of [0, 1, 12, 16, 137, 170, 273, 487, 495, 511, 513, 2219, 70491, 262143, 3200001]) {
+    for (const where of [`STAR.TIME | ONE | COUNT.${n}`, `COUNT.${n} | ONE | STAR.TIME`]) {
+      const p = page(`+: ${where}`);
+      assert.deepEqual(decode(vocab, render(vocab, p).join('\n')), p, where);
+    }
   }
   const p = page('+: STAR.TIME | ONE | COUNT.12\n×: _ | _ | _.495');
   assert.deepEqual(decode(vocab, render(vocab, p).join('\n')), p);
-  const q = page('+: ONE.SELF | ONE | ONE.OTHER');
-  assert.deepEqual(decode(vocab, render(vocab, q).join('\n')), q);
+  for (const src of ['+: ONE.SELF | ONE | ONE.OTHER', '+: BODY.AFTER | ONE | OTHER', '+: BODY | ONE.OTHER | OTHER', '+: SELF | VOICE.ONE | ONE']) {
+    const q = page(src);
+    assert.deepEqual(decode(vocab, render(vocab, q).join('\n')), q, src);
+  }
+});
+
+test('a 0 digit at the end of a line is flagged', () => {
+  assert.deepEqual(hiddenZeros(page('+: SELF | LIGHT | COUNT.12.106.0')), [1]);
+  assert.deepEqual(hiddenZeros(page('+: SELF | LIGHT | COUNT.12.106.0\n\n+: SELF | VOICE | ONE')), []);
 });
 
 test('pictures are refused', () => {
-  const dots = '.'.repeat(23) + '\n';
-  assert.throws(() => decode(vocab, '+++\n...\n'), /wide/);
-  assert.throws(() => decode(vocab, '...+...................\n' + dots + dots), /between lattice/);
-  assert.throws(() => decode(vocab, '+++.×××................\n+.+.×.×................\n+++.×××................\n'), /mixes symbols/);
-  assert.throws(() => decode(vocab, '+.+....................\n' + dots + dots), /not a part/);
-  assert.equal(decode(vocab, '').lines.length, 0);
+  assert.throws(() => decode(vocab, '+++\n...\n'), /lines and bands/);
+  assert.throws(() => decode(vocab, '+++++++\n+.+.+.+\n+++++++\n'), /1, 2 and 4 cell gaps/);
+  assert.throws(() => decode(vocab, '+++.......×××\n+.+...+...×.×\n+++.......×××\n'), /mixes symbols/);
+  assert.throws(() => decode(vocab, '+.+..........\n.............\n.............\n'), /1, 2 and 4 cell gaps/);
+  assert.equal(decode(vocab, '').triplets.length, 0);
 });
 
 test('parse errors name the line', () => {
@@ -111,7 +126,9 @@ test('rule five', () => {
     assert.deepEqual(g.edges[0].replies[0].responses.map((r) => responseText(r)), want);
   }
   const g = readGraph(vocab, page('+: SELF | LIGHT.BEFORE | ONE'));
-  assert.equal(formatGraph(vocab, g)[1], '1. (+) we --see [past]--> [that: nothing above]');
+  assert.equal(formatGraph(vocab, g)[1], '1. (+) we --see [past]--> [that: nothing before]');
+  const d = readGraph(vocab, page('+: SELF | LIGHT | COUNT.4.171\n×: _ | _ | _.4.170'));
+  assert.deepEqual(d.edges[0].replies[0].responses.map((r) => responseText(r)), ['object.digit 1: yes (to +)', 'object.digit 2: instead "170" (to +)']);
 });
 
 test('the Chinese glosses cover the whole vocabulary', () => {

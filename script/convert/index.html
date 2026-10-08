@@ -41,14 +41,14 @@
     <div class="wrap">
       <div class="section-head">
         <h2 class="section-title" id="forward-title">文字 → 图</h2>
-        <p class="section-lede">每行一个声部：<code>符号: 节点 | 关系 | 节点</code>。词写成<a href="../dictionary/">词典</a>里的 <code>类.指</code>，数写成 <code>COUNT.n</code>，<code>_</code> 表示空。一句下面的行是其他声音在回应它。空一行开始下一句。<code>#</code> 后面是注释。</p>
+        <p class="section-lede">每行一个声部：<code>符号: 节点 | 关系 | 节点</code>。词写成<a href="../dictionary/">词典</a>里的 <code>类.指</code>，数写成 <code>COUNT</code> 加 512 进制的数位（<code>COUNT.137</code>；2219 写作 <code>COUNT.4.171</code>，也可以直接写 <code>COUNT.2219</code>），<code>_</code> 表示空。一组行是一个三元组，第一行下面的行是其他声音在回应它。空一行开始下一个三元组。<code>#</code> 后面是注释。</p>
       </div>
       <div class="gs-pane">
         <div>
           <label class="field">例子
             <select id="gs-examples">
               <option value="">选一个例子 …</option>
-              <option value="# 他们说话：三句。空一行开始下一条边。\n+: BODY.OTHER | ONE | BODY.AIR\n×: _ | _ | _.WATER\n*: _ | _ | _.AIR\n\n+: SELF | LIGHT.BEFORE | BODY.OTHER\n\n+: SELF | VOICE.ONE | ONE\n">一场对话</option>
+              <option value="# 他们说话：三个三元组。空一行开始下一个。\n+: BODY.OTHER | ONE | BODY.AIR\n×: _ | _ | _.WATER\n*: _ | _ | _.AIR\n\n+: SELF | LIGHT.BEFORE | BODY.OTHER\n\n+: SELF | VOICE.ONE | ONE\n">一场对话</option>
               <option value="# “我们看见过你们的世界。”\n+: SELF | LIGHT.BEFORE | BODY.OTHER\n">我们看见过你们的世界</option>
               <option value="# “我们看不见你们了。”（影子那段发射）\n+: SELF | LIGHT.BEFORE | OTHER\n\n+: SELF | LIGHT.NOT | OTHER\n">我们看不见你们了</option>
               <option value="# “你们的世界是水世界。我们看见过那个。”\n+: BODY.OTHER | ONE | BODY.WATER\n\n+: SELF | LIGHT.BEFORE | ONE\n">我们看见过那个</option>
@@ -56,10 +56,12 @@
               <option value="# “你们的世界是什么？”我们的回答：水世界。\n+: BODY.OTHER | ONE | OPEN\n×: _ | _ | BODY.WATER\n">一个问题</option>
               <option value="# “脉冲星有多少颗？”十二颗。\n+: STAR.TIME | ONE | OPEN.COUNT\n×: _ | _ | COUNT.12\n">多少？</option>
               <option value="# 第三个声音站在他们一边，反对我们对自己世界的说法。\n+: BODY.OTHER | ONE | BODY.AIR\n×: _ | _ | _.WATER\n*: _ | _ | _.AIR\n">第三个声音</option>
+              <option value="# “现在是 2219 年。十二颗脉冲星。”大的数是 COUNT 后面的 512 进制数位。\n+: TIME.ONE | ONE | COUNT.4.171\n\n+: STAR.TIME | ONE | COUNT.12\n">2219 年</option>
             </select>
           </label>
           <label class="field">页面源文 <textarea id="gs-src" rows="9" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea></label>
           <p class="gs-error" id="gs-src-err" role="alert" hidden></p>
+          <label class="field">每行几个三元组 <select id="gs-per-line"><option>1</option><option selected>2</option><option>3</option><option>4</option></select></label>
           <p class="note">符号：<span class="gs-ink-them">+</span> 是他们，<span class="gs-ink-us">×</span> 是我们；其他任何单个字符是另一个声音。</p>
         </div>
         <div class="gs-out">
@@ -81,7 +83,7 @@
     <div class="wrap">
       <div class="section-head">
         <h2 class="section-title" id="reverse-title">图 → 文字</h2>
-        <p class="section-lede">选一个部件，点一个位置把它盖上去；或者选“单格”随手画。颜色浅一些的方块是格点：文字只会落在那里，画在它们之间的记号会让它变成一幅图。也可以粘贴用文字表示的图，每行一排，<code>.</code> 表示空格。</p>
+        <p class="section-lede">选一个部件，点一下把它盖上去；或者选“单格”随手画。颜色浅一些的排是声部所在的地方。词里的部件之间空 1 格，词与词空 2 格，三元组之间空 4 格：翻译机只靠这些空隙读出结构，切不成完整部件的就是一幅图。也可以粘贴用文字表示的图，每行一排，<code>.</code> 表示空格。</p>
       </div>
       <div class="gs-pane">
         <div>
@@ -95,8 +97,9 @@
           </div>
           <div class="gs-palette" id="gs-palette" role="group" aria-label="部件"></div>
           <div class="gs-controls">
-            <label class="field">数 <input type="number" id="gs-num" min="0" max="511" value="12"></label>
-            <label class="field">句数 <input type="number" id="gs-lines" min="1" max="12" value="2"></label>
+            <label class="field">数位 <input type="number" id="gs-num" min="0" max="511" value="12"></label>
+            <label class="field">行数 <input type="number" id="gs-lines" min="1" max="12" value="2"></label>
+            <label class="field">宽 <input type="number" id="gs-width" min="7" max="120" value="45"></label>
             <label class="field">声音数 <select id="gs-voices"><option>1</option><option selected>2</option><option>3</option></select></label>
             <button type="button" class="btn btn-sm btn-ghost" id="gs-clear">清空</button>
           </div>

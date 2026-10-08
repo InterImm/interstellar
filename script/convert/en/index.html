@@ -41,14 +41,14 @@
     <div class="wrap">
       <div class="section-head">
         <h2 class="section-title" id="forward-title">Text → drawing</h2>
-        <p class="section-lede">One band per row: <code>SYMBOL: node | relation | node</code>. Words are <code>KIND.WHICH</code> from the <a href="../../dictionary/en/">dictionary</a>, numbers are <code>COUNT.n</code>, and <code>_</code> is empty. Rows under a statement are other voices answering it. A blank row starts the next statement. <code>#</code> starts a comment.</p>
+        <p class="section-lede">One band per row: <code>SYMBOL: node | relation | node</code>. Words are <code>KIND.WHICH</code> from the <a href="../../dictionary/en/">dictionary</a>, numbers are <code>COUNT</code> and base-512 digits (<code>COUNT.137</code>, <code>COUNT.4.171</code> for 2219, or just <code>COUNT.2219</code>), and <code>_</code> is empty. A block of rows is one triplet; rows under its first are other voices answering it. A blank row starts the next triplet. <code>#</code> starts a comment.</p>
       </div>
       <div class="gs-pane">
         <div>
           <label class="field">Examples
             <select id="gs-examples">
               <option value="">Pick an example …</option>
-              <option value="# They speak: three statements. A blank line starts the next edge.\n+: BODY.OTHER | ONE | BODY.AIR\n×: _ | _ | _.WATER\n*: _ | _ | _.AIR\n\n+: SELF | LIGHT.BEFORE | BODY.OTHER\n\n+: SELF | VOICE.ONE | ONE\n">A conversation</option>
+              <option value="# They speak: three triplets. A blank line starts the next one.\n+: BODY.OTHER | ONE | BODY.AIR\n×: _ | _ | _.WATER\n*: _ | _ | _.AIR\n\n+: SELF | LIGHT.BEFORE | BODY.OTHER\n\n+: SELF | VOICE.ONE | ONE\n">A conversation</option>
               <option value="# &quot;We saw your world.&quot;\n+: SELF | LIGHT.BEFORE | BODY.OTHER\n">We saw your world</option>
               <option value="# &quot;We no longer see you.&quot; (the shadow transmission)\n+: SELF | LIGHT.BEFORE | OTHER\n\n+: SELF | LIGHT.NOT | OTHER\n">We no longer see you</option>
               <option value="# &quot;Your world is water. We saw that.&quot;\n+: BODY.OTHER | ONE | BODY.WATER\n\n+: SELF | LIGHT.BEFORE | ONE\n">We saw that</option>
@@ -56,10 +56,12 @@
               <option value="# &quot;Your world is what?&quot; and our answer: a water-world.\n+: BODY.OTHER | ONE | OPEN\n×: _ | _ | BODY.WATER\n">A question</option>
               <option value="# &quot;How many pulsars?&quot; Twelve.\n+: STAR.TIME | ONE | OPEN.COUNT\n×: _ | _ | COUNT.12\n">How many?</option>
               <option value="# A third voice sides with them, against us, about our own world.\n+: BODY.OTHER | ONE | BODY.AIR\n×: _ | _ | _.WATER\n*: _ | _ | _.AIR\n">A third voice</option>
+              <option value="# &quot;Now is 2219. Twelve pulsars.&quot; Big numbers are base-512 digits after COUNT.\n+: TIME.ONE | ONE | COUNT.4.171\n\n+: STAR.TIME | ONE | COUNT.12\n">The year 2219</option>
             </select>
           </label>
           <label class="field">Page source <textarea id="gs-src" rows="9" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea></label>
           <p class="gs-error" id="gs-src-err" role="alert" hidden></p>
+          <label class="field">Triplets per line <select id="gs-per-line"><option>1</option><option selected>2</option><option>3</option><option>4</option></select></label>
           <p class="note">Symbols: <span class="gs-ink-them">+</span> is them, <span class="gs-ink-us">×</span> is us; any other single character is another voice.</p>
         </div>
         <div class="gs-out">
@@ -81,7 +83,7 @@
     <div class="wrap">
       <div class="section-head">
         <h2 class="section-title" id="reverse-title">Drawing → text</h2>
-        <p class="section-lede">Pick a part and click a position to stamp it, or pick "one cell" and draw freely. The lighter squares are the lattice: text only ever sits there, so a mark between them makes it a picture. You can also paste a drawing as text, one row per line, with <code>.</code> for empty cells.</p>
+        <p class="section-lede">Pick a part and click to stamp it, or pick "one cell" and draw freely. The lighter rows are where bands go. Leave 1 empty cell between the parts of a word, 2 between words and 4 between triplets: the machine reads the structure from those gaps alone, and anything that won't split into whole parts is a picture. You can also paste a drawing as text, one row per line, with <code>.</code> for empty cells.</p>
       </div>
       <div class="gs-pane">
         <div>
@@ -95,8 +97,9 @@
           </div>
           <div class="gs-palette" id="gs-palette" role="group" aria-label="Parts"></div>
           <div class="gs-controls">
-            <label class="field">Number <input type="number" id="gs-num" min="0" max="511" value="12"></label>
+            <label class="field">Digit <input type="number" id="gs-num" min="0" max="511" value="12"></label>
             <label class="field">Lines <input type="number" id="gs-lines" min="1" max="12" value="2"></label>
+            <label class="field">Width <input type="number" id="gs-width" min="7" max="120" value="45"></label>
             <label class="field">Voices <select id="gs-voices"><option>1</option><option selected>2</option><option>3</option></select></label>
             <button type="button" class="btn btn-sm btn-ghost" id="gs-clear">Clear</button>
           </div>

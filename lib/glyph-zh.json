@@ -81,7 +81,7 @@
   "VOICE.LIGHT": {"gloss": "无线电", "note": "由光承载的声音"},
   "VOICE.BODY": {"gloss": "共鸣体、乐器", "note": "会发声的物体"},
   "VOICE.OPEN": {"gloss": "一个问题", "note": ""},
-  "ONE": {"gloss": "那", "note": "单独放在节点位置：指上一行"},
+  "ONE": {"gloss": "那", "note": "单独放在节点位置：指前一个三元组"},
   "ONE.ONE": {"gloss": "相同", "note": ""},
   "ONE.NOT": {"gloss": "不同", "note": ""},
   "OPEN.COUNT": {"gloss": "多少？", "note": "“什么数？”，用 COUNT.n 回答"},
