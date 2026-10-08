@@ -1,0 +1,5 @@
+# "Now is 2219. Twelve pulsars." Big numbers are base-512 digits after COUNT.
+# COUNT.4.171 = 4 x 512 + 171 = 2219 (you can also write COUNT.2219).
++: TIME.ONE | ONE | COUNT.4.171
+
++: STAR.TIME | ONE | COUNT.12

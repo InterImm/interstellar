@@ -1,4 +1,4 @@
-# They speak: three statements. A blank line starts the next edge.
+# They speak: three triplets. A blank line starts the next one.
 +: BODY.OTHER | ONE | BODY.AIR
 ×: _ | _ | _.WATER
 *: _ | _ | _.AIR

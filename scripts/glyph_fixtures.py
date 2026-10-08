@@ -3,7 +3,7 @@
 tests/glyph.test.mjs compares lib/glyph.js against this file, so the site and the `glyph` command agree.
 Re-run it after updating glyph-cli or lib/glyph-vocab.json:
 
-    pip install glyph-cli==0.2.0
+    pip install glyph-cli==0.3.0
     python3 scripts/glyph_fixtures.py
 """
 
@@ -25,6 +25,7 @@ for path in sorted((ROOT / "tests/glyph-examples").glob("*.txt")):
     page = parse_page(source, vocab)
     rows = render(vocab, page)
     examples[path.name] = {
+        "rows_one_per_line": render(vocab, page, per_line=1),
         "source": source,
         "formatted": format_page(page),
         "rows": rows,
@@ -39,14 +40,19 @@ for e in vocab.entries:
 
 parse = {}
 for text in ["BODY.OTHER", "body.other", "SELF", "COUNT.137", "COUNT.0", "COUNT", "_.12", "_.WATER", "_", "",
-             "LIGHT.VOICE", "BODY.WIND", "COUNT.512", "STAR.12", "ONE.12", "COUNT.SELF", "FOO", "_.0"]:
+             "LIGHT.VOICE", "BODY.WIND", "COUNT.512", "STAR.12", "ONE.12", "COUNT.SELF", "FOO", "_.0",
+             "COUNT.4.171", "COUNT.2219", "COUNT.70491", "COUNT.12.106.0", "COUNT.4.512", "COUNT.0.5", "_.4.170",
+             "BODY.SELF.OTHER"]:
     try:
         w = vocab.parse(text)
         parse[text] = {"word": str(w), "node": vocab.gloss(w), "relation": vocab.gloss(w, role="relation")}
     except GlyphError as exc:
         parse[text] = {"error": str(exc)}
 
-numbers = {str(n): draw_words(vocab, [vocab.parse(f"COUNT.{n}")]) for n in range(0, 512)}
+numbers = {
+    str(n): draw_words(vocab, [vocab.parse(f"COUNT.{n}")])
+    for n in [*range(0, 512), 512, 2219, 70491, 262143, 262144, 3200000]
+}
 
 out = {"glyph_cli": glyph_cli.__version__, "examples": examples, "words": words, "parse": parse, "numbers": numbers}
 (ROOT / "tests/glyph-cli-fixtures.json").write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")

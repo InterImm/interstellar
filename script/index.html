@@ -51,7 +51,8 @@
           <li>一切都画在同一张共享的网格上。</li>
           <li>每一方只用自己的记号画：<span class="gs-ink-them">+</span> 是罗斯128 b，<span class="gs-ink-us">×</span> 是我们。记号从不互相覆盖，所以总能看出是谁画的。</li>
           <li>一块 3 × 3 的格子是一个部件，两个部件组成一个词，就像笔画组成汉字。它不是字母表。</li>
-          <li>一行是一句话。其他声音在它下面画出自己的回答。</li>
+          <li>空隙就是结构：词里的部件隔 1 格，三元组里的词隔 2 格，三元组之间隔 4 格。</li>
+          <li>一个三元组是一句话。其他声音在它下面画出自己的回答。</li>
         </ul>
         <p class="muted">到目前为止，他们发来的一切都只用 <span class="gs-ink-them">+</span> 画成。图里的第二个声部是人类可以发回去的回答：是水，不是空气。</p>
       </div>
@@ -75,7 +76,7 @@
       <div class="section-head">
         <p class="kicker">3 · 词</p>
         <h2 class="section-title" id="words-title">两个部件组成一个词</h2>
-        <p class="section-lede">一个词占两个相邻的位置：左边是<b>类</b>，右边是<b>指</b>，写作 <code>类.指</code>。属于你们的世界是你们的世界；计时的恒星是脉冲星；行进的空气是风。只有一个部件的词，右边空着。所有约定好的词都在<a href="dictionary/">词典</a>里。</p>
+        <p class="section-lede">一个词是两个部件，中间空一格：左边是<b>类</b>，右边是<b>指</b>，写作 <code>类.指</code>。属于你们的世界是你们的世界；计时的恒星是脉冲星；行进的空气是风。只有一个部件的词就只有 3 格宽。所有约定好的词都在<a href="dictionary/">词典</a>里。</p>
       </div>
       <ul class="gs-words" data-gs-words="BODY.OTHER BODY.SELF STAR.TIME AIR.PATH LIGHT.BODY VOICE.VOICE PATH.LIGHT TIME.BODY"></ul>
     </div>
@@ -85,8 +86,8 @@
     <div class="wrap">
       <div class="section-head">
         <p class="kicker">4 · 句</p>
-        <h2 class="section-title" id="edges-title">每一行是图谱的一条边</h2>
-        <p class="section-lede">一行宽六个位置（23 格），正好放三个词：一个节点、一个关系、另一个节点。一段文字是一行行叠起来的，所以一段文字就是一张知识图谱。同一个词出现在两行，就是同一个节点；节点位置上单独一个 ONE 表示“那”，指上一行那句话。</p>
+        <h2 class="section-title" id="edges-title">每个三元组是图谱的一条边</h2>
+        <p class="section-lede">一段文字是一串三元组（节点，关系，节点），从左往右读，一行写不下就换行。每个三元组是知识图谱的一条边，所以一段文字就是一张图。空隙说明一切：词里隔 1 格，词与词隔 2 格，三元组之间隔 4 格，行与行隔 3 排。同一个词出现在两个三元组里，就是同一个节点；节点位置上单独一个 ONE 表示“那”，指前一个三元组。</p>
       </div>
       <div class="split" style="--split: minmax(0, 1fr) minmax(0, 1.3fr); align-items: start; margin-bottom: 2rem;">
         <div class="prose">
@@ -118,20 +119,21 @@
     <div class="wrap">
       <div class="section-head">
         <p class="kicker">5 · 数</p>
-        <h2 class="section-title" id="numbers-title">数是九个比特</h2>
-        <p class="section-lede">一个数写作 COUNT（一条计数的横线），后面的“指”按九个比特读：从 256 到 1，从左到右，从上到下。COUNT 单独出现是零，所以能写 0 到 511。只有 COUNT 这一类的“指”按比特读，所以数永远不会被错认成词。</p>
+        <h2 class="section-title" id="numbers-title">数是 512 进制的数位</h2>
+        <p class="section-lede">一个数写作 COUNT（一条计数的横线），后面跟着 512 进制的数位，高位在前。每个数位按九个比特读：从 256 到 1，从左到右，从上到下。COUNT 单独出现是零；137 是 COUNT.137；2219 年是 COUNT.4.171，因为 4 × 512 + 171 = 2219。只有 COUNT 后面的位置按比特读，所以数永远不会被错认成词。</p>
       </div>
       <div class="gs-number" data-gs-number>
         <div class="gs-draw"></div>
         <div class="gs-bits" aria-hidden="true"></div>
         <div class="gs-number-controls">
-          <label class="field">数 <input type="number" min="0" max="511" step="1" value="137"></label>
+          <label class="field">数 <input type="number" min="0" max="134217727" step="1" value="137"></label>
           <input type="range" min="0" max="511" step="1" value="137" aria-label="数">
-          <p class="note">写作 <span class="gs-number-word">COUNT.137</span>。试试 137，第五段发射。</p>
+          <p class="note">写作 <span class="gs-number-word">COUNT.137</span>。试试 137（第五段发射），或者 2219。</p>
         </div>
       </div>
       <div class="gs-examples" style="margin-top: 1.5rem;">
         <figure class="gs-example" data-gs-example="+: SELF | LIGHT.ONE | STAR.TIME\n\n+: STAR.TIME | ONE | COUNT.12"></figure>
+        <figure class="gs-example" data-gs-example="+: TIME.ONE | ONE | COUNT.4.171"></figure>
       </div>
     </div>
   </section>
@@ -141,7 +143,7 @@
       <div class="section-head">
         <p class="kicker-out">6 · 声音</p>
         <h2 class="section-title" id="voices-title">往下叠，就是又一个声音</h2>
-        <p class="section-lede">只有新的一方才会在一行下面加一个声部，而且每一方一直用同一个声部，所以声部的数目就是声音的数目。下面声部里的每个部件，回应同一位置上方最近的那个部件。这样任何一方都能逐个部件地赞同、否定或修改任何节点和边。一场对话，就是几个声音一起搭起来的一张图。</p>
+        <p class="section-lede">只有新的一方才会在一个三元组下面加一个声部，而且每一方一直用同一个声部，所以声部的数目就是声音的数目。下面声部里的每个部件，回应同一个词里同一位置上方最近的那个部件。这样任何一方都能逐个部件地赞同、否定或修改任何节点和边。一场对话，就是几个声音一起搭起来的一张图。</p>
       </div>
       <div class="table-scroll" style="max-width: 36rem; margin-bottom: 2rem;"><table class="data-table">
         <thead><tr><th>下面画的</th><th>意思</th></tr></thead>
@@ -167,9 +169,9 @@
       <p class="kicker">7 · 翻译机</p>
       <h2 class="section-title" id="machine-title">翻译机怎样读一页</h2>
       <ol class="gs-steps">
-        <li>把一页切成 3 × 3 的位置。不落在格点上的都是图，比如最早那幅 667 比特的图，而不是文字。</li>
-        <li>在三行的空隙处分出句子，数一数一句有几个声部：那就是有几个声音。</li>
-        <li>把每句的第一个声部读成一条边：节点、关系、节点。同一个词，同一个节点。单独的 ONE 指向上一行。</li>
+        <li>在三排的空隙处分出行，数一数一行有几个声部：那就是有几个声音。</li>
+        <li>按 1、2、4 格的空隙把每一行切成三元组、词和部件。切不成完整部件的都是图，比如最早那幅 667 比特的图，而不是文字。</li>
+        <li>把每个三元组的第一个声部读成一条边：节点、关系、节点。同一个词，同一个节点。单独的 ONE 指向前一个三元组。</li>
         <li>把下面声部的每个部件和上方最近的部件对照，把回答连同画它的声音，挂到那个节点或那条边上。</li>
       </ol>
       <p>人类不用学这些符号；翻译机负责读和写，它的词库随着每一页增长。你也可以运行同一台机器：<a href="convert/">转换器</a>在浏览器里把文字变成图，再把图变回文字。它和命令行词典 <a href="https://interimm.github.io/glyph-cli/">glyph</a>（<code>pip install glyph-cli</code>）用的是同一套规则和同一份词表。</p>

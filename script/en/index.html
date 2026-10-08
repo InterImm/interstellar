@@ -51,7 +51,8 @@
           <li>Everything is drawn on one shared grid of cells.</li>
           <li>Each party draws only with its own mark: <span class="gs-ink-them">+</span> for Ross 128 b, <span class="gs-ink-us">×</span> for us. Marks never cover each other, so you can always see who drew what.</li>
           <li>One grid square of 3 × 3 cells is one part, and two parts make a word, the way strokes make a Chinese character. It is not an alphabet.</li>
-          <li>A line is one statement. Under it, other voices draw their answers.</li>
+          <li>Spacing is structure: 1 empty cell between the parts of a word, 2 between the words of a triplet, 4 between triplets.</li>
+          <li>A triplet is one statement. Under it, other voices draw their answers.</li>
         </ul>
         <p class="muted">So far, everything they have sent is drawn in <span class="gs-ink-them">+</span> alone. The second band in the drawing is a reply humans could send: water, instead of air.</p>
       </div>
@@ -75,7 +76,7 @@
       <div class="section-head">
         <p class="kicker">3 · Words</p>
         <h2 class="section-title" id="words-title">Two parts make a word</h2>
-        <p class="section-lede">A word takes two neighbouring positions: the <b>kind</b> on the left and the <b>which</b> on the right, written <code>KIND.WHICH</code>. A world that is yours is your world; a star that keeps time is a pulsar; air going is wind. A one-part word leaves the which empty. The <a href="../dictionary/en/">dictionary</a> lists every agreed word.</p>
+        <p class="section-lede">A word is two parts, one empty cell apart: the <b>kind</b> on the left and the <b>which</b> on the right, written <code>KIND.WHICH</code>. A world that is yours is your world; a star that keeps time is a pulsar; air going is wind. A one-part word is just 3 cells wide. The <a href="../dictionary/en/">dictionary</a> lists every agreed word.</p>
       </div>
       <ul class="gs-words" data-gs-words="BODY.OTHER BODY.SELF STAR.TIME AIR.PATH LIGHT.BODY VOICE.VOICE PATH.LIGHT TIME.BODY"></ul>
     </div>
@@ -85,8 +86,8 @@
     <div class="wrap">
       <div class="section-head">
         <p class="kicker">4 · Lines</p>
-        <h2 class="section-title" id="edges-title">Every line is one edge of a graph</h2>
-        <p class="section-lede">A line is six positions wide (23 cells), so it holds three words: a node, a relation, another node. A text is a stack of lines, so a text is a knowledge graph. The same word on two lines is the same node, and a lone ONE in a node slot means "that": the statement on the line above.</p>
+        <h2 class="section-title" id="edges-title">Every triplet is one edge of a graph</h2>
+        <p class="section-lede">A text is a run of triplets (node, relation, node), read left to right and wrapping onto new lines. Each triplet is one edge of a knowledge graph, so a text is a graph. The gaps say it all: 1 cell inside a word, 2 between words, 4 between triplets, 3 rows between lines. The same word in two triplets is the same node, and a lone ONE in a node slot means "that": the triplet before.</p>
       </div>
       <div class="split" style="--split: minmax(0, 1fr) minmax(0, 1.3fr); align-items: start; margin-bottom: 2rem;">
         <div class="prose">
@@ -118,20 +119,21 @@
     <div class="wrap">
       <div class="section-head">
         <p class="kicker">5 · Numbers</p>
-        <h2 class="section-title" id="numbers-title">Numbers are nine bits</h2>
-        <p class="section-lede">A number is COUNT, a counting line, followed by a which read as nine bits: 256 down to 1, left to right, top to bottom. COUNT alone is zero, so 0 to 511 fit. COUNT is the only kind whose which is read as bits, so a number can never be mistaken for a word.</p>
+        <h2 class="section-title" id="numbers-title">Numbers are base-512 digits</h2>
+        <p class="section-lede">A number is COUNT, a counting line, followed by base-512 digits, most significant first. Each digit is nine bits: 256 down to 1, left to right, top to bottom. COUNT alone is zero; 137 is COUNT.137; the year 2219 is COUNT.4.171, because 4 × 512 + 171 = 2219. Only the positions after COUNT are read as bits, so a number can never be mistaken for a word.</p>
       </div>
       <div class="gs-number" data-gs-number>
         <div class="gs-draw"></div>
         <div class="gs-bits" aria-hidden="true"></div>
         <div class="gs-number-controls">
-          <label class="field">Number <input type="number" min="0" max="511" step="1" value="137"></label>
+          <label class="field">Number <input type="number" min="0" max="134217727" step="1" value="137"></label>
           <input type="range" min="0" max="511" step="1" value="137" aria-label="Number">
-          <p class="note">Written <span class="gs-number-word">COUNT.137</span>. Try 137, the fifth transmission.</p>
+          <p class="note">Written <span class="gs-number-word">COUNT.137</span>. Try 137, the fifth transmission, or 2219.</p>
         </div>
       </div>
       <div class="gs-examples" style="margin-top: 1.5rem;">
         <figure class="gs-example" data-gs-example="+: SELF | LIGHT.ONE | STAR.TIME\n\n+: STAR.TIME | ONE | COUNT.12"></figure>
+        <figure class="gs-example" data-gs-example="+: TIME.ONE | ONE | COUNT.4.171"></figure>
       </div>
     </div>
   </section>
@@ -141,7 +143,7 @@
       <div class="section-head">
         <p class="kicker-out">6 · Voices</p>
         <h2 class="section-title" id="voices-title">Stacking means another voice</h2>
-        <p class="section-lede">Only a new party adds a band under a line, and each party keeps its band, so the number of bands is the number of voices. Every part in a lower band answers the nearest drawn part above it in the same position. That lets anyone agree with, deny or change any node or edge, part by part. A conversation is a graph several voices build together.</p>
+        <p class="section-lede">Only a new party adds a band under a triplet, and each party keeps its band, so the number of bands is the number of voices. Every part in a lower band answers the nearest drawn part above it in the same position of the same word. That lets anyone agree with, deny or change any node or edge, part by part. A conversation is a graph several voices build together.</p>
       </div>
       <div class="table-scroll" style="max-width: 36rem; margin-bottom: 2rem;"><table class="data-table">
         <thead><tr><th>Below</th><th>Means</th></tr></thead>
@@ -167,9 +169,9 @@
       <p class="kicker">7 · The machine</p>
       <h2 class="section-title" id="machine-title">How the machine reads a page</h2>
       <ol class="gs-steps">
-        <li>Cut the page into 3 × 3 positions. Anything off the lattice is a picture, like the first 667-bit message, not text.</li>
-        <li>Split it into lines at the three-row gaps, and count the bands in a line: that is the number of voices.</li>
-        <li>Read the first band of each line as an edge: node, relation, node. Same word, same node. A lone ONE points at the line above.</li>
+        <li>Split the page into lines at the three-row gaps, and count the bands in a line: that is the number of voices.</li>
+        <li>Cut each line into triplets, words and parts at the 1, 2 and 4 cell gaps. Anything that won't cut into whole parts is a picture, like the first 667-bit message, not text.</li>
+        <li>Read the first band of each triplet as an edge: node, relation, node. Same word, same node. A lone ONE points at the triplet before.</li>
         <li>Read every part in a lower band against the nearest part above it, and attach the answer to that node or edge, with the voice that drew it.</li>
       </ol>
       <p>Humans don't learn the signs; the machine reads and writes them, and its lexicon grows with every page. You can run the same machine: the <a href="../convert/en/">converter</a> turns text into drawings and drawings back into text, in your browser. It follows the same rules and the same vocabulary as <a href="https://interimm.github.io/glyph-cli/">glyph</a>, the command-line dictionary (<code>pip install glyph-cli</code>).</p>
