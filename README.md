@@ -45,10 +45,13 @@ with their own number (see `app/script.js`).
   Earth, Isidis (Mars) and Ceres; made public 2219-10-05. A narrow 1420.55 MHz line pulsed at exactly the rate of
   pulsar J1909−3744 (the duet): in step with it at Earth's centre, then one smooth slip of exactly one pulse, then in
   step again. Only Earth hears it in tune. Later returns of transmission 1 took two other forms, the chorus and the
-  missing note (`lib/signals.js`). Repeats. These details are proposals and easy to change (`DETECTED` in `app/signal.js` and
+  missing note (`lib/signals.js`). The duet is a handshake: it sets a shared clock and shows the signal is tuned
+  for Earth, so Earth's record of the four content transmissions that follow is the most accurate one. Repeats. These details are proposals and easy to change (`DETECTED` in `app/signal.js` and
   `app/home.js`, the logs in the HTML).
 - The arrival-time table is illustrative: a plane wave from Ross 128 with made-up 2219 planet positions.
 - The beacon repeats every 9 h 41 m 13 s as received, each pass 22 minutes (`app/pulsars.js`).
+- The grid script (`script/`) is our transcription of their speech. In 2219 it is a first draft; the language is
+  built up over back-and-forth exchanges, each round trip 21.96 years (first reply arrives 2230, earliest answer 2241).
 - Later in the era, more voices. The entrance only hints at it.
 
 ## Fonts
