@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN" class="js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>回音之间 | 通联纪</title>
+<meta name="description" content="一个小游戏：在 2219 年此刻出生在太阳系某处，过完一生。罗斯128 b 的回答每 21.96 年才到一次，一辈子只听得到几次。">
+<link rel="alternate" hreflang="zh-CN" href="https://interstellar.interimm.org/life/">
+<link rel="alternate" hreflang="en" href="https://interstellar.interimm.org/life/en/">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../kit/interimm.css?v=2">
+<link rel="stylesheet" href="../app/life.css?v=1">
+<script src="../kit/interimm.js?v=2" defer></script>
+<script type="module" src="../app/life.js?v=1"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到正文</a>
+
+<header class="site-header" data-interimm-header data-lang="cn" data-current="life" data-lang-en="en/">
+  <div class="wrap header-inner">
+    <a class="brand" href="../"><span class="brand-dot" aria-hidden="true"></span><span class="brand-name">通联纪</span></a>
+  </div>
+</header>
+
+<main id="main">
+  <header class="hero life-hero space" id="start">
+    <div class="wrap">
+      <p class="kicker"><span class="pulse"></span>小游戏 · 一生</p>
+      <h1>回音之间</h1>
+      <p class="lede">你会在 2219 年的此刻出生，地点不由你选：可能是地球，也可能是月球、太空城、火星十一城里的一座，或者木星、土星的卫星。罗斯128 b 的每一次回答，都要隔 21.96 年才到。一辈子能听到几次，要看你生在哪里、活多久。</p>
+      <div class="life-start">
+        <div class="tabs" role="tablist" aria-label="怎样出生">
+          <button type="button" role="tab" data-mode="people" aria-selected="true">按人口</button>
+          <button type="button" role="tab" data-mode="worlds" aria-selected="false">按世界</button>
+        </div>
+        <p class="note">按人口：和真实一样，几乎一定生在地球。按世界：先随机挑一个世界，再在那里按人口挑。</p>
+        <div class="hero-actions">
+          <button type="button" class="btn btn-primary btn-lg" id="btn-born">出生 <span>→</span></button>
+          <button type="button" class="btn btn-ghost btn-lg" id="btn-shared" hidden>用链接里的出生</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="section life-game" id="game" hidden aria-label="这一生">
+    <div class="wrap">
+      <figure class="scope life-scope">
+        <canvas id="lightcone" role="img" aria-label="光锥图"></canvas>
+        <figcaption><span>↑ 罗斯128 b · 10.98 光年</span><span>2208 → 2340</span><span>↓ 太阳系</span></figcaption>
+      </figure>
+      <ul class="legend life-legend"><li><i class="sw sw-signal"></i>他们的回答</li><li><i class="sw life-sw-us"></i>我们的信 · 你的一生</li><li><i class="sw sw-dim"></i>还没发生</li></ul>
+
+      <div class="life-controls cluster">
+        <button type="button" class="btn btn-ghost btn-sm" id="btn-pause">暂停</button>
+        <div class="tabs life-speed" aria-label="速度">
+          <button type="button" data-speed="0" aria-pressed="true">1×</button>
+          <button type="button" data-speed="1" aria-pressed="false">3×</button>
+          <button type="button" data-speed="2" aria-pressed="false">8×</button>
+        </div>
+        <button type="button" class="btn btn-ghost btn-sm" id="btn-next">跳到下一个抉择</button>
+      </div>
+
+      <div class="life-grid">
+        <aside class="life-now">
+          <dl class="readouts">
+            <div><dt>年份</dt><dd id="r-year">–</dd></div>
+            <div><dt>年龄</dt><dd id="r-age">–</dd></div>
+            <div><dt>所在</dt><dd id="r-where">–</dd></div>
+            <div><dt>工作</dt><dd id="r-job">–</dd></div>
+            <div><dt>身边的人</dt><dd id="r-people">–</dd></div>
+            <div><dt>听到的回音</dt><dd id="r-heard">–</dd></div>
+          </dl>
+          <div class="life-choice" id="choice" hidden aria-live="polite"></div>
+        </aside>
+        <div>
+          <section class="life-end" id="end" hidden aria-live="polite"></section>
+          <ol class="log life-log" id="life-log" aria-label="这一生的记录"></ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" aria-labelledby="how-title">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="kicker">怎么算的</p>
+        <h2 class="section-title" id="how-title">规则与来源</h2>
+      </header>
+      <div class="prose life-method">
+        <p><strong>出生地。</strong>地球人口取联合国《世界人口展望 2024》对 2100 年的预测（约 102 亿），并假设之后保持不变。月球、太空城、火星十一城、谷神星、木卫三、木卫四和泰坦的人口都是游戏的假设：《星际移民之书》只说过人口过万才算城市，南河城“接近地球中等城市”。游戏假设每个地方的出生率都一样。</p>
+        <p><strong>寿命。</strong>以联合国对 2100 年的出生时预期寿命（约 82 岁）为准。火星辐射较强（书中提到火星磁场微弱），所以减几年；泰坦大气浓厚、辐射低，加一年。这些增减都是假设。</p>
+        <p><strong>回音。</strong>信号在 2219 年 10 月 5 日公之于众，第一封回信同一天发出。游戏假设双方每次都在收到信的当天回答，所以回答在 2241、2263、2285、2307 年到达，每次相隔 21.96 年。这是最快的情况，档案页只说这是“最早可能”的回音。</p>
+        <p><strong>你提的词。</strong>每次回答到达后，你可以从翻译机的词库（<a href="../script/">网格文字</a>，2219 年的初稿）里提一个词，用我们的符号 × 画出来。大多数提议都用不上；做词库标注、外交和档案工作的人，被采纳的机会大一些。这些概率也是假设。</p>
+        <p><strong>地方和工作</strong>都来自<a href="https://book.interimm.org/">《星际移民之书》</a>：火星的城市圈、瀑布城和星夜城、火纵线的木土线路、火星家园计划，以及书里的行业列表。木土合相的年份按真实天象推算（每 19.86 年一次）。</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" data-interimm-footer>
+  <div class="wrap"><p class="footer-legal"><span>© InterImm</span><a href="../">通联纪</a></p></div>
+</footer>
+</body>
+</html>

@@ -49,6 +49,12 @@
       "children": []
     },
     {
+      "id": "life",
+      "name": "回音之间",
+      "url": "https://interstellar.interimm.org/life/",
+      "children": []
+    },
+    {
       "id": "explorer",
       "name": "系外行星图鉴",
       "url": "https://interimm.org/exoplanet-explorer/",
@@ -103,6 +109,10 @@
         {
           "title": "两星漂移 · 太阳与罗斯128",
           "url": "https://interstellar.interimm.org/drift/"
+        },
+        {
+          "title": "回音之间 · 一生的小游戏",
+          "url": "https://interstellar.interimm.org/life/"
         },
         {
           "title": "系外行星图鉴（英文）",

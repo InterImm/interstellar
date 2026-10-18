@@ -49,6 +49,12 @@
       "children": []
     },
     {
+      "id": "life",
+      "name": "Between Replies",
+      "url": "https://interstellar.interimm.org/life/en/",
+      "children": []
+    },
+    {
       "id": "explorer",
       "name": "Exoplanet explorer",
       "url": "https://interimm.org/exoplanet-explorer/",
@@ -103,6 +109,10 @@
         {
           "title": "Drift · Sun and Ross 128",
           "url": "https://interstellar.interimm.org/drift/en/"
+        },
+        {
+          "title": "Between Replies · a one-life game",
+          "url": "https://interstellar.interimm.org/life/en/"
         },
         {
           "title": "Exoplanet explorer",
