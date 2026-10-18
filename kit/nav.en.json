@@ -50,8 +50,8 @@
     },
     {
       "id": "life",
-      "name": "Between Replies",
-      "url": "https://interstellar.interimm.org/life/en/",
+      "name": "The Relay (game)",
+      "url": "https://interimm.org/iron-bamboo-initiative/#life",
       "children": []
     },
     {
@@ -111,8 +111,8 @@
           "url": "https://interstellar.interimm.org/drift/en/"
         },
         {
-          "title": "Between Replies · a one-life game",
-          "url": "https://interstellar.interimm.org/life/en/"
+          "title": "The Relay · a game from 2219 to 2620",
+          "url": "https://interimm.org/iron-bamboo-initiative/#life"
         },
         {
           "title": "Exoplanet explorer",

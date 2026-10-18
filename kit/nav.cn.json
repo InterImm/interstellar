@@ -50,8 +50,8 @@
     },
     {
       "id": "life",
-      "name": "回音之间",
-      "url": "https://interstellar.interimm.org/life/",
+      "name": "接力（游戏）",
+      "url": "https://interimm.org/iron-bamboo-initiative/#life",
       "children": []
     },
     {
@@ -111,8 +111,8 @@
           "url": "https://interstellar.interimm.org/drift/"
         },
         {
-          "title": "回音之间 · 一生的小游戏",
-          "url": "https://interstellar.interimm.org/life/"
+          "title": "接力 · 从 2219 到 2620 的游戏",
+          "url": "https://interimm.org/iron-bamboo-initiative/#life"
         },
         {
           "title": "系外行星图鉴（英文）",
