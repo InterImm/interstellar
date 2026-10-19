@@ -57,7 +57,9 @@
       return `<li class="nav-item">${link(item).replace('<a ', '<a class="nav-link" ')}</li>`;
     }).join('');
     const langs = nav.languages.filter((l) => hasLang(header, l)).map((l) => `<a class="nav-link lang-link" href="${esc(langUrl(header, l))}" hreflang="${esc(l.code)}" lang="${esc(l.code)}"><span class="sr-only">${esc(nav.labels.language)}: </span>${esc(l.name)}</a>`).join('');
-    return `<div class="${wrapClass(header)} header-inner">
+    // the era bar: which phase this is, and the way back to the one before (nav.era in nav.<lang>.json)
+    const era = nav.era ? `<div class="era-bar"><div class="${wrapClass(header)} era-inner"><span class="era-label">${esc(nav.era.label)}</span>${nav.era.back ? `<a class="era-back" href="${esc(nav.era.back.url)}">${esc(nav.era.back.name)}</a>` : ''}</div></div>` : '';
+    return `${era}<div class="${wrapClass(header)} header-inner">
       ${brand(nav)}${site(header)}
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="sr-only">${esc(nav.labels.menu)}</span>${MENU_ICON}</button>
       <nav id="site-nav" class="site-nav" aria-label="${esc(nav.labels.menu)}">

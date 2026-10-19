@@ -49,10 +49,29 @@
       "children": []
     },
     {
-      "id": "life",
-      "name": "The Relay (game)",
-      "url": "https://iron-bamboo-initiative.pages.dev/#life",
-      "children": []
+      "id": "ironbamboo",
+      "name": "Iron Bamboo",
+      "url": "https://iron-bamboo-initiative.pages.dev/",
+      "children": [
+        {
+          "id": "ibhome",
+          "name": "Iron Bamboo home",
+          "url": "https://iron-bamboo-initiative.pages.dev/",
+          "children": []
+        },
+        {
+          "id": "life",
+          "name": "The Relay (game)",
+          "url": "https://iron-bamboo-initiative.pages.dev/#life",
+          "children": []
+        },
+        {
+          "id": "ibmap",
+          "name": "Iron Bamboo's star map",
+          "url": "https://iron-bamboo-initiative.pages.dev/#ship",
+          "children": []
+        }
+      ]
     },
     {
       "id": "explorer",
@@ -115,6 +134,10 @@
           "url": "https://iron-bamboo-initiative.pages.dev/#life"
         },
         {
+          "title": "Iron Bamboo's star map · 2620",
+          "url": "https://iron-bamboo-initiative.pages.dev/#ship"
+        },
+        {
           "title": "Exoplanet explorer",
           "url": "https://interimm.org/exoplanet-explorer/"
         },
@@ -156,5 +179,12 @@
         }
       ]
     }
-  ]
+  ],
+  "era": {
+    "label": "Phase 2 · The Contact Era · 2219",
+    "back": {
+      "name": "← Back to phase 1 · InterImm",
+      "url": "https://interimm.org/en/"
+    }
+  }
 }
