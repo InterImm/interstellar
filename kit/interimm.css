@@ -233,6 +233,11 @@ ul, ol { margin: 0 0 1em; }
 .era-label { color: var(--muted); }
 .era-back { color: var(--us); text-decoration: none; }
 .era-back:hover { text-decoration: underline; }
+.era-back { margin-left: auto; }
+.era-close { flex: none; background: transparent; border: 0; color: var(--muted); font: inherit; font-size: 1rem; line-height: 1; padding: 0.15rem 0.35rem; cursor: pointer; }
+.era-close:hover { color: var(--text); }
+.era-label, .era-back { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+@media (max-width: 560px) { .era-inner { flex-wrap: nowrap; } .era-label { display: none; } .era-back { margin-left: 0; } .era-close { margin-left: auto; } }
 .header-inner { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 1.25rem; min-height: 4rem; padding-block: 0.5rem; }
 
 .brand {
