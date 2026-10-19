@@ -227,6 +227,12 @@ ul, ol { margin: 0 0 1em; }
   background: var(--deep);
   border-bottom: 2px solid var(--text);
 }
+/* the era bar above the header: this phase, and the way back to phase 1 */
+.era-bar { background: #050829; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.06em; }
+.era-inner { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem 1rem; flex-wrap: wrap; min-height: 1.9rem; padding-block: 0.2rem; }
+.era-label { color: var(--muted); }
+.era-back { color: var(--us); text-decoration: none; }
+.era-back:hover { text-decoration: underline; }
 .header-inner { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 1.25rem; min-height: 4rem; padding-block: 0.5rem; }
 
 .brand {
