@@ -52,24 +52,24 @@
     {
       "id": "ironbamboo",
       "name": "Iron Bamboo",
-      "url": "https://iron-bamboo-initiative.pages.dev/",
+      "url": "https://iron-bamboo.interimm.org/",
       "children": [
         {
           "id": "ibhome",
           "name": "Iron Bamboo home",
-          "url": "https://iron-bamboo-initiative.pages.dev/",
+          "url": "https://iron-bamboo.interimm.org/",
           "children": []
         },
         {
           "id": "life",
           "name": "The Relay (game)",
-          "url": "https://iron-bamboo-initiative.pages.dev/#life",
+          "url": "https://iron-bamboo.interimm.org/#life",
           "children": []
         },
         {
           "id": "ibmap",
           "name": "Iron Bamboo's star map",
-          "url": "https://iron-bamboo-initiative.pages.dev/#ship",
+          "url": "https://iron-bamboo.interimm.org/#ship",
           "children": []
         }
       ]
@@ -132,11 +132,11 @@
         },
         {
           "title": "The Relay · a game from 2219 to 2620",
-          "url": "https://iron-bamboo-initiative.pages.dev/#life"
+          "url": "https://iron-bamboo.interimm.org/#life"
         },
         {
           "title": "Iron Bamboo's star map · 2620",
-          "url": "https://iron-bamboo-initiative.pages.dev/#ship"
+          "url": "https://iron-bamboo.interimm.org/#ship"
         },
         {
           "title": "Exoplanet explorer",

@@ -52,24 +52,24 @@
     {
       "id": "ironbamboo",
       "name": "铁竹",
-      "url": "https://iron-bamboo-initiative.pages.dev/",
+      "url": "https://iron-bamboo.interimm.org/",
       "children": [
         {
           "id": "ibhome",
           "name": "铁竹首页",
-          "url": "https://iron-bamboo-initiative.pages.dev/",
+          "url": "https://iron-bamboo.interimm.org/",
           "children": []
         },
         {
           "id": "life",
           "name": "接力（游戏）",
-          "url": "https://iron-bamboo-initiative.pages.dev/#life",
+          "url": "https://iron-bamboo.interimm.org/#life",
           "children": []
         },
         {
           "id": "ibmap",
           "name": "铁竹星图",
-          "url": "https://iron-bamboo-initiative.pages.dev/#ship",
+          "url": "https://iron-bamboo.interimm.org/#ship",
           "children": []
         }
       ]
@@ -132,11 +132,11 @@
         },
         {
           "title": "接力 · 从 2219 到 2620 的游戏",
-          "url": "https://iron-bamboo-initiative.pages.dev/#life"
+          "url": "https://iron-bamboo.interimm.org/#life"
         },
         {
           "title": "铁竹星图 · 2620",
-          "url": "https://iron-bamboo-initiative.pages.dev/#ship"
+          "url": "https://iron-bamboo.interimm.org/#ship"
         },
         {
           "title": "系外行星图鉴（英文）",
