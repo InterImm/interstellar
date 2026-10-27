@@ -44,6 +44,12 @@
       "children": []
     },
     {
+      "id": "pulsarlab",
+      "name": "脉冲星实验室",
+      "url": "https://interstellar.interimm.org/pulsar-lab/",
+      "children": []
+    },
+    {
       "id": "drift",
       "name": "两星漂移",
       "url": "https://interstellar.interimm.org/drift/",
@@ -125,6 +131,10 @@
         {
           "title": "脉冲星账本（实时）",
           "url": "https://interstellar.interimm.org/pulsars/"
+        },
+        {
+          "title": "脉冲星实验室 · 观测与分析（模拟）",
+          "url": "https://interstellar.interimm.org/pulsar-lab/"
         },
         {
           "title": "两星漂移 · 太阳与罗斯128",

@@ -1,0 +1,34 @@
+/* Pulsar lab only. Everything shared is in kit/interimm.css. */
+.lab-hero h1 { font-size: var(--step-4); }
+.lab-hero-grid { --split: minmax(0, 1fr) minmax(0, 1.15fr); align-items: center; }
+.lab-hero .lede { max-width: 36rem; }
+.lab-readouts { margin-top: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), 1fr)); }
+.lab-lighthouse canvas { height: clamp(16rem, 34vw, 23rem); }
+
+.lab-two { --split: minmax(0, 1fr) minmax(0, 1.2fr); }
+.lab-zoom canvas { height: 15rem; }
+.lab-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 0.8rem; margin: 1rem 0; }
+.lab-slider { flex: 1 1 14rem; display: flex; }
+.lab-slider input { width: 100%; }
+.lab-controls .readout { min-width: 8rem; color: var(--them); font-family: var(--font-mono); }
+.lab-check { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.9rem; color: var(--muted); }
+
+.lab-setup { display: grid; gap: 1rem 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); align-items: end; }
+.lab-setup .tabs > button:disabled { opacity: 0.35; cursor: not-allowed; }
+.lab-note { max-width: 46rem; margin: 1rem 0 0; color: var(--muted); }
+.lab-warn { margin: 1rem 0 0; padding: 0.6rem 0.8rem; border: 2px dashed var(--us); color: var(--us); }
+.lab-obs { --split: minmax(0, 1.6fr) minmax(0, 1fr); margin-top: 1.5rem; }
+.lab-waterfall canvas { height: clamp(18rem, 36vw, 26rem); }
+.lab-obs-readouts { grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr)); }
+.lab-obs-readouts dd { font-size: 1rem; }
+
+.lab-tool { --split: minmax(0, 1.4fr) minmax(0, 1fr); }
+.lab-tool > .scope canvas { height: clamp(18rem, 36vw, 26rem); }
+.lab-tool p { color: var(--muted); }
+.lab-tool .readouts dd { font-size: 1rem; }
+.lab-curve { margin: 1rem 0; }
+.lab-curve canvas { height: 8rem; }
+.lab-tool .lab-found { margin: 1rem 0 0; padding: 0.6rem 0.8rem; background: var(--them); color: var(--them-ink); font-weight: 600; }
+
+.lab-table td:last-child { min-width: 18rem; color: var(--muted); }
+.lab-table .text-link { padding: 0; border: 0; background: none; font: inherit; font-family: var(--font-mono); color: var(--link); cursor: pointer; text-decoration: underline; }
