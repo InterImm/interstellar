@@ -44,6 +44,12 @@
       "children": []
     },
     {
+      "id": "pulsarlab",
+      "name": "Pulsar lab",
+      "url": "https://interstellar.interimm.org/pulsar-lab/en/",
+      "children": []
+    },
+    {
       "id": "drift",
       "name": "Drift",
       "url": "https://interstellar.interimm.org/drift/en/",
@@ -125,6 +131,10 @@
         {
           "title": "Pulsar ledger (live)",
           "url": "https://interstellar.interimm.org/pulsars/en/"
+        },
+        {
+          "title": "Pulsar lab · observe and analyse (simulated)",
+          "url": "https://interstellar.interimm.org/pulsar-lab/en/"
         },
         {
           "title": "Drift · Sun and Ross 128",

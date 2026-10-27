@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en" class="js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Pulsar lab | The Contact Era</title>
+<meta name="description" content="What a pulsar is, how we hear one, and how astronomers pull one out of the noise: a simulated observatory built from real catalogue values and measured fluxes, with period search, dedispersion, folding and spectrum tools.">
+<link rel="alternate" hreflang="zh-CN" href="https://interstellar.interimm.org/pulsar-lab/">
+<link rel="alternate" hreflang="en" href="https://interstellar.interimm.org/pulsar-lab/en/">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../kit/interimm.css?v=4">
+<link rel="stylesheet" href="../../app/pulsarlab.css">
+<script src="../../kit/interimm.js?v=4" defer></script>
+<script type="module" src="../../app/pulsarlab.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" data-interimm-header data-lang="en" data-current="pulsarlab" data-lang-cn="../">
+  <div class="wrap header-inner">
+    <a class="brand" href="../../en/"><span class="brand-dot" aria-hidden="true"></span><span class="brand-name">The Contact Era</span></a>
+  </div>
+</header>
+
+<main id="main">
+  <header class="hero lab-hero space" data-message="off">
+    <div class="wrap split lab-hero-grid">
+      <div>
+        <p class="kicker">Pulsar lab · simulated from a real catalogue</p>
+        <h1>Lighthouses in space</h1>
+        <p class="lede">A pulsar is a neutron star spinning fast: as heavy as the Sun, as small as a city. Its magnetic poles shine two beams of radio waves that sweep the sky as it turns. Each time a beam crosses Earth, a telescope gets one pulse.</p>
+        <dl class="readouts lab-readouts">
+          <div><dt>Now looking at</dt><dd id="h-name">–</dd></div>
+          <div><dt>Turns per second</dt><dd id="h-rot">–</dd></div>
+          <div><dt>Period</dt><dd id="h-per">–</dd></div>
+          <div><dt>Distance</dt><dd id="h-dist">–</dd></div>
+          <div><dt>Dispersion measure</dt><dd id="h-dm">–</dd></div>
+        </dl>
+      </div>
+      <figure class="scope lab-lighthouse">
+        <canvas id="lighthouse" role="img" aria-label="Animation: a neutron star turns and two radio beams sweep round like a lighthouse's; each time one crosses the telescope on the right, the trace below jumps with a pulse"></canvas>
+        <figcaption><span>Seen from above the spin axis: two beams from the magnetic poles</span><span>yellow · a telescope on Earth</span></figcaption>
+      </figure>
+    </div>
+  </header>
+
+  <section class="section" id="two" aria-labelledby="two-title">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="kicker">First, untangle this</p>
+        <h2 class="section-title" id="two-title">Two kinds of "frequency"</h2>
+        <p class="section-lede">A pulsar "at 339 hertz" observed "at 1.4 gigahertz": those are two different things.</p>
+      </header>
+      <div class="split lab-two">
+        <div class="prose">
+          <p><strong>The spin frequency is the rhythm.</strong> However many times a pulsar turns in a second, that many pulses arrive: the slow ones tick once in 8 seconds, the fastest 716 times a second. The number belongs to the star; every telescope measures the same.</p>
+          <p><strong>The radio frequency is the carrier.</strong> Each pulse is a burst of radio noise spread from tens of megahertz to tens of gigahertz, oscillating hundreds of millions to billions of times a second. A telescope takes in one slice of it, its observing band. The band changes what you see: lower frequencies are brighter, but free electrons between the stars delay them more and blur them more.</p>
+          <p>Ross 128 b's beacon uses the two separately. The carrier is one narrow tone, <span class="num">1420.55 MHz</span>: hydrogen is the ruler every radio-astronomy civilization knows, the frequency sits in the band pulsar timing watches, so timing stations heard it first, and the uncorrected Doppler shift tells where it comes from. The rhythm is J1909−3744's <span class="num">339.3 Hz</span>. The tone only carries; the timing is the message. <a href="../../archive/2219-signal/en/">Read the signal archive</a> · <a href="../../signals/en/">Hear the five transmissions</a></p>
+          <p class="note">Drag the time window: at nanoseconds the beacon is a clean sine and the pulsar a tangle of noise; at milliseconds both become pulses.</p>
+        </div>
+        <div>
+          <figure class="scope lab-zoom">
+            <canvas id="zoom" role="img" aria-label="Two waveforms: Ross 128 b's beacon above, the pulsar J1909−3744 below, zoomed to the chosen time window"></canvas>
+            <figcaption><span>Time window <output id="zoom-out" for="zoom-win">–</output></span><span>both rows share one time axis</span></figcaption>
+          </figure>
+          <div class="lab-controls">
+            <label class="lab-slider"><span class="sr-only">Time window</span><input type="range" id="zoom-win" min="-9.3" max="0.3" step="0.01" value="-8.7"></label>
+          </div>
+          <div class="lab-controls">
+            <button type="button" class="btn btn-ghost btn-sm" data-zoom="-8.7">2 ns</button>
+            <button type="button" class="btn btn-ghost btn-sm" data-zoom="-6">1 µs</button>
+            <button type="button" class="btn btn-ghost btn-sm" data-zoom="-2.3">5 ms</button>
+            <button type="button" class="btn btn-ghost btn-sm" data-zoom="-1.3">50 ms</button>
+          </div>
+          <dl class="readouts">
+            <div><dt>Carrier cycles in the window</dt><dd id="z-cycles">–</dd></div>
+            <div><dt>Pulses in the window</dt><dd id="z-pulses">–</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="observe" aria-labelledby="observe-title">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="kicker">Observatory</p>
+        <h2 class="section-title" id="observe-title">Pick a pulsar, pick a telescope</h2>
+        <p class="section-lede">This is the raw data a receiver records: frequency up the side, time across, brighter for more power. The noise follows the sensitivity of real telescopes, so what is easy or hard to see here is easy or hard for astronomers too.</p>
+      </header>
+      <div class="lab-setup">
+        <label class="field"><span>Pulsar</span><select id="psr"></select></label>
+        <label class="field"><span>Telescope</span><select id="tel"></select></label>
+        <div class="field"><span id="band-label">Band</span><div class="tabs" role="tablist" id="band" aria-labelledby="band-label"></div></div>
+      </div>
+      <p class="lab-note" id="psr-note"></p>
+      <p class="lab-warn" id="o-warn" role="status" hidden></p>
+      <div class="split lab-obs">
+        <figure class="scope lab-waterfall">
+          <canvas id="waterfall" role="img" aria-label="Dynamic spectrum: raw data, frequency against time. Each pulse arrives first at high frequency and later at low, drawing a slanted line: dispersion"></canvas>
+          <figcaption><span>raw data, not dedispersed</span><span id="o-slow">–</span></figcaption>
+        </figure>
+        <div>
+          <div class="lab-controls">
+            <button type="button" class="btn btn-primary" id="run" aria-pressed="false">Start observing</button>
+            <button type="button" class="btn btn-ghost" id="listen" aria-pressed="false">Listen</button>
+            <label class="lab-check"><input type="checkbox" id="noise" checked> with noise</label>
+          </div>
+          <dl class="readouts lab-obs-readouts" aria-live="polite">
+            <div><dt>Observing time</dt><dd id="o-time">–</dd></div>
+            <div><dt>Folded S/N</dt><dd id="o-snr">–</dd></div>
+            <div><dt>Flux in this band</dt><dd id="o-flux">–</dd></div>
+            <div><dt>Dispersion sweep across the band</dt><dd id="o-sweep">–</dd></div>
+            <div><dt>Scattering tail</dt><dd id="o-scatter">–</dd></div>
+            <div><dt>System temperature</dt><dd id="o-tsys">–</dd></div>
+          </dl>
+          <p class="note">One observation is 10 minutes, played here in 30 seconds. A millisecond pulsar's single pulses are usually lost in the noise; you only see it after stacking hundreds of thousands of them at the period (folding).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="tools" aria-labelledby="tools-title">
+    <div class="wrap">
+      <header class="section-head section-head-split">
+        <div>
+          <p class="kicker">Analysis tools</p>
+          <h2 class="section-title" id="tools-title">Pull it out of the noise</h2>
+          <p class="section-lede">Roughly the four steps astronomers take to find and measure a pulsar. Observe for a while, then work on that same data with these tools. For a real try, pick "Mystery signal": nobody knows its period or DM.</p>
+        </div>
+        <div class="tabs" role="tablist" aria-label="Analysis tools">
+          <button type="button" role="tab" data-tool="fft" aria-selected="true">Period search</button>
+          <button type="button" role="tab" data-tool="dm" aria-selected="false">Dedisperse</button>
+          <button type="button" role="tab" data-tool="fold" aria-selected="false">Fold</button>
+          <button type="button" role="tab" data-tool="spec" aria-selected="false">Spectrum</button>
+        </div>
+      </header>
+
+      <div data-panel="fft">
+        <div class="split lab-tool">
+          <figure class="scope"><canvas id="fft" role="img" aria-label="Power spectrum: frequency across, power up; a pulsar shows as a fundamental and a comb of evenly spaced harmonics"></canvas><figcaption><span>power spectrum · dedispersed at DM <span id="f-dm">–</span></span><span>dashed · candidate threshold  cyan squares · harmonics</span></figcaption></figure>
+          <div>
+            <p>Add up the whole band and take a Fourier transform. A periodic signal is a row of evenly spaced spikes in the power spectrum: the fundamental and its harmonics. Narrow pulses have many harmonics, so adding several of them together lifts a weak signal out.</p>
+            <dl class="readouts">
+              <div><dt>Strongest candidate</dt><dd id="f-best">–</dd></div>
+              <div><dt>Its period</dt><dd id="f-per">–</dd></div>
+              <div><dt>Above the noise</dt><dd id="f-sig">–</dd></div>
+            </dl>
+            <div class="lab-controls">
+              <button type="button" class="btn btn-primary btn-sm" id="use-fft" disabled>Fold at this period <span>→</span></button>
+              <label class="lab-check"><input type="checkbox" id="f-zoom" checked> zoom to candidate</label>
+            </div>
+            <p class="lab-controls"><button type="button" class="btn btn-ghost btn-sm" id="f-search" disabled>Search a ladder of DMs</button></p>
+            <p class="note">Among tens of thousands of frequencies, noise alone reaches about 10 σ, so a candidate needs 16 σ. A wrong DM smears the pulse and kills the harmonics: a highly dispersed millisecond pulsar only turns up when you search DM after DM.</p>
+          </div>
+        </div>
+      </div>
+
+      <div data-panel="dm" hidden>
+        <div class="split lab-tool">
+          <figure class="scope"><canvas id="dd-chan" role="img" aria-label="Each channel folded against phase, with the profile of all channels added below. At the right DM the pulses in every channel line up vertically"></canvas><figcaption><span>each channel folded · two turns wide</span><span>below · all channels added</span></figcaption></figure>
+          <div>
+            <p>Free electrons between the stars slow lower frequencies down. The delay goes as one over frequency squared, scaled by the dispersion measure DM: the number of electrons along the line of sight. Dedispersing shifts each channel back by its delay. Get it right and the slant becomes a straight line, the pulse sharpest, the S/N highest.</p>
+            <div class="lab-controls">
+              <label class="lab-slider"><span class="sr-only">Trial DM</span><input type="range" id="dm" min="0" max="300" step="0.05" value="0"></label>
+              <output class="readout" id="dm-out" for="dm">–</output>
+            </div>
+            <dl class="readouts">
+              <div><dt>S/N</dt><dd id="d-snr">–</dd></div>
+              <div><dt>Best DM</dt><dd id="d-best">–</dd></div>
+            </dl>
+            <p class="lab-controls"><button type="button" class="btn btn-ghost btn-sm" id="dm-best">Jump to best</button></p>
+            <figure class="scope lab-curve"><canvas id="dd-curve" role="img" aria-label="S/N against trial DM"></canvas></figure>
+            <p class="note">The DM gives a distance too: a model of the Milky Way's electrons turns DM into light-years.</p>
+          </div>
+        </div>
+      </div>
+
+      <div data-panel="fold" hidden>
+        <div class="split lab-tool">
+          <figure class="scope"><canvas id="fold-sub" role="img" aria-label="Phase against time: each row a 20-second sub-integration, one turn across. At the right period the pulse runs straight down; off by a little, it drifts sideways"></canvas><figcaption><span>20 s per row, top to bottom</span><span>right period, straight line</span></figcaption></figure>
+          <div>
+            <p>Cut the data at the trial period and stack the pieces. At the right period hundreds of thousands of pulses land on the same phase and the stack gets clearer; off by a hair, the pulse drifts across the plot. Pulsar timing measures this period to a dozen and more decimal places.</p>
+            <div class="lab-controls">
+              <label class="lab-slider"><span class="sr-only">Period fine tuning (turns of drift over ten minutes)</span><input type="range" id="poff" min="-32" max="32" step="0.05" value="0"></label>
+              <output class="readout" id="poff-out" for="poff">–</output>
+            </div>
+            <figure class="scope lab-curve"><canvas id="fold-prof" role="img" aria-label="The folded pulse profile"></canvas></figure>
+            <dl class="readouts">
+              <div><dt>Trial period</dt><dd id="p-trial">–</dd></div>
+              <div><dt>S/N</dt><dd id="p-snr">–</dd></div>
+              <div><dt>Best period</dt><dd id="p-bestv">–</dd></div>
+            </dl>
+            <p class="lab-controls"><button type="button" class="btn btn-ghost btn-sm" id="p-best">Jump to best</button></p>
+            <figure class="scope lab-curve"><canvas id="fold-curve" role="img" aria-label="S/N against trial period"></canvas></figure>
+            <p class="lab-found" id="found" role="status" hidden></p>
+          </div>
+        </div>
+      </div>
+
+      <div data-panel="spec" hidden>
+        <div class="split lab-tool">
+          <figure class="scope"><canvas id="spec" role="img" aria-label="Flux density against observing frequency, both logarithmic: white points are published measurements, the cyan line a fit, the bars the bands you can pick"></canvas><figcaption><span>white · published measurements  cyan · fit</span><span>bars · observing bands</span></figcaption></figure>
+          <div>
+            <p>This one is real data. Every white point is the average flux some telescope measured at some frequency, from a published paper. Most pulsars are brighter at low frequencies, falling roughly as frequency to the power −1.6, and some turn over again at the very lowest. This curve sets how strong the signal is in the observatory above.</p>
+            <dl class="readouts">
+              <div><dt>Band</dt><dd id="s-band">–</dd></div>
+              <div><dt>Flux</dt><dd id="s-flux">–</dd></div>
+              <div><dt>Spectral index</dt><dd id="s-alpha">–</dd></div>
+            </dl>
+            <p class="note" id="s-pts"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="list" aria-labelledby="list-title">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="kicker">Roster</p>
+        <h2 class="section-title" id="list-title">The thirteen here</h2>
+        <p class="section-lede">Click a name to put it on the observatory.</p>
+      </header>
+      <div class="table-scroll">
+        <table class="data-table lab-table">
+          <thead><tr><th scope="col">Name</th><th scope="col" class="num">Period</th><th scope="col" class="num">Turns/s</th><th scope="col" class="num">DM</th><th scope="col" class="num">Distance</th><th scope="col">Why it is famous</th></tr></thead>
+          <tbody id="roster"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="method" aria-labelledby="method-title">
+    <div class="wrap prose">
+      <h2 class="section-title" id="method-title">What is real, what is simulated</h2>
+      <p><strong>There is no live feed.</strong> Radio telescopes record enormous amounts of raw data. Observatories put processed data into archives, usually public only after a proprietary period, and nothing online offers a live pulsar signal a web page could plug into. So this page is a simulation, but every number in it comes from real measurements.</p>
+      <p><strong>Real:</strong> periods, dispersion measures, distances and declinations from the ATNF Pulsar Catalogue (rounded). How the flux density changes with frequency comes from measurements in dozens of papers, compiled by the pulsar_spectra project (Swainston et al. 2022) and kept as they are in <a href="https://github.com/InterImm/interstellar/blob/main/lib/pulsar-fluxes.json">lib/pulsar-fluxes.json</a>. Telescope gains and system temperatures are typical published values. The noise follows the radiometer equation; the dispersion delay is 4.149 ms × DM ÷ (frequency/GHz)²; scattering grows with DM and falls as frequency to the −3.9, after the empirical fit of Bhat et al. (2004).</p>
+      <p><strong>Simulated:</strong> pulse profiles are schematic Gaussian components, roughly matching measured profiles at 1.4 GHz. Not simulated: period changes from binary orbits, scintillation, pulse-to-pulse variation and radio interference. The "mystery signal" is random.</p>
+      <p><strong>In the story:</strong> in 2219 the signal from Ross 128 b first showed up in pulsar-timing data, and the beacon's duet keeps J1909−3744's beat; see <a href="../../signals/en/">the five transmissions</a> and <a href="../../archive/2219-signal/en/">the signal archive</a>. Pulsars ticking as clocks: <a href="../../pulsars/en/">the pulsar ledger</a>. Ross 128 b itself is in the <a href="https://interimm.org/exoplanet-explorer/">exoplanet explorer</a>, how the two stars close in is in <a href="../../drift/en/">Drift</a>, and the script both sides are slowly drafting is in <a href="../../script/en/">Grid script</a> (command-line tool <a href="https://interimm.github.io/glyph-cli/">glyph-cli</a>). To live a life spent listening, play <a href="https://iron-bamboo.interimm.org/#life">Light-Year Canon</a>; phase one of the story is in <a href="https://book.interimm.org/">The Book of InterImm</a>.</p>
+      <p class="note">Source: <a href="https://github.com/InterImm/interstellar/blob/main/lib/pulsarlab.js">lib/pulsarlab.js</a> (physics), <a href="https://github.com/InterImm/interstellar/blob/main/app/pulsarlab.js">app/pulsarlab.js</a> (pictures and sound).</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" data-interimm-footer>
+  <div class="wrap"><p class="footer-legal"><span>© InterImm</span><a href="../../en/">The Contact Era</a></p></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="zh-CN" class="js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>脉冲星实验室 | 通联纪</title>
+<meta name="description" content="脉冲星是什么、怎么听到它、天文学家怎样从噪声里把它找出来：用真实目录参数和实测流量模拟的观测台，附周期搜索、消色散、折叠和频谱工具。">
+<link rel="alternate" hreflang="zh-CN" href="https://interstellar.interimm.org/pulsar-lab/">
+<link rel="alternate" hreflang="en" href="https://interstellar.interimm.org/pulsar-lab/en/">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../kit/interimm.css?v=4">
+<link rel="stylesheet" href="../app/pulsarlab.css">
+<script src="../kit/interimm.js?v=4" defer></script>
+<script type="module" src="../app/pulsarlab.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到正文</a>
+
+<header class="site-header" data-interimm-header data-lang="cn" data-current="pulsarlab" data-lang-en="en/">
+  <div class="wrap header-inner">
+    <a class="brand" href="../"><span class="brand-dot" aria-hidden="true"></span><span class="brand-name">通联纪</span></a>
+  </div>
+</header>
+
+<main id="main">
+  <header class="hero lab-hero space" data-message="off">
+    <div class="wrap split lab-hero-grid">
+      <div>
+        <p class="kicker">脉冲星实验室 · 模拟，参数来自真实目录</p>
+        <h1>宇宙里的灯塔</h1>
+        <p class="lede">脉冲星是一颗转得飞快的中子星：太阳那么重，却只有一座城市那么大。它的磁极射出两束射电波，随着自转扫过天空。每扫过地球一次，望远镜就收到一个脉冲。</p>
+        <dl class="readouts lab-readouts">
+          <div><dt>现在看的是</dt><dd id="h-name">–</dd></div>
+          <div><dt>每秒转</dt><dd id="h-rot">–</dd></div>
+          <div><dt>周期</dt><dd id="h-per">–</dd></div>
+          <div><dt>距离</dt><dd id="h-dist">–</dd></div>
+          <div><dt>色散量</dt><dd id="h-dm">–</dd></div>
+        </dl>
+      </div>
+      <figure class="scope lab-lighthouse">
+        <canvas id="lighthouse" role="img" aria-label="动画：中子星自转，两束射电波像灯塔一样扫过；每当一束扫过右边的望远镜，下面的曲线就跳起一个脉冲"></canvas>
+        <figcaption><span>从自转轴正上方往下看：两束射电波从磁极射出</span><span>黄色 · 地球上的望远镜</span></figcaption>
+      </figure>
+    </div>
+  </header>
+
+  <section class="section" id="two" aria-labelledby="two-title">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="kicker">先分清楚</p>
+        <h2 class="section-title" id="two-title">两种“频率”</h2>
+        <p class="section-lede">说一颗脉冲星“339 赫兹”，又说在“1.4 吉赫”观测它，这是两件事。</p>
+      </header>
+      <div class="split lab-two">
+        <div class="prose">
+          <p><strong>自转频率，就是节奏。</strong>脉冲星一秒转几圈，就一秒来几个脉冲：慢的 8 秒才一下，最快的每秒 716 下。这个数是星体本身的，换哪台望远镜都一样。</p>
+          <p><strong>射电频率，就是载波。</strong>每个脉冲本身是一阵射电噪声，从几十兆赫一直到几十吉赫都有，每秒振荡上亿到上百亿次。望远镜只截取其中一段，叫观测频段。频段不同，看到的脉冲也不同：频率越低越亮，但被星际电子拖得越晚，也被散射得越模糊。</p>
+          <p>罗斯128 b 的信标正好把两者分开用。载波是一个很窄的音，<span class="num">1420.55 MHz</span>：氢谱线是每个做射电天文的文明都认得的尺子，这个频率又落在脉冲星计时的频段里，所以计时站最先听到；没有修正的多普勒频移，说出它从哪里来。节奏则是 J1909−3744 的 <span class="num">339.3 Hz</span>。音调只是载体，时刻才是信息。<a href="../archive/2219-signal/">读信号档案</a> · <a href="../signals/">听五段发射</a></p>
+          <p class="note">拖动时间窗口：在纳秒尺度上，信标是一条干净的正弦波，脉冲星是一团噪声；放大到毫秒，两者都变成一下一下的脉冲。</p>
+        </div>
+        <div>
+          <figure class="scope lab-zoom">
+            <canvas id="zoom" role="img" aria-label="两行波形：上面是罗斯128 b 的信标，下面是脉冲星 J1909−3744，随所选的时间窗口放大或缩小"></canvas>
+            <figcaption><span>时间窗口 <output id="zoom-out" for="zoom-win">–</output></span><span>两行用同一个时间轴</span></figcaption>
+          </figure>
+          <div class="lab-controls">
+            <label class="lab-slider"><span class="sr-only">时间窗口</span><input type="range" id="zoom-win" min="-9.3" max="0.3" step="0.01" value="-8.7"></label>
+          </div>
+          <div class="lab-controls">
+            <button type="button" class="btn btn-ghost btn-sm" data-zoom="-8.7">2 纳秒</button>
+            <button type="button" class="btn btn-ghost btn-sm" data-zoom="-6">1 微秒</button>
+            <button type="button" class="btn btn-ghost btn-sm" data-zoom="-2.3">5 毫秒</button>
+            <button type="button" class="btn btn-ghost btn-sm" data-zoom="-1.3">50 毫秒</button>
+          </div>
+          <dl class="readouts">
+            <div><dt>窗口里的载波周期</dt><dd id="z-cycles">–</dd></div>
+            <div><dt>窗口里的脉冲</dt><dd id="z-pulses">–</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="observe" aria-labelledby="observe-title">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="kicker">观测台</p>
+        <h2 class="section-title" id="observe-title">选一颗脉冲星，选一台望远镜</h2>
+        <p class="section-lede">下面是接收机记录下来的原始数据：纵轴是频率，横轴是时间，越亮功率越强。噪声按真实望远镜的灵敏度来算，所以这里看得清看不清，和天文学家实际遇到的一样。</p>
+      </header>
+      <div class="lab-setup">
+        <label class="field"><span>脉冲星</span><select id="psr"></select></label>
+        <label class="field"><span>望远镜</span><select id="tel"></select></label>
+        <div class="field"><span id="band-label">频段</span><div class="tabs" role="tablist" id="band" aria-labelledby="band-label"></div></div>
+      </div>
+      <p class="lab-note" id="psr-note"></p>
+      <p class="lab-warn" id="o-warn" role="status" hidden></p>
+      <div class="split lab-obs">
+        <figure class="scope lab-waterfall">
+          <canvas id="waterfall" role="img" aria-label="动态频谱：频率对时间的原始数据。脉冲在高频先到、低频后到，形成一道斜线，这就是色散"></canvas>
+          <figcaption><span>原始数据，没有消色散</span><span id="o-slow">–</span></figcaption>
+        </figure>
+        <div>
+          <div class="lab-controls">
+            <button type="button" class="btn btn-primary" id="run" aria-pressed="false">开始观测</button>
+            <button type="button" class="btn btn-ghost" id="listen" aria-pressed="false">听</button>
+            <label class="lab-check"><input type="checkbox" id="noise" checked> 带上噪声</label>
+          </div>
+          <dl class="readouts lab-obs-readouts" aria-live="polite">
+            <div><dt>观测时间</dt><dd id="o-time">–</dd></div>
+            <div><dt>折叠后的信噪比</dt><dd id="o-snr">–</dd></div>
+            <div><dt>这个频段的流量</dt><dd id="o-flux">–</dd></div>
+            <div><dt>色散扫过整个频段</dt><dd id="o-sweep">–</dd></div>
+            <div><dt>散射拖尾</dt><dd id="o-scatter">–</dd></div>
+            <div><dt>系统温度</dt><dd id="o-tsys">–</dd></div>
+          </dl>
+          <p class="note">一次观测 10 分钟，这里 30 秒放完。毫秒脉冲星单个脉冲通常淹没在噪声里，要把几十万个脉冲按周期叠起来（折叠）才看得见。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="tools" aria-labelledby="tools-title">
+    <div class="wrap">
+      <header class="section-head section-head-split">
+        <div>
+          <p class="kicker">分析工具</p>
+          <h2 class="section-title" id="tools-title">从噪声里把它找出来</h2>
+          <p class="section-lede">天文学家发现和测量脉冲星，大致就是这四步。先观测一会儿，再用这些工具处理同一份数据。想真正试一试，就选“神秘信号”：它的周期和色散量谁都不知道。</p>
+        </div>
+        <div class="tabs" role="tablist" aria-label="分析工具">
+          <button type="button" role="tab" data-tool="fft" aria-selected="true">周期搜索</button>
+          <button type="button" role="tab" data-tool="dm" aria-selected="false">消色散</button>
+          <button type="button" role="tab" data-tool="fold" aria-selected="false">折叠</button>
+          <button type="button" role="tab" data-tool="spec" aria-selected="false">频谱</button>
+        </div>
+      </header>
+
+      <div data-panel="fft">
+        <div class="split lab-tool">
+          <figure class="scope"><canvas id="fft" role="img" aria-label="功率谱：横轴是频率，竖线是各频率上的功率；脉冲星表现为基频和一串等间距的谐波"></canvas><figcaption><span>功率谱 · 按色散量 <span id="f-dm">–</span> 消色散后</span><span>虚线 · 候选门槛　青色方块 · 谐波</span></figcaption></figure>
+          <div>
+            <p>把整个频段加起来，做傅里叶变换。周期信号在功率谱上是一串等间距的尖峰：基频和它的谐波。窄脉冲的谐波特别多，所以把几个谐波的功率加起来，弱信号也能冒出来。</p>
+            <dl class="readouts">
+              <div><dt>最强候选</dt><dd id="f-best">–</dd></div>
+              <div><dt>对应周期</dt><dd id="f-per">–</dd></div>
+              <div><dt>高出噪声</dt><dd id="f-sig">–</dd></div>
+            </dl>
+            <div class="lab-controls">
+              <button type="button" class="btn btn-primary btn-sm" id="use-fft" disabled>用这个周期去折叠 <span>→</span></button>
+              <label class="lab-check"><input type="checkbox" id="f-zoom" checked> 放大到候选</label>
+            </div>
+            <p class="lab-controls"><button type="button" class="btn btn-ghost btn-sm" id="f-search" disabled>在一组色散量上逐个搜索</button></p>
+            <p class="note">几万个频率里，光是噪声最高也能冒到 10 σ 左右，所以要超过 16 σ 才算候选。色散量设错了，脉冲被抹宽，谐波就少了：色散大的毫秒脉冲星，要在一组色散量上逐个搜索才找得到。</p>
+          </div>
+        </div>
+      </div>
+
+      <div data-panel="dm" hidden>
+        <div class="split lab-tool">
+          <figure class="scope"><canvas id="dd-chan" role="img" aria-label="各频道按相位叠加后的图像，下方是全部频道相加的脉冲轮廓。色散量正确时，各频道的脉冲排成一条竖线"></canvas><figcaption><span>每个频道折叠后 · 两圈宽</span><span>下面 · 全部频道相加</span></figcaption></figure>
+          <div>
+            <p>星际空间的自由电子让低频的电波走得慢一些，延迟和频率的平方成反比，比例就是色散量 DM：视线上电子的总数。消色散就是把每个频道往前挪回相应的时间。挪对了，斜线变成竖线，脉冲最尖、信噪比最高。</p>
+            <div class="lab-controls">
+              <label class="lab-slider"><span class="sr-only">试验色散量</span><input type="range" id="dm" min="0" max="300" step="0.05" value="0"></label>
+              <output class="readout" id="dm-out" for="dm">–</output>
+            </div>
+            <dl class="readouts">
+              <div><dt>信噪比</dt><dd id="d-snr">–</dd></div>
+              <div><dt>最佳色散量</dt><dd id="d-best">–</dd></div>
+            </dl>
+            <p class="lab-controls"><button type="button" class="btn btn-ghost btn-sm" id="dm-best">跳到最佳</button></p>
+            <figure class="scope lab-curve"><canvas id="dd-curve" role="img" aria-label="信噪比随试验色散量变化的曲线"></canvas></figure>
+            <p class="note">知道了色散量，就能估计距离：银河系电子密度模型把 DM 换成光年。</p>
+          </div>
+        </div>
+      </div>
+
+      <div data-panel="fold" hidden>
+        <div class="split lab-tool">
+          <figure class="scope"><canvas id="fold-sub" role="img" aria-label="相位-时间图：每一行是一段 20 秒的子积分，横轴是一圈的相位。周期正确时脉冲排成竖线，周期偏了就斜着漂移"></canvas><figcaption><span>每行 20 秒，从上往下</span><span>周期准，就是竖线</span></figcaption></figure>
+          <div>
+            <p>按试验周期把数据切成一段段，叠在一起。周期准，几十万个脉冲落在同一个相位上，越叠越清楚；周期差一点点，脉冲就在图上斜着漂走。脉冲星计时就是把这个周期测到小数点后十几位。</p>
+            <div class="lab-controls">
+              <label class="lab-slider"><span class="sr-only">周期微调（十分钟里漂移的圈数）</span><input type="range" id="poff" min="-32" max="32" step="0.05" value="0"></label>
+              <output class="readout" id="poff-out" for="poff">–</output>
+            </div>
+            <figure class="scope lab-curve"><canvas id="fold-prof" role="img" aria-label="折叠后的脉冲轮廓"></canvas></figure>
+            <dl class="readouts">
+              <div><dt>试验周期</dt><dd id="p-trial">–</dd></div>
+              <div><dt>信噪比</dt><dd id="p-snr">–</dd></div>
+              <div><dt>最佳周期</dt><dd id="p-bestv">–</dd></div>
+            </dl>
+            <p class="lab-controls"><button type="button" class="btn btn-ghost btn-sm" id="p-best">跳到最佳</button></p>
+            <figure class="scope lab-curve"><canvas id="fold-curve" role="img" aria-label="信噪比随试验周期变化的曲线"></canvas></figure>
+            <p class="lab-found" id="found" role="status" hidden></p>
+          </div>
+        </div>
+      </div>
+
+      <div data-panel="spec" hidden>
+        <div class="split lab-tool">
+          <figure class="scope"><canvas id="spec" role="img" aria-label="流量密度随观测频率变化的对数图：白点是发表过的实测值，青线是拟合，竖条是可选的观测频段"></canvas><figcaption><span>白点 · 发表过的实测值　青线 · 拟合</span><span>竖条 · 观测频段</span></figcaption></figure>
+          <div>
+            <p>这一张是真实数据。每个白点都是某篇论文里，某台望远镜在某个频率测到的平均流量。大多数脉冲星在低频更亮，流量大约按频率的 −1.6 次方下降，有的在最低频又弯下来。这条曲线决定了上面观测台里信号有多强。</p>
+            <dl class="readouts">
+              <div><dt>当前频段</dt><dd id="s-band">–</dd></div>
+              <div><dt>流量</dt><dd id="s-flux">–</dd></div>
+              <div><dt>谱指数</dt><dd id="s-alpha">–</dd></div>
+            </dl>
+            <p class="note" id="s-pts"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="list" aria-labelledby="list-title">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="kicker">名册</p>
+        <h2 class="section-title" id="list-title">这里的十三颗</h2>
+        <p class="section-lede">点名字，就把它放到观测台上。</p>
+      </header>
+      <div class="table-scroll">
+        <table class="data-table lab-table">
+          <thead><tr><th scope="col">名字</th><th scope="col" class="num">周期</th><th scope="col" class="num">每秒转</th><th scope="col" class="num">色散量</th><th scope="col" class="num">距离</th><th scope="col">为什么有名</th></tr></thead>
+          <tbody id="roster"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="method" aria-labelledby="method-title">
+    <div class="wrap prose">
+      <h2 class="section-title" id="method-title">哪些是真的，哪些是模拟</h2>
+      <p><strong>没有实时直播。</strong>射电望远镜的原始数据量很大，各台站会把处理好的数据放进档案库，通常过一段保护期才公开，网上没有可以直接接进网页的实时脉冲星信号。所以这一页是模拟，但模拟的每个数都来自真实测量。</p>
+      <p><strong>真的：</strong>周期、色散量、距离和赤纬取自 ATNF 脉冲星目录（四舍五入）。流量密度随频率的变化来自几十篇论文的实测值，由 pulsar_spectra 项目（Swainston 等，2022）汇编，原样放在 <a href="https://github.com/InterImm/interstellar/blob/main/lib/pulsar-fluxes.json">lib/pulsar-fluxes.json</a>。望远镜的增益和系统温度是公开的典型值。噪声按辐射计方程计算，色散延迟用 4.149 毫秒 × DM ÷ (频率/吉赫)²，散射按 Bhat 等（2004）的经验关系随 DM 增长、随频率的 −3.9 次方变化。</p>
+      <p><strong>模拟的：</strong>脉冲轮廓是示意的高斯成分，形状大致对得上 1.4 吉赫的实测轮廓。没有模拟双星轨道带来的周期变化、闪烁、单个脉冲的强弱起伏和地面干扰。“神秘信号”是随机生成的。</p>
+      <p><strong>在故事里：</strong>2219 年，罗斯128 b 的信号最早出现在脉冲星计时数据里，信标的二重唱跟的就是 J1909−3744 的节拍，见<a href="../signals/">五段发射</a>和<a href="../archive/2219-signal/">信号档案</a>。脉冲星被当作时钟一下一下地跳，见<a href="../pulsars/">脉冲星账本</a>。罗斯128 b 本身可以在<a href="https://interimm.org/exoplanet-explorer/">系外行星浏览器</a>里找到，两颗星怎样相互靠近见<a href="../drift/">两星漂移</a>，两边一起慢慢拟定的文字见<a href="../script/">网格文字</a>（命令行工具 <a href="https://interimm.github.io/glyph-cli/">glyph-cli</a>）。想过一辈子守着这些信号的人生，去玩<a href="https://iron-bamboo.interimm.org/#life">光年卡农</a>；第一阶段的故事在<a href="https://book.interimm.org/">星际移民之书</a>。</p>
+      <p class="note">源代码：<a href="https://github.com/InterImm/interstellar/blob/main/lib/pulsarlab.js">lib/pulsarlab.js</a>（物理）、<a href="https://github.com/InterImm/interstellar/blob/main/app/pulsarlab.js">app/pulsarlab.js</a>（画面和声音）。</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" data-interimm-footer>
+  <div class="wrap"><p class="footer-legal"><span>© InterImm星际移民中心</span><a href="../">通联纪</a></p></div>
+</footer>
+</body>
+</html>
