@@ -24,6 +24,9 @@ Run it locally with any static server, for example `python3 -m http.server`, and
 release or a vocabulary change, copy its `vocab.json` to `lib/glyph-vocab.json`, add the Chinese glosses to `lib/glyph-zh.json`,
 and regenerate the fixtures with that release installed (`pip install glyph-cli==0.3.0`; until it is on PyPI, `pip install git+https://github.com/InterImm/glyph-cli`) and `python3 scripts/glyph_fixtures.py`.
 
+Every page has a link-preview card (`og:image`) in `images/og/`, drawn from the page's own title and description.
+After changing either, or adding a page, run `node scripts/og_cards.cjs` (needs Playwright) and add the `og:` tags to the new page's `<head>`.
+
 The previous Hugo site (2022, "飞向恒星 / we must leave the solar system") is in the git history. The draft about
 the first Earth–Mars conflict lives on the branch `cms/interstellar/草稿`.
 

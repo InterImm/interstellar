@@ -6,6 +6,16 @@
 <meta name="color-scheme" content="dark">
 <title>脉冲星实验室 | 通联纪</title>
 <meta name="description" content="脉冲星是什么、怎么听到它、天文学家怎样从噪声里把它找出来：用真实目录参数和实测流量模拟的观测台，附周期搜索、消色散、折叠和频谱工具。">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="通联纪">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="脉冲星实验室 | 通联纪">
+<meta property="og:description" content="脉冲星是什么、怎么听到它、天文学家怎样从噪声里把它找出来：用真实目录参数和实测流量模拟的观测台，附周期搜索、消色散、折叠和频谱工具。">
+<meta property="og:url" content="https://interstellar.interimm.org/pulsar-lab/">
+<meta property="og:image" content="https://interstellar.interimm.org/images/og/pulsar-lab.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" hreflang="zh-CN" href="https://interstellar.interimm.org/pulsar-lab/">
 <link rel="alternate" hreflang="en" href="https://interstellar.interimm.org/pulsar-lab/en/">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
@@ -54,7 +64,7 @@
       </header>
       <div class="split lab-two">
         <div class="prose">
-          <p><strong>自转频率，就是节奏。</strong>脉冲星一秒转几圈，就一秒来几个脉冲：慢的 8 秒才一下，最快的每秒 716 下。这个数是星体本身的，换哪台望远镜都一样。</p>
+          <p><strong>自转频率，就是节奏。</strong>脉冲星一秒转几圈，就一秒来几个脉冲：这里最慢的一颗 8 秒多才一下，已知最慢的要等一分多钟；最快的每秒 716 下。这个数是星体本身的，换哪台望远镜都一样。</p>
           <p><strong>射电频率，就是载波。</strong>每个脉冲本身是一阵射电噪声，从几十兆赫一直到几十吉赫都有，每秒振荡上亿到上百亿次。望远镜只截取其中一段，叫观测频段。频段不同，看到的脉冲也不同：频率越低越亮，但被星际电子拖得越晚，也被散射得越模糊。</p>
           <p>罗斯128 b 的信标正好把两者分开用。载波是一个很窄的音，<span class="num">1420.55 MHz</span>：氢谱线是每个做射电天文的文明都认得的尺子，这个频率又落在脉冲星计时的频段里，所以计时站最先听到；没有修正的多普勒频移，说出它从哪里来。节奏则是 J1909−3744 的 <span class="num">339.3 Hz</span>。音调只是载体，时刻才是信息。<a href="../archive/2219-signal/">读信号档案</a> · <a href="../signals/">听五段发射</a></p>
           <p class="note">拖动时间窗口：在纳秒尺度上，信标是一条干净的正弦波，脉冲星是一团噪声；放大到毫秒，两者都变成一下一下的脉冲。</p>
@@ -115,7 +125,7 @@
             <div><dt>散射拖尾</dt><dd id="o-scatter">–</dd></div>
             <div><dt>系统温度</dt><dd id="o-tsys">–</dd></div>
           </dl>
-          <p class="note">一次观测 10 分钟，这里 30 秒放完。毫秒脉冲星单个脉冲通常淹没在噪声里，要把几十万个脉冲按周期叠起来（折叠）才看得见。</p>
+          <p class="note">一次观测 10 分钟，这里 30 秒放完。毫秒脉冲星单个脉冲通常淹没在噪声里，要把几十万个脉冲按周期叠起来（折叠）才看得见。图下那条“频段相加”是不消色散、直接把所有频道加起来：色散扫过整个频段的时间和周期差不多时，各频道的脉冲彼此错开，加起来几乎是平的，只在没有脉冲的空隙处凹下去。消色散之后，它才变成一个尖峰。</p>
         </div>
       </div>
     </div>
@@ -238,7 +248,7 @@
       <p><strong>没有实时直播。</strong>射电望远镜的原始数据量很大，各台站会把处理好的数据放进档案库，通常过一段保护期才公开，网上没有可以直接接进网页的实时脉冲星信号。所以这一页是模拟，但模拟的每个数都来自真实测量。</p>
       <p><strong>真的：</strong>周期、色散量、距离和赤纬取自 ATNF 脉冲星目录（四舍五入）。流量密度随频率的变化来自几十篇论文的实测值，由 pulsar_spectra 项目（Swainston 等，2022）汇编，原样放在 <a href="https://github.com/InterImm/interstellar/blob/main/lib/pulsar-fluxes.json">lib/pulsar-fluxes.json</a>。望远镜的增益和系统温度是公开的典型值。噪声按辐射计方程计算，色散延迟用 4.149 毫秒 × DM ÷ (频率/吉赫)²，散射按 Bhat 等（2004）的经验关系随 DM 增长、随频率的 −3.9 次方变化。</p>
       <p><strong>模拟的：</strong>脉冲轮廓是示意的高斯成分，形状大致对得上 1.4 吉赫的实测轮廓。没有模拟双星轨道带来的周期变化、闪烁、单个脉冲的强弱起伏和地面干扰。“神秘信号”是随机生成的。</p>
-      <p><strong>在故事里：</strong>2219 年，罗斯128 b 的信号最早出现在脉冲星计时数据里，信标的二重唱跟的就是 J1909−3744 的节拍，见<a href="../signals/">五段发射</a>和<a href="../archive/2219-signal/">信号档案</a>。脉冲星被当作时钟一下一下地跳，见<a href="../pulsars/">脉冲星账本</a>。罗斯128 b 本身可以在<a href="https://interimm.org/exoplanet-explorer/">系外行星浏览器</a>里找到，两颗星怎样相互靠近见<a href="../drift/">两星漂移</a>，两边一起慢慢拟定的文字见<a href="../script/">网格文字</a>（命令行工具 <a href="https://interimm.github.io/glyph-cli/">glyph-cli</a>）。想过一辈子守着这些信号的人生，去玩<a href="https://iron-bamboo.interimm.org/#life">光年卡农</a>；第一阶段的故事在<a href="https://book.interimm.org/">星际移民之书</a>。</p>
+      <p><strong>在故事里：</strong>2219 年，罗斯128 b 的信号最早出现在脉冲星计时数据里，信标的二重唱跟的就是 J1909−3744 的节拍，见<a href="../signals/">五段发射</a>和<a href="../archive/2219-signal/">信号档案</a>。脉冲星被当作时钟一下一下地跳，见<a href="../pulsars/">脉冲星账本</a>。罗斯128 b 本身可以在<a href="https://interimm.org/exoplanet-explorer/">系外行星图鉴</a>里找到，两颗星怎样相互靠近见<a href="../drift/">两星漂移</a>，两边一起慢慢拟定的文字见<a href="../script/">网格文字</a>（命令行工具 <a href="https://interimm.github.io/glyph-cli/">glyph-cli</a>）。想过一辈子守着这些信号的人生，去玩<a href="https://iron-bamboo.interimm.org/#life">光年卡农</a>；第一阶段的故事在<a href="https://book.interimm.org/">星际移民之书</a>。</p>
       <p class="note">源代码：<a href="https://github.com/InterImm/interstellar/blob/main/lib/pulsarlab.js">lib/pulsarlab.js</a>（物理）、<a href="https://github.com/InterImm/interstellar/blob/main/app/pulsarlab.js">app/pulsarlab.js</a>（画面和声音）。</p>
     </div>
   </section>

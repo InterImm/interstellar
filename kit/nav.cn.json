@@ -129,7 +129,7 @@
           "url": "https://interstellar.interimm.org/script/"
         },
         {
-          "title": "脉冲星账本（实时）",
+          "title": "脉冲星账本 · 故事里的实时计数",
           "url": "https://interstellar.interimm.org/pulsars/"
         },
         {
@@ -160,7 +160,7 @@
     },
     {
       "title": "第一阶段 · 2219",
-      "description": "火星改造的第一年。",
+      "description": "同样在 2219 年，另一条故事线：火星改造的第一年。",
       "links": [
         {
           "title": "星际移民中心",
@@ -169,6 +169,14 @@
         {
           "title": "火星时钟",
           "url": "https://interimm.org/mars-clock/"
+        },
+        {
+          "title": "《星际移民之书》",
+          "url": "https://book.interimm.org/"
+        },
+        {
+          "title": "星际企业中心",
+          "url": "https://interimm.org/hub/"
         }
       ]
     },
@@ -179,6 +187,10 @@
         {
           "title": "第二阶段设计套件",
           "url": "https://interstellar.interimm.org/kit/"
+        },
+        {
+          "title": "glyph-cli · 网格文字命令行工具",
+          "url": "https://interimm.github.io/glyph-cli/"
         },
         {
           "title": "GitHub",

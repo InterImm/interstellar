@@ -129,7 +129,7 @@
           "url": "https://interstellar.interimm.org/script/en/"
         },
         {
-          "title": "Pulsar ledger (live)",
+          "title": "Pulsar ledger · the story clock, live",
           "url": "https://interstellar.interimm.org/pulsars/en/"
         },
         {
@@ -160,7 +160,7 @@
     },
     {
       "title": "Phase 1 · 2219",
-      "description": "The first year of terraforming Mars.",
+      "description": "Also 2219, another storyline: the first year of terraforming Mars.",
       "links": [
         {
           "title": "InterImm",
@@ -169,6 +169,14 @@
         {
           "title": "Mars Clock",
           "url": "https://interimm.org/mars-clock/en/"
+        },
+        {
+          "title": "The Book of InterImm",
+          "url": "https://book.interimm.org/"
+        },
+        {
+          "title": "InterImm company hub",
+          "url": "https://interimm.org/hub/"
         }
       ]
     },
@@ -179,6 +187,10 @@
         {
           "title": "Phase 2 design kit",
           "url": "https://interstellar.interimm.org/kit/"
+        },
+        {
+          "title": "glyph-cli · the grid-script command line tool",
+          "url": "https://interimm.github.io/glyph-cli/"
         },
         {
           "title": "GitHub",
